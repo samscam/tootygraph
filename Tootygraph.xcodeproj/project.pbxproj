@@ -17,6 +17,8 @@
 		2236FB7729970E5000436F65 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB7629970E5000436F65 /* Settings.swift */; };
 		2236FB7929970EBF00436F65 /* MediaAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB7829970EBF00436F65 /* MediaAttachment.swift */; };
 		2236FB7B29970EE800436F65 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB7A29970EE800436F65 /* Account.swift */; };
+		2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C227299847AF004B3A4A /* MultipartKitTootSDK */; };
+		2245C22A299847AF004B3A4A /* TootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C229299847AF004B3A4A /* TootSDK */; };
 		22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* BottomBar.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenu.swift */; };
 		22EC11FE298F23E100976ECC /* TootygraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FD298F23E100976ECC /* TootygraphApp.swift */; };
@@ -73,6 +75,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				22EC122629904FF900976ECC /* NukeUI in Frameworks */,
+				2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */,
+				2245C22A299847AF004B3A4A /* TootSDK in Frameworks */,
 				22EC122229904FF900976ECC /* Nuke in Frameworks */,
 				22EC122B299061AC00976ECC /* Boutique in Frameworks */,
 				22EC122429904FF900976ECC /* NukeExtensions in Frameworks */,
@@ -209,6 +213,8 @@
 				22EC122529904FF900976ECC /* NukeUI */,
 				22EC122A299061AC00976ECC /* Boutique */,
 				2236FB6529946A7100436F65 /* SwiftSoup */,
+				2245C227299847AF004B3A4A /* MultipartKitTootSDK */,
+				2245C229299847AF004B3A4A /* TootSDK */,
 			);
 			productName = Fedster;
 			productReference = 22EC11FA298F23E100976ECC /* Tootygraph.app */;
@@ -242,6 +248,7 @@
 				22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */,
 				22EC1229299061AC00976ECC /* XCRemoteSwiftPackageReference "Boutique" */,
 				2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */,
 			);
 			productRefGroup = 22EC11FB298F23E100976ECC /* Products */;
 			projectDirPath = "";
@@ -514,6 +521,14 @@
 				minimumVersion = 2.5.3;
 			};
 		};
+		2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TootSDK/TootSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.2;
+			};
+		};
 		22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -537,6 +552,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		2245C227299847AF004B3A4A /* MultipartKitTootSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */;
+			productName = MultipartKitTootSDK;
+		};
+		2245C229299847AF004B3A4A /* TootSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */;
+			productName = TootSDK;
 		};
 		22EC122129904FF900976ECC /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
