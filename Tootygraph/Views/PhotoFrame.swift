@@ -7,21 +7,37 @@
 
 import SwiftUI
 import NukeUI
+import TootSDK
+
+extension Attachment {
+  var mediaURL: URL? {
+    URL(string:self.url)
+  }
+}
+
+extension Attachment {
+  var aspect: CGSize {
+    guard let original = meta?.original,
+          let width = original.width, let height = original.height else { return CGSize.zero }
+    
+    return CGSize(width: width, height: height)
+  }
+}
 
 struct PhotoFrame: View {
-  let media: MediaAttachment
+  let media: Attachment
   
-  var body: some View{
-    LazyImage(url: media.url) { state in
+  var body: some View {
+    LazyImage(url: media.mediaURL) { state in
       if let image = state.image {
         image
           .resizingMode(.aspectFill)
-          .frame(idealWidth:media.meta?.original?.width,  idealHeight:media.meta?.original?.height)
+//          .frame(idealWidth:media.meta?.original?.width,  idealHeight:media.meta?.original?.height)
         
       } else {
         Color
           .accentColor.opacity(0.3)
-          .frame(idealWidth:media.meta?.original?.width,  idealHeight:media.meta?.original?.height)
+//          .frame(idealWidth:media.meta?.original?.width,  idealHeight:media.meta?.original?.height)
         
         
       }
@@ -33,5 +49,6 @@ struct PhotoFrame: View {
     .frame(maxHeight:512)
     .shadow(color:.black.opacity(0.3), radius: 10)
     .padding(.bottom,-20)
+    
   }
 }

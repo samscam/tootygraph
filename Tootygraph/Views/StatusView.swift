@@ -8,12 +8,13 @@
 import SwiftUI
 import NukeUI
 import Boutique
+import TootSDK
 
 struct StatusView: View {
   @EnvironmentObject var settings: Settings
   
-  let status: Status
-  let onSelected: ((Status, MediaAttachment)->Void)?
+  let post: Post
+  let onSelected: ((Post, Attachment)->Void)?
   
   let photoNamespace: Namespace.ID
 
@@ -21,21 +22,18 @@ struct StatusView: View {
   var body: some View{
     VStack(alignment: .center, spacing: 0) {
       
+      AvatarView(account: post.account).zIndex(5).padding(.bottom, -10)
+        .rotationEffect(Angle(degrees: settings.jaunty ? Double.random(in: -5...5) : 0 ) )
       
-      ForEach(status.mediaAttachments){ media in
+      ForEach(post.mediaAttachments){ media in
         
         VStack(alignment: .center,spacing: 0){
           
-          if media == status.mediaAttachments.first {
-            
-            AvatarView(account: status.account).zIndex(5).padding(.bottom, -10)
-              .rotationEffect(Angle(degrees: settings.jaunty ? Double.random(in: -5...5) : 0 ) )
-          }
           NavigationLink {
-              DetailView(status: status, selectedMedia: media, photoNamespace: photoNamespace)
+              DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace)
           } label: {
             PhotoFrame(media: media)
-              .matchedGeometryEffect(id: media.id, in: photoNamespace)
+//              .matchedGeometryEffect(id: media.id, in: photoNamespace)
 
           }
         }

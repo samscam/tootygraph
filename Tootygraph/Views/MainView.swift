@@ -7,19 +7,34 @@
 
 import SwiftUI
 
+enum MainViewStates {
+  case noAccounts
+  case normal
+}
+
 struct MainView: View {
-  let server=Server(baseURL: URL(string:"https://togl.me")!)
+
   
   @StateObject var settings = Settings()
+  @StateObject var accountsManager = AccountsManager()
   
+  @State var status: MainViewStates = .noAccounts
 
   var body: some View {
-    NavigationStack{
-      TimelineView(server: server)
-        .background{
-          Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
-        }
+    if let client = accountsManager.selectedClient {
+      NavigationStack{
+        TimelineView(client: client)
+          .background{
+            Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
+          }
+          .environmentObject(settings)
+          .environmentObject(accountsManager)
+      }
+    } else {
+      AccountsView()
         .environmentObject(settings)
+        .environmentObject(accountsManager)
     }
+
   }
 }

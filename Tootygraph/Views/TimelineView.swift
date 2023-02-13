@@ -7,20 +7,23 @@
 
 import SwiftUI
 import Boutique
+import TootSDK
 
 struct TimelineView: View {
-  @StateObject var server: Server
-  
+  let client: TootClient
 
-  init(server: Server){
-    _server = StateObject<Server>(wrappedValue: server)
+  init(client: TootClient){
+    self.client = client
+    _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
   }
   
-  @State private var statuses: [Status] = []
+  @StateObject var timelineViewModel: TimelineViewModel
+  
+  
   @State private var showSettings: Bool = false
   
-  @State private var selectedStatus: Status?
-  @State private var selectedMedia: MediaAttachment?
+  @State private var selectedPost: Post?
+  @State private var selectedMedia: Attachment?
   
   @Namespace var photoNamespace
   
@@ -32,20 +35,19 @@ struct TimelineView: View {
     ScrollView {
       LazyVStack{
 
-        ForEach(statuses) { status in
-          StatusView(status: status,onSelected: onSelected, photoNamespace: photoNamespace)
+        ForEach(timelineViewModel.posts) { post in
+          StatusView(post: post, onSelected: onSelected, photoNamespace: photoNamespace)
             .padding(20)
         }
       }
     }
     
     .refreshable {
-      
-      do {
-        try await server.fetchPublicTimeline()
-      } catch {
-        print(error)
-      }
+        do {
+          try await timelineViewModel.refresh()
+        } catch {
+         print("Oh noes \(error)")
+       }
       
     }
     .safeAreaInset(edge: .bottom, spacing: 0) {
@@ -53,16 +55,17 @@ struct TimelineView: View {
       
     }
     
-    .onReceive(server.$publicTimeline.$items) { output in
-      self.statuses = output.sorted{ $0.createdAt > $1.createdAt }
-    }
+//    .onReceive(server.$publicTimeline.$items) { output in
+//      self.statuses = output.sorted{ $0.createdAt > $1.createdAt }
+//    }
     .onAppear{
+      
       Task{
         do {
-          try await server.fetchPublicTimeline()
+          try await timelineViewModel.refresh()
         } catch {
-          print(error)
-        }
+         print("Oh noes \(error)")
+       }
       }
     }
     .navigationTitle("Tootygraph")
@@ -84,24 +87,24 @@ struct TimelineView: View {
     
   }
   
-  func onSelected(status: Status, media: MediaAttachment){
+  func onSelected(post: Post, media: Attachment){
     withAnimation{
-      selectedStatus = status
+      selectedPost = post
       selectedMedia = media
     }
   }
   
   func dismiss(){
     withAnimation{
-      selectedStatus = nil
+      selectedPost = nil
       selectedMedia = nil
     }
   }
 }
 
-struct TimelineView_Previews: PreviewProvider {
-  static var previews: some View {
-    let server=Server(baseURL: URL(string:"https://togl.me/api/v1/timelines/public")!)
-    TimelineView(server: server)
-  }
-}
+//struct TimelineView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    let server=Server(baseURL: URL(string:"https://togl.me/api/v1/timelines/public")!)
+//    TimelineView(server: server)
+//  }
+//}

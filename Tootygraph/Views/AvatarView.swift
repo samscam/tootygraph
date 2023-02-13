@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NukeUI
+import TootSDK
 
 struct AvatarView: View {
   let account: Account
@@ -14,7 +15,7 @@ struct AvatarView: View {
   var body: some View{
 
     HStack(alignment:.center){
-      LazyImage(url: account.avatar){ state in
+      LazyImage(url: URL(string:account.avatar)){ state in
         if let image = state.image {
           image
             .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -26,7 +27,7 @@ struct AvatarView: View {
       .frame(width:40,height:40)
       
       VStack(alignment: .leading){
-        Text(account.displayName)
+        Text(account.displayName ?? "--")
           .bold()
           .lineSpacing(-3)
           .foregroundColor(.black)
@@ -45,6 +46,7 @@ struct AvatarView: View {
   }
 }
 
+/*
 struct AvatarView_Previews: PreviewProvider {
   
   
@@ -68,6 +70,8 @@ struct AvatarView_Previews: PreviewProvider {
     }
   }
 }
+ 
+ */
 
 public extension Color {
 

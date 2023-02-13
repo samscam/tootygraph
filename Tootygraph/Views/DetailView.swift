@@ -7,11 +7,13 @@
 
 import SwiftUI
 import NukeUI
+import TootSDK
 
 
 struct DetailView: View {
-  let status: Status
-  let selectedMedia: MediaAttachment
+  
+  let post: Post
+  let selectedMedia: Attachment
   let photoNamespace: Namespace.ID
   
   @State private var dragOffset = CGSize.zero
@@ -19,8 +21,8 @@ struct DetailView: View {
   var body: some View{
     ScrollView{
       VStack{
-        AvatarView(account: status.account)
-        if let parsedContent = status.parsedContent {
+        AvatarView(account: post.account)
+        if let parsedContent = post.content {
           Text(parsedContent)
             .font(.system(.callout, design: .rounded))
             .multilineTextAlignment(.leading)
@@ -29,17 +31,17 @@ struct DetailView: View {
               RoundedRectangle(cornerRadius: 20).foregroundColor(.gray.opacity(0.2))
             }
         }
-        ForEach(status.mediaAttachments) { media in
+        ForEach(post.mediaAttachments) { media in
           
             PhotoFrame(media: media)
-              .matchedGeometryEffect(id: media.id, in: photoNamespace)
+//              .matchedGeometryEffect(id: media.id, in: photoNamespace)
           
           Spacer(minLength: 40)
 
         }
       }.padding()
     }
-    .navigationTitle("From \(status.account.displayName)")
+    .navigationTitle("From \(post.account.displayName ?? "--")")
     .background{
       Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
     }
