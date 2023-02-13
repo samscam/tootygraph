@@ -14,6 +14,7 @@ enum AccountCreationError: Error {
 }
 
 class AccountsManager: ObservableObject {
+  // Nope we can't be having this... credentials need to be in the keychain
   @Stored(in: .serverAccountsStore) var accounts: [ServerAccount]
   
   @Published var selectedClient: TootClient? = nil
