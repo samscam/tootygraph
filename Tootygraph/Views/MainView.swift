@@ -29,6 +29,16 @@ struct MainView: View {
           }
           .environmentObject(settings)
           .environmentObject(accountsManager)
+          .toolbar {
+            Button {
+              accountsManager.signOut()
+            } label: {
+              Image(systemName: "figure.socialdance")
+                .resizable()
+                .frame(width: 40, height: 40)
+              
+            }
+          }
       }
     } else {
       AccountsView()

@@ -45,23 +45,25 @@ class AccountsManager: ObservableObject {
     let client = try await TootClient(connect: url)
     
     let accessToken = try await client.presentSignIn(callbackURI: "tootygraph://auth")
+    let userAccount = try await client.verifyCredentials()
     
-    let serverAccount = ServerAccount(username: client.clientName, instanceURL: url, accessToken: accessToken)
+    let serverAccount = ServerAccount(id: userAccount.id, username: userAccount.acct, instanceURL: url, accessToken: accessToken)
     try await addServerAccount(serverAccount: serverAccount)
     
     DispatchQueue.main.async {
       self.selectedClient = client
     }
   }
+  func signOut(){
+    selectedClient = nil
+  }
 }
 
 struct ServerAccount: Codable, Equatable, Identifiable, Hashable {
   
+  let id: String
   let username: String
   let instanceURL: URL
   let accessToken: String?
   
-  var id: String {
-    username
-  }
 }
