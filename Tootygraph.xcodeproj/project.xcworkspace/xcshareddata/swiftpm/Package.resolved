@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TootSDK/TootSDK",
       "state" : {
-        "revision" : "929b5cac75d937e6c9859bc9680b3302daf69e92",
-        "version" : "0.20.0"
+        "revision" : "a7b3477b63abd11ab11baf87c641edddca5f79af",
+        "version" : "0.22.0"
       }
     }
   ],
