@@ -21,29 +21,20 @@ struct SettingsMenu: View {
       showingPopover.toggle()
     }, label: {
       Image(systemName: "beach.umbrella.fill")
+      
+    })
+    .popover(isPresented: $showingPopover, content: {
+      VStack(alignment:.leading){
+        Text("Settings").font(.largeTitle)
+        Toggle("Jaunty angles",isOn: settings.$jaunty.binding)
         
-        })
-    .overlay(alignment:.topTrailing) {
-          VStack(alignment:.leading){
-            Text("Settings").font(.largeTitle)
-            Toggle("Jaunty angles",isOn: settings.$jaunty.binding)
-              
-            Toggle("Descriptions", isOn: settings.$descriptions.binding)
-            Spacer()
-          }.frame(width:500).padding()
-            .background(.white)
-            .cornerRadius(10)
-            .if(!showingPopover) { view in
-              view.hidden()
-            }
-            
-            .zIndex(100)
-
-            
+        Toggle("Descriptions", isOn: settings.$descriptions.binding)
+        Spacer()
       }
-
-    
-    }
+      .padding()
+      
+    })
+  }
 }
 
 struct SettingsMenu_Previews: PreviewProvider {
