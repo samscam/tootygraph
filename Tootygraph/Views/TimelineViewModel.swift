@@ -8,9 +8,27 @@
 import Foundation
 import TootSDK
 
+struct PostWrapper: Equatable, Hashable, Identifiable{
+  var id: ObjectIdentifier {
+    return wrappedPost.id
+  }
+  
+  let wrappedPost: Post
+  let attributedContent: AttributedString
+  
+  init(_ post: Post){
+    let renderer = UIKitAttribStringRenderer()
+    
+    self.wrappedPost = post
+    let attrib = renderer.render(post.displayPost).attributedString
+    self.attributedContent = AttributedString(attrib)
+    
+  }
+}
+
 class TimelineViewModel: ObservableObject {
   
-  @MainActor @Published var posts: [Post] = []
+  @MainActor @Published var posts: [PostWrapper] = []
   @MainActor @Published var loading: Bool = false
   @MainActor @Published var name: String = ""
   
@@ -29,7 +47,7 @@ class TimelineViewModel: ObservableObject {
     await setLoading(false)
   }
   
-  @MainActor private func setPosts(_ posts: [Post]) {
+  @MainActor private func setPosts(_ posts: [PostWrapper]) {
       self.posts = posts
   }
   
@@ -60,6 +78,8 @@ class TimelineViewModel: ObservableObject {
                 let filteredPosts = updatedPosts.map{
                   $0.displayPost
                 }.filter{ $0.mediaAttachments.count > 0 }
+                  .map{ PostWrapper($0) }
+                
                   await setPosts(filteredPosts)
               }
             

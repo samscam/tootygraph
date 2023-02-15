@@ -22,7 +22,7 @@ struct TimelineView: View {
   
   @State private var showSettings: Bool = false
   
-  @State private var selectedPost: Post?
+  @State private var selectedPost: PostWrapper?
   @State private var selectedMedia: Attachment?
   
   @Namespace var photoNamespace
@@ -69,7 +69,7 @@ struct TimelineView: View {
       }
     }
     .navigationTitle("Tootygraph")
-//    .toolbar {
+    .toolbar {
 //      ToolbarItem{
 //        Button {
 //          Task{
@@ -80,14 +80,14 @@ struct TimelineView: View {
 //        }
 //
 //      }
-//      ToolbarItem(placement:.primaryAction){
-//        SettingsMenu()
-//      }
-//    }
+      ToolbarItem(placement:.automatic){
+        SettingsMenu()
+      }
+    }
     
   }
   
-  func onSelected(post: Post, media: Attachment){
+  func onSelected(post: PostWrapper, media: Attachment){
     withAnimation{
       selectedPost = post
       selectedMedia = media

@@ -12,7 +12,7 @@ import TootSDK
 
 struct DetailView: View {
   
-  let post: Post
+  let post: PostWrapper
   let selectedMedia: Attachment
   let photoNamespace: Namespace.ID
   
@@ -21,8 +21,8 @@ struct DetailView: View {
   var body: some View{
     ScrollView{
       VStack{
-        AvatarView(account: post.account)
-        if let parsedContent = post.content {
+        AvatarView(account: post.wrappedPost.account)
+        if let parsedContent = post.attributedContent {
           Text(parsedContent)
             .font(.system(.callout, design: .rounded))
             .multilineTextAlignment(.leading)
@@ -31,7 +31,7 @@ struct DetailView: View {
               RoundedRectangle(cornerRadius: 20).foregroundColor(.gray.opacity(0.2))
             }
         }
-        ForEach(post.mediaAttachments) { media in
+        ForEach(post.wrappedPost.mediaAttachments) { media in
           
             PhotoFrame(media: media)
 //              .matchedGeometryEffect(id: media.id, in: photoNamespace)
@@ -41,7 +41,7 @@ struct DetailView: View {
         }
       }.padding()
     }
-    .navigationTitle("From \(post.account.displayName ?? "--")")
+    .navigationTitle("From \(post.wrappedPost.account.displayName ?? "--")")
     .background{
       Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
     }

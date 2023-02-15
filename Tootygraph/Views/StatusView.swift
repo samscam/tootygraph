@@ -13,8 +13,8 @@ import TootSDK
 struct StatusView: View {
   @EnvironmentObject var settings: Settings
   
-  let post: Post
-  let onSelected: ((Post, Attachment)->Void)?
+  let post: PostWrapper
+  let onSelected: ((PostWrapper, Attachment)->Void)?
   
   let photoNamespace: Namespace.ID
 
@@ -22,15 +22,15 @@ struct StatusView: View {
   var body: some View{
     VStack(alignment: .center, spacing: 0) {
       
-      AvatarView(account: post.account).zIndex(5).padding(.bottom, -10)
+      AvatarView(account: post.wrappedPost.account).zIndex(5).padding(.bottom, -10)
         .rotationEffect(Angle(degrees: settings.jaunty ? Double.random(in: -5...5) : 0 ) )
       
-      ForEach(post.mediaAttachments){ media in
+      ForEach(post.wrappedPost.mediaAttachments){ media in
         
         VStack(alignment: .center,spacing: 0){
           
           NavigationLink {
-              DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace)
+            DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace)
           } label: {
             PhotoFrame(media: media)
 //              .matchedGeometryEffect(id: media.id, in: photoNamespace)
