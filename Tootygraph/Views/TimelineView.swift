@@ -15,10 +15,10 @@ struct TimelineView: View {
   init(client: TootClient){
     self.client = client
     _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
+    
   }
   
   @StateObject var timelineViewModel: TimelineViewModel
-  
   
   @State private var showSettings: Bool = false
   
@@ -28,6 +28,7 @@ struct TimelineView: View {
   @Namespace var photoNamespace
   
   @EnvironmentObject var settings: Settings
+  @EnvironmentObject var accountsManager: AccountsManager
   
   var body: some View {
     
@@ -38,6 +39,9 @@ struct TimelineView: View {
         ForEach(timelineViewModel.posts) { post in
           StatusView(post: post, onSelected: onSelected, photoNamespace: photoNamespace)
             .padding(20)
+            .onAppear{
+              timelineViewModel.onItemAppear(post)
+            }
         }
       }
     }
@@ -59,29 +63,20 @@ struct TimelineView: View {
 //      self.statuses = output.sorted{ $0.createdAt > $1.createdAt }
 //    }
     .onAppear{
-      
-      Task{
-        do {
-          try await timelineViewModel.refresh()
-        } catch {
-         print("Oh noes \(error)")
-       }
-      }
+      timelineViewModel.loadInitial()
     }
     .navigationTitle("Tootygraph")
     .toolbar {
-//      ToolbarItem{
-//        Button {
-//          Task{
-//            try? await server.fetchPublicTimeline()
-//          }
-//        } label: {
-//          Image(systemName: "fan.floor")
-//        }
-//
-//      }
       ToolbarItem(placement:.automatic){
         SettingsMenu()
+      }
+      ToolbarItem(placement: .automatic) {
+        Button {
+          accountsManager.signOut()
+        } label: {
+          Image(systemName: "figure.socialdance")
+          
+        }
       }
     }
     

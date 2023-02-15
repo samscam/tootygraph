@@ -26,25 +26,126 @@ struct PostWrapper: Equatable, Hashable, Identifiable{
   }
 }
 
+extension PagedInfo: Equatable{
+  public static func == (lhs: PagedInfo, rhs: PagedInfo) -> Bool {
+    return lhs.minId == rhs.minId && lhs.maxId == rhs.maxId && lhs.sinceId == rhs.sinceId
+  }
+}
+
+enum PagingState: Equatable {
+  case nothing
+  case loadingFirst
+  case resting
+  case lodingNext
+  case end
+}
+enum PagingErrors: Error {
+  case noMoreResults
+}
+
 class TimelineViewModel: ObservableObject {
   
-  @MainActor @Published var posts: [PostWrapper] = []
-  @MainActor @Published var loading: Bool = false
-  @MainActor @Published var name: String = ""
+  @Published var posts: [PostWrapper] = []
+  @Published var loading: Bool = false
+  @Published var name: String = ""
   
   private var client: TootClient
+  
+  private let threshold = 2
+  
   init(client: TootClient){
     self.client = client
+    loadInitial()
+  }
+  
+  var pagingState: PagingState = .nothing
+  var nextPage: PagedInfo? = nil
+  
+  func loadInitial(){
+    guard pagingState == .nothing else { return }
+    pagingState = .loadingFirst
     Task{
-      await setBindings()
+      do {
+        try await self.loadMore()
+      } catch {
+        print("Oh noes \(error)")
+      }
     }
   }
   
-  func refresh() async throws {
+  func loadMore() async throws {
     await setLoading(true)
-    try await client.data.refresh(.timeLineHome)
-    try await client.data.refresh(.verifyCredentials)
+    
+    let result = try await client.getHomeTimeline(nextPage)
+    
+    if Task.isCancelled {
+      pagingState = .resting
+      return
+    }
+    
+    guard result.result.count > 0 else {
+      pagingState = .end
+      throw PagingErrors.noMoreResults
+    }
+    
+    nextPage = PagedInfo(maxId:result.info.maxId)
+    
+    let filteredPosts = filterPosts(result.result)
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      self.posts.append(contentsOf: filteredPosts)
+      self.pagingState = .resting
+    }
+    
     await setLoading(false)
+  }
+  
+  private var currentTask: Task<Void, Never>? {
+      willSet {
+          if let task = currentTask {
+              if task.isCancelled { return }
+              task.cancel()
+              // Setting a new task cancelling the current task
+          }
+      }
+  }
+
+
+  
+  func onItemAppear(_ post: PostWrapper){
+    if pagingState == .end {
+      return
+    }
+    
+    if pagingState == .lodingNext || pagingState == .loadingFirst {
+      return
+    }
+    
+    guard let index = posts.firstIndex(where: { $0.id == post.id }) else {
+         return
+     }
+    
+    let thresholdIndex = posts.index(posts.endIndex, offsetBy: -threshold)
+        if index != thresholdIndex {
+            return
+        }
+    
+    pagingState = .lodingNext
+    currentTask = Task {
+      do{
+        try await loadMore()
+      } catch {
+          print(error)
+      }
+    }
+  }
+  
+  /// Forces the stream to refresh
+  func refresh() async throws {
+//    await setLoading(true)
+//    try await client.data.refresh(.timeLineHome)
+//    try await client.data.refresh(.verifyCredentials)
+//    await setLoading(false)
   }
   
   @MainActor private func setPosts(_ posts: [PostWrapper]) {
@@ -65,43 +166,19 @@ class TimelineViewModel: ObservableObject {
           Task {
               for await updatedPosts in try await client.data.stream(.timeLineHome)
             {
-//                  let renderer = UIKitAttribStringRenderer()
-                  
-//                  let feedPosts = updatedPosts.map { post in
-//
-//                      let html = renderer.render(post.displayPost).wrappedValue
-//                      let markdown = TootHTML.extractAsPlainText(html: post.displayPost.content) ?? ""
-//
-//                      return FeedPost(html: html, markdown: markdown, tootPost: post)
-//                  }
-//
-                let filteredPosts = updatedPosts.map{
-                  $0.displayPost
-                }.filter{ $0.mediaAttachments.count > 0 }
-                  .map{ PostWrapper($0) }
-                
-                  await setPosts(filteredPosts)
-              }
-            
-            
-          }
-          
-          // Reset data if the client changes (user has signed in/out etc
-//          Task {
-//              for await _ in client.values {
-//                  await setPosts([])
-//                  await setName("")
-//              }
-//          }
-          
-          // opt into account updates
-          Task {
-              for await account in try await  client.data.stream(.verifyCredentials) {
-                  print("got account update")
-                  await self.setName(account.displayName ?? "-")
-              }
-          }
 
+                let filteredPosts = filterPosts(updatedPosts)
+                await setPosts(filteredPosts)
+              }
+            
+          }
       }
+  
+  private func filterPosts(_ posts: [Post]) -> [PostWrapper] {
+    return posts.map{
+      $0.displayPost
+    }.filter{ $0.mediaAttachments.count > 0 }
+      .map{ PostWrapper($0) }
+  }
   
 }
