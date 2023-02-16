@@ -22,8 +22,11 @@ struct TimelineView: View {
   
   @State private var showSettings: Bool = false
   
+  @State private var posts: [PostWrapper] = []
   @State private var selectedPost: PostWrapper?
   @State private var selectedMedia: Attachment?
+  
+  
   
   @Namespace var photoNamespace
   
@@ -32,36 +35,37 @@ struct TimelineView: View {
   
   var body: some View {
     
-    
-    ScrollView {
-      LazyVStack{
+    GeometryReader{ geometry in
+      ScrollView {
+        LazyVStack{
 
-        ForEach(timelineViewModel.posts) { post in
-          StatusView(post: post, onSelected: onSelected, photoNamespace: photoNamespace)
-            .padding(20)
-            .onAppear{
-              timelineViewModel.onItemAppear(post)
-            }
+          ForEach(posts) { post in
+            StatusView(post: post, onSelected: onSelected, photoNamespace: photoNamespace, geometry: geometry)
+              .padding(20)
+              .onAppear{
+                timelineViewModel.onItemAppear(post)
+              }
+          }
         }
       }
-    }
-    
-    .refreshable {
-        do {
-          try await timelineViewModel.refresh()
-        } catch {
-         print("Oh noes \(error)")
-       }
       
+      .refreshable {
+          do {
+            try await timelineViewModel.refresh()
+          } catch {
+           print("Oh noes \(error)")
+         }
+        
+      }
     }
     .safeAreaInset(edge: .bottom, spacing: 0) {
       BottomBar()
       
     }
     
-//    .onReceive(server.$publicTimeline.$items) { output in
-//      self.statuses = output.sorted{ $0.createdAt > $1.createdAt }
-//    }
+    .onReceive(timelineViewModel.$posts) { output in
+      self.posts = output
+    }
     .onAppear{
       timelineViewModel.loadInitial()
     }

@@ -15,9 +15,9 @@ struct StatusView: View {
   
   let post: PostWrapper
   let onSelected: ((PostWrapper, Attachment)->Void)?
-  
-  let photoNamespace: Namespace.ID
 
+  let photoNamespace: Namespace.ID
+  let geometry: GeometryProxy
   
   var body: some View{
     VStack(alignment: .center, spacing: 0) {
@@ -33,6 +33,8 @@ struct StatusView: View {
             DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace)
           } label: {
             PhotoFrame(media: media)
+              .frame(maxWidth: geometry.size.width * 0.9)
+              .frame(maxHeight: geometry.size.height * 0.9)
 //              .matchedGeometryEffect(id: media.id, in: photoNamespace)
 
           }
