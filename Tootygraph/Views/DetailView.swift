@@ -15,6 +15,7 @@ struct DetailView: View {
   let post: PostWrapper
   let selectedMedia: Attachment
   let photoNamespace: Namespace.ID
+  let accountNamespace: Namespace.ID
   
   @State private var dragOffset = CGSize.zero
 
@@ -22,6 +23,7 @@ struct DetailView: View {
     ScrollView{
       VStack{
         AvatarView(account: post.wrappedPost.account)
+//          .matchedGeometryEffect(id: post.wrappedPost.account.id, in: accountNamespace)
         if let parsedContent = post.attributedContent {
           Text(parsedContent)
             .font(.system(.callout, design: .rounded))

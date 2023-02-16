@@ -16,12 +16,26 @@ struct PostWrapper: Equatable, Hashable, Identifiable{
   let wrappedPost: Post
   let attributedContent: AttributedString
   
+  // Pre-generate jaunty angles for display...
+  var jauntyAngles: [Double] = []
+
+  
   init(_ post: Post){
-    let renderer = UIKitAttribStringRenderer()
     
+    // Pre-render html content
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
+    let renderer = AppKitAttribStringRenderer()
+    #else
+    let renderer = UIKitAttribStringRenderer()
+    #endif
     self.wrappedPost = post
     let attrib = renderer.render(post.displayPost).attributedString
     self.attributedContent = AttributedString(attrib)
+    
+    // Pre-generate adequate quantities of random jaunty angles
+    for _ in 0...post.mediaAttachments.count + 2 {
+        jauntyAngles.append(Double.random(in: -3...3))
+    }
     
   }
 }

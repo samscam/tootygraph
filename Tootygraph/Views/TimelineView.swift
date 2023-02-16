@@ -11,7 +11,7 @@ import TootSDK
 
 struct TimelineView: View {
   let client: TootClient
-
+  
   init(client: TootClient){
     self.client = client
     _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
@@ -26,9 +26,8 @@ struct TimelineView: View {
   @State private var selectedPost: PostWrapper?
   @State private var selectedMedia: Attachment?
   
-  
-  
   @Namespace var photoNamespace
+  @Namespace var accountNamespace
   
   @EnvironmentObject var settings: Settings
   @EnvironmentObject var accountsManager: AccountsManager
@@ -38,9 +37,9 @@ struct TimelineView: View {
     GeometryReader{ geometry in
       ScrollView {
         LazyVStack{
-
+          
           ForEach(posts) { post in
-            StatusView(post: post, onSelected: onSelected, photoNamespace: photoNamespace, geometry: geometry)
+            StatusView(post: post, onSelected: onSelected, photoNamespace: photoNamespace, accountNamespace: accountNamespace, geometry: geometry)
               .padding(20)
               .onAppear{
                 timelineViewModel.onItemAppear(post)
@@ -50,11 +49,11 @@ struct TimelineView: View {
       }
       
       .refreshable {
-          do {
-            try await timelineViewModel.refresh()
-          } catch {
-           print("Oh noes \(error)")
-         }
+        do {
+          try await timelineViewModel.refresh()
+        } catch {
+          print("Oh noes \(error)")
+        }
         
       }
     }

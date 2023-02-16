@@ -32,22 +32,21 @@ struct PhotoFrame: View {
       if let image = state.image {
         image
           .resizingMode(.aspectFill)
-          .frame(idealWidth:Double(media.meta?.original?.width ?? 10),  idealHeight:Double(media.meta?.original?.height ?? 10))
+          
       } else {
         Color
           .accentColor.opacity(0.3)
-          .frame(idealWidth:Double(media.meta?.original?.width ?? 10),  idealHeight:Double(media.meta?.original?.height ?? 10))
-        
-        
       }
     }
+    .frame(maxWidth:Double(media.meta?.original?.width ?? 10),  maxHeight:Double(media.meta?.original?.height ?? 10))
 
-    .background(Color.white)
     .padding(10)
+    .background(Color.white)
     .border(.white, width:10)
-    .padding(-10)
+
     
     .aspectRatio(media.aspect,contentMode: .fit)
+
     .shadow(color:.black.opacity(0.3), radius: 10)
     .padding(.bottom,-15)
     

@@ -13,33 +13,39 @@ import TootSDK
 struct StatusView: View {
   @EnvironmentObject var settings: Settings
   
-  let post: PostWrapper
+  var post: PostWrapper
   let onSelected: ((PostWrapper, Attachment)->Void)?
 
   let photoNamespace: Namespace.ID
+  let accountNamespace: Namespace.ID
   let geometry: GeometryProxy
   
   var body: some View{
     VStack(alignment: .center, spacing: 0) {
       
       AvatarView(account: post.wrappedPost.account).zIndex(5).padding(.bottom, -10)
-        .rotationEffect(Angle(degrees: settings.jaunty ? Double.random(in: -5...5) : 0 ) )
+        .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
+//        .matchedGeometryEffect(id: post.wrappedPost.account.id, in: accountNamespace)
       
       ForEach(post.wrappedPost.mediaAttachments){ media in
+        let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
+        let jaunty = post.jauntyAngles[index+1]
         
         VStack(alignment: .center,spacing: 0){
           
           NavigationLink {
-            DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace)
+            DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace, accountNamespace: accountNamespace)
           } label: {
             PhotoFrame(media: media)
-              .frame(maxWidth: geometry.size.width * 0.9)
-              .frame(maxHeight: geometry.size.height * 0.9)
+
 //              .matchedGeometryEffect(id: media.id, in: photoNamespace)
 
-          }
+          }.buttonStyle(.plain)
+          
         }
-        .rotationEffect(Angle(degrees: settings.jaunty ? Double.random(in: -3...3) : 0))
+          .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
+          .frame(maxWidth: geometry.size.width * 0.9)
+          .frame(maxHeight: geometry.size.height * 0.8)
         
         
       }.padding(.bottom,20)

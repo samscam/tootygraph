@@ -29,7 +29,6 @@ struct MainView: View {
           }
           .environmentObject(settings)
           .environmentObject(accountsManager)
-          
       }
     } else {
       AccountsView()
