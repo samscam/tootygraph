@@ -14,6 +14,8 @@ struct ServerAccountView: View{
       Text(account.username)
       Text(account.instanceURL.absoluteString)
       
-    }
+    }.padding(10)
+      .border(Color.accentColor, width:3)
+      .padding(5)
   }
 }
