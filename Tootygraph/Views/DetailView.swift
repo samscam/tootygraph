@@ -24,15 +24,7 @@ struct DetailView: View {
       VStack{
         AvatarView(account: post.wrappedPost.account)
 //          .matchedGeometryEffect(id: post.wrappedPost.account.id, in: accountNamespace)
-        if let parsedContent = post.attributedContent {
-          Text(parsedContent)
-            .font(.system(.callout, design: .rounded))
-            .multilineTextAlignment(.leading)
-            .padding()
-            .background{
-              RoundedRectangle(cornerRadius: 20).foregroundColor(.gray.opacity(0.2))
-            }
-        }
+
         ForEach(post.wrappedPost.mediaAttachments) { media in
           
             PhotoFrame(media: media)
@@ -40,6 +32,18 @@ struct DetailView: View {
           
           Spacer(minLength: 40)
 
+        }
+        if let parsedContent = post.attributedContent {
+          Text(parsedContent)
+            .font(.custom("AmericanTypewriter",size:24))
+            .foregroundColor(.black)
+            .opacity(0.8)
+            .multilineTextAlignment(.leading)
+            .padding()
+            .background{
+              Rectangle()
+                .foregroundColor(.yellow.opacity(0.7))
+            }
         }
       }.padding()
     }
