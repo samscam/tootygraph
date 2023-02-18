@@ -14,10 +14,6 @@ struct StatusView: View {
   @EnvironmentObject var settings: Settings
   
   var post: PostWrapper
-  let onSelected: ((PostWrapper, Attachment)->Void)?
-
-  let photoNamespace: Namespace.ID
-  let accountNamespace: Namespace.ID
   let geometry: GeometryProxy
   
   var body: some View{
@@ -25,7 +21,6 @@ struct StatusView: View {
       
       AvatarView(account: post.wrappedPost.account).zIndex(5).padding(.bottom, -10)
         .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
-//        .matchedGeometryEffect(id: post.wrappedPost.account.id, in: accountNamespace)
       
       ForEach(post.wrappedPost.mediaAttachments){ media in
         let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
@@ -34,12 +29,9 @@ struct StatusView: View {
         VStack(alignment: .center,spacing: 0){
           
           NavigationLink {
-            DetailView(post: post, selectedMedia: media, photoNamespace: photoNamespace, accountNamespace: accountNamespace)
+            DetailView(post: post, selectedMedia: media)
           } label: {
             PhotoFrame(media: media)
-
-//              .matchedGeometryEffect(id: media.id, in: photoNamespace)
-
           }.buttonStyle(.plain)
           
         }

@@ -14,8 +14,6 @@ struct DetailView: View {
   
   let post: PostWrapper
   let selectedMedia: Attachment
-  let photoNamespace: Namespace.ID
-  let accountNamespace: Namespace.ID
   
   @State private var dragOffset = CGSize.zero
 
@@ -23,13 +21,11 @@ struct DetailView: View {
     ScrollView{
       VStack{
         AvatarView(account: post.wrappedPost.account)
-//          .matchedGeometryEffect(id: post.wrappedPost.account.id, in: accountNamespace)
 
         ForEach(post.wrappedPost.mediaAttachments) { media in
           
             PhotoFrame(media: media)
-//              .matchedGeometryEffect(id: media.id, in: photoNamespace)
-          
+
           Spacer(minLength: 40)
 
         }

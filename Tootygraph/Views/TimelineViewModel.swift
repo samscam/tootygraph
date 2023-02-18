@@ -7,6 +7,7 @@
 
 import Foundation
 import TootSDK
+import SwiftUI
 
 struct PostWrapper: Equatable, Hashable, Identifiable{
   var id: ObjectIdentifier {
@@ -14,7 +15,7 @@ struct PostWrapper: Equatable, Hashable, Identifiable{
   }
   
   let wrappedPost: Post
-  let attributedContent: AttributedString
+  var attributedContent: AttributedString
   
   // Pre-generate jaunty angles for display...
   var jauntyAngles: [Double] = []
@@ -30,6 +31,7 @@ struct PostWrapper: Equatable, Hashable, Identifiable{
     #endif
     self.wrappedPost = post
     let attrib = renderer.render(post.displayPost).attributedString
+
     self.attributedContent = AttributedString(attrib)
     
     // Pre-generate adequate quantities of random jaunty angles
