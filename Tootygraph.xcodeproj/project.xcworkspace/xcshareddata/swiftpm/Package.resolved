@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "67bd45931180f652159e3342575277a7f197b3ab",
-        "version" : "11.6.2"
+        "revision" : "33f7e93be5d4ec027d42af77a8ec4680d1862ad2",
+        "version" : "11.6.4"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TootSDK/TootSDK",
       "state" : {
-        "revision" : "a7b3477b63abd11ab11baf87c641edddca5f79af",
-        "version" : "0.22.0"
+        "revision" : "af3d67cc3d6a7912c5251f3d71944f776b721880",
+        "version" : "0.24.0"
       }
     }
   ],
