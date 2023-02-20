@@ -19,7 +19,7 @@ struct StatusView: View {
   var body: some View{
     VStack(alignment: .center, spacing: 0) {
       
-      AvatarView(account: post.wrappedPost.account).zIndex(5).padding(.bottom, -10)
+      AvatarView(account: post.wrappedPost.account)
         .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
       
       ForEach(post.wrappedPost.mediaAttachments){ media in
@@ -28,11 +28,11 @@ struct StatusView: View {
         
         VStack(alignment: .center,spacing: 0){
           
-          NavigationLink {
-            DetailView(post: post, selectedMedia: media)
-          } label: {
-            PhotoFrame(media: media)
-          }.buttonStyle(.plain)
+//          NavigationLink {
+//            DetailView(post: post, selectedMedia: media)
+//          } label: {
+            PhotoView(media: media)
+//          }.buttonStyle(.plain)
           
         }
           .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))

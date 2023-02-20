@@ -24,7 +24,7 @@ struct DetailView: View {
 
         ForEach(post.wrappedPost.mediaAttachments) { media in
           
-            PhotoFrame(media: media)
+            PhotoView(media: media)
 
           Spacer(minLength: 40)
 
