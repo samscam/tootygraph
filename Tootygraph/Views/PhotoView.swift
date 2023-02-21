@@ -36,36 +36,56 @@ extension Attachment {
 
 struct PhotoView: View {
 
+  @State private var flipped: Bool = false
+  
   let media: Attachment
   
   var body: some View {
     if media.description != nil {
-      Flipper( frontView: frontView, rearView: rearView)
+      Flipper( flipped: $flipped, frontView: frontView, rearView: rearView)
+        .aspectRatio(media.aspect,contentMode: .fit)
     } else {
       frontView
+        .aspectRatio(media.aspect,contentMode: .fit)
     }
   }
   
   @MainActor
   var frontView: some View {
     ZStack{
+      
+      Rectangle().foregroundColor(.gray.opacity(0.5))
+      
       photoView
+      
+      // Hidden copy of the alt text to scale the frame to match
+      if let description = media.description {
+        Text(description)
+          .foregroundColor(.white)
+          .padding()
+          .opacity(0)
+      }
     }
     .photoFrame()
     .if(media.description != nil, transform: { view in
-      view
-        .overlay(alignment: .bottomTrailing) {
+      ZStack(alignment:.bottomTrailing){
+        view
+        CornerBadge( alignment: .bottomTrailing){
           Text("ALT")
+            .bold()
+            .padding(10)
             .foregroundColor(.black)
-            .padding(.bottom, 15)
-            .padding(.horizontal, 20)
-            .background(Color.white.opacity(1.0))
-            .padding(.horizontal, -20)
-            .rotationEffect(.radians( -.pi / 4))
-            .padding(.top, 20)
-            .padding(.leading, 20)
-            .clipShape(Rectangle())
         }
+        .foregroundColor(.white)
+        .onTapGesture{
+          print("Flip!")
+          
+          withAnimation {
+            self.flipped = true
+          }
+          
+        }
+      }
     })
 
   }
@@ -75,6 +95,7 @@ struct PhotoView: View {
     ZStack{
       
       photoView
+        .rotation3DEffect(.radians(.pi), axis: (0,1,0))
         .blur(radius: 5)
       
       Rectangle().foregroundColor(.black.opacity(0.5))
@@ -85,6 +106,12 @@ struct PhotoView: View {
           .padding()
       }
 
+    }
+    .onTapGesture {
+      print("Unflip")
+      withAnimation {
+        self.flipped = false
+      }
     }
     .photoFrame()
   }
@@ -102,7 +129,7 @@ struct PhotoView: View {
       }
     }
     .frame(maxWidth:media.width, maxHeight:media.height)
-    .aspectRatio(media.aspect,contentMode: .fit)
+//    .aspectRatio(media.aspect,contentMode: .fit)
   }
 }
 
@@ -123,3 +150,4 @@ extension View {
     modifier(PhotoFrame())
   }
 }
+

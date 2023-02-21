@@ -27,19 +27,19 @@ struct TimelineView: View {
     
     GeometryReader{ geometry in
       ScrollViewReader{ proxy in
-        ScrollView {
-          LazyVStack{
-            
-            ForEach(timelineViewModel.posts) { post in
-              StatusView(post: post, geometry: geometry)
-                .padding(20)
-                .onAppear{
-                  timelineViewModel.onItemAppear(post)
-                }
+        List(timelineViewModel.posts) { post in
+          StatusView(post: post, geometry: geometry)
+            .padding(20)
+            .onAppear{
+              timelineViewModel.onItemAppear(post)
             }
+            .listRowSeparator(.hidden)
+            .listRowInsets(.none)
+            .listRowBackground(EmptyView())
             
-          }
         }
+        .listStyle(PlainListStyle())
+        
         
         .refreshable {
           do {

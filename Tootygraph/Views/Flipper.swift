@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Flipper<Front:View, Rear:View>: View {
   
-  @State var flipped: Bool = false
+  @Binding var flipped: Bool
   
   let frontView: Front
   let rearView: Rear
@@ -24,12 +24,14 @@ struct Flipper<Front:View, Rear:View>: View {
       rearView
         .modifier(FlipOpacity(opacity: flipped ? 1 : 0))
         .rotation3DEffect(.radians(flipped ? 0 : .pi ), axis: (x: 0, y: 1, z: 0))
+    }.onChange(of: flipped) { newValue in
+      print("It flipped")
     }
-    .onTapGesture {
-      withAnimation {
-        self.flipped.toggle()
-      }
-    }
+//    .onTapGesture {
+//      withAnimation {
+//        self.flipped.toggle()
+//      }
+//    }
 
   }
 }

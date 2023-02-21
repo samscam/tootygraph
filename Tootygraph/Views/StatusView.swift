@@ -27,20 +27,22 @@ struct StatusView: View {
         let jaunty = post.jauntyAngles[index+1]
         
         VStack(alignment: .center,spacing: 0){
-          
-//          NavigationLink {
-//            DetailView(post: post, selectedMedia: media)
-//          } label: {
+          ZStack{
+            NavigationLink {
+              DetailView(post: post, selectedMedia: media)
+            } label: {
+              EmptyView()
+            }.buttonStyle(.plain).opacity(0)
             PhotoView(media: media)
-//          }.buttonStyle(.plain)
-          
+          }
         }
           .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
           .frame(maxWidth: geometry.size.width * 0.9)
-          .frame(maxHeight: geometry.size.height * 0.8)
+          .frame(maxHeight: geometry.size.height * 0.7)
         
-        
-      }.padding(.bottom,20)
+      }
+      .padding(.bottom,20)
+      
     }
   }
   
