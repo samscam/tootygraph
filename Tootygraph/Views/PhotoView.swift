@@ -13,6 +13,11 @@ extension Attachment {
   var mediaURL: URL? {
     URL(string:self.url)
   }
+  
+  var mediaPreviewURL: URL? {
+    guard let previewUrl = self.previewUrl else { return nil }
+    return URL(string:previewUrl)
+  }
 }
 
 extension Attachment {
@@ -43,50 +48,43 @@ struct PhotoView: View {
   var body: some View {
     if media.description != nil {
       Flipper( flipped: $flipped, frontView: frontView, rearView: rearView)
-        .aspectRatio(media.aspect,contentMode: .fit)
     } else {
       frontView
-        .aspectRatio(media.aspect,contentMode: .fit)
     }
   }
   
   @MainActor
   var frontView: some View {
-    ZStack{
-      
+    ZStack {
       Rectangle().foregroundColor(.gray.opacity(0.5))
-      
       photoView
-      
-      // Hidden copy of the alt text to scale the frame to match
-      if let description = media.description {
-        Text(description)
-          .foregroundColor(.white)
-          .padding()
-          .opacity(0)
-      }
+//      Text("\(media.width?.formatted() ?? "?") x \(media.height?.formatted() ?? "?")")
+//        .bold()
+//        .foregroundColor(.white)
+//        .background(.black)
     }
+    .frame(maxWidth:media.width, maxHeight:media.height)
+    .aspectRatio(media.aspect,contentMode: .fit)
     .photoFrame()
-    .if(media.description != nil, transform: { view in
-      ZStack(alignment:.bottomTrailing){
-        view
+    .overlay(alignment: .bottomTrailing) {
+      if let _ = media.description {
         CornerBadge( alignment: .bottomTrailing){
           Text("ALT")
             .bold()
-            .padding(10)
             .foregroundColor(.black)
         }
         .foregroundColor(.white)
         .onTapGesture{
-          print("Flip!")
-          
           withAnimation {
             self.flipped = true
           }
-          
         }
+      } else {
+        EmptyView()
       }
-    })
+    }
+
+
 
   }
   
@@ -108,28 +106,34 @@ struct PhotoView: View {
 
     }
     .onTapGesture {
-      print("Unflip")
       withAnimation {
         self.flipped = false
       }
     }
+    .frame(maxWidth:media.width, maxHeight:media.height)
+    .aspectRatio(media.aspect,contentMode: .fit)
     .photoFrame()
+
+
   }
   
   @MainActor
   var photoView: some View {
-    LazyImage(url: media.mediaURL) { state in
-      if let image = state.image {
-        image
-          .resizingMode(.aspectFill)
-        
-      } else {
-        Color
-          .accentColor.opacity(0.3)
+
+      LazyImage(url: media.mediaURL) { state in
+        if let image = state.image {
+          image
+            .resizingMode(.aspectFit)
+        } else {
+          Color
+            .accentColor.opacity(0.3)
+        }
       }
-    }
-    .frame(maxWidth:media.width, maxHeight:media.height)
-//    .aspectRatio(media.aspect,contentMode: .fit)
+//      .aspectRatio(media.aspect,contentMode: .fill)
+//      .frame(maxWidth:media.width, maxHeight:media.height)
+
+
+
   }
 }
 

@@ -25,48 +25,46 @@ struct TimelineView: View {
   
   var body: some View {
     
-    GeometryReader{ geometry in
-      ScrollViewReader{ proxy in
-        List(timelineViewModel.posts) { post in
+      GeometryReader{ geometry in
+      List(timelineViewModel.posts) { post in
+        
           StatusView(post: post, geometry: geometry)
             .padding(20)
             .onAppear{
               timelineViewModel.onItemAppear(post)
             }
             .listRowSeparator(.hidden)
-            .listRowInsets(.none)
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             .listRowBackground(EmptyView())
+      }
+      .listStyle(PlainListStyle())
+      .padding(0)
+      
+      .refreshable {
+        do {
+          try await timelineViewModel.refresh()
+        } catch {
+          print("Oh noes \(error)")
+        }
+      }
+      
+      .safeAreaInset(edge: .bottom, spacing: 0) {
+        BottomBar()
+      }
+      .onAppear{
+        timelineViewModel.loadInitial()
+      }
+      .navigationTitle("Tootygraph")
+      .toolbar {
+        ToolbarItem(placement:.automatic){
+          SettingsMenu()
+        }
+        ToolbarItem(placement: .automatic) {
+          Button {
+            accountsManager.signOut()
+          } label: {
+            Image(systemName: "figure.socialdance")
             
-        }
-        .listStyle(PlainListStyle())
-        
-        
-        .refreshable {
-          do {
-            try await timelineViewModel.refresh()
-          } catch {
-            print("Oh noes \(error)")
-          }
-        }
-        
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-          BottomBar()
-        }
-        .onAppear{
-          timelineViewModel.loadInitial()
-        }
-        .navigationTitle("Tootygraph")
-        .toolbar {
-          ToolbarItem(placement:.automatic){
-            SettingsMenu()
-          }
-          ToolbarItem(placement: .automatic) {
-            Button {
-              accountsManager.signOut()
-            } label: {
-              Image(systemName: "figure.socialdance")
-              
-            }
           }
         }
       }

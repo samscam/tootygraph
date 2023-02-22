@@ -17,33 +17,35 @@ struct StatusView: View {
   let geometry: GeometryProxy
   
   var body: some View{
-    VStack(alignment: .center, spacing: 0) {
+    ZStack {
+      NavigationLink {
+        DetailView(post: post, selectedMedia: nil)
+      } label: {
+        EmptyView()
+      }.buttonStyle(.plain).opacity(0)
       
-      AvatarView(account: post.wrappedPost.account)
-        .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
-      
-      ForEach(post.wrappedPost.mediaAttachments){ media in
-        let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
-        let jaunty = post.jauntyAngles[index+1]
+      VStack(alignment: .center, spacing: 0) {
         
-        VStack(alignment: .center,spacing: 0){
-          ZStack{
-            NavigationLink {
-              DetailView(post: post, selectedMedia: media)
-            } label: {
-              EmptyView()
-            }.buttonStyle(.plain).opacity(0)
-            PhotoView(media: media)
-          }
+        AvatarView(account: post.wrappedPost.account)
+          .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
+
+            ForEach(post.wrappedPost.mediaAttachments){ media in
+              let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
+              let jaunty = post.jauntyAngles[index+1]
+              
+                PhotoView(media: media)
+
+                .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
+                .frame(maxWidth: geometry.size.width * 0.9)
+                .frame(maxHeight: geometry.size.height * 0.9)
+              
         }
-          .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
-          .frame(maxWidth: geometry.size.width * 0.9)
-          .frame(maxHeight: geometry.size.height * 0.7)
+        .padding(.bottom,20)
         
       }
-      .padding(.bottom,20)
       
     }
+    
   }
   
 }
