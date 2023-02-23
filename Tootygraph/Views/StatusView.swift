@@ -36,8 +36,11 @@ struct StatusView: View {
                 PhotoView(media: media)
 
                 .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
-                .frame(maxWidth: geometry.size.width * 0.9)
-                .frame(maxHeight: geometry.size.height * 0.9)
+              
+              // These are currently commented out - because they mess up other aspects of
+              // scaling the photo frames... :/
+//                .frame(maxWidth: geometry.size.width * 0.9)
+//                .frame(maxHeight: geometry.size.height * 0.9)
               
         }
         .padding(.bottom,20)
