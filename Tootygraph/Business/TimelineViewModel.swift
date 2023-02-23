@@ -9,39 +9,7 @@ import Foundation
 import TootSDK
 import SwiftUI
 
-struct PostWrapper: Equatable, Hashable, Identifiable{
-  var id: ObjectIdentifier {
-    return wrappedPost.id
-  }
-  
-  let wrappedPost: Post
-  var attributedContent: AttributedString
-  
-  // Pre-generate jaunty angles for display...
-  var jauntyAngles: [Double] = []
 
-  
-  init(_ post: Post){
-    
-    // Pre-render html content
-    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
-    let renderer = AppKitAttribStringRenderer()
-    #else
-    let renderer = UIKitAttribStringRenderer()
-    #endif
-    self.wrappedPost = post
-    let attrib = renderer.render(post.displayPost).attributedString
-
-    self.attributedContent = AttributedString(attrib)
-    
-    // Pre-generate adequate quantities of random jaunty angles
-    for _ in 0...post.mediaAttachments.count + 2 {
-        jauntyAngles.append(Double.random(in: -3...3))
-    }
-    
-  }
-  
-}
 
 extension PagedInfo: Equatable{
   public static func == (lhs: PagedInfo, rhs: PagedInfo) -> Bool {
@@ -195,7 +163,7 @@ class TimelineViewModel: ObservableObject {
     return posts.map{
       $0.displayPost
     }.filter{ $0.mediaAttachments.count > 0 }
-      .map{ PostWrapper($0) }
+      .map{ PostWrapper($0,client:client) }
   }
   
 }

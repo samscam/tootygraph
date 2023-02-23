@@ -20,9 +20,9 @@ struct DetailView: View {
   var body: some View{
     ScrollView{
       VStack{
-        AvatarView(account: post.wrappedPost.account)
+        AvatarView(account: post.post.account)
 
-        ForEach(post.wrappedPost.mediaAttachments) { media in
+        ForEach(post.post.mediaAttachments) { media in
           
             PhotoView(media: media)
 
@@ -43,7 +43,7 @@ struct DetailView: View {
         }
       }.padding()
     }
-    .navigationTitle("From \(post.wrappedPost.account.displayName ?? "--")")
+    .navigationTitle("From \(post.post.account.displayName ?? "--")")
     .background{
       Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
     }

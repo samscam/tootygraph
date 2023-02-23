@@ -9,37 +9,42 @@ import SwiftUI
 import TootSDK
 
 struct ActionsView: View {
-  let actions: [Action]
+  let actions: [ActionType]
   
   var body: some View {
     Grid{
       GridRow{
         ForEach(actions) { action in
-          Button {
-            // action
-          } label: {
-              Image(systemName: action.iconName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                
-          }.buttonStyle(PlainButtonStyle())
-          
+          Rectangle()
         }
       }.frame(maxHeight: 40)
     }
   }
 }
 
-struct ActionWrap {
+struct ActionButtonView: View{
+  let highlighted: Bool
+  let inProgress: Bool = false
   
-  let post: PostWrapper
-  let client: TootClient
+  let actionType: ActionType
   
+  let onTap: ()->()
   
+  var body: some View {
+    Button {
+      onTap()
+    } label: {
+        Image(systemName: actionType.iconName)
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .foregroundColor(highlighted ? .accentColor : .primary)
+          
+    }.buttonStyle(PlainButtonStyle())
+  }
   
 }
 
-enum Action: String, Identifiable, CaseIterable {
+enum ActionType: String, Identifiable, CaseIterable {
   case reply
   case boost
   case favourite

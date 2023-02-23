@@ -13,7 +13,7 @@ import TootSDK
 struct StatusView: View {
   @EnvironmentObject var settings: Settings
   
-  var post: PostWrapper
+  @ObservedObject var post: PostWrapper
   let geometry: GeometryProxy
   
   var body: some View{
@@ -26,11 +26,11 @@ struct StatusView: View {
       
       VStack(alignment: .center, spacing: 0) {
         
-        AvatarView(account: post.wrappedPost.account)
+        AvatarView(account: post.post.account)
           .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
         
-        ForEach(post.wrappedPost.mediaAttachments){ media in
-          let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
+        ForEach(post.post.mediaAttachments){ media in
+          let index = post.post.mediaAttachments.firstIndex(of: media)!
           let jaunty = post.jauntyAngles[index+1]
           
           PhotoView(media: media)
@@ -44,8 +44,13 @@ struct StatusView: View {
         }
         Spacer(minLength: 10)
         
-        ActionsView(actions: [.boost,.reply,.favourite,.share])
-          .frame(maxWidth: .infinity)
+        ActionButtonView(highlighted: post.post.favourited ?? false, actionType: .favourite) {
+          Task{
+            try await post.toggleFavourite()
+          }
+        }.frame(width:50,height:50)
+//        ActionsView(actions: [.boost,.reply,.favourite,.share])
+//          .frame(maxWidth: .infinity)
         
       }.padding(.bottom,20)
       
