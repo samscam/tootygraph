@@ -72,6 +72,7 @@ struct PhotoView: View {
           Text("ALT")
             .bold()
             .foregroundColor(.black)
+            .padding(4)
         }
         .foregroundColor(.white)
         .onTapGesture{
@@ -124,6 +125,7 @@ struct PhotoView: View {
         if let image = state.image {
           image
             .resizingMode(.aspectFit)
+            
         } else {
           Color
             .accentColor.opacity(0.3)

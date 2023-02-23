@@ -28,24 +28,26 @@ struct StatusView: View {
         
         AvatarView(account: post.wrappedPost.account)
           .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
-
-            ForEach(post.wrappedPost.mediaAttachments){ media in
-              let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
-              let jaunty = post.jauntyAngles[index+1]
-              
-                PhotoView(media: media)
-
-                .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
-              
-              // These are currently commented out - because they mess up other aspects of
-              // scaling the photo frames... :/
-//                .frame(maxWidth: geometry.size.width * 0.9)
-//                .frame(maxHeight: geometry.size.height * 0.9)
-              
-        }
-        .padding(.bottom,20)
         
-      }
+        ForEach(post.wrappedPost.mediaAttachments){ media in
+          let index = post.wrappedPost.mediaAttachments.firstIndex(of: media)!
+          let jaunty = post.jauntyAngles[index+1]
+          
+          PhotoView(media: media)
+            .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
+          
+          // These are currently commented out - because they mess up other aspects of
+          // scaling the photo frames... :/
+          // .frame(maxWidth: geometry.size.width * 0.9)
+          // .frame(maxHeight: geometry.size.height * 0.9)
+          
+        }
+        Spacer(minLength: 10)
+        
+        ActionsView(actions: [.boost,.reply,.favourite,.share])
+          .frame(maxWidth: .infinity)
+        
+      }.padding(.bottom,20)
       
     }
     

@@ -40,6 +40,7 @@ struct PostWrapper: Equatable, Hashable, Identifiable{
     }
     
   }
+  
 }
 
 extension PagedInfo: Equatable{
@@ -198,3 +199,4 @@ class TimelineViewModel: ObservableObject {
   }
   
 }
+
