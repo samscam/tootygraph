@@ -53,10 +53,24 @@ class PostWrapper: ObservableObject, Identifiable{
     
     if let result = result {
       await MainActor.run{
-        post = result
+        post = result.displayPost
       }
     }
   }
   
+  func toggleBoost() async throws {
+    let result: Post?
+    if let boosted = post.reposted, boosted == true {
+      result = try await client?.unboostPost(id: post.id)
+    } else {
+      result = try await client?.boostPost(id: post.id)
+    }
+    
+    if let result = result {
+      await MainActor.run{
+        post = result.displayPost
+      }
+    }
+  }
   
 }

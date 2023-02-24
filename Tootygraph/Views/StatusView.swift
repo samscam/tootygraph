@@ -44,13 +44,18 @@ struct StatusView: View {
         }
         Spacer(minLength: 10)
         
-        ActionButtonView(highlighted: post.post.favourited ?? false, actionType: .favourite) {
-          Task{
-            try await post.toggleFavourite()
-          }
-        }.frame(width:50,height:50)
-//        ActionsView(actions: [.boost,.reply,.favourite,.share])
-//          .frame(maxWidth: .infinity)
+        HStack(spacing:20){
+          ActionButtonView(highlighted: post.post.favourited ?? false, actionType: .favourite) {
+            Task{
+              try await post.toggleFavourite()
+            }
+          }.frame(width:50,height:50)
+          ActionButtonView(highlighted: post.post.reposted ?? false, actionType: .boost) {
+            Task{
+              try await post.toggleBoost()
+            }
+          }.frame(width:50,height:50)
+        }
         
       }.padding(.bottom,20)
       
