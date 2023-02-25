@@ -8,13 +8,29 @@
 import Foundation
 import TootSDK
 
-class PostWrapper: ObservableObject, Identifiable{
+class PostWrapper: ObservableObject, Identifiable, Hashable{
+
   
   
   let id: String
   
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+  static func == (lhs: PostWrapper, rhs: PostWrapper) -> Bool {
+    lhs.id == rhs.id
+  }
+  
   @Published private(set) var post: Post
   private(set) var attributedContent: AttributedString
+  
+  var mediaAttachments: [Attachment] {
+    return post.displayPost.mediaAttachments
+  }
+  
+  var displayPost: Post {
+    return post.displayPost
+  }
   
   // Pre-generate jaunty angles for display...
   var jauntyAngles: [Double] = []
@@ -37,7 +53,7 @@ class PostWrapper: ObservableObject, Identifiable{
     self.attributedContent = AttributedString(attrib)
     
     // Pre-generate adequate quantities of random jaunty angles
-    for _ in 0...post.mediaAttachments.count + 2 {
+    for _ in 0...post.displayPost.mediaAttachments.count + 4 {
         jauntyAngles.append(Double.random(in: -3...3))
     }
     

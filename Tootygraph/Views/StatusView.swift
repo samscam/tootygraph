@@ -26,12 +26,12 @@ struct StatusView: View {
       
       VStack(alignment: .center, spacing: 0) {
         
-        AvatarView(account: post.post.account)
+        AvatarView(account: post.displayPost.account)
           .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
         
-        ForEach(post.post.mediaAttachments){ media in
-          let index = post.post.mediaAttachments.firstIndex(of: media)!
-          let jaunty = post.jauntyAngles[index+1]
+        ForEach(post.mediaAttachments){ media in
+          let index = post.mediaAttachments.firstIndex(of: media)!
+          let jaunty = post.jauntyAngles[index+2]
           
           PhotoView(media: media)
             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
@@ -45,12 +45,12 @@ struct StatusView: View {
         Spacer(minLength: 10)
         
         HStack(spacing:20){
-          ActionButtonView(highlighted: post.post.favourited ?? false, actionType: .favourite) {
+          ActionButtonView(highlighted: post.displayPost.favourited ?? false, actionType: .favourite) {
             Task{
               try await post.toggleFavourite()
             }
           }.frame(width:50,height:50)
-          ActionButtonView(highlighted: post.post.reposted ?? false, actionType: .boost) {
+          ActionButtonView(highlighted: post.displayPost.reposted ?? false, actionType: .boost) {
             Task{
               try await post.toggleBoost()
             }

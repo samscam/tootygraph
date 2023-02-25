@@ -35,6 +35,7 @@ class TimelineViewModel: ObservableObject {
   @Published var name: String = ""
   
   private var client: TootClient
+  private var postsSet = Set<PostWrapper>()
   
   private let threshold = 2
   
@@ -52,9 +53,11 @@ class TimelineViewModel: ObservableObject {
     Task{
       do {
         try await self.loadMore()
+        await self.startStreaming()
       } catch {
         print("Oh noes \(error)")
       }
+      
     }
   }
   
@@ -78,7 +81,7 @@ class TimelineViewModel: ObservableObject {
     let filteredPosts = filterPosts(result.result)
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
-      self.posts.append(contentsOf: filteredPosts)
+      self.addPosts(filteredPosts)
       self.pagingState = .resting
     }
     
@@ -127,14 +130,23 @@ class TimelineViewModel: ObservableObject {
   
   /// Forces the stream to refresh
   func refresh() async throws {
-//    await setLoading(true)
-//    try await client.data.refresh(.timeLineHome)
-//    try await client.data.refresh(.verifyCredentials)
-//    await setLoading(false)
+    await setLoading(true)
+    try await client.data.refresh(.timeLineHome)
+    try await client.data.refresh(.verifyCredentials)
+    await setLoading(false)
   }
   
-  @MainActor private func setPosts(_ posts: [PostWrapper]) {
-      self.posts = posts
+  @MainActor
+  private func addPosts(_ newPosts: [PostWrapper]) {
+    for post in newPosts {
+      let (inserted, _) = postsSet.insert(post)
+      if !inserted {
+        postsSet.update(with: post)
+      }
+    }
+    self.posts = postsSet.sorted(by: {
+      $0.id > $1.id
+    })
   }
   
   @MainActor private func setLoading(_ loading: Bool) {
@@ -145,19 +157,16 @@ class TimelineViewModel: ObservableObject {
       self.name = name
   }
   
-  private func setBindings() async {
+  private func startStreaming() async {
+      Task {
+          for await updatedPosts in try await client.data.stream(.timeLineHome)
+        {
 
-          
-          Task {
-              for await updatedPosts in try await client.data.stream(.timeLineHome)
-            {
-
-                let filteredPosts = filterPosts(updatedPosts)
-                await setPosts(filteredPosts)
-              }
-            
+            let filteredPosts = filterPosts(updatedPosts)
+            await addPosts(filteredPosts)
           }
       }
+  }
   
   private func filterPosts(_ posts: [Post]) -> [PostWrapper] {
     return posts.map{
