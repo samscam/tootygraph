@@ -37,7 +37,7 @@ struct ActionButtonView: View{
         Image(systemName: actionType.iconName)
           .resizable()
           .aspectRatio(contentMode: .fit)
-          .foregroundColor(highlighted ? .accentColor : .primary)
+          .foregroundColor(highlighted ? .accentColor.opacity(1) : .primary.opacity(0.5))
           
     }.buttonStyle(PlainButtonStyle())
   }

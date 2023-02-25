@@ -29,20 +29,25 @@ struct StatusView: View {
         AvatarView(account: post.displayPost.account)
           .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[0] : 0 ) )
         
+        Spacer()
+        
         ForEach(post.mediaAttachments){ media in
           let index = post.mediaAttachments.firstIndex(of: media)!
           let jaunty = post.jauntyAngles[index+2]
           
+
           PhotoView(media: media)
             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
-          
           // These are currently commented out - because they mess up other aspects of
           // scaling the photo frames... :/
           // .frame(maxWidth: geometry.size.width * 0.9)
           // .frame(maxHeight: geometry.size.height * 0.9)
           
+          if !settings.jaunty || index == post.mediaAttachments.count-1{
+            Spacer()
+          }
+          
         }
-        Spacer(minLength: 10)
         
         if let parsedContent = post.attributedContent {
           Text(parsedContent)
@@ -50,6 +55,7 @@ struct StatusView: View {
             .foregroundColor(.black)
             .opacity(0.8)
             .multilineTextAlignment(.leading)
+            .layoutPriority(10)
             .padding()
             .background{
               Rectangle()
@@ -57,11 +63,11 @@ struct StatusView: View {
             }
             .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[1] : 0))
         }
-        
+        Spacer()
         HStack(spacing:20){
           ActionButtonView(highlighted: post.displayPost.favourited ?? false, actionType: .favourite) {
             Task{
-              try await post.toggleFavourite()
+                try await post.toggleFavourite()
             }
           }.frame(width:50,height:50)
           ActionButtonView(highlighted: post.displayPost.reposted ?? false, actionType: .boost) {
@@ -70,6 +76,8 @@ struct StatusView: View {
             }
           }.frame(width:50,height:50)
         }
+
+          .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[2] : 0))
         
       }.padding(.bottom,20)
       
