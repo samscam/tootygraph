@@ -169,9 +169,9 @@ class TimelineViewModel: ObservableObject {
   }
   
   private func filterPosts(_ posts: [Post]) -> [PostWrapper] {
-    return posts.map{
-      $0.displayPost
-    }.filter{ $0.mediaAttachments.count > 0 }
+    return posts
+//      .map{ $0.displayPost }
+//      .filter{ $0.mediaAttachments.count > 0 }
       .map{ PostWrapper($0,client:client) }
   }
   

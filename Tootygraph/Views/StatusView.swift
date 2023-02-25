@@ -44,6 +44,20 @@ struct StatusView: View {
         }
         Spacer(minLength: 10)
         
+        if let parsedContent = post.attributedContent {
+          Text(parsedContent)
+            .font(.custom("AmericanTypewriter",size:24))
+            .foregroundColor(.black)
+            .opacity(0.8)
+            .multilineTextAlignment(.leading)
+            .padding()
+            .background{
+              Rectangle()
+                .foregroundColor(.yellow.opacity(0.7))
+            }
+            .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[1] : 0))
+        }
+        
         HStack(spacing:20){
           ActionButtonView(highlighted: post.displayPost.favourited ?? false, actionType: .favourite) {
             Task{
