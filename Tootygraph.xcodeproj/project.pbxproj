@@ -23,8 +23,10 @@
 		227C65D929A4F8FE006BF540 /* CornerBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C65D829A4F8FE006BF540 /* CornerBadge.swift */; };
 		2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25729A7F53700F24EA9 /* ActionsView.swift */; };
 		2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostWrapper.swift */; };
+		22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */; };
 		22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* BottomBar.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenu.swift */; };
+		22DFF05D29AD5D9F00D14A27 /* PhotoComposerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */; };
 		22EC11FE298F23E100976ECC /* TootygraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FD298F23E100976ECC /* TootygraphApp.swift */; };
 		22EC1200298F23E100976ECC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FF298F23E100976ECC /* TimelineView.swift */; };
 		22EC1202298F23E200976ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1201298F23E200976ECC /* Assets.xcassets */; };
@@ -53,8 +55,10 @@
 		227C65D829A4F8FE006BF540 /* CornerBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerBadge.swift; sourceTree = "<group>"; };
 		2287F25729A7F53700F24EA9 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
 		2287F25B29A826F400F24EA9 /* PostWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWrapper.swift; sourceTree = "<group>"; };
+		22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComposer.swift; sourceTree = "<group>"; };
 		22CD12082991BE5E00B7D70D /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		22CD120A2993061800B7D70D /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComposerViewModel.swift; sourceTree = "<group>"; };
 		22EC11FA298F23E100976ECC /* Tootygraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tootygraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EC11FD298F23E100976ECC /* TootygraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootygraphApp.swift; sourceTree = "<group>"; };
 		22EC11FF298F23E100976ECC /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 		2236FB672995B63300436F65 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22C0338029ABB5C600A353B8 /* PhotoComposer */,
 				2236FB742997052200436F65 /* MainView.swift */,
 				22EC11FF298F23E100976ECC /* TimelineView.swift */,
 				2236FB622994609000436F65 /* DetailView.swift */,
@@ -117,6 +122,15 @@
 				22EC121C298F430800976ECC /* BoxPacker.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		22C0338029ABB5C600A353B8 /* PhotoComposer */ = {
+			isa = PBXGroup;
+			children = (
+				22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */,
+				22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */,
+			);
+			path = PhotoComposer;
 			sourceTree = "<group>";
 		};
 		22EC11F1298F23E100976ECC = {
@@ -257,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2236FB6A2995B73700436F65 /* PhotoView.swift in Sources */,
+				22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */,
 				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
@@ -272,6 +287,7 @@
 				22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */,
 				2200224C2999A8B7000FA97F /* TimelineViewModel.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
+				22DFF05D29AD5D9F00D14A27 /* PhotoComposerViewModel.swift in Sources */,
 				2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
 				22EC11FE298F23E100976ECC /* TootygraphApp.swift in Sources */,

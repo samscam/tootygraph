@@ -10,6 +10,9 @@ import Foundation
 import SwiftUI
 
 struct BottomBar: View {
+  @State var showingPhotoComposer: Bool = false
+  @StateObject var photoComposerViewModel = PhotoComposerViewModel()
+  
   var body: some View {
     HStack{
       Spacer()
@@ -23,6 +26,12 @@ struct BottomBar: View {
           Circle().foregroundColor(.accentColor)
         )
         .shadow(radius: 10)
+        .onTapGesture {
+          showingPhotoComposer.toggle()
+        }
+        .fullScreenCover(isPresented: $showingPhotoComposer) {
+          PhotoComposer(showingPhotoComposer: $showingPhotoComposer, viewModel: photoComposerViewModel)
+        }
       Spacer()
     }
 //    .background(LinearGradient(colors: [.clear,Color.background.opacity(0.5)], startPoint: .top, endPoint: .bottom))
