@@ -11,12 +11,42 @@ import Boutique
 
 enum SettingsKeys: String{
   case jaunty
-  case descriptions
+  case descriptionsFirst
+  case includeTextPosts
+  case showContent
 }
 
 class Settings: ObservableObject {
-  @StoredValue(key:SettingsKeys.jaunty.rawValue) var jaunty: Bool = false
-  @StoredValue(key:SettingsKeys.descriptions.rawValue) var descriptions: Bool = true
+  
+  @StoredValue(key:SettingsKeys.jaunty.rawValue)
+  var jaunty: Bool = false
+  
+  @StoredValue(key:SettingsKeys.descriptionsFirst.rawValue)
+  var descriptionsFirst: Bool = false
+  
+  @StoredValue(key:SettingsKeys.includeTextPosts.rawValue)
+  var includeTextPosts: Bool = false
+  
+  @StoredValue(key:SettingsKeys.showContent.rawValue)
+  var showContent: Bool = false
+  
+  var disposebag = Set<AnyCancellable>()
+  
+  init(){
+    
+    // Set up behaviour for interdependent settings
+    $showContent.publisher.sink { [weak self] newValue in
+      if newValue == false {
+        self?.$includeTextPosts.set(false)
+      }
+    }.store(in: &disposebag)
+  
+    $includeTextPosts.publisher.sink { [weak self] newValue in
+      if newValue == true {
+        self?.$showContent.set(true)
+      }
+    }.store(in: &disposebag)
+    
+  }
   
 }
- 

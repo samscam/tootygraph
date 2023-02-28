@@ -14,9 +14,9 @@ struct TimelineView: View {
   let client: TootClient
   @StateObject var timelineViewModel: TimelineViewModel
   
-  init(client: TootClient){
+  init(client: TootClient, settings: Settings){
     self.client = client
-    _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
+    _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client, settings: settings))
     
   }
   

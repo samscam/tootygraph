@@ -19,7 +19,7 @@ struct StatusView: View {
   var body: some View{
     ZStack {
       NavigationLink {
-        DetailView(post: post, selectedMedia: nil)
+        DetailView(post: post, selectedMedia: nil).environmentObject(settings)
       } label: {
         EmptyView()
       }.buttonStyle(.plain).opacity(0)
@@ -49,7 +49,7 @@ struct StatusView: View {
           
         }
         
-        if let parsedContent = post.attributedContent {
+        if settings.showContent, let parsedContent = post.attributedContent {
           Text(parsedContent)
             .font(.custom("AmericanTypewriter",size:24))
             .foregroundColor(.black)

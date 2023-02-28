@@ -40,17 +40,24 @@ extension Attachment {
 }
 
 struct PhotoView: View {
-
+  @EnvironmentObject var settings: Settings
+  
   @State private var flipped: Bool = false
   
   let media: Attachment
   
   var body: some View {
-    if media.description != nil {
-      Flipper( flipped: $flipped, frontView: frontView, rearView: rearView)
-    } else {
-      frontView
+    Group{
+      if media.description != nil {
+        Flipper( flipped: $flipped, frontView: frontView, rearView: rearView)
+      } else {
+        frontView
+      }
+      
     }
+      .onAppear{
+        flipped = settings.descriptionsFirst
+      }
   }
   
   @MainActor

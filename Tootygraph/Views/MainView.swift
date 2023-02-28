@@ -23,7 +23,7 @@ struct MainView: View {
   var body: some View {
     if let client = accountsManager.selectedClient {
       NavigationStack{
-        TimelineView(client: client)
+        TimelineView(client: client, settings: settings)
           .background{
             Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
           }

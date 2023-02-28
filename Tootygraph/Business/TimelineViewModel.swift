@@ -8,7 +8,7 @@
 import Foundation
 import TootSDK
 import SwiftUI
-
+import Combine
 
 
 extension PagedInfo: Equatable{
@@ -35,13 +35,41 @@ class TimelineViewModel: ObservableObject {
   @Published var name: String = ""
   
   private var client: TootClient
-  private var postsSet = Set<PostWrapper>()
+  
+  @Published private var postsSet = Set<PostWrapper>()
   
   private let threshold = 2
   
-  init(client: TootClient){
+  private let settings: Settings
+  private var disposebag = Set<AnyCancellable>()
+  
+  init(client: TootClient, settings: Settings){
     self.client = client
+    self.settings = settings
+    
     loadInitial()
+    
+    // Binding for postsSet to apply filtering and update posts
+    $postsSet
+      .combineLatest(settings.$includeTextPosts.publisher)
+      .map{ (posts, includeText) in
+        return posts.filter {post in
+
+          if includeText {
+            return true
+          } else {
+            return post.mediaAttachments.count > 0
+          }
+        }
+      }
+      .map{ posts in
+        return posts.sorted {
+          $0.id > $1.id
+        }
+      }
+      .assign(to: &$posts)
+      
+      
   }
   
   var pagingState: PagingState = .nothing
@@ -78,10 +106,9 @@ class TimelineViewModel: ObservableObject {
     
     nextPage = PagedInfo(maxId:result.info.maxId)
     
-    let filteredPosts = filterPosts(result.result)
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
-      self.addPosts(filteredPosts)
+      self.addPosts(result.result)
       self.pagingState = .resting
     }
     
@@ -137,16 +164,17 @@ class TimelineViewModel: ObservableObject {
   }
   
   @MainActor
-  private func addPosts(_ newPosts: [PostWrapper]) {
-    for post in newPosts {
+  private func addPosts(_ newPosts: [Post]) {
+    
+    let postWrappers = newPosts.map{ PostWrapper($0, client: client)}
+    
+    for post in postWrappers {
       let (inserted, _) = postsSet.insert(post)
       if !inserted {
         postsSet.update(with: post)
       }
     }
-    self.posts = postsSet.sorted(by: {
-      $0.id > $1.id
-    })
+    
   }
   
   @MainActor private func setLoading(_ loading: Bool) {
@@ -161,19 +189,13 @@ class TimelineViewModel: ObservableObject {
       Task {
           for await updatedPosts in try await client.data.stream(.timeLineHome)
         {
-
-            let filteredPosts = filterPosts(updatedPosts)
-            await addPosts(filteredPosts)
+            
+            await addPosts(updatedPosts)
           }
       }
   }
   
-  private func filterPosts(_ posts: [Post]) -> [PostWrapper] {
-    return posts
-//      .map{ $0.displayPost }
-//      .filter{ $0.mediaAttachments.count > 0 }
-      .map{ PostWrapper($0,client:client) }
-  }
+
   
 }
 

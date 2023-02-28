@@ -28,7 +28,9 @@ struct SettingsMenu: View {
         Text("Settings").font(.largeTitle)
         Toggle("Jaunty angles",isOn: settings.$jaunty.binding)
         
-        Toggle("Descriptions", isOn: settings.$descriptions.binding)
+        Toggle("Descriptions first", isOn: settings.$descriptionsFirst.binding)
+        Toggle("Include posts with no pictures", isOn: settings.$includeTextPosts.binding)
+        Toggle("Show post content", isOn: settings.$showContent.binding)
         Spacer()
       }
       .padding()
