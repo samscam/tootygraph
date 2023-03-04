@@ -8,10 +8,15 @@
 import Foundation
 
 import SwiftUI
+import TootSDK
 
 struct BottomBar: View {
   @State var showingPhotoComposer: Bool = false
-  @StateObject var photoComposerViewModel = PhotoComposerViewModel()
+  @StateObject var photoComposerViewModel: PhotoComposerViewModel
+  
+  init(tootClient: TootClient?){
+    _photoComposerViewModel = StateObject(wrappedValue: PhotoComposerViewModel(tootClient: tootClient))
+  }
   
   var body: some View {
     HStack{
@@ -41,6 +46,6 @@ struct BottomBar: View {
 }
 struct BottomBar_Previews: PreviewProvider{
   static var previews: some View{
-    BottomBar()
+    BottomBar(tootClient: nil)
   }
 }

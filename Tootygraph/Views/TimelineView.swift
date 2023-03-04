@@ -49,7 +49,7 @@ struct TimelineView: View {
       }
       
       .safeAreaInset(edge: .bottom, spacing: 0) {
-        BottomBar()
+        BottomBar(tootClient: client)
       }
       .onAppear{
         timelineViewModel.loadInitial()

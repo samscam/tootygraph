@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreTransferable
 import PhotosUI
+import TootSDK
 
 class PhotoComposerViewModel: ObservableObject{
   @Published var imageStates: [PickerImageStateWrap] = []
@@ -21,6 +22,12 @@ class PhotoComposerViewModel: ObservableObject{
   }
   
   @Published var selectedSelectedItem: PickerImageStateWrap? = nil
+  
+  let tootClient: TootClient?
+  
+  init(tootClient: TootClient?){
+    self.tootClient = tootClient
+  }
   
   func postImages(){
     // now do something
@@ -43,6 +50,7 @@ class PickerImageStateWrap: Identifiable, ObservableObject {
   @Published var description: String = ""
   
   var id: String
+  var data: Data? = nil
   
   init(_ pickerItem: PhotosPickerItem) {
     self.pickerItem = pickerItem
@@ -53,20 +61,20 @@ class PickerImageStateWrap: Identifiable, ObservableObject {
   }
   
   func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
-      return imageSelection.loadTransferable(type: TransferImage.self) { result in
-        
-          DispatchQueue.main.async {
-              switch result {
-              case .success(let image?):
-                self.state = .success(image.image)
-              case .success(nil):
-                self.state = .empty
-              case .failure(let error):
-                self.state = .failure(error)
-
-              }
-          }
+    return imageSelection.loadTransferable(type: TransferImage.self) { result in
+      
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let image?):
+          self.state = .success(image.image)
+        case .success(nil):
+          self.state = .empty
+        case .failure(let error):
+          self.state = .failure(error)
+          
+        }
       }
+    }
   }
 }
 
@@ -82,29 +90,33 @@ extension PickerImageStateWrap: Hashable {
 }
 
 enum TransferError: Error {
-    case importFailed
+  case importFailed
 }
 
 struct TransferImage: Transferable {
-    let image: Image
+  let image: Image
+  let data: Data
+  
+  static var transferRepresentation: some TransferRepresentation {
     
-    static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(importedContentType: .image) { data in
-        #if canImport(AppKit)
-            guard let nsImage = NSImage(data: data) else {
-                throw TransferError.importFailed
-            }
-            let image = Image(nsImage: nsImage)
-          return .init(image: image)
-        #elseif canImport(UIKit)
-            guard let uiImage = UIImage(data: data) else {
-                throw TransferError.importFailed
-            }
-            let image = Image(uiImage: uiImage)
-          return .init(image: image)
-        #else
-            throw TransferError.importFailed
-        #endif
-        }
+    DataRepresentation(importedContentType: .image) { data in
+#if canImport(AppKit)
+      guard let nsImage = NSImage(data: data) else {
+        throw TransferError.importFailed
+      }
+      let image = Image(nsImage: nsImage)
+      return .init(image: image, data: data)
+#elseif canImport(UIKit)
+      guard let uiImage = UIImage(data: data) else {
+        throw TransferError.importFailed
+      }
+      let image = Image(uiImage: uiImage)
+      return .init(image: image,data: data)
+#else
+      throw TransferError.importFailed
+#endif
     }
+    
+  }
+  
 }
