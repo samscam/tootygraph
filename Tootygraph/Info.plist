@@ -15,5 +15,9 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera so you can post photogaphs to your fediverse accounts</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app can use the microphone to record sound and post to your fediverse accounts</string>
 </dict>
 </plist>
