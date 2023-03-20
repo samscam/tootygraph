@@ -11,60 +11,68 @@ import PhotosUI
 struct PhotoComposer: View {
   @Binding var showingPhotoComposer: Bool
   @ObservedObject var viewModel: PhotoComposerViewModel
-  @FocusState var focussedItem: PickerImageStateWrap?
-  
+  @FocusState var focussedItem: WrappedPickerItem?
+
   var body: some View {
     
     VStack{
+
       Button("Close") {
         showingPhotoComposer.toggle()
       }
-      if (viewModel.imageStates.count > 0){
+      
+      if (viewModel.wrappedPickerItems.count > 0){
         PhotosPicker(selection: $viewModel.selectedItems, maxSelectionCount: 4,
                      matching: .images) {
           Text("Change selection")
         }
       }
-      TabView {
-        if (viewModel.imageStates.count == 0){
-          VStack{
-            
-            PhotosPicker(selection: $viewModel.selectedItems, maxSelectionCount: 4,
-                         matching: .images) {
-              Text("PICK PICKTURES")
-            }
-                         .font(.title)
-                         .buttonStyle(.borderedProminent)
-                         
+      if (viewModel.wrappedPickerItems.count == 0){
+        VStack{
+          
+          PhotosPicker(selection: $viewModel.selectedItems, maxSelectionCount: 4,
+                       matching: .images) {
+            Text("PICK PICTURES")
           }
+                       .font(.title)
+                       .buttonStyle(.borderedProminent)
+                       
         }
-        ForEach(viewModel.imageStates){ state in
-          ImageMetaEditor(wrap: state)
-            .focused($focussedItem, equals: state)
-            .onAppear{
-              focussedItem = state
-            }
-        }
-        if (viewModel.imageStates.count > 0){
-          Button("Send it") {
-            viewModel.postImages()
-          }.font(.title)
-          .buttonStyle(.borderedProminent)
-            
-        }
-      }.tabViewStyle(.page)
-        
-        
+      } else {
+        TabView(selection: $viewModel.tabSelection){
+          
+          ForEach(viewModel.wrappedPickerItems){ item in
+            ImageMetaEditor(wrap: item)
+              .focused($focussedItem, equals: item)
+              .tag(Optional(item))
+          }
+          if (viewModel.wrappedPickerItems.count > 0){
+            Button("Send it") {
+              viewModel.postImages()
+            }.font(.title)
+              .buttonStyle(.borderedProminent)
+              .tag(Optional<WrappedPickerItem>.none)
 
-      
+          }
+        }.tabViewStyle(.page)
+
+
+        
+        
+      }
     }
+    .onChange(of: viewModel.tabSelection) { newValue in
+      focussedItem = newValue
+    }
+
   }
 }
 struct ImageMetaEditor: View {
-  @ObservedObject var wrap: PickerImageStateWrap
+  @ObservedObject var wrap: WrappedPickerItem
   var body: some View {
     VStack{
-        PickedImageView(wrap: wrap)
+      PickedImageView(wrap: wrap)
+        .padding()
         
         TextField(text: $wrap.description, prompt: Text("Describe this image"), axis:.vertical ){
           Label("Description", systemImage: "pencil")
@@ -80,7 +88,7 @@ struct ImageMetaEditor: View {
 }
 
 struct PickedImageView: View {
-  @ObservedObject var wrap: PickerImageStateWrap
+  @ObservedObject var wrap: WrappedPickerItem
   var body: some View {
     switch wrap.state {
     case .success(let image):

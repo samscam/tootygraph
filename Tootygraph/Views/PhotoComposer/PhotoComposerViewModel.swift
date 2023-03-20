@@ -11,17 +11,18 @@ import PhotosUI
 import TootSDK
 
 class PhotoComposerViewModel: ObservableObject{
-  @Published var imageStates: [PickerImageStateWrap] = []
+  @Published var wrappedPickerItems: [WrappedPickerItem] = []
   
   @Published var selectedItems: [PhotosPickerItem] = [] {
     didSet {
-      imageStates = selectedItems.map{ item in
-        return PickerImageStateWrap(item)
+      wrappedPickerItems = selectedItems.map{ item in
+        return WrappedPickerItem(item)
       }
+      tabSelection = wrappedPickerItems.first
     }
   }
   
-  @Published var selectedSelectedItem: PickerImageStateWrap? = nil
+  @Published var tabSelection: WrappedPickerItem?
   
   let tootClient: TootClient?
   
@@ -34,6 +35,35 @@ class PhotoComposerViewModel: ObservableObject{
   }
 }
 
+//
+//  func postImages() async throws {
+//
+//
+//    for imageState in imageStates {
+//      let imageData = try await imageState.loadData()
+//
+//      let uploadParams = UploadMediaAttachmentParams(file: imageData, thumbnail: nil, description: imageState.description , focus: nil)
+//
+//      let mediaAttachment = try await client.uploadMedia(uploadParams, mimeType: imageState.mimeType)
+//
+//      if mediaAttachment.url == nil {
+//        print("Image upload in progress…")
+//        var hasUploaded = false
+//        repeat {
+//          try await Task.sleep(for: .seconds(5))
+//          print("Checking if image already uploaded…")
+//          let uploadedMediaAttachment = try await tootClient.getMedia(id: mediaAttachment.id)
+//          hasUploaded = uploadedMediaAttachment != nil
+//        } while !hasUploaded
+//      }
+//
+//      print("Image uploaded, posting status")
+//      let params = PostParams(post: post, mediaIds: [mediaAttachment.id], visibility: visibility)
+//      try await client.publishPost(params).id
+//
+//    }
+//  }
+//}
 
 enum ImageState {
   
@@ -44,7 +74,7 @@ enum ImageState {
   
 }
 
-class PickerImageStateWrap: Identifiable, ObservableObject {
+class WrappedPickerItem: Identifiable, ObservableObject {
   let pickerItem: PhotosPickerItem
   @Published var state: ImageState
   @Published var description: String = ""
@@ -78,8 +108,8 @@ class PickerImageStateWrap: Identifiable, ObservableObject {
   }
 }
 
-extension PickerImageStateWrap: Hashable {
-  static func == (lhs: PickerImageStateWrap, rhs: PickerImageStateWrap) -> Bool {
+extension WrappedPickerItem: Hashable {
+  static func == (lhs: WrappedPickerItem, rhs: WrappedPickerItem) -> Bool {
     return lhs.id == rhs.id
   }
   
