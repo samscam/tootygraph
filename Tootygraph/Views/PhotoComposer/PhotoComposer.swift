@@ -12,7 +12,8 @@ struct PhotoComposer: View {
   @Binding var showingPhotoComposer: Bool
   @ObservedObject var viewModel: PhotoComposerViewModel
   @FocusState var focussedItem: WrappedPickerItem?
-
+  @State var showingCamera: Bool = false
+  
   var body: some View {
     
     VStack{
@@ -32,11 +33,13 @@ struct PhotoComposer: View {
           
           PhotosPicker(selection: $viewModel.selectedItems, maxSelectionCount: 4,
                        matching: .images) {
-            Text("PICK PICTURES")
+            Text("Pick from library")
           }
                        .font(.title)
                        .buttonStyle(.borderedProminent)
-                       
+          Button("Camera") {
+            showingCamera = true
+          }
         }
       } else {
         TabView(selection: $viewModel.tabSelection){
@@ -61,6 +64,9 @@ struct PhotoComposer: View {
         
       }
     }
+    .sheet(isPresented: $showingCamera, content: {
+      CameraView()
+    })
     .onChange(of: viewModel.tabSelection) { newValue in
       focussedItem = newValue
     }

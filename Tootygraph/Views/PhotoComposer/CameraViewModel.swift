@@ -29,7 +29,6 @@ class CameraViewModel: ObservableObject {
       await captureSession.startRunning()
 
     }
-    
   }
   
   

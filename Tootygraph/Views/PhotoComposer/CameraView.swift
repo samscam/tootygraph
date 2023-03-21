@@ -15,7 +15,7 @@ struct CameraView: View {
   var body: some View {
     VStack{
       VideoPreviewView(captureSession: $cameraViewModel.captureSession)
-    }
+    }.border(.pink)
   }
 }
 
@@ -30,11 +30,15 @@ struct VideoPreviewView: UIViewRepresentable{
   
   func updateUIView(_ uiView: UIViewType, context: Context) {
     uiView.videoPreviewLayer.session = captureSession
+    uiView.videoPreviewLayer.videoGravity = .resizeAspectFill
   }
 }
 
 
 class VideoPreviewUIView: UIView {
+  
+  var orientationChangeObserver: NSObjectProtocol?
+  
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }
@@ -42,4 +46,49 @@ class VideoPreviewUIView: UIView {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
         return layer as! AVCaptureVideoPreviewLayer
     }
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    sharedInit()
+  }
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    sharedInit()
+  }
+  
+  func sharedInit(){
+    self.orientationChangeObserver = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] notification in
+      self?.correctVideoOrientation()
+    }
+  }
+
+  
+  deinit{
+    guard let orientationChangeObserver = orientationChangeObserver else { return }
+    NotificationCenter.default.removeObserver(orientationChangeObserver)
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    correctVideoOrientation()
+  }
+  
+  private func correctVideoOrientation() {
+    guard let orientation = self.window?.windowScene?.interfaceOrientation,
+          let connection = videoPreviewLayer.connection else { return }
+    if connection.isVideoOrientationSupported {
+      switch orientation {
+      case .portrait:
+        connection.videoOrientation = .portrait
+      case .landscapeLeft:
+        connection.videoOrientation = .landscapeLeft
+      case .landscapeRight:
+        connection.videoOrientation = .landscapeRight
+      case .portraitUpsideDown:
+        connection.videoOrientation = .portraitUpsideDown
+      default:
+        connection.videoOrientation = .portrait
+      }
+    }
+  }
 }
