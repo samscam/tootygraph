@@ -64,8 +64,8 @@ struct PhotoComposer: View {
         
       }
     }
-    .sheet(isPresented: $showingCamera, content: {
-      CameraView()
+    .orientedFullScreenCover(isPresented: $showingCamera, content: {
+      CameraView(isPresented: $showingCamera)
     })
     .onChange(of: viewModel.tabSelection) { newValue in
       focussedItem = newValue

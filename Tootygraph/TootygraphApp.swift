@@ -7,13 +7,3 @@
 
 import SwiftUI
 
-@main
-struct TootygraphApp: App {
-
-    var body: some Scene {
-        WindowGroup {
-          MainView()
-            
-        }
-    }
-}

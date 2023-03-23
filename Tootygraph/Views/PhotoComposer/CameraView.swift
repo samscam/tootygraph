@@ -11,11 +11,16 @@ import UIKit
 
 struct CameraView: View {
   @StateObject var cameraViewModel = CameraViewModel()
+  @Binding var isPresented: Bool
   
   var body: some View {
     VStack{
+      Button("Close") {
+        isPresented = false
+      }
       VideoPreviewView(captureSession: $cameraViewModel.captureSession)
     }.border(.pink)
+//      .supportedOrientations(.portrait)
   }
 }
 
