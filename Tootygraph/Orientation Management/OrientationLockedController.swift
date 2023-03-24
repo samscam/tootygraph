@@ -35,6 +35,7 @@ class OrientationLockedController<Content: View>: UIHostingController<Orientatio
     super.init(rootView: orientationRoot)
 
     updater = box.$supportedOrientations.sink { [weak self] newValue in
+      print("Forcing orientation update", newValue)
       self?.setNeedsUpdateOfSupportedInterfaceOrientations()
     }
   }
@@ -51,6 +52,7 @@ class OrientationLockedController<Content: View>: UIHostingController<Orientatio
     var body: some View {
       contentView
         .onPreferenceChange(SupportedOrientationsPreferenceKey.self) {
+          print("Supported orientations is now", $0)
           box.supportedOrientations = $0
         }
     }

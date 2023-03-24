@@ -34,7 +34,7 @@ struct BottomBar: View {
         .onTapGesture {
           showingPhotoComposer.toggle()
         }
-        .fullScreenCover(isPresented: $showingPhotoComposer) {
+        .orientedFullScreenCover(isPresented: $showingPhotoComposer){
           PhotoComposer(showingPhotoComposer: $showingPhotoComposer, viewModel: photoComposerViewModel)
         }
       Spacer()

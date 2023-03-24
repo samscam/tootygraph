@@ -14,7 +14,6 @@ struct SupportedOrientationsPreferenceKey: PreferenceKey {
     }
 
     static func reduce(value: inout UIInterfaceOrientationMask, nextValue: () -> UIInterfaceOrientationMask) {
-      print("Reducing %@",value)
         value.formIntersection(nextValue())
     }
 }
