@@ -36,7 +36,6 @@
 		22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* BottomBar.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenu.swift */; };
 		22DFF05D29AD5D9F00D14A27 /* PhotoComposerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */; };
-		22EC11FE298F23E100976ECC /* TootygraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FD298F23E100976ECC /* TootygraphApp.swift */; };
 		22EC1200298F23E100976ECC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FF298F23E100976ECC /* TimelineView.swift */; };
 		22EC1202298F23E200976ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1201298F23E200976ECC /* Assets.xcassets */; };
 		22EC1206298F23E200976ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1205298F23E200976ECC /* Preview Assets.xcassets */; };
@@ -78,7 +77,6 @@
 		22CD120A2993061800B7D70D /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComposerViewModel.swift; sourceTree = "<group>"; };
 		22EC11FA298F23E100976ECC /* Tootygraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tootygraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22EC11FD298F23E100976ECC /* TootygraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootygraphApp.swift; sourceTree = "<group>"; };
 		22EC11FF298F23E100976ECC /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		22EC1201298F23E200976ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22EC1203298F23E200976ECC /* Tootygraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tootygraph.entitlements; sourceTree = "<group>"; };
@@ -109,29 +107,25 @@
 		22002241299850AF000FA97F /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				22002244299850F5000FA97F /* AccountsManager.swift */,
 				22002242299850C6000FA97F /* AccountsView.swift */,
 				2200224829987715000FA97F /* ServerAccountView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
 		};
-		2236FB672995B63300436F65 /* Views */ = {
+		2236FB672995B63300436F65 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
-				22C0338029ABB5C600A353B8 /* PhotoComposer */,
-				2236FB742997052200436F65 /* MainView.swift */,
 				22EC11FF298F23E100976ECC /* TimelineView.swift */,
+				2200224B2999A8B7000FA97F /* TimelineViewModel.swift */,
 				2236FB622994609000436F65 /* DetailView.swift */,
 				22EC121E298FCBF300976ECC /* StatusView.swift */,
 				2287F25729A7F53700F24EA9 /* ActionsView.swift */,
-				2236FB692995B73700436F65 /* PhotoView.swift */,
-				227C65D829A4F8FE006BF540 /* CornerBadge.swift */,
-				227C65D629A2D5A3006BF540 /* Flipper.swift */,
-				22CD12082991BE5E00B7D70D /* BottomBar.swift */,
 				22EC1227299050EE00976ECC /* AvatarView.swift */,
-				22CD120A2993061800B7D70D /* SettingsMenu.swift */,
+				227C65D629A2D5A3006BF540 /* Flipper.swift */,
 			);
-			path = Views;
+			path = Timeline;
 			sourceTree = "<group>";
 		};
 		2236FB682995B64F00436F65 /* Layouts */ = {
@@ -140,6 +134,24 @@
 				22EC121C298F430800976ECC /* BoxPacker.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		22805CCC29D23E4400DE7818 /* Media Views */ = {
+			isa = PBXGroup;
+			children = (
+				2236FB692995B73700436F65 /* PhotoView.swift */,
+				227C65D829A4F8FE006BF540 /* CornerBadge.swift */,
+			);
+			path = "Media Views";
+			sourceTree = "<group>";
+		};
+		22805CCD29D23E9400DE7818 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2236FB7629970E5000436F65 /* Settings.swift */,
+				22CD120A2993061800B7D70D /* SettingsMenu.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		22BA628F29CA635100284C67 /* Orientation Management */ = {
@@ -187,11 +199,15 @@
 			children = (
 				2200224A2998CECF000FA97F /* Info.plist */,
 				22BA628729CA5FE700284C67 /* AppDelegate.swift */,
+				2236FB742997052200436F65 /* MainView.swift */,
+				22CD12082991BE5E00B7D70D /* BottomBar.swift */,
 				22BA628F29CA635100284C67 /* Orientation Management */,
-				22EC11FD298F23E100976ECC /* TootygraphApp.swift */,
 				22EC120D298F240D00976ECC /* Business */,
 				22002241299850AF000FA97F /* Accounts */,
-				2236FB672995B63300436F65 /* Views */,
+				22805CCD29D23E9400DE7818 /* Settings */,
+				22805CCC29D23E4400DE7818 /* Media Views */,
+				22C0338029ABB5C600A353B8 /* PhotoComposer */,
+				2236FB672995B63300436F65 /* Timeline */,
 				2236FB682995B64F00436F65 /* Layouts */,
 				22EC1201298F23E200976ECC /* Assets.xcassets */,
 				22EC1203298F23E200976ECC /* Tootygraph.entitlements */,
@@ -211,10 +227,7 @@
 		22EC120D298F240D00976ECC /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				22002244299850F5000FA97F /* AccountsManager.swift */,
-				2236FB7629970E5000436F65 /* Settings.swift */,
 				220022462998759E000FA97F /* BoutiqueStores.swift */,
-				2200224B2999A8B7000FA97F /* TimelineViewModel.swift */,
 				2287F25B29A826F400F24EA9 /* PostWrapper.swift */,
 			);
 			path = Business;
@@ -334,7 +347,6 @@
 				22BA628A29CA605300284C67 /* SceneDelegate.swift in Sources */,
 				2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
-				22EC11FE298F23E100976ECC /* TootygraphApp.swift in Sources */,
 				227C65D929A4F8FE006BF540 /* CornerBadge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

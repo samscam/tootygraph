@@ -17,9 +17,15 @@ struct PhotoComposer: View {
   var body: some View {
     
     VStack{
-
+      
       Button("Close") {
         showingPhotoComposer.toggle()
+      }
+      
+      TabView(selection: $viewModel.tabSelection){
+        ForEach(viewModel.wrappedPickerItems){ item in
+          Text(item.description)
+        }
       }
       
       if (viewModel.wrappedPickerItems.count > 0){

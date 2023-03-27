@@ -10,6 +10,14 @@ import CoreTransferable
 import PhotosUI
 import TootSDK
 
+
+struct MediaItem: Identifiable {
+  var id: String
+  var type: AttachmentType
+  var description: String
+  var data: Data  
+}
+
 class PhotoComposerViewModel: ObservableObject{
   @Published var wrappedPickerItems: [WrappedPickerItem] = []
   

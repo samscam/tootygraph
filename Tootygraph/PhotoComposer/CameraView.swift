@@ -20,7 +20,6 @@ struct CameraView: View {
       }
       VideoPreviewView(captureSession: $cameraViewModel.captureSession)
     }.border(.pink)
-//      .supportedOrientations(.portrait)
   }
 }
 
