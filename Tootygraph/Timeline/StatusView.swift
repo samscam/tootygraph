@@ -49,7 +49,8 @@ struct StatusView: View {
           
         }
         
-        if settings.showContent, let parsedContent = post.attributedContent {
+        if settings.showContent{
+          let parsedContent = post.attributedContent
           Text(parsedContent)
             .font(.custom("AmericanTypewriter",size:24))
             .foregroundColor(.black)

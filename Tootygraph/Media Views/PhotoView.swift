@@ -9,7 +9,7 @@ import SwiftUI
 import NukeUI
 import TootSDK
 
-extension Attachment {
+extension MediaAttachment {
   var mediaURL: URL? {
     URL(string:self.url)
   }
@@ -20,7 +20,7 @@ extension Attachment {
   }
 }
 
-extension Attachment {
+extension MediaAttachment {
   var aspect: CGSize {
     guard let original = meta?.original,
           let width = original.width, let height = original.height else { return CGSize.zero }
@@ -44,7 +44,7 @@ struct PhotoView: View {
   
   @State private var flipped: Bool = false
   
-  let media: Attachment
+  let media: MediaAttachment
   
   var body: some View {
     Group{

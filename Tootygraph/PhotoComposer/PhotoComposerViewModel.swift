@@ -11,26 +11,12 @@ import PhotosUI
 import TootSDK
 
 
-struct MediaItem: Identifiable {
-  var id: String
-  var type: AttachmentType
-  var description: String
-  var data: Data  
-}
 
 class PhotoComposerViewModel: ObservableObject{
-  @Published var wrappedPickerItems: [WrappedPickerItem] = []
   
-  @Published var selectedItems: [PhotosPickerItem] = [] {
-    didSet {
-      wrappedPickerItems = selectedItems.map{ item in
-        return WrappedPickerItem(item)
-      }
-      tabSelection = wrappedPickerItems.first
-    }
-  }
+  @Published var mediaItems: [MediaItem] = []
+  @Published var selectedItem: MediaItem?
   
-  @Published var tabSelection: WrappedPickerItem?
   
   let tootClient: TootClient?
   
@@ -38,7 +24,7 @@ class PhotoComposerViewModel: ObservableObject{
     self.tootClient = tootClient
   }
   
-  func postImages(){
+  func postMedia(){
     // now do something
   }
 }
@@ -94,26 +80,12 @@ class WrappedPickerItem: Identifiable, ObservableObject {
     self.pickerItem = pickerItem
     id = UUID().uuidString
     state = .empty
-    let progress = loadTransferable(from: pickerItem)
-    state = .loading(progress)
+    Task{
+      let mediaItem = try await pickerItem.loadTransferable(type: MediaItem.self)
+    }
+
   }
   
-  func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
-    return imageSelection.loadTransferable(type: TransferImage.self) { result in
-      
-      DispatchQueue.main.async {
-        switch result {
-        case .success(let image?):
-          self.state = .success(image.image)
-        case .success(nil):
-          self.state = .empty
-        case .failure(let error):
-          self.state = .failure(error)
-          
-        }
-      }
-    }
-  }
 }
 
 extension WrappedPickerItem: Hashable {
@@ -131,9 +103,15 @@ enum TransferError: Error {
   case importFailed
 }
 
-struct TransferImage: Transferable {
-  let image: Image
-  let data: Data
+class MediaItem: Transferable, Identifiable, ObservableObject {
+  var image: Image? = nil
+  var data: Data? = nil
+  
+  
+  init(image: Image?, data: Data?) {
+    self.image = image
+    self.data = data
+  }
   
   static var transferRepresentation: some TransferRepresentation {
     
@@ -155,6 +133,18 @@ struct TransferImage: Transferable {
 #endif
     }
     
+  }
+  
+}
+
+
+extension MediaItem: Hashable {
+  static func == (lhs: MediaItem, rhs: MediaItem) -> Bool {
+    return lhs.id == rhs.id
+  }
+  
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(self.id)
   }
   
 }

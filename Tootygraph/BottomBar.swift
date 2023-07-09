@@ -24,28 +24,39 @@ struct BottomBar: View {
       Image(systemName: "camera")
         .resizable()
         .aspectRatio(contentMode: .fit)
-        .foregroundColor(.black)
+        .foregroundColor(.white)
         .frame(width: 40,height:40)
         .padding(10)
         .background(
-          Circle().foregroundColor(.accentColor)
+          Circle().foregroundColor(.black)
         )
-        .shadow(radius: 10)
+        .shadow(color:.white,radius: 20)
         .onTapGesture {
           showingPhotoComposer.toggle()
         }
         .orientedFullScreenCover(isPresented: $showingPhotoComposer){
-          PhotoComposer(showingPhotoComposer: $showingPhotoComposer, viewModel: photoComposerViewModel)
+          PhotoComposer(viewModel: photoComposerViewModel)
         }
       Spacer()
     }
-//    .background(LinearGradient(colors: [.clear,Color.background.opacity(0.5)], startPoint: .top, endPoint: .bottom))
+    .background(LinearGradient(colors: [.clear,Color.background.opacity(0.4)], startPoint: .top, endPoint: .bottom))
 
     
   }
 }
 struct BottomBar_Previews: PreviewProvider{
   static var previews: some View{
-    BottomBar(tootClient: nil)
+    VStack{
+      Text("Hello")
+      Spacer()
+    }
+      .safeAreaInset(edge: .bottom, spacing: 0) {
+        BottomBar(tootClient: nil)
+      }
+      .background{
+          Image("wood-texture").resizable()
+            .ignoresSafeArea()
+      }
   }
+  
 }

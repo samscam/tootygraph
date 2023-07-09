@@ -24,7 +24,7 @@ class PostWrapper: ObservableObject, Identifiable, Hashable{
   @Published private(set) var post: Post
   private(set) var attributedContent: AttributedString
   
-  var mediaAttachments: [Attachment] {
+  var mediaAttachments: [MediaAttachment] {
     return post.displayPost.mediaAttachments
   }
   

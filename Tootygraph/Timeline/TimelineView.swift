@@ -54,7 +54,7 @@ struct TimelineView: View {
       .onAppear{
         timelineViewModel.loadInitial()
       }
-      .navigationTitle("Tootygraph")
+      .navigationTitle(timelineViewModel.name)
       .toolbar {
         ToolbarItem(placement:.automatic){
           SettingsMenu()

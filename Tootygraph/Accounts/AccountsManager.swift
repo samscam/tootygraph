@@ -13,21 +13,26 @@ enum AccountCreationError: Error {
   case invalidURL
 }
 
+@MainActor
 class AccountsManager: ObservableObject {
   // Nope we can't be having this... credentials need to be in the keychain
   @Stored(in: .serverAccountsStore) var accounts: [ServerAccount]
   
   @Published var selectedClient: TootClient? = nil
   
-  func addServerAccount(serverAccount: ServerAccount) async throws{
+  func addServerAccount(_ serverAccount: ServerAccount) async throws{
     try await $accounts.insert(serverAccount)
+  }
+  
+  func removeServerAccount(_ serverAccount: ServerAccount) async throws{
+    try await $accounts.remove(serverAccount)
   }
   
   func connect(_ serverAccount: ServerAccount) async throws {
     let client = try await TootClient(connect: serverAccount.instanceURL, accessToken: serverAccount.accessToken)
-    DispatchQueue.main.async {
-      self.selectedClient = client
-    }
+    
+    self.selectedClient = client
+    
   }
   
   func startAuth(urlString: String) async throws {
@@ -48,15 +53,17 @@ class AccountsManager: ObservableObject {
     let userAccount = try await client.verifyCredentials()
     
     let serverAccount = ServerAccount(id: userAccount.id, username: userAccount.acct, instanceURL: url, accessToken: accessToken)
-    try await addServerAccount(serverAccount: serverAccount)
+    try await addServerAccount(serverAccount)
     
-    DispatchQueue.main.async {
-      self.selectedClient = client
-    }
+    
+    self.selectedClient = client
+    
   }
   func signOut(){
     selectedClient = nil
   }
+  
+
 }
 
 struct ServerAccount: Codable, Equatable, Identifiable, Hashable {

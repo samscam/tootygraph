@@ -11,14 +11,23 @@ import UIKit
 
 struct CameraView: View {
   @StateObject var cameraViewModel = CameraViewModel()
-  @Binding var isPresented: Bool
+
   
   var body: some View {
     VStack{
-      Button("Close") {
-        isPresented = false
+      switch(cameraViewModel.authStatus){
+      case .notDetermined:
+       Text("You probably need to authorise camera access")
+      case .denied:
+        Text("Oh dear, denied")
+      case .restricted:
+        Text("Camera access is restricted")
+      case .authorized:
+        VideoPreviewView(captureSession: $cameraViewModel.captureSession)
+      default:
+        Text("Something else happened")
       }
-      VideoPreviewView(captureSession: $cameraViewModel.captureSession)
+      
     }.border(.pink)
   }
 }

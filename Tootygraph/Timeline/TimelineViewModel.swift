@@ -28,11 +28,13 @@ enum PagingErrors: Error {
   case noMoreResults
 }
 
+@MainActor
 class TimelineViewModel: ObservableObject {
   
   @Published var posts: [PostWrapper] = []
   @Published var loading: Bool = false
   @Published var name: String = ""
+  @Published var account: Account?
   
   private var client: TootClient
   
@@ -46,7 +48,7 @@ class TimelineViewModel: ObservableObject {
   init(client: TootClient, settings: Settings){
     self.client = client
     self.settings = settings
-    
+    self.name = client.instanceURL.absoluteString
     loadInitial()
     
     // Binding for postsSet to apply filtering and update posts
@@ -80,6 +82,8 @@ class TimelineViewModel: ObservableObject {
     pagingState = .loadingFirst
     Task{
       do {
+        let account = try await client.verifyCredentials()
+        
         try await self.loadMore()
         await self.startStreaming()
       } catch {
@@ -90,9 +94,9 @@ class TimelineViewModel: ObservableObject {
   }
   
   func loadMore() async throws {
-    await setLoading(true)
+    self.loading = true
     
-    let result = try await client.getHomeTimeline(nextPage)
+    let result = try await client.getTimeline(.home, pageInfo: nextPage)
     
     if Task.isCancelled {
       pagingState = .resting
@@ -112,7 +116,7 @@ class TimelineViewModel: ObservableObject {
       self.pagingState = .resting
     }
     
-    await setLoading(false)
+    self.loading = false
   }
   
   private var currentTask: Task<Void, Never>? {
@@ -157,10 +161,10 @@ class TimelineViewModel: ObservableObject {
   
   /// Forces the stream to refresh
   func refresh() async throws {
-    await setLoading(true)
-    try await client.data.refresh(.timeLineHome)
+    self.loading = true
+    try await client.data.refresh(.home)
     try await client.data.refresh(.verifyCredentials)
-    await setLoading(false)
+    self.loading = false
   }
   
   @MainActor
@@ -177,20 +181,13 @@ class TimelineViewModel: ObservableObject {
     
   }
   
-  @MainActor private func setLoading(_ loading: Bool) {
-      self.loading = loading
-  }
-  
-  @MainActor private func setName(_ name: String) {
-      self.name = name
-  }
   
   private func startStreaming() async {
       Task {
-          for await updatedPosts in try await client.data.stream(.timeLineHome)
+          for await updatedPosts in try await client.data.stream(.home)
         {
             
-            await addPosts(updatedPosts)
+            addPosts(updatedPosts)
           }
       }
   }

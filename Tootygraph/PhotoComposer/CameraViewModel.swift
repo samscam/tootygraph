@@ -24,9 +24,14 @@ class CameraViewModel: ObservableObject {
       }
       
       if (authStatus == .authorized){
-        try? await setupCaptureSession()
+        do{
+          try await setupCaptureSession()
+          await captureSession.startRunning()
+        } catch {
+          print(error)
+        }
       }
-      await captureSession.startRunning()
+      
 
     }
   }

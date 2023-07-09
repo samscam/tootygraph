@@ -13,7 +13,7 @@ import TootSDK
 struct DetailView: View {
   
   let post: PostWrapper
-  let selectedMedia: Attachment?
+  let selectedMedia: MediaAttachment?
   
   @State private var dragOffset = CGSize.zero
 
@@ -29,8 +29,8 @@ struct DetailView: View {
           Spacer(minLength: 40)
 
         }
-        if let parsedContent = post.attributedContent {
-          Text(parsedContent)
+        
+          Text(post.attributedContent)
             .font(.custom("AmericanTypewriter",size:24))
             .foregroundColor(.black)
             .opacity(0.8)
@@ -40,7 +40,7 @@ struct DetailView: View {
               Rectangle()
                 .foregroundColor(.yellow.opacity(0.7))
             }
-        }
+        
       }.padding()
     }
     .navigationTitle("From \(post.post.account.displayName ?? "--")")
