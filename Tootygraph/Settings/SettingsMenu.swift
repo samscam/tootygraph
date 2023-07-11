@@ -22,7 +22,7 @@ struct SettingsMenu: View {
     }, label: {
       Image(systemName: "beach.umbrella.fill")
       
-    })
+    }).buttonStyle(.plain)
     .popover(isPresented: $showingPopover, content: {
       VStack(alignment:.leading){
         Text("Settings").font(.largeTitle)

@@ -65,7 +65,7 @@ struct TimelineView: View {
           } label: {
             Image(systemName: "figure.socialdance")
             
-          }
+          }.buttonStyle(.plain)
         }
       }
     }
