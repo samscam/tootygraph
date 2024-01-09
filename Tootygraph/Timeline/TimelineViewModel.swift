@@ -41,12 +41,14 @@ class TimelineViewModel: ObservableObject {
   @Published private var postsSet = Set<PostWrapper>()
   
   private let threshold = 2
+  private let timeline: Timeline
   
   private let settings: Settings
   private var disposebag = Set<AnyCancellable>()
   
-  init(client: TootClient, settings: Settings){
+  init(client: TootClient, timeline: Timeline, settings: Settings){
     self.client = client
+    self.timeline = timeline
     self.settings = settings
     self.name = client.instanceURL.absoluteString
     loadInitial()
@@ -96,7 +98,7 @@ class TimelineViewModel: ObservableObject {
   func loadMore() async throws {
     self.loading = true
     
-    let result = try await client.getTimeline(.home, pageInfo: nextPage)
+    let result = try await client.getTimeline(timeline, pageInfo: nextPage)
     
     if Task.isCancelled {
       pagingState = .resting
@@ -162,7 +164,7 @@ class TimelineViewModel: ObservableObject {
   /// Forces the stream to refresh
   func refresh() async throws {
     self.loading = true
-    try await client.data.refresh(.home)
+    try await client.data.refresh(timeline)
     try await client.data.refresh(.verifyCredentials)
     self.loading = false
   }
@@ -184,7 +186,7 @@ class TimelineViewModel: ObservableObject {
   
   private func startStreaming() async {
       Task {
-          for await updatedPosts in try await client.data.stream(.home)
+          for await updatedPosts in try await client.data.stream(timeline)
         {
             
             addPosts(updatedPosts)

@@ -16,6 +16,7 @@ enum SettingsKeys: String{
   case showContent
 }
 
+@MainActor
 class Settings: ObservableObject {
   
   @StoredValue(key:SettingsKeys.jaunty.rawValue)
@@ -37,7 +38,7 @@ class Settings: ObservableObject {
     // Set up behaviour for interdependent settings
     $showContent.publisher.sink { [weak self] newValue in
       if newValue == false {
-        self?.$includeTextPosts.set(false)
+          self?.$includeTextPosts.set(false)
       }
     }.store(in: &disposebag)
   

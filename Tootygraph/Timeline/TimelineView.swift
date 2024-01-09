@@ -9,67 +9,80 @@ import SwiftUI
 import Boutique
 import TootSDK
 
-struct TimelineView: View {
-  
-  let client: TootClient
-  @StateObject var timelineViewModel: TimelineViewModel
-  
-  init(client: TootClient, settings: Settings){
-    self.client = client
-    _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client, settings: settings))
+struct ConnectionView: View {
+    @ObservedObject var connection: Connection
+    @EnvironmentObject var settings: Settings
     
-  }
-  
-  @EnvironmentObject var settings: Settings
-  @EnvironmentObject var accountsManager: AccountsManager
-  
-  var body: some View {
-    
-      GeometryReader{ geometry in
-      List(timelineViewModel.posts) { post in
-        
-          StatusView(post: post, geometry: geometry)
-            .padding(20)
-            .onAppear{
-              timelineViewModel.onItemAppear(post)
-            }
-            .listRowSeparator(.hidden)
-            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            .listRowBackground(EmptyView())
-      }
-      .listStyle(PlainListStyle())
-      .padding(0)
-      
-      .refreshable {
-        do {
-          try await timelineViewModel.refresh()
-        } catch {
-          print("Oh noes \(error)")
+    var body: some View {
+        if let tootClient = connection.tootClient {
+            TimelineView(client: tootClient, timeline: .home, settings: settings)
+        } else {
+            Button {
+              Task{
+                try? await connection.connect()
+              }
+            } label: {
+              Text("Connect")
+            }.buttonStyle(.borderedProminent)
         }
-      }
-      
-      .safeAreaInset(edge: .bottom, spacing: 0) {
-        BottomBar(tootClient: client)
-      }
-      .onAppear{
-        timelineViewModel.loadInitial()
-      }
-      .navigationTitle(timelineViewModel.name)
-      .toolbar {
-        ToolbarItem(placement:.automatic){
-          SettingsMenu()
-        }
-        ToolbarItem(placement: .automatic) {
-          Button {
-            accountsManager.signOut()
-          } label: {
-            Image(systemName: "figure.socialdance")
-            
-          }.buttonStyle(.plain)
-        }
-      }
     }
-  }
+}
+
+struct TimelineView: View {
+    
+    let client: TootClient
+    let timeline: Timeline
+    
+    @StateObject var timelineViewModel: TimelineViewModel
+    
+    init(client: TootClient, timeline: Timeline, settings: Settings){
+        self.client = client
+        
+        self.timeline = timeline
+        _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client, timeline: timeline, settings: settings))
+        
+    }
+    
+    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var accountsManager: AccountsManager
+    
+    var body: some View {
+        
+        GeometryReader{ geometry in
+            List(timelineViewModel.posts) { post in
+                
+                StatusView(post: post, geometry: geometry)
+                    .padding(20)
+                    .onAppear{
+                        timelineViewModel.onItemAppear(post)
+                    }
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowBackground(EmptyView())
+            }
+            .listStyle(PlainListStyle())
+            .padding(0)
+            //      .background{
+            //        Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
+            //      }
+            .refreshable {
+                do {
+                    try await timelineViewModel.refresh()
+                } catch {
+                    print("Oh noes \(error)")
+                }
+            }
+            
+//            .safeAreaInset(edge: .bottom, spacing: 0) {
+//                BottomBar(tootClient: client)
+//            }
+            .onAppear{
+                timelineViewModel.loadInitial()
+            }
+            .navigationTitle(timelineViewModel.name)
+            
+        }
+    }
 }
 
 //struct TimelineView_Previews: PreviewProvider {

@@ -15,7 +15,7 @@ struct PhotoComposer: View {
     VStack{
       ScrollView(.horizontal, showsIndicators: false){
         VStack(alignment:.center, spacing:0){
-          FilmEdge()
+          
         
           LazyHStack(spacing:0){
             ForEach(viewModel.mediaItems){ item in
@@ -32,15 +32,17 @@ struct PhotoComposer: View {
             }
           }
           .frame(height:150)
+
               
           
           .tabViewStyle(.page)
           .indexViewStyle(.page(backgroundDisplayMode: .always))
-          FilmEdge()
+
         }
-        
+        .padding(.vertical, 20)
         .background{
-          Color.black
+          FilmEdge().fill(Color.black,style: FillStyle(eoFill: true))
+//          Color.black
         }
       }
       
@@ -72,27 +74,12 @@ struct PhotoComposer: View {
   }
 }
 
-struct FilmEdge: View {
-  let holeSize = CGSize(width: 15, height: 15)
-  let space: CGFloat = 15
-  let padding: CGFloat = 7
-  
-  var body: some View {
-    GeometryReader { geometry in
-      let cols = Int(geometry.size.width / holeSize.width)
-      HStack(spacing:space){
-        ForEach(0 ..< cols){ _ in
-          RoundedRectangle(cornerRadius: 4).foregroundColor(.white).frame(width: holeSize.width, height: holeSize.height)
-        }
-      }.padding(.vertical,padding)
-    }.frame(height: holeSize.height+padding*2)
-  }
-}
+
 
 struct PhotoComposer_Previews: PreviewProvider{
   static let previewViewModel = {
     let vm = PhotoComposerViewModel(tootClient: nil)
-//    vm.mediaItems.append(MediaItem(image: Image("heaton") , data: nil))
+    vm.mediaItems.append(MediaItem(image: Image("heaton") , data: nil))
     vm.mediaItems.append(MediaItem(image: Image("hat") , data: nil))
     vm.mediaItems.append(MediaItem(image: Image("macs") , data: nil))
     vm.mediaItems.append(MediaItem(image: Image("carp") , data: nil))

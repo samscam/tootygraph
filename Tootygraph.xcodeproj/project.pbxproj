@@ -14,11 +14,16 @@
 		2200224C2999A8B7000FA97F /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* TimelineViewModel.swift */; };
 		220AE8C129C521A30023554D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C029C521A30023554D /* CameraView.swift */; };
 		220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C229C521B30023554D /* CameraViewModel.swift */; };
+		22120CA92B4A2A99006FECD6 /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CA82B4A2A99006FECD6 /* NukeVideo */; };
+		22120CAD2B4AB8B3006FECD6 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CAC2B4AB8B3006FECD6 /* Gifu */; };
+		22120CAF2B4B7395006FECD6 /* ColourFun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22120CAE2B4B7395006FECD6 /* ColourFun.swift */; };
+		2223CC1B2AA53A7100122870 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223CC1A2AA53A7100122870 /* TopBar.swift */; };
 		2236FB632994609000436F65 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB622994609000436F65 /* DetailView.swift */; };
 		2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2236FB6529946A7100436F65 /* SwiftSoup */; };
 		2236FB6A2995B73700436F65 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB692995B73700436F65 /* PhotoView.swift */; };
 		2236FB752997052200436F65 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB742997052200436F65 /* MainView.swift */; };
 		2236FB7729970E5000436F65 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB7629970E5000436F65 /* Settings.swift */; };
+		224390662A5D90180040C26C /* FilmStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224390652A5D90180040C26C /* FilmStrip.swift */; };
 		2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C227299847AF004B3A4A /* MultipartKitTootSDK */; };
 		2245C22A299847AF004B3A4A /* TootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C229299847AF004B3A4A /* TootSDK */; };
 		2277F1AB29B298E200CB0D9C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2277F1AA29B298E200CB0D9C /* README.md */; };
@@ -58,10 +63,13 @@
 		2200224B2999A8B7000FA97F /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
 		220AE8C029C521A30023554D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		220AE8C229C521B30023554D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		22120CAE2B4B7395006FECD6 /* ColourFun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourFun.swift; sourceTree = "<group>"; };
+		2223CC1A2AA53A7100122870 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		2236FB622994609000436F65 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2236FB692995B73700436F65 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		2236FB742997052200436F65 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2236FB7629970E5000436F65 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		224390652A5D90180040C26C /* FilmStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmStrip.swift; sourceTree = "<group>"; };
 		2277F1AA29B298E200CB0D9C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		227C65D629A2D5A3006BF540 /* Flipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flipper.swift; sourceTree = "<group>"; };
 		227C65D829A4F8FE006BF540 /* CornerBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerBadge.swift; sourceTree = "<group>"; };
@@ -96,7 +104,9 @@
 				22EC122629904FF900976ECC /* NukeUI in Frameworks */,
 				2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */,
 				2245C22A299847AF004B3A4A /* TootSDK in Frameworks */,
+				22120CA92B4A2A99006FECD6 /* NukeVideo in Frameworks */,
 				22EC122229904FF900976ECC /* Nuke in Frameworks */,
+				22120CAD2B4AB8B3006FECD6 /* Gifu in Frameworks */,
 				22EC122B299061AC00976ECC /* Boutique in Frameworks */,
 				22EC122429904FF900976ECC /* NukeExtensions in Frameworks */,
 				2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */,
@@ -114,6 +124,13 @@
 				2200224829987715000FA97F /* ServerAccountView.swift */,
 			);
 			path = Accounts;
+			sourceTree = "<group>";
+		};
+		22120CA72B4A2A99006FECD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2236FB672995B63300436F65 /* Timeline */ = {
@@ -172,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */,
+				224390652A5D90180040C26C /* FilmStrip.swift */,
 				22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */,
 				220AE8C029C521A30023554D /* CameraView.swift */,
 				220AE8C229C521B30023554D /* CameraViewModel.swift */,
@@ -185,6 +203,7 @@
 				2277F1AA29B298E200CB0D9C /* README.md */,
 				22EC11FC298F23E100976ECC /* Tootygraph */,
 				22EC11FB298F23E100976ECC /* Products */,
+				22120CA72B4A2A99006FECD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,6 +221,7 @@
 				2200224A2998CECF000FA97F /* Info.plist */,
 				22BA628729CA5FE700284C67 /* AppDelegate.swift */,
 				2236FB742997052200436F65 /* MainView.swift */,
+				2223CC1A2AA53A7100122870 /* TopBar.swift */,
 				22CD12082991BE5E00B7D70D /* BottomBar.swift */,
 				22BA628F29CA635100284C67 /* Orientation Management */,
 				22EC120D298F240D00976ECC /* Business */,
@@ -232,6 +252,7 @@
 				220022462998759E000FA97F /* BoutiqueStores.swift */,
 				2287F25B29A826F400F24EA9 /* PostWrapper.swift */,
 				22AD6C802A5B6103008A79CA /* ServerAccount.swift */,
+				22120CAE2B4B7395006FECD6 /* ColourFun.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -260,6 +281,8 @@
 				2236FB6529946A7100436F65 /* SwiftSoup */,
 				2245C227299847AF004B3A4A /* MultipartKitTootSDK */,
 				2245C229299847AF004B3A4A /* TootSDK */,
+				22120CA82B4A2A99006FECD6 /* NukeVideo */,
+				22120CAC2B4AB8B3006FECD6 /* Gifu */,
 			);
 			productName = Fedster;
 			productReference = 22EC11FA298F23E100976ECC /* Tootygraph.app */;
@@ -273,7 +296,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					22EC11F9298F23E100976ECC = {
 						CreatedOnToolsVersion = 14.2;
@@ -294,6 +317,7 @@
 				22EC1229299061AC00976ECC /* XCRemoteSwiftPackageReference "Boutique" */,
 				2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */,
+				22120CAB2B4AB8B3006FECD6 /* XCRemoteSwiftPackageReference "Gifu" */,
 			);
 			productRefGroup = 22EC11FB298F23E100976ECC /* Products */;
 			projectDirPath = "";
@@ -327,8 +351,10 @@
 				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
 				22BA628C29CA60F800284C67 /* OrientationLockedController.swift in Sources */,
 				22BA628E29CA62DE00284C67 /* SupportedOrientationsPreferenceKey.swift in Sources */,
+				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
+				22120CAF2B4B7395006FECD6 /* ColourFun.swift in Sources */,
 				220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */,
 				22AD6C812A5B6103008A79CA /* ServerAccount.swift in Sources */,
 				2236FB7729970E5000436F65 /* Settings.swift in Sources */,
@@ -336,6 +362,7 @@
 				22BA629329CA6BB900284C67 /* OrientedFullScreenCover.swift in Sources */,
 				22002243299850C6000FA97F /* AccountsView.swift in Sources */,
 				2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */,
+				2223CC1B2AA53A7100122870 /* TopBar.swift in Sources */,
 				220022472998759E000FA97F /* BoutiqueStores.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,
 				22EC121F298FCBF300976ECC /* StatusView.swift in Sources */,
@@ -362,6 +389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -391,9 +419,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -420,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -449,9 +480,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -476,6 +509,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tootygraph/Tootygraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Tootygraph/Preview Content\"";
 				DEVELOPMENT_TEAM = 9M28MQ9SZC;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -501,7 +535,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.tootygraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -517,6 +552,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tootygraph/Tootygraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Tootygraph/Preview Content\"";
 				DEVELOPMENT_TEAM = 9M28MQ9SZC;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -542,7 +578,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.spotlightkid.tootygraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -573,6 +610,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		22120CAB2B4AB8B3006FECD6 /* XCRemoteSwiftPackageReference "Gifu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kaishin/Gifu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
 		2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
@@ -586,7 +631,7 @@
 			repositoryURL = "https://github.com/TootSDK/TootSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.2;
+				minimumVersion = 1.7.0;
 			};
 		};
 		22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */ = {
@@ -594,7 +639,7 @@
 			repositoryURL = "https://github.com/kean/Nuke";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.0.0;
+				minimumVersion = 12.1.0;
 			};
 		};
 		22EC1229299061AC00976ECC /* XCRemoteSwiftPackageReference "Boutique" */ = {
@@ -608,6 +653,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		22120CA82B4A2A99006FECD6 /* NukeVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeVideo;
+		};
+		22120CAC2B4AB8B3006FECD6 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22120CAB2B4AB8B3006FECD6 /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
+		};
 		2236FB6529946A7100436F65 /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */;

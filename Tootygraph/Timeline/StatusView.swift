@@ -32,16 +32,33 @@ struct StatusView: View {
         Spacer()
         
         ForEach(post.mediaAttachments){ media in
+            
           let index = post.mediaAttachments.firstIndex(of: media)!
           let jaunty = post.jauntyAngles[index+2]
           
+            ZStack{
+                PhotoView(media: media)
+                switch media.type {
 
-          PhotoView(media: media)
+                case .video:
+                    Text("Whoops video")
+                case .gifv:
+                    Text("Whoops Gif")
+                case .audio:
+                    Text("Whoops audio")
+                case .image:
+                    Text("Image")
+                case .unknown:
+                    Text("UNKNOWN")
+                    
+                }
+                
+            }
             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
           // These are currently commented out - because they mess up other aspects of
           // scaling the photo frames... :/
-          // .frame(maxWidth: geometry.size.width * 0.9)
-          // .frame(maxHeight: geometry.size.height * 0.9)
+//           .frame(maxWidth: geometry.size.width * 0.9)
+//           .frame(maxHeight: geometry.size.height * 0.9)
           
           if !settings.jaunty || index == post.mediaAttachments.count-1{
             Spacer()

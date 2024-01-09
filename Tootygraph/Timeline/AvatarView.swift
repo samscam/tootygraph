@@ -18,6 +18,8 @@ struct AvatarView: View {
       LazyImage(url: URL(string:account.avatar)){ state in
         if let image = state.image {
           image
+            .resizable()
+            .aspectRatio(contentMode: .fill)
             .clipShape(RoundedRectangle(cornerRadius: 5))
             .opacity(0.8)
         } else {
@@ -80,7 +82,7 @@ public extension Color {
     static let secondaryBackground = Color(NSColor.underPageBackgroundColor)
     static let tertiaryBackground = Color(NSColor.controlBackgroundColor)
     #else
-    static let background = Color(UIColor.systemBackground)
+//    static let background = Color(UIColor.systemBackground)
     static let secondaryBackground = Color(UIColor.secondarySystemBackground)
     static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
     #endif

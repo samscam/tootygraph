@@ -17,13 +17,7 @@ struct SettingsMenu: View {
   @State private var showingPopover: Bool = false
   
   var body: some View {
-    Button(action: {
-      showingPopover.toggle()
-    }, label: {
-      Image(systemName: "beach.umbrella.fill")
-      
-    }).buttonStyle(.plain)
-    .popover(isPresented: $showingPopover, content: {
+
       VStack(alignment:.leading){
         Text("Settings").font(.largeTitle)
         Toggle("Jaunty angles",isOn: settings.$jaunty.binding)
@@ -33,9 +27,6 @@ struct SettingsMenu: View {
         Toggle("Show post content", isOn: settings.$showContent.binding)
         Spacer()
       }
-      .padding()
-      
-    })
   }
 }
 
