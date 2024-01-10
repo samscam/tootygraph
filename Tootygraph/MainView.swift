@@ -23,15 +23,17 @@ struct MainView: View {
     
     @State var status: MainViewStates = .noAccounts
     
+    @FocusState var fieldFocussed: Bool
     
     var body: some View {
         
         
         TabView(selection: $selectedViewTag.animation()){
-            AccountsView(selectedViewTag: $selectedViewTag)
+            AccountsView(fieldFocussed: $fieldFocussed, selectedViewTag: $selectedViewTag)
                 .environmentObject(settings)
                 .environmentObject(accountsManager)
                 .tag("settings")
+                
             
             ForEach(accountsManager.connections){ connection in
                 ConnectionView(connection: connection)
@@ -42,8 +44,6 @@ struct MainView: View {
             }
             
         }
-//        .ignoresSafeArea(.keyboard,edges:[.bottom,.horizontal])
-        
         .background(currentBackground
             .opacity(0.4)
             .ignoresSafeArea(.all))
@@ -51,6 +51,7 @@ struct MainView: View {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
                     currentBackground = Color(cgColor:connection.serverAccount.color.cgColor)
+                    fieldFocussed = false
                 }
             } else {
                 withAnimation{
@@ -61,24 +62,30 @@ struct MainView: View {
         
         
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
-            Picker("Account",selection: $selectedViewTag.animation()) {
-                Image(systemName: "gearshape.fill")
-                    .resizable()
-                    .frame(width: 32,height:32)
-                    .tag("settings")
-                ForEach(accountsManager.connections){ connection in
-                    
-                    Group{
-                        Text(connection.serverAccount.username)
+        .if(accountsManager.connections.count > 0, transform: { view in
+            view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
+                
+                
+                
+                Picker("Account",selection: $selectedViewTag.animation()) {
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .frame(width: 32,height:32)
+                        .tag("settings")
+                    ForEach(accountsManager.connections){ connection in
+                        
+                        Group{
+                            Text(connection.serverAccount.username)
+                        }
+                        .tag(connection.serverAccount.niceName)
                     }
-                    .tag(connection.serverAccount.niceName)
-                }
-            }.pickerStyle(.segmented)
-                .padding()
-                .background(Material.bar)
-            
-        }
+                }.pickerStyle(.segmented)
+                    .padding()
+                    .background(Material.bar)
+                
+            }
+        })
+        
         .onAppear {
             Task{
                 try await accountsManager.connectAll()

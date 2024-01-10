@@ -52,15 +52,18 @@ struct ServerAccountView: View{
                 LazyImage(url: URL(string:headerURL)) { state in
                     if let image = state.image {
                         image
-                            .resizable().aspectRatio(contentMode: .fill)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
                             .blur(radius: 2)
                             .opacity(0.6)
+                            
                     } else {
                         EmptyView()
                     }
                 }
             }
-        }.clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(1)
         .background(Color(cgColor: account.color.cgColor))
         .clipShape(RoundedRectangle(cornerRadius: 10))

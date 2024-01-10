@@ -10,24 +10,30 @@ import TootSDK
 
 struct AccountsView: View {
     @EnvironmentObject var accountsManager: AccountsManager
-    @FocusState var fieldFocussed: Bool
+    
+    var fieldFocussed: FocusState<Bool>.Binding
+    
     @Binding var selectedViewTag: String
     
     var body: some View {
         ScrollView{
-            VStack(alignment:.leading){
+            VStack(alignment:.center){
                 Image("greenicon1024")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .photoFrame()
                     .frame(width:128)
+                    .padding(.top,20)
+            }
+            VStack(alignment:.leading){
                 if (accountsManager.accounts.count > 0){
                     Text("Accounts").font(.title)
                     
                     ForEach($accountsManager.connections){ $connection in
                         ServerAccountView(account:$connection.serverAccount)
+                            .clipped()
+                            .contentShape(Rectangle())
                             .onTapGesture {
-                                
                                 selectedViewTag = connection.serverAccount.niceName
                             }
                         
@@ -45,7 +51,7 @@ struct AccountsView: View {
                 
                 Spacer()
                 Divider()
-                AddServerView(fieldFocussed: $fieldFocussed)
+                AddServerView(fieldFocussed: fieldFocussed)
                 
                 Spacer()
                 Divider()
@@ -58,11 +64,12 @@ struct AccountsView: View {
                     }
                 }
             }.padding()
+            .contentShape(Rectangle())
             .onTapGesture {
-                fieldFocussed = false
+                fieldFocussed.wrappedValue = false
             }
             
-        }
+        }.scrollDismissesKeyboard(.automatic)
     }
 }
 
@@ -93,8 +100,9 @@ struct AccountsView: View {
     @StateObject var accountsManager = AccountsManager()
     @StateObject var settings = Settings()
     @State var selectedViewTag: String = "settings"
+    @FocusState var fieldFocussed: Bool
     
-    return AccountsView(selectedViewTag: $selectedViewTag)
+    return AccountsView(fieldFocussed: $fieldFocussed, selectedViewTag: $selectedViewTag)
         .environmentObject(accountsManager)
         .environmentObject(settings)
         .onAppear{
