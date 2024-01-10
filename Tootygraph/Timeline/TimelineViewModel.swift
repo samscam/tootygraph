@@ -54,6 +54,7 @@ class TimelineViewModel: ObservableObject {
     loadInitial()
     
     // Binding for postsSet to apply filtering and update posts
+      
     $postsSet
       .combineLatest(settings.$includeTextPosts.publisher)
       .map{ (posts, includeText) in
@@ -84,7 +85,7 @@ class TimelineViewModel: ObservableObject {
     pagingState = .loadingFirst
     Task{
       do {
-        let account = try await client.verifyCredentials()
+        let _ = try await client.verifyCredentials()
         
         try await self.loadMore()
         await self.startStreaming()

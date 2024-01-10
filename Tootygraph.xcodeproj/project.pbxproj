@@ -52,6 +52,7 @@
 		22EC122629904FF900976ECC /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122529904FF900976ECC /* NukeUI */; };
 		22EC1228299050EE00976ECC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC1227299050EE00976ECC /* AvatarView.swift */; };
 		22EC122B299061AC00976ECC /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122A299061AC00976ECC /* Boutique */; };
+		22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		22EC121C298F430800976ECC /* BoxPacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxPacker.swift; sourceTree = "<group>"; };
 		22EC121E298FCBF300976ECC /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		22EC1227299050EE00976ECC /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			children = (
 				22002244299850F5000FA97F /* AccountsManager.swift */,
 				22002242299850C6000FA97F /* AccountsView.swift */,
+				22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */,
 				2200224829987715000FA97F /* ServerAccountView.swift */,
 			);
 			path = Accounts;
@@ -347,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2236FB6A2995B73700436F65 /* PhotoView.swift in Sources */,
+				22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */,
 				22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */,
 				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
 				22BA628C29CA60F800284C67 /* OrientationLockedController.swift in Sources */,
@@ -527,7 +531,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -570,7 +574,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;

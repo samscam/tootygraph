@@ -67,10 +67,6 @@ struct PhotoView: View {
         ZStack {
             Rectangle().foregroundColor(.gray.opacity(0.5))
             photoView
-            //      Text("\(media.width?.formatted() ?? "?") x \(media.height?.formatted() ?? "?")")
-            //        .bold()
-            //        .foregroundColor(.white)
-            //        .background(.black)
         }
         .frame(maxWidth:media.width, maxHeight:media.height)
         .aspectRatio(media.aspect,contentMode: .fit)
@@ -148,7 +144,6 @@ struct PhotoView: View {
                         ZStack{
                             Color
                                 .accentColor.opacity(Double(state.progress.fraction))
-                            //                    ProgressView(value: state.progress.fraction, total: 1)
                         }
                     }
                     

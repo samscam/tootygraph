@@ -19,42 +19,50 @@ struct MainView: View {
     @StateObject var accountsManager = AccountsManager()
     
     @State var selectedViewTag: String = "settings"
+    @State var currentBackground: Color = .background
     
     @State var status: MainViewStates = .noAccounts
+    
     
     var body: some View {
         
         
-        
-        
-        
-        
-        TabView(selection: $selectedViewTag){
-            AccountsView()
+        TabView(selection: $selectedViewTag.animation()){
+            AccountsView(selectedViewTag: $selectedViewTag)
                 .environmentObject(settings)
                 .environmentObject(accountsManager)
                 .tag("settings")
-                .tabItem{
-                    Label("Settings", systemImage: "house.fill")
-                }
             
             ForEach(accountsManager.connections){ connection in
                 ConnectionView(connection: connection)
                     .environmentObject(settings)
                     .environmentObject(accountsManager)
-                    .tag(connection.serverAccount.username)
-                    .background {
-                        Color(cgColor: connection.serverAccount.color.cgColor)
-                            .opacity(0.4)
-                            .ignoresSafeArea()
-                    }
+                    .tag(connection.serverAccount.niceName)
+                
             }
             
         }
+//        .ignoresSafeArea(.keyboard,edges:[.bottom,.horizontal])
+        
+        .background(currentBackground
+            .opacity(0.4)
+            .ignoresSafeArea(.all))
+        .onChange(of: selectedViewTag, {
+            if let connection = accountsManager[selectedViewTag] {
+                withAnimation{
+                    currentBackground = Color(cgColor:connection.serverAccount.color.cgColor)
+                }
+            } else {
+                withAnimation{
+                    currentBackground = .background
+                }
+            }
+        })
+        
+        
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .ignoresSafeArea()
-        .safeAreaInset(edge: .top, spacing: 0) {
-            Picker("Account",selection: $selectedViewTag) {
+        .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
+            Picker("Account",selection: $selectedViewTag.animation()) {
                 Image(systemName: "gearshape.fill")
                     .resizable()
                     .frame(width: 32,height:32)
@@ -62,14 +70,19 @@ struct MainView: View {
                 ForEach(accountsManager.connections){ connection in
                     
                     Group{
-                        Text(connection.serverAccount.instanceURL.host() ?? "-")
-                        
+                        Text(connection.serverAccount.username)
                     }
-                    //                            .frame(width:32,height:32)
-                    .tag(connection.serverAccount.username)
+                    .tag(connection.serverAccount.niceName)
                 }
             }.pickerStyle(.segmented)
+                .padding()
+                .background(Material.bar)
+            
         }
-        
+        .onAppear {
+            Task{
+                try await accountsManager.connectAll()
+            }
+        }
     }
 }

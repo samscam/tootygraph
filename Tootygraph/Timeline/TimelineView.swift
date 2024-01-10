@@ -16,6 +16,7 @@ struct ConnectionView: View {
     var body: some View {
         if let tootClient = connection.tootClient {
             TimelineView(client: tootClient, timeline: .home, settings: settings)
+                
         } else {
             Button {
               Task{
@@ -62,9 +63,6 @@ struct TimelineView: View {
             }
             .listStyle(PlainListStyle())
             .padding(0)
-            //      .background{
-            //        Image("wood-texture").resizable().edgesIgnoringSafeArea(.all)
-            //      }
             .refreshable {
                 do {
                     try await timelineViewModel.refresh()
@@ -72,10 +70,6 @@ struct TimelineView: View {
                     print("Oh noes \(error)")
                 }
             }
-            
-//            .safeAreaInset(edge: .bottom, spacing: 0) {
-//                BottomBar(tootClient: client)
-//            }
             .onAppear{
                 timelineViewModel.loadInitial()
             }

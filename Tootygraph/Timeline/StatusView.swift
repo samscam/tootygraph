@@ -37,7 +37,7 @@ struct StatusView: View {
           let jaunty = post.jauntyAngles[index+2]
           
             ZStack{
-                PhotoView(media: media)
+                
                 switch media.type {
 
                 case .video:
@@ -47,7 +47,7 @@ struct StatusView: View {
                 case .audio:
                     Text("Whoops audio")
                 case .image:
-                    Text("Image")
+                    PhotoView(media: media)
                 case .unknown:
                     Text("UNKNOWN")
                     

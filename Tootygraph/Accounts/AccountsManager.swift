@@ -39,20 +39,10 @@ class Connection: Identifiable, ObservableObject {
     }
 }
 
-@MainActor
-protocol AccountsManagerProtocol: ObservableObject {
-    var connections: [Connection] { get }
-    
-    func addServerAccount(_ serverAccount: ServerAccount) async throws
-    func removeServerAccount(_ serverAccount: ServerAccount) async throws
-    func connect(_ serverAccount: ServerAccount) async throws
-    func startAuth(urlString: String) async throws
-    func signOut()
-}
 
 
 @MainActor
-class AccountsManager: AccountsManagerProtocol {
+class AccountsManager: ObservableObject {
     // Nope we can't be having this... credentials need to be in the keychain
     @Stored(in: .serverAccountsStore) var accounts: [ServerAccount]
     
@@ -91,7 +81,7 @@ class AccountsManager: AccountsManagerProtocol {
         
         // We need to refresh the server account with the user account
         var serverAccount = serverAccount
-        let userAccount = try await client.verifyCredentials()
+        let userAccount = try await client.verifyCredentials() // callers will need to handle this throwing 
         serverAccount.userAccount = userAccount
         try await addServerAccount(serverAccount)
         
@@ -123,10 +113,16 @@ class AccountsManager: AccountsManagerProtocol {
         
     }
     
-    func signOut(){
-        //    selectedClient = nil
+    func reset() async throws{
+        for connection in connections {
+            try await removeServerAccount(connection.serverAccount)
+        }
     }
     
-    
+    subscript(accountName:String) -> Connection?{
+        return connections.first{
+            accountName == $0.serverAccount.niceName
+        }
+    }
 }
 
