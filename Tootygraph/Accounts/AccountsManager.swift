@@ -9,6 +9,11 @@ import Foundation
 import TootSDK
 import Boutique
 
+import NukeUI
+import Nuke
+import NukeVideo
+
+
 enum AccountCreationError: Error {
     case invalidURL
 }
@@ -49,6 +54,8 @@ class AccountsManager: ObservableObject {
     @Published var connections: [Connection] = []
     
     init(){
+        ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)
+        
         $accounts.$items
             .map{ serverAccounts in
                 serverAccounts.map { serverAccount in

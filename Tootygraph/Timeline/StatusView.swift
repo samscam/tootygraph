@@ -36,7 +36,7 @@ struct StatusView: View {
           let index = post.mediaAttachments.firstIndex(of: media)!
           let jaunty = post.jauntyAngles[index+2]
           
-            ZStack{
+            VStack{
                 
                 switch media.type {
 
@@ -47,11 +47,12 @@ struct StatusView: View {
                 case .audio:
                     Text("Whoops audio")
                 case .image:
-                    PhotoView(media: media)
+                    EmptyView()
                 case .unknown:
                     Text("UNKNOWN")
                     
                 }
+                PhotoView(media: media)
                 
             }
             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))

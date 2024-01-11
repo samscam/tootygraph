@@ -32,12 +32,6 @@
 		2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25729A7F53700F24EA9 /* ActionsView.swift */; };
 		2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostWrapper.swift */; };
 		22AD6C812A5B6103008A79CA /* ServerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* ServerAccount.swift */; };
-		22BA628829CA5FE700284C67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA628729CA5FE700284C67 /* AppDelegate.swift */; };
-		22BA628A29CA605300284C67 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA628929CA605300284C67 /* SceneDelegate.swift */; };
-		22BA628C29CA60F800284C67 /* OrientationLockedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA628B29CA60F800284C67 /* OrientationLockedController.swift */; };
-		22BA628E29CA62DE00284C67 /* SupportedOrientationsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA628D29CA62DE00284C67 /* SupportedOrientationsPreferenceKey.swift */; };
-		22BA629129CA637E00284C67 /* View+SupportedOrientations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA629029CA637E00284C67 /* View+SupportedOrientations.swift */; };
-		22BA629329CA6BB900284C67 /* OrientedFullScreenCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA629229CA6BB900284C67 /* OrientedFullScreenCover.swift */; };
 		22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */; };
 		22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* BottomBar.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenu.swift */; };
@@ -53,6 +47,7 @@
 		22EC1228299050EE00976ECC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC1227299050EE00976ECC /* AvatarView.swift */; };
 		22EC122B299061AC00976ECC /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122A299061AC00976ECC /* Boutique */; };
 		22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */; };
+		22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9CDC62B50A0E3006D2C6D /* TootygraphApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,12 +72,6 @@
 		2287F25729A7F53700F24EA9 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
 		2287F25B29A826F400F24EA9 /* PostWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWrapper.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* ServerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccount.swift; sourceTree = "<group>"; };
-		22BA628729CA5FE700284C67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		22BA628929CA605300284C67 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		22BA628B29CA60F800284C67 /* OrientationLockedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationLockedController.swift; sourceTree = "<group>"; };
-		22BA628D29CA62DE00284C67 /* SupportedOrientationsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedOrientationsPreferenceKey.swift; sourceTree = "<group>"; };
-		22BA629029CA637E00284C67 /* View+SupportedOrientations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+SupportedOrientations.swift"; sourceTree = "<group>"; };
-		22BA629229CA6BB900284C67 /* OrientedFullScreenCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientedFullScreenCover.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComposer.swift; sourceTree = "<group>"; };
 		22CD12082991BE5E00B7D70D /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		22CD120A2993061800B7D70D /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
@@ -96,6 +85,7 @@
 		22EC121E298FCBF300976ECC /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		22EC1227299050EE00976ECC /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServerView.swift; sourceTree = "<group>"; };
+		22F9CDC62B50A0E3006D2C6D /* TootygraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootygraphApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,18 +166,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		22BA628F29CA635100284C67 /* Orientation Management */ = {
-			isa = PBXGroup;
-			children = (
-				22BA628929CA605300284C67 /* SceneDelegate.swift */,
-				22BA628B29CA60F800284C67 /* OrientationLockedController.swift */,
-				22BA628D29CA62DE00284C67 /* SupportedOrientationsPreferenceKey.swift */,
-				22BA629029CA637E00284C67 /* View+SupportedOrientations.swift */,
-				22BA629229CA6BB900284C67 /* OrientedFullScreenCover.swift */,
-			);
-			path = "Orientation Management";
-			sourceTree = "<group>";
-		};
 		22C0338029ABB5C600A353B8 /* PhotoComposer */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,11 +200,10 @@
 			isa = PBXGroup;
 			children = (
 				2200224A2998CECF000FA97F /* Info.plist */,
-				22BA628729CA5FE700284C67 /* AppDelegate.swift */,
+				22F9CDC62B50A0E3006D2C6D /* TootygraphApp.swift */,
 				2236FB742997052200436F65 /* MainView.swift */,
 				2223CC1A2AA53A7100122870 /* TopBar.swift */,
 				22CD12082991BE5E00B7D70D /* BottomBar.swift */,
-				22BA628F29CA635100284C67 /* Orientation Management */,
 				22EC120D298F240D00976ECC /* Business */,
 				22002241299850AF000FA97F /* Accounts */,
 				22805CCD29D23E9400DE7818 /* Settings */,
@@ -353,8 +330,6 @@
 				22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */,
 				22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */,
 				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
-				22BA628C29CA60F800284C67 /* OrientationLockedController.swift in Sources */,
-				22BA628E29CA62DE00284C67 /* SupportedOrientationsPreferenceKey.swift in Sources */,
 				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
@@ -363,25 +338,22 @@
 				22AD6C812A5B6103008A79CA /* ServerAccount.swift in Sources */,
 				2236FB7729970E5000436F65 /* Settings.swift in Sources */,
 				22EC1200298F23E100976ECC /* TimelineView.swift in Sources */,
-				22BA629329CA6BB900284C67 /* OrientedFullScreenCover.swift in Sources */,
 				22002243299850C6000FA97F /* AccountsView.swift in Sources */,
 				2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */,
 				2223CC1B2AA53A7100122870 /* TopBar.swift in Sources */,
 				220022472998759E000FA97F /* BoutiqueStores.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,
 				22EC121F298FCBF300976ECC /* StatusView.swift in Sources */,
-				22BA628829CA5FE700284C67 /* AppDelegate.swift in Sources */,
 				2200224929987715000FA97F /* ServerAccountView.swift in Sources */,
 				2236FB752997052200436F65 /* MainView.swift in Sources */,
 				22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */,
 				2200224C2999A8B7000FA97F /* TimelineViewModel.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
 				22DFF05D29AD5D9F00D14A27 /* PhotoComposerViewModel.swift in Sources */,
-				22BA629129CA637E00284C67 /* View+SupportedOrientations.swift in Sources */,
 				220AE8C129C521A30023554D /* CameraView.swift in Sources */,
-				22BA628A29CA605300284C67 /* SceneDelegate.swift in Sources */,
 				2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
+				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,
 				227C65D929A4F8FE006BF540 /* CornerBadge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
