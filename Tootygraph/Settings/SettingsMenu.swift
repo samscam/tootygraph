@@ -19,7 +19,7 @@ struct SettingsMenu: View {
   var body: some View {
 
       VStack(alignment:.leading){
-        Text("Settings").font(.largeTitle)
+        Text("Settings").font(.title)
         Toggle("Jaunty angles",isOn: settings.$jaunty.binding)
         
         Toggle("Descriptions first", isOn: settings.$descriptionsFirst.binding)

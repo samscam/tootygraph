@@ -43,35 +43,51 @@ struct AddServerView: View {
                         tryToConnect()
                     }
                     .onChange(of: newAccountURLString) { oldValue, newValue in
-                        
-                        connectionTask?.cancel()
-                        errorMessage = nil
+                        withAnimation{
+                            connectionTask?.cancel()
+                            errorMessage = nil
+                        }
                     }
+                    .frame(maxHeight:.infinity)
                 
                 Button {
                     tryToConnect()
                 } label: {
                     HStack{
-                        Text("Connect")
+                        
                         if connecting {
                             
                             ProgressView()
                                 .progressViewStyle(.circular)
                                 .padding(.horizontal,3)
                                 .foregroundColor(.white)
+                                .frame(maxHeight:.infinity)
+                        } else {
+                            Text("go").frame(maxHeight:.infinity)
                         }
                     }
-                }.buttonStyle(.borderedProminent)
-                //                .frame(idealHeight: 30)
-            }
-            if let errorMessage {
-                HStack{
-                    Image(systemName: "exclamationmark.triangle.fill")
-                    Text(errorMessage).multilineTextAlignment(.leading)
+                    
                 }
-                .padding(3)
+                .disabled(connecting)
+                .buttonStyle(.borderedProminent)
+                    
+                    
+            }
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxHeight:150)
+            
+            if let errorMessage {
+                HStack(alignment: .firstTextBaseline){
+                    Image(systemName: "exclamationmark.triangle.fill")
+                    Text(errorMessage)
+                        .frame(maxWidth:.infinity)
+                        .multilineTextAlignment(.leading)
+                }
+                .foregroundStyle(.black)
+                .padding(5)
                 .background(Color.yellow)
                 .clipShape(RoundedRectangle(cornerRadius: 3))
+                
             }
         }
     }
