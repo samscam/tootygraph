@@ -35,7 +35,9 @@ struct AccountsView: View {
                             .clipped()
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                selectedViewTag = connection.serverAccount.niceName
+                                withAnimation{
+                                    selectedViewTag = connection.serverAccount.niceName
+                                }
                             }
                         
                     }
