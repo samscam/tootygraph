@@ -12,8 +12,9 @@ struct AccountsView: View {
     @EnvironmentObject var accountsManager: AccountsManager
     
     var fieldFocussed: FocusState<Bool>.Binding
-    
     @Binding var selectedViewTag: String
+    
+    @State private var showResetAlert: Bool = false
     
     var body: some View {
         ScrollView{
@@ -59,10 +60,18 @@ struct AccountsView: View {
                 Spacer()
                 Divider()
                 Button("Reset") {
-                    Task{
-                        try await accountsManager.reset()
+                    showResetAlert = true
+                }.alert("Are you sure you want to reset Tootygraph?",isPresented: $showResetAlert){
+                    Button("Reset",role:.destructive){
+                        Task {
+                            try await accountsManager.reset()
+                        }
+                    }
+                    Button("Cancel",role: .cancel){
+                        
                     }
                 }
+                    
             }.padding()
             .contentShape(Rectangle())
             .onTapGesture {
