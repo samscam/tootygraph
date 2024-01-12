@@ -36,26 +36,8 @@ struct StatusView: View {
           let index = post.mediaAttachments.firstIndex(of: media)!
           let jaunty = post.jauntyAngles[index+2]
           
-            VStack{
-                
-                switch media.type {
-
-                case .video:
-                    Text("Whoops video")
-                case .gifv:
-                    Text("Whoops Gif")
-                case .audio:
-                    Text("Whoops audio")
-                case .image:
-                    EmptyView()
-                case .unknown:
-                    Text("UNKNOWN")
-                    
-                }
-                PhotoView(media: media)
-                
-            }
-            .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
+            PhotoView(media: media)
+                .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
           // These are currently commented out - because they mess up other aspects of
           // scaling the photo frames... :/
 //           .frame(maxWidth: geometry.size.width * 0.9)
@@ -70,16 +52,13 @@ struct StatusView: View {
         if settings.showContent{
           let parsedContent = post.attributedContent
           Text(parsedContent)
-            .font(.custom("AmericanTypewriter",size:24))
-            .foregroundColor(.black)
+            
+            .font(.custom("AmericanTypewriter",size:20))
+            .foregroundColor(.primary)
             .opacity(0.8)
             .multilineTextAlignment(.leading)
             .layoutPriority(10)
-            .padding()
-            .background{
-              Rectangle()
-                .foregroundColor(.yellow.opacity(0.7))
-            }
+            .padding(.vertical)
             .rotationEffect(Angle(degrees: settings.jaunty ? post.jauntyAngles[1] : 0))
         }
         Spacer()

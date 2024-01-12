@@ -125,37 +125,27 @@ struct PhotoView: View {
     
     @MainActor
     var photoView: some View {
-        
-        LazyImage(url: media.mediaURL) { state in
-            if let container = state.imageContainer {
-                if container.type == .gif {
-                    // Use a view capable of displaying animated images
-                    
-                } else {
+        Group{
+            if media.type == .image {
+                LazyImage(url: media.mediaURL, transaction: .init(animation: .default)) { state in
                     
                     if let image = state.image {
+                        
                         image.resizable().aspectRatio(contentMode: .fit)
                     } else if let error = state.error {
                         ZStack{
                             Color.red
                             Text(error.localizedDescription)
                         }
-                    } else if state.isLoading {
-                        ZStack{
-                            Color
-                                .accentColor.opacity(Double(state.progress.fraction))
-                        }
+                        
                     }
-                    
                 }
+            } else {
+                NukeVideoView(asset: media.mediaURL)
             }
-            
-            
         }
         .aspectRatio(media.aspect,contentMode: .fill)
         .frame(maxWidth:media.width, maxHeight:media.height)
-        
-        
         
     }
 }
@@ -184,16 +174,16 @@ extension View {
 //        let gifuView = GIFImageView(image: image)
 //        return gifuView
 //    }
-//    
+//
 //    func updateUIView(_ uiView: Gifu.GIFImageView, context: Context) {
 //        uiView.image = image
 //    }
-//    
-//    typealias UIViewType = GIFImageView
-//    
-//    @Binding var image: UIImage
-//    
 //
-//    
+//    typealias UIViewType = GIFImageView
+//
+//    @Binding var image: UIImage
+//
+//
+//
 //
 //}
