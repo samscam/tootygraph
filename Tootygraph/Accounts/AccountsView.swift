@@ -89,7 +89,7 @@ struct AccountsView: View {
     @State var account: ServerAccount = ServerAccount(
         id: "someid",
         username: "sam",
-        color: .random(),
+        hue: .random(),
         instanceURL: URL(string: "https://togl.me")!,
         accessToken: nil,
         userAccount: Account(

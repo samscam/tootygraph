@@ -40,6 +40,7 @@ struct MainView: View {
                     .environmentObject(settings)
                     .environmentObject(accountsManager)
                     .tag(connection.serverAccount.niceName)
+                    .tint(connection.serverAccount.hue.foreground)
                 
             }
             
@@ -50,7 +51,7 @@ struct MainView: View {
         .onChange(of: selectedViewTag, {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
-                    currentBackground = Color(cgColor:connection.serverAccount.color.cgColor)
+                    currentBackground = connection.serverAccount.hue.background
                     fieldFocussed = false
                 }
             } else {

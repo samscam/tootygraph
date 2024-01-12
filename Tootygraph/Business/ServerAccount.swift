@@ -13,7 +13,7 @@ struct ServerAccount: Codable, Equatable, Identifiable, Hashable {
     
     let id: String
     let username: String
-    var color: CodableColor
+    var hue: Hue
     let instanceURL: URL
     let accessToken: String?
     var userAccount: Account?

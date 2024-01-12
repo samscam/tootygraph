@@ -40,10 +40,8 @@ struct ServerAccountView: View{
             VStack(alignment: .leading){
                 Text("@\(account.username)").font(.title3).bold()
                 Text(account.host)
-            }.padding(5).foregroundColor(.white)
-            Spacer()
-            ColorPicker("Colour", selection: $account.color.cgColor).labelsHidden()
-                .padding(.trailing,10)
+            }.padding(5).foregroundColor(.primary)
+            
         }
 
         .padding(5)
@@ -65,7 +63,7 @@ struct ServerAccountView: View{
         }
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(1)
-        .background(Color(cgColor: account.color.cgColor))
+        .background(account.hue.background)
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
@@ -73,7 +71,7 @@ struct ServerAccountView: View{
     @State var account: ServerAccount = ServerAccount(
         id: "someid",
         username: "sam",
-        color: .random(),
+        hue: .random(),
         instanceURL: URL(string: "https://togl.me")!,
         accessToken: nil,
         userAccount: Account(

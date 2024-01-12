@@ -113,7 +113,7 @@ class AccountsManager: ObservableObject {
         let userAccount = try await client.verifyCredentials()
         
         let serverAccount = ServerAccount(id: userAccount.id, username: userAccount.acct,
-                                          color: .random() , instanceURL: url, accessToken: accessToken, userAccount: userAccount)
+                                          hue: .random() , instanceURL: url, accessToken: accessToken, userAccount: userAccount)
         try await addServerAccount(serverAccount)
         
         

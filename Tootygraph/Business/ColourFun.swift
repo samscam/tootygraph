@@ -9,64 +9,30 @@ import Foundation
 import CoreGraphics
 import SwiftUI
 
-struct CodableColor: Codable {
-    var cgColor: CGColor
+struct Hue: Codable, Equatable, Hashable {
     
-    enum CodingKeys: String, CodingKey {
-        case colorSpace
-        case components
+    var hue: Double
+    
+    var background: Color {
+        return Color(hue: hue, saturation: 0.5, brightness: 0.5)
+    }
+    var foreground: Color {
+        return Color(hue: hue, saturation: 1.0, brightness: 1.0)
     }
     
-    init(cgColor: CGColor) {
-        self.cgColor = cgColor
+    var compliment: Color {
+        return Color(hue: hue+0.3, saturation: 1.0, brightness: 1.0)
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder
-            .container(keyedBy: CodingKeys.self)
-        let colorSpace = try container
-            .decode(String.self, forKey: .colorSpace)
-        let components = try container
-            .decode([CGFloat].self, forKey: .components)
-        
-        guard
-            let cgColorSpace = CGColorSpace(name: colorSpace as CFString),
-            let cgColor = CGColor(
-                colorSpace: cgColorSpace, components: components
-            )
-        else {
-            throw CodingError.wrongData
-        }
-        
-        self.cgColor = cgColor
+    init(_ hue: Double) {
+        self.hue = hue
     }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        guard
-            let colorSpace = cgColor.colorSpace?.name,
-            let components = cgColor.components
-        else {
-            throw CodingError.wrongData
-        }
-              
-        try container.encode(colorSpace as String, forKey: .colorSpace)
-        try container.encode(components, forKey: .components)
-    }
-}
-
-extension CodableColor: Hashable, Equatable {
     
 }
 
-extension CodableColor {
-    static func random() -> CodableColor {
-        let cgColor = CGColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1.0)
-        return CodableColor(cgColor: cgColor)
+extension Hue {
+    static func random() -> Hue {
+        let hue = Double.random(in: 0...1)
+        return Hue(hue)
     }
-}
-
-enum CodingError: Error {
-    case wrongColor
-    case wrongData
 }
