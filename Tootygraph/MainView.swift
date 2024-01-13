@@ -19,7 +19,7 @@ struct MainView: View {
     @StateObject var accountsManager = AccountsManager()
     
     @State var selectedViewTag: String = "settings"
-    @State var currentBackground: Color = .background
+    @State var currentBackground: AnyShapeStyle = AnyShapeStyle(Color.background)
     
     @State var status: MainViewStates = .noAccounts
     
@@ -33,64 +33,48 @@ struct MainView: View {
                 .environmentObject(settings)
                 .environmentObject(accountsManager)
                 .tag("settings")
-                
+            
             
             ForEach(accountsManager.connections){ connection in
                 ConnectionView(connection: connection)
                     .environmentObject(settings)
                     .environmentObject(accountsManager)
                     .tag(connection.serverAccount.niceName)
-                    .tint(connection.serverAccount.hue.foreground)
+                    .tint(Palette(connection.serverAccount.hue).highlight)
                 
             }
             
         }
-        .background(currentBackground
-            .opacity(0.4)
-            .ignoresSafeArea(.all))
+        .background(currentBackground)
         .onChange(of: selectedViewTag, {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
-                    currentBackground = connection.serverAccount.hue.background
+                    currentBackground = AnyShapeStyle(Palette(connection.serverAccount.hue).background)
                     fieldFocussed = false
                 }
             } else {
                 withAnimation{
-                    currentBackground = .background
+                    currentBackground = AnyShapeStyle(Color.background)
                 }
             }
         })
         
         
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .if(accountsManager.connections.count > 0, transform: { view in
-            view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
-                
-                
-                
-                Picker("Account",selection: $selectedViewTag.animation()) {
-                    Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .frame(width: 32,height:32)
-                        .tag("settings")
-                    ForEach(accountsManager.connections){ connection in
-                        
-                        Group{
-                            Text(connection.serverAccount.username)
-                        }
-                        .tag(connection.serverAccount.niceName)
-                    }
-                }.pickerStyle(.segmented)
-                    .padding()
-                    .background(Material.bar)
-                
-            }
-        })
         
         .onAppear {
             Task{
                 try await accountsManager.connectAll()
             }
         }
+        .if(accountsManager.connections.count > 0, transform: { view in
+            view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
+                TopBar(selectedViewTag: $selectedViewTag)
+                    .environmentObject(accountsManager)
+            }
+        })
+        
     }
 }
+
+

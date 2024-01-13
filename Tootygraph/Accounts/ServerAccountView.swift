@@ -53,7 +53,9 @@ struct ServerAccountView: View{
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .blur(radius: 2)
+                            .saturation(0)
                             .opacity(0.6)
+                            
                             
                     } else {
                         EmptyView()
@@ -61,9 +63,10 @@ struct ServerAccountView: View{
                 }
             }
         }
+        .background(Palette(account.hue).background)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding(1)
-        .background(account.hue.background)
+        .padding(2)
+        .background(Palette(account.hue).highlight)
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
@@ -71,7 +74,7 @@ struct ServerAccountView: View{
     @State var account: ServerAccount = ServerAccount(
         id: "someid",
         username: "sam",
-        hue: .random(),
+        hue: .random(in: 0...1),
         instanceURL: URL(string: "https://togl.me")!,
         accessToken: nil,
         userAccount: Account(
