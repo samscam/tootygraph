@@ -41,7 +41,7 @@ struct ServerAccountView: View{
                 Text("@\(account.username)").font(.title3).bold()
                 Text(account.host)
             }.padding(5).foregroundColor(.primary)
-            
+            Spacer()
         }
 
         .padding(5)
