@@ -108,6 +108,8 @@ struct StatusView: View {
     
 }
 
+
+#if DEBUG
 #Preview(traits: .sizeThatFitsLayout){
     let settings = {
         let settings = Settings()
@@ -135,3 +137,6 @@ struct StatusView: View {
     
     
 }
+
+#endif
+

@@ -42,6 +42,7 @@ struct AvatarView: View {
   }
 }
 
+#if DEBUG
 #Preview(traits:.sizeThatFitsLayout) {
     AvatarView(account: TestAccounts.alpaca)
 }
@@ -50,3 +51,4 @@ struct AvatarView: View {
 #Preview(traits:.sizeThatFitsLayout) {
     AvatarView(account: TestAccounts.sam)
 }
+#endif
