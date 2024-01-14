@@ -1,12 +1,10 @@
 # Tootygraph
 
-Tootygraph is an photography-focussed fediverse client app (though currently only supports Mastodon)
-
-Currently at experimental initial stages.
-
-UI entirely-mostly done using SwiftUI
-
-Tootygraph is open source. Apache 2.0 license.
+* Tootygraph is an playful, photography-focussed fediverse client app for iOS
+* It definitely supports Mastodon, but should also support Pleroma, Pixelfed, Akkoma, Friendica, others thanks to [TootSDK](https://github.com/TootSDK/TootSDK)
+* Currently at experimental initial stages.
+* UI entirely-mostly done using SwiftUI
+* Tootygraph is open source. Apache 2.0 license. Done for love and fun, and free forever in all senses of the word.
 
 ## Appreciations and credits:
 
