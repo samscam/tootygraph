@@ -102,38 +102,35 @@ struct ColourSample: View{
                     .foregroundStyle(palette.highlight)
                     .frame(maxWidth: .infinity, maxHeight:.infinity)
             }
-//            .backgroundStyle(palette.background)
         }
     }
 }
-//                .environment(\.colorScheme, .dark)
-//            
-//            HStack{
-//                Text("Primary").bold()
-//                    .frame(maxWidth: .infinity, maxHeight:.infinity)
-//                    .foregroundStyle(.primary)
-//                    
-//                Text("Tint").bold()
-//                    .foregroundStyle(palette.highlight)
-//                    
-//                    .frame(maxWidth: .infinity, maxHeight:.infinity)
-//                    
-//            }
-//            .backgroundStyle(palette.background)
-//            .environment(\.colorScheme, .light)
 
 
-//#Preview {
-//    
-//    var hue: Double = 0
-//    return
-//        List(0..<10, id: \.self) { i in
-//            ColourSample(palette: Palette(Double(i)/10.0))
-//                .frame(height:70)
-//        }.listStyle(.plain)
-//
-//    
-//}
+#Preview {
+    
+    var hue: Double = 0
+    return
+        List(0..<10, id: \.self) { i in
+            ColourSample(palette: Palette(Double(i)/10.0))
+                .frame(height:70)
+        }.listStyle(.plain)
+
+    
+}
 
 
 
+
+public extension Color {
+
+    #if os(macOS)
+    static let background = Color(NSColor.windowBackgroundColor)
+    static let secondaryBackground = Color(NSColor.underPageBackgroundColor)
+    static let tertiaryBackground = Color(NSColor.controlBackgroundColor)
+    #else
+//    static let background = Color(UIColor.systemBackground)
+    static let secondaryBackground = Color(UIColor.secondarySystemBackground)
+    static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
+    #endif
+}

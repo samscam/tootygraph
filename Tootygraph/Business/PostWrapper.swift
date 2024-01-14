@@ -11,7 +11,6 @@ import TootSDK
 class PostWrapper: ObservableObject, Identifiable, Hashable{
 
   
-  
   let id: String
   
   func hash(into hasher: inout Hasher) {
@@ -54,7 +53,7 @@ class PostWrapper: ObservableObject, Identifiable, Hashable{
     
     // Pre-generate adequate quantities of random jaunty angles
     for _ in 0...post.displayPost.mediaAttachments.count + 4 {
-        jauntyAngles.append(Double.random(in: -3...3))
+        jauntyAngles.append(Double.random(in: -2...2))
     }
     
   }

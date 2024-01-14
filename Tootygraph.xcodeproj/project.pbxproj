@@ -36,6 +36,11 @@
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
 		22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* BottomBar.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenu.swift */; };
+		22D750F42B533A8200B71F7D /* alpaca.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750F32B533A8200B71F7D /* alpaca.jpeg */; };
+		22D750F62B533AAE00B71F7D /* sam.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750F52B533AAD00B71F7D /* sam.jpeg */; };
+		22D750F82B534BC300B71F7D /* TestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D750F72B534BC300B71F7D /* TestFixtures.swift */; };
+		22D750FD2B53547E00B71F7D /* heaton.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750FB2B53547E00B71F7D /* heaton.jpeg */; };
+		22D750FE2B53547E00B71F7D /* macs.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750FC2B53547E00B71F7D /* macs.jpeg */; };
 		22DFF05D29AD5D9F00D14A27 /* PhotoComposerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */; };
 		22EC1200298F23E100976ECC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FF298F23E100976ECC /* TimelineView.swift */; };
 		22EC1202298F23E200976ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1201298F23E200976ECC /* Assets.xcassets */; };
@@ -77,6 +82,11 @@
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
 		22CD12082991BE5E00B7D70D /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		22CD120A2993061800B7D70D /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		22D750F32B533A8200B71F7D /* alpaca.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alpaca.jpeg; sourceTree = "<group>"; };
+		22D750F52B533AAD00B71F7D /* sam.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sam.jpeg; sourceTree = "<group>"; };
+		22D750F72B534BC300B71F7D /* TestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFixtures.swift; sourceTree = "<group>"; };
+		22D750FB2B53547E00B71F7D /* heaton.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = heaton.jpeg; sourceTree = "<group>"; };
+		22D750FC2B53547E00B71F7D /* macs.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = macs.jpeg; sourceTree = "<group>"; };
 		22DFF05C29AD5D9F00D14A27 /* PhotoComposerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComposerViewModel.swift; sourceTree = "<group>"; };
 		22EC11FA298F23E100976ECC /* Tootygraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tootygraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EC11FF298F23E100976ECC /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -224,7 +234,12 @@
 		22EC1204298F23E200976ECC /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				22D750F32B533A8200B71F7D /* alpaca.jpeg */,
+				22D750F52B533AAD00B71F7D /* sam.jpeg */,
+				22D750FB2B53547E00B71F7D /* heaton.jpeg */,
+				22D750FC2B53547E00B71F7D /* macs.jpeg */,
 				22EC1205298F23E200976ECC /* Preview Assets.xcassets */,
+				22D750F72B534BC300B71F7D /* TestFixtures.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -316,8 +331,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D750FD2B53547E00B71F7D /* heaton.jpeg in Resources */,
+				22D750F62B533AAE00B71F7D /* sam.jpeg in Resources */,
 				2277F1AB29B298E200CB0D9C /* README.md in Resources */,
+				22D750F42B533A8200B71F7D /* alpaca.jpeg in Resources */,
 				22EC1206298F23E200976ECC /* Preview Assets.xcassets in Resources */,
+				22D750FE2B53547E00B71F7D /* macs.jpeg in Resources */,
 				22EC1202298F23E200976ECC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +351,7 @@
 				2236FB6A2995B73700436F65 /* PhotoView.swift in Sources */,
 				22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */,
 				22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */,
+				22D750F82B534BC300B71F7D /* TestFixtures.swift in Sources */,
 				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
 				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenu.swift in Sources */,

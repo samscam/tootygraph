@@ -8,19 +8,6 @@
 import SwiftUI
 import TootSDK
 
-struct ActionsView: View {
-  let actions: [ActionType]
-  
-  var body: some View {
-    Grid{
-      GridRow{
-        ForEach(actions) { action in
-          Rectangle()
-        }
-      }.frame(maxHeight: 40)
-    }
-  }
-}
 
 struct ActionButtonView: View{
   let highlighted: Bool
@@ -57,13 +44,13 @@ enum ActionType: String, Identifiable, CaseIterable {
   var iconName: String {
     switch self {
     case .share:
-      return "square.and.arrow.up.circle.fill"
+      return "square.and.arrow.up.circle"
     case .favourite:
-      return "heart.circle.fill"
+      return "heart.circle"
     case .reply:
-      return "arrowshape.turn.up.left.circle.fill"
+      return "arrowshape.turn.up.left.circle"
     case .boost:
-      return "tornado.circle.fill"
+      return "tornado.circle"
     }
   }
 }
