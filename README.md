@@ -1,3 +1,5 @@
+<p><img src="https://raw.githubusercontent.com/samscam/tootygraph/main/Artwork/racco-icon.png" width="100" /></p>
+
 # Tootygraph
 
 * Tootygraph is an playful, photography-focussed fediverse client app for iOS
