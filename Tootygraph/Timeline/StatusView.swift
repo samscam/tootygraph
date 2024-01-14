@@ -110,7 +110,7 @@ struct StatusView: View {
 
 #Preview(traits: .sizeThatFitsLayout){
     let settings = {
-        var settings = Settings()
+        let settings = Settings()
         settings.$jaunty.set(false)
         settings.$showContent.set(true)
         return settings
@@ -124,7 +124,7 @@ struct StatusView: View {
 
 #Preview(traits: .sizeThatFitsLayout){
     let settings = {
-        var settings = Settings()
+        let settings = Settings()
         settings.$jaunty.set(false)
         settings.$showContent.set(true)
         return settings

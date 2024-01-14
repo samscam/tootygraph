@@ -109,7 +109,6 @@ struct ColourSample: View{
 
 #Preview {
     
-    var hue: Double = 0
     return
         List(0..<10, id: \.self) { i in
             ColourSample(palette: Palette(Double(i)/10.0))

@@ -38,7 +38,7 @@ struct FilmEdge {
 extension FilmEdge: Shape {
 
   func path(in rect: CGRect) -> Path {
-    var rect = rect//.insetBy(dx: 0, dy: -holeEdgeInset*2 - holeSize.height)
+    let rect = rect//.insetBy(dx: 0, dy: -holeEdgeInset*2 - holeSize.height)
     var shape = Rectangle().path(in: rect)
     var x: CGFloat = rect.origin.x
     var y: CGFloat = rect.origin.y + holeEdgeInset
