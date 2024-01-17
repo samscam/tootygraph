@@ -10,7 +10,7 @@ import SwiftUI
 import TootSDK
 import NukeUI
 
-struct TopBar: View {
+struct TopBarView: View {
     @EnvironmentObject var accountsManager: AccountsManager
     @Binding var selectedViewTag: String
     

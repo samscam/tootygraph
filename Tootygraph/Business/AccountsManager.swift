@@ -18,39 +18,6 @@ enum AccountCreationError: Error {
     case invalidURL
 }
 
-@MainActor
-class Connection: Identifiable, ObservableObject {
-    @Published var serverAccount: ServerAccount
-    @Published var tootClient: TootClient?
-    
-    init(serverAccount: ServerAccount) {
-        self.serverAccount = serverAccount
-    }
-    
-    var avatarURL: URL? {
-        guard let avatar = serverAccount.userAccount?.avatar else {
-            return nil
-        }
-        return URL(string:avatar)
-    }
-    
-    func connect() async throws {
-        guard tootClient == nil else {
-            return
-        }
-        
-        let client = try await TootClient(connect: serverAccount.instanceURL, accessToken: serverAccount.accessToken)
-        
-        // We need to refresh the server account with the user account
-        var serverAccount = serverAccount
-        let userAccount = try await client.verifyCredentials()
-        serverAccount.userAccount = userAccount
-        
-        self.tootClient = client
-        
-    }
-}
-
 
 
 @MainActor
@@ -122,8 +89,6 @@ class AccountsManager: ObservableObject {
         let serverAccount = ServerAccount(id: userAccount.id, username: userAccount.acct,
                                           hue: .random(in: 0...1) , instanceURL: url, accessToken: accessToken, userAccount: userAccount)
         try await addServerAccount(serverAccount)
-        
-        
         
     }
     

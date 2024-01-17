@@ -60,7 +60,7 @@ struct AccountsView: View {
                 
                 Spacer()
                 Divider()
-                SettingsMenu()
+                SettingsMenuView()
                 Spacer()
                 Divider()
                 Button("Reset") {

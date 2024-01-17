@@ -87,5 +87,6 @@ class PostWrapper: ObservableObject, Identifiable, Hashable{
       }
     }
   }
+    
   
 }

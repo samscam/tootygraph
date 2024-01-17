@@ -17,6 +17,9 @@ struct StatusView: View {
     @EnvironmentObject var settings: Settings
     
     @ObservedObject var post: PostWrapper
+    
+    @State var showingReplySheet: Bool = false
+    
     let geometry: GeometryProxy?
     
     var body: some View{
@@ -92,6 +95,9 @@ struct StatusView: View {
     
     var actionButtons: some View {
         HStack(spacing:10){
+            ActionButtonView(highlighted: post.displayPost.reposted ?? false, actionType: .reply) {
+                showingReplySheet = true
+            }.frame(width:40,height:40)
             Spacer()
             ActionButtonView(highlighted: post.displayPost.favourited ?? false, actionType: .favourite) {
                 Task{
@@ -104,6 +110,9 @@ struct StatusView: View {
                 }
             }.frame(width:40,height:40)
         }
+        .sheet(isPresented: $showingReplySheet, content: {
+            PostComposerView(replyContext: post)
+        })
     }
     
 }

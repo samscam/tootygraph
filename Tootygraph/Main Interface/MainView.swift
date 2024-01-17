@@ -88,7 +88,7 @@ struct MainView: View {
         .if(accountsManager.connections.count > 0, transform: { view in
             view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
                 VStack{
-                    TopBar(selectedViewTag: $selectedViewTag)
+                    TopBarView(selectedViewTag: $selectedViewTag)
                         .environmentObject(accountsManager)
                     
                 }

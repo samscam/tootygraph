@@ -10,7 +10,7 @@ import Boutique
 
 
 
-struct SettingsMenu: View {
+struct SettingsMenuView: View {
   
   @EnvironmentObject var settings: Settings
   
@@ -34,7 +34,7 @@ struct SettingsMenu_Previews: PreviewProvider {
   static let settings = Settings()
   
   static var previews: some View{
-    SettingsMenu().environmentObject(settings)
+    SettingsMenuView().environmentObject(settings)
   }
   
 }
