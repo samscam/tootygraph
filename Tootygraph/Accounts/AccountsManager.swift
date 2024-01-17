@@ -27,6 +27,13 @@ class Connection: Identifiable, ObservableObject {
         self.serverAccount = serverAccount
     }
     
+    var avatarURL: URL? {
+        guard let avatar = serverAccount.userAccount?.avatar else {
+            return nil
+        }
+        return URL(string:avatar)
+    }
+    
     func connect() async throws {
         guard tootClient == nil else {
             return

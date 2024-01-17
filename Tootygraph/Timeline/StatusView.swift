@@ -10,7 +10,10 @@ import NukeUI
 import Boutique
 import TootSDK
 
+
 struct StatusView: View {
+    
+    @Environment(\.palette) var palette: Palette
     @EnvironmentObject var settings: Settings
     
     @ObservedObject var post: PostWrapper
@@ -65,12 +68,9 @@ struct StatusView: View {
         .padding(15)
         .background{
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray.opacity(0.3))
+                .fill(palette.postBackground)
         }
         .padding(.horizontal,10)
-        //        .padding(.bottom,20)
-        //
-        //    }
         
     }
     
@@ -117,9 +117,11 @@ struct StatusView: View {
         settings.$showContent.set(true)
         return settings
     }()
+    let palette = Palette.random()
     
     let postWrapper = PostWrapper(TestPosts.justText)
     return StatusView(post: postWrapper, geometry: nil).environmentObject(settings)
+        .palette(palette)
     
     
 }

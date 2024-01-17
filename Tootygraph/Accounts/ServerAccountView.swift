@@ -10,6 +10,7 @@ import NukeUI
 import TootSDK
 
 struct ServerAccountView: View{
+    @Environment(\.palette) var palette: Palette
     
     @Binding var account: ServerAccount
     
@@ -22,7 +23,7 @@ struct ServerAccountView: View{
                             image
                                 .resizable().aspectRatio(contentMode: .fill)
                         } else {
-                            Color.red
+                            Color.gray
                         }
                     }
                     
@@ -54,7 +55,7 @@ struct ServerAccountView: View{
                             .aspectRatio(contentMode: .fill)
                             .blur(radius: 2)
                             .saturation(0)
-                            .opacity(0.6)
+                            .opacity(0.3)
                             
                             
                     } else {
@@ -63,11 +64,13 @@ struct ServerAccountView: View{
                 }
             }
         }
-        .background(Palette(account.hue).background)
+        .background(palette.background)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding(2)
-        .background(Palette(account.hue).highlight)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay{
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(palette.highlight,lineWidth: 3)
+        }
+        
     }
 }
 #Preview(traits: .sizeThatFitsLayout){

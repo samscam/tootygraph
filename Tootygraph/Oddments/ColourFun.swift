@@ -23,6 +23,10 @@ struct Palette {
         return PaletteBackgroundColor(hue)
     }
     
+    var postBackground: some ShapeStyle {
+        return PalettePostBackgroundColor(hue)
+    }
+    
     init(_ hue: Double) {
         self.hue = hue
     }
@@ -50,7 +54,7 @@ struct PaletteHighlightColor: View, ShapeStyle {
     }
 
     private var lightHighlight: Color {
-        return Color(hue: hue + 0.05, saturation: 1.0, brightness: 0.55)
+        return Color(hue: hue + 0.05, saturation: 0.9, brightness: 0.85)
     }
     
 }
@@ -71,12 +75,38 @@ struct PaletteBackgroundColor: View, ShapeStyle {
     }
     
     private var lightBackground: Color {
-        return Color(hue: hue, saturation: 0.2, brightness: 1.0)
+        return Color(hue: hue, saturation: 0.1, brightness: 1.0)
     }
     
     
     private var darkBackground: Color {
-        return Color(hue: hue, saturation: 1.0, brightness: 0.3)
+        return Color(hue: hue, saturation: 1.0, brightness: 0.35)
+    }
+}
+
+
+struct PalettePostBackgroundColor: View, ShapeStyle {
+    var hue: Double
+    
+    init(_ hue: Double) {
+        self.hue = hue
+    }
+    
+    func resolve(in environment: EnvironmentValues) -> some ShapeStyle {
+        if environment.colorScheme == .light {
+            return lightBackground
+        } else {
+            return darkBackground
+        }
+    }
+    
+    private var lightBackground: Color {
+        return Color(hue: hue, saturation: 0.01, brightness: 1.0)
+    }
+    
+    
+    private var darkBackground: Color {
+        return Color(hue: hue, saturation: 0.2, brightness: 0.2)
     }
 }
 
@@ -84,6 +114,23 @@ extension Palette {
     static func random() -> Palette {
         let hue = Double.random(in: 0...1)
         return Palette(hue)
+    }
+}
+
+private struct PaletteEnvironmentKey: EnvironmentKey {
+    static let defaultValue: Palette = Palette.random()
+}
+
+extension EnvironmentValues {
+    var palette: Palette {
+        get { self[PaletteEnvironmentKey.self] }
+        set { self[PaletteEnvironmentKey.self] = newValue }
+    }
+}
+
+extension View {
+    func palette(_ palette: Palette) -> some View {
+        environment(\.palette, palette)
     }
 }
 
@@ -100,8 +147,32 @@ struct ColourSample: View{
                 
                 Text("Tint").bold()
                     .foregroundStyle(palette.highlight)
-                    .frame(maxWidth: .infinity, maxHeight:.infinity)
+                
+                .frame(maxWidth: .infinity, maxHeight:.infinity)
+                    .background{
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(palette.postBackground)
+                    }
+                    .padding()
             }
+            .background(palette.background)
+            .colorScheme(.dark)
+            HStack{
+                
+                Text("Primary").bold()
+                    .frame(maxWidth: .infinity, maxHeight:.infinity)
+                    .foregroundStyle(.primary)
+                
+                Text("Tint").bold()
+                    .foregroundStyle(palette.highlight)
+                    .frame(maxWidth: .infinity, maxHeight:.infinity)
+                    .background{
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(palette.postBackground)
+                    }
+                    .padding()
+            }.background(palette.background)
+                .colorScheme(.light)
         }
     }
 }
@@ -133,3 +204,5 @@ public extension Color {
     static let tertiaryBackground = Color(UIColor.tertiarySystemBackground)
     #endif
 }
+
+

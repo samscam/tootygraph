@@ -31,6 +31,8 @@
 		227C65D929A4F8FE006BF540 /* CornerBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C65D829A4F8FE006BF540 /* CornerBadge.swift */; };
 		2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25729A7F53700F24EA9 /* ActionsView.swift */; };
 		2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostWrapper.swift */; };
+		22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AF72B548B0B00378FF9 /* FancyPicker.swift */; };
+		22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */; };
 		22AD6C812A5B6103008A79CA /* ServerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* ServerAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PhotoComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -77,6 +79,8 @@
 		227C65D829A4F8FE006BF540 /* CornerBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerBadge.swift; sourceTree = "<group>"; };
 		2287F25729A7F53700F24EA9 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
 		2287F25B29A826F400F24EA9 /* PostWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWrapper.swift; sourceTree = "<group>"; };
+		22931AF72B548B0B00378FF9 /* FancyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyPicker.swift; sourceTree = "<group>"; };
+		22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* ServerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PhotoComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComposer.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
@@ -179,6 +183,26 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		22931AF92B55DD6A00378FF9 /* Oddments */ = {
+			isa = PBXGroup;
+			children = (
+				22120CAE2B4B7395006FECD6 /* ColourFun.swift */,
+				22931AF72B548B0B00378FF9 /* FancyPicker.swift */,
+				22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */,
+			);
+			path = Oddments;
+			sourceTree = "<group>";
+		};
+		22931AFA2B55DD8400378FF9 /* Main Interface */ = {
+			isa = PBXGroup;
+			children = (
+				2236FB742997052200436F65 /* MainView.swift */,
+				2223CC1A2AA53A7100122870 /* TopBar.swift */,
+				22CD12082991BE5E00B7D70D /* BottomBar.swift */,
+			);
+			path = "Main Interface";
+			sourceTree = "<group>";
+		};
 		22C0338029ABB5C600A353B8 /* PhotoComposer */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,10 +238,9 @@
 			children = (
 				2200224A2998CECF000FA97F /* Info.plist */,
 				22F9CDC62B50A0E3006D2C6D /* TootygraphApp.swift */,
-				2236FB742997052200436F65 /* MainView.swift */,
-				2223CC1A2AA53A7100122870 /* TopBar.swift */,
-				22CD12082991BE5E00B7D70D /* BottomBar.swift */,
 				22EC120D298F240D00976ECC /* Business */,
+				22931AF92B55DD6A00378FF9 /* Oddments */,
+				22931AFA2B55DD8400378FF9 /* Main Interface */,
 				22002241299850AF000FA97F /* Accounts */,
 				22805CCD29D23E9400DE7818 /* Settings */,
 				22805CCC29D23E4400DE7818 /* Media Views */,
@@ -250,7 +273,6 @@
 				220022462998759E000FA97F /* BoutiqueStores.swift */,
 				2287F25B29A826F400F24EA9 /* PostWrapper.swift */,
 				22AD6C802A5B6103008A79CA /* ServerAccount.swift */,
-				22120CAE2B4B7395006FECD6 /* ColourFun.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -370,11 +392,13 @@
 				22EC121F298FCBF300976ECC /* StatusView.swift in Sources */,
 				2200224929987715000FA97F /* ServerAccountView.swift in Sources */,
 				2236FB752997052200436F65 /* MainView.swift in Sources */,
+				22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */,
 				22CD12092991BE5E00B7D70D /* BottomBar.swift in Sources */,
 				2200224C2999A8B7000FA97F /* TimelineViewModel.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
 				22DFF05D29AD5D9F00D14A27 /* PhotoComposerViewModel.swift in Sources */,
 				220AE8C129C521A30023554D /* CameraView.swift in Sources */,
+				22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */,
 				2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
 				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,

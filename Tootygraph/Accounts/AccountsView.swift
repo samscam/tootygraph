@@ -32,8 +32,9 @@ struct AccountsView: View {
                     
                     ForEach($accountsManager.connections){ $connection in
                         ServerAccountView(account:$connection.serverAccount)
+                            .palette(Palette(connection.serverAccount.hue))
                             .frame(maxWidth: .infinity)
-                            .clipped()
+                            
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 withAnimation{

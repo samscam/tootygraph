@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NukeUI
+import Boutique
 
 enum MainViewStates {
     case noAccounts
@@ -19,33 +20,51 @@ struct MainView: View {
     @StateObject var accountsManager = AccountsManager()
     
     @State var selectedViewTag: String = "settings"
+    
     @State var currentBackground: AnyShapeStyle = AnyShapeStyle(Color.background)
     
-    @State var status: MainViewStates = .noAccounts
-    
+
+    // This is for defocussing the add account field from AddServerView.swift - it is unpleasant that it's here but hey, whatevs
     @FocusState var fieldFocussed: Bool
+    
     
     var body: some View {
         
         
+
+        
         TabView(selection: $selectedViewTag.animation()){
+            
             AccountsView(fieldFocussed: $fieldFocussed, selectedViewTag: $selectedViewTag)
                 .environmentObject(settings)
                 .environmentObject(accountsManager)
                 .tag("settings")
-            
             
             ForEach(accountsManager.connections){ connection in
                 ConnectionView(connection: connection)
                     .environmentObject(settings)
                     .environmentObject(accountsManager)
                     .tag(connection.serverAccount.niceName)
+                    .palette(Palette(connection.serverAccount.hue))
                     .tint(Palette(connection.serverAccount.hue).highlight)
                 
             }
+
             
         }
-        .background(currentBackground)
+        .background{
+            ZStack {
+                Rectangle()
+                    .fill(currentBackground)
+                
+                Image("wood-texture")
+                    .resizable()
+                    .saturation(0)
+                    .blendMode(.multiply)
+                    .opacity(0.3)
+                
+            }.ignoresSafeArea()
+        }
         .onChange(of: selectedViewTag, {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
@@ -61,7 +80,6 @@ struct MainView: View {
         
         
         .tabViewStyle(.page(indexDisplayMode: .never))
-        
         .onAppear {
             Task{
                 try await accountsManager.connectAll()
@@ -69,8 +87,11 @@ struct MainView: View {
         }
         .if(accountsManager.connections.count > 0, transform: { view in
             view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
-                TopBar(selectedViewTag: $selectedViewTag)
-                    .environmentObject(accountsManager)
+                VStack{
+                    TopBar(selectedViewTag: $selectedViewTag)
+                        .environmentObject(accountsManager)
+                    
+                }
             }
         })
         
