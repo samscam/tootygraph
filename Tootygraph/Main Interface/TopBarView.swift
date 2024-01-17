@@ -48,26 +48,26 @@ struct TopBarView: View {
                     }
                     .frame(width: 52,height:52)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .if(selectedViewTag == connection.serverAccount.niceName){
+                    .if(selectedViewTag == connection.account.id){
                         $0.overlay{
                              
-                            let highlight = Palette(connection.serverAccount.hue).highlight
+                            let highlight = Palette(connection.account.hue).highlight
                             RoundedRectangle(cornerRadius: 10)
                                     .stroke(highlight, lineWidth: 4)
 
                         }
                     }
                     
-                    .if(connection.serverAccount.niceName != selectedViewTag){
+                    .if(connection.account.id != selectedViewTag){
                         $0.opacity(0.7)
                     }
                     .onTapGesture {
                         withAnimation(.spring(duration:0.2)) {
-                            selectedViewTag = connection.serverAccount.niceName
+                            selectedViewTag = connection.account.id
                         }
                     }
                     
-                    .tag(connection.serverAccount.niceName)
+                    .tag(connection.account.id)
                 }
             }
         }

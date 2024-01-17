@@ -11,12 +11,12 @@ import Boutique
 import TootSDK
 
 
-struct StatusView: View {
+struct PostView: View {
     
     @Environment(\.palette) var palette: Palette
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsManager
     
-    @ObservedObject var post: PostWrapper
+    @ObservedObject var post: PostManager
     
     @State var showingReplySheet: Bool = false
     
@@ -121,15 +121,15 @@ struct StatusView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout){
     let settings = {
-        let settings = Settings()
+        let settings = SettingsManager()
         settings.$jaunty.set(false)
         settings.$showContent.set(true)
         return settings
     }()
     let palette = Palette.random()
     
-    let postWrapper = PostWrapper(TestPosts.justText)
-    return StatusView(post: postWrapper, geometry: nil).environmentObject(settings)
+    let postWrapper = PostManager(TestPosts.justText)
+    return PostView(post: postWrapper, geometry: nil).environmentObject(settings)
         .palette(palette)
     
     
@@ -137,14 +137,14 @@ struct StatusView: View {
 
 #Preview(traits: .sizeThatFitsLayout){
     let settings = {
-        let settings = Settings()
+        let settings = SettingsManager()
         settings.$jaunty.set(false)
         settings.$showContent.set(true)
         return settings
     }()
     
-    let postWrapper = PostWrapper(TestPosts.postWithPics)
-    return StatusView(post: postWrapper, geometry: nil).environmentObject(settings).padding()
+    let postWrapper = PostManager(TestPosts.postWithPics)
+    return PostView(post: postWrapper, geometry: nil).environmentObject(settings).padding()
     
     
 }

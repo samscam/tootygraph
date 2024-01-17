@@ -12,7 +12,7 @@ import Boutique
 
 struct SettingsMenuView: View {
   
-  @EnvironmentObject var settings: Settings
+  @EnvironmentObject var settings: SettingsManager
   
   @State private var showingPopover: Bool = false
   
@@ -31,7 +31,7 @@ struct SettingsMenuView: View {
 }
 
 struct SettingsMenu_Previews: PreviewProvider {
-  static let settings = Settings()
+  static let settings = SettingsManager()
   
   static var previews: some View{
     SettingsMenuView().environmentObject(settings)

@@ -17,7 +17,7 @@ enum SettingsKeys: String{
 }
 
 @MainActor
-class Settings: ObservableObject {
+class SettingsManager: ObservableObject {
   
   @StoredValue(key:SettingsKeys.jaunty.rawValue)
   var jaunty: Bool = false

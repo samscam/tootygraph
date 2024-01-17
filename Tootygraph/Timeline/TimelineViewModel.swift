@@ -31,27 +31,27 @@ enum PagingErrors: Error {
 @MainActor
 class TimelineViewModel: ObservableObject {
   
-  @Published var posts: [PostWrapper] = []
+  @Published var posts: [PostManager] = []
   @Published var loading: Bool = false
   @Published var name: String = ""
   @Published var account: Account?
   
   private var client: TootClient
   
-  @Published private var postsSet = Set<PostWrapper>()
+  @Published private var postsSet = Set<PostManager>()
   
   private let threshold = 2
   private let timeline: Timeline
   
-  private let settings: Settings
+  private let settings: SettingsManager
   private var disposebag = Set<AnyCancellable>()
   
-  init(client: TootClient, timeline: Timeline, settings: Settings){
+  init(client: TootClient, timeline: Timeline, settings: SettingsManager){
     self.client = client
     self.timeline = timeline
     self.settings = settings
     self.name = client.instanceURL.absoluteString
-    loadInitial()
+
     
     // Binding for postsSet to apply filtering and update posts
       
@@ -74,7 +74,7 @@ class TimelineViewModel: ObservableObject {
       }
       .assign(to: &$posts)
       
-      
+      loadInitial()
   }
   
   var pagingState: PagingState = .nothing
@@ -134,7 +134,7 @@ class TimelineViewModel: ObservableObject {
 
 
   
-  func onItemAppear(_ post: PostWrapper){
+  func onItemAppear(_ post: PostManager){
     if pagingState == .end {
       return
     }
@@ -173,7 +173,7 @@ class TimelineViewModel: ObservableObject {
   @MainActor
   private func addPosts(_ newPosts: [Post]) {
     
-    let postWrappers = newPosts.map{ PostWrapper($0, client: client)}
+    let postWrappers = newPosts.map{ PostManager($0, client: client)}
     
     for post in postWrappers {
       let (inserted, _) = postsSet.insert(post)

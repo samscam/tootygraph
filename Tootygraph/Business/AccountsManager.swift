@@ -14,26 +14,33 @@ import Nuke
 import NukeVideo
 
 
-enum AccountCreationError: Error {
+enum AccountsManagerError: Error {
     case invalidURL
+    case alreadyConnected
 }
 
 
-
+/**
+ The AccountsManager is responsible for managing the different fedi accounts that the user has added to the app.
+ 
+ 
+ */
 @MainActor
 class AccountsManager: ObservableObject {
-    // Nope we can't be having this... credentials need to be in the keychain
-    @Stored(in: .serverAccountsStore) var accounts: [ServerAccount]
     
-    @Published var connections: [Connection] = []
+    // Nope we can't be having this... credentials need to be in the keychain
+    @Stored(in: .serverAccountsStore) private var accounts: [FediAccount]
+    
+    @Published var connections: [ConnectionManager] = []
     
     init(){
+        // This is to make Nuke be able to handle videos, apparently
         ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)
         
         $accounts.$items
             .map{ serverAccounts in
                 serverAccounts.map { serverAccount in
-                    Connection(serverAccount: serverAccount)
+                    ConnectionManager(account: serverAccount)
                 }
             }
             .assign(to: &$connections)
@@ -45,29 +52,14 @@ class AccountsManager: ObservableObject {
         }
     }
     
-    func addServerAccount(_ serverAccount: ServerAccount) async throws{
-        try await $accounts.insert(serverAccount)
+    func addServerAccount(_ account: FediAccount) async throws{
+        try await $accounts.insert(account)
     }
     
-    func removeServerAccount(_ serverAccount: ServerAccount) async throws{
-        try await $accounts.remove(serverAccount)
+    func removeServerAccount(_ account: FediAccount) async throws{
+        try await $accounts.remove(account)
     }
     
-    func connect(_ serverAccount: ServerAccount) async throws {
-        
-        // check if we already have a connected client
-        
-        
-        let client = try await TootClient(connect: serverAccount.instanceURL, accessToken: serverAccount.accessToken)
-        
-        // We need to refresh the server account with the user account
-        var serverAccount = serverAccount
-        let userAccount = try await client.verifyCredentials() // callers will need to handle this throwing 
-        serverAccount.userAccount = userAccount
-        try await addServerAccount(serverAccount)
-        
-        
-    }
     
     func startAuth(urlString: String) async throws {
         var urlString = urlString
@@ -78,7 +70,7 @@ class AccountsManager: ObservableObject {
         }
         
         guard let url = URL(string: urlString) else {
-            throw AccountCreationError.invalidURL
+            throw AccountsManagerError.invalidURL
         }
         
         let client = try await TootClient(connect: url)
@@ -86,7 +78,8 @@ class AccountsManager: ObservableObject {
         let accessToken = try await client.presentSignIn(callbackURI: "tootygraph://auth")
         let userAccount = try await client.verifyCredentials()
         
-        let serverAccount = ServerAccount(id: userAccount.id, username: userAccount.acct,
+        let serverAccount = FediAccount(id: userAccount.id,
+                                        username: userAccount.acct,
                                           hue: .random(in: 0...1) , instanceURL: url, accessToken: accessToken, userAccount: userAccount)
         try await addServerAccount(serverAccount)
         
@@ -94,13 +87,13 @@ class AccountsManager: ObservableObject {
     
     func reset() async throws{
         for connection in connections {
-            try await removeServerAccount(connection.serverAccount)
+            try await removeServerAccount(connection.account)
         }
     }
     
-    subscript(accountName:String) -> Connection?{
+    subscript(accountId:String) -> ConnectionManager?{
         return connections.first{
-            accountName == $0.serverAccount.niceName
+            accountId == $0.account.id
         }
     }
 }

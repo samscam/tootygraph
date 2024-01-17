@@ -12,43 +12,33 @@ import TootSDK
 struct ServerAccountView: View{
     @Environment(\.palette) var palette: Palette
     
-    @Binding var account: ServerAccount
+    let account: Account
     
     var body: some View {
         HStack{
-            Group{
-                if let avatarURL = account.userAccount?.avatar {
-                    LazyImage(url: URL(string:avatarURL)) { state in
-                        if let image = state.image {
-                            image
-                                .resizable().aspectRatio(contentMode: .fill)
-                        } else {
-                            Color.gray
-                        }
-                    }
-                    
+            LazyImage(url: URL(string:account.avatar)) { state in
+                if let image = state.image {
+                    image
+                        .resizable().aspectRatio(contentMode: .fill)
                 } else {
-                    Image(systemName: "person")
-                        .resizable()
-                        .padding(10)
-                        .background()
-                        
+                    Color.gray
                 }
             }
             .frame(width:80,height:80)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
             VStack(alignment: .leading){
-                Text("@\(account.username)").font(.title3).bold()
-                Text(account.host)
+                Text("\(account.displayName ?? account.acct)").font(.title3).bold()
+                Text(account.acct)
+                Text(account.id)
             }.padding(5).foregroundColor(.primary)
             Spacer()
         }
 
         .padding(5)
         .background{
-            if let headerURL = account.userAccount?.header {
-                LazyImage(url: URL(string:headerURL)) { state in
+            if account.header != "" {
+                LazyImage(url: URL(string:account.header)) { state in
                     if let image = state.image {
                         image
                             .resizable()
@@ -74,13 +64,7 @@ struct ServerAccountView: View{
     }
 }
 #Preview(traits: .sizeThatFitsLayout){
-    @State var account: ServerAccount = ServerAccount(
-        id: "someid",
-        username: "sam",
-        hue: .random(in: 0...1),
-        instanceURL: URL(string: "https://togl.me")!,
-        accessToken: nil,
-        userAccount: Account(
+    let account = Account(
             id: "arrg",
             acct: "dunno",
             url: "https://example.foo",
@@ -94,6 +78,6 @@ struct ServerAccountView: View{
             postsCount: 1023,
             followersCount: 123,
             followingCount: 432,
-            fields: []))
-    return ServerAccountView(account: $account).padding()
+            fields: [])
+    return ServerAccountView(account: account).padding()
 }

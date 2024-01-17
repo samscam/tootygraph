@@ -9,7 +9,14 @@ import Foundation
 import TootSDK
 import SwiftUI
 
-struct ServerAccount: Codable, Equatable, Identifiable, Hashable {
+/**
+ A FediAccount is the storable structure representing a user account on a server somewhere.
+ 
+ The actual `Account` providing full details of the user from TootSDK is embedded within it and kept in sync.
+ 
+ Suitable for storing locally and initiating a ConnectionManager.
+ */
+struct FediAccount: Codable, Equatable, Identifiable, Hashable {
     
     let id: String
     let username: String

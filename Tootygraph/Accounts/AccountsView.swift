@@ -27,18 +27,18 @@ struct AccountsView: View {
                     .padding(.top,20)
             }
             VStack(alignment:.leading){
-                if (accountsManager.accounts.count > 0){
+                if (accountsManager.connections.count > 0){
                     Text("Accounts").font(.title)
                     
                     ForEach($accountsManager.connections){ $connection in
-                        ServerAccountView(account:$connection.serverAccount)
-                            .palette(Palette(connection.serverAccount.hue))
+                        ServerAccountView(account:connection.account.userAccount!)//<<<<<< don't leave this there
+                            .palette(Palette(connection.account.hue))
                             .frame(maxWidth: .infinity)
                             
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 withAnimation{
-                                    selectedViewTag = connection.serverAccount.niceName
+                                    selectedViewTag = connection.account.id
                                 }
                             }
                         
@@ -88,7 +88,7 @@ struct AccountsView: View {
 
 #Preview{
     
-    @State var account: ServerAccount = ServerAccount(
+    @State var account: FediAccount = FediAccount(
         id: "someid",
         username: "sam",
         hue: .random(in: 0...1),
@@ -111,7 +111,7 @@ struct AccountsView: View {
             fields: []))
     
     @StateObject var accountsManager = AccountsManager()
-    @StateObject var settings = Settings()
+    @StateObject var settings = SettingsManager()
     @State var selectedViewTag: String = "settings"
     @FocusState var fieldFocussed: Bool
     

@@ -22,7 +22,7 @@
 		2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2236FB6529946A7100436F65 /* SwiftSoup */; };
 		2236FB6A2995B73700436F65 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB692995B73700436F65 /* PhotoView.swift */; };
 		2236FB752997052200436F65 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB742997052200436F65 /* MainView.swift */; };
-		2236FB7729970E5000436F65 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB7629970E5000436F65 /* Settings.swift */; };
+		2236FB7729970E5000436F65 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB7629970E5000436F65 /* SettingsManager.swift */; };
 		224390662A5D90180040C26C /* FilmStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224390652A5D90180040C26C /* FilmStrip.swift */; };
 		2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C227299847AF004B3A4A /* MultipartKitTootSDK */; };
 		2245C22A299847AF004B3A4A /* TootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C229299847AF004B3A4A /* TootSDK */; };
@@ -30,14 +30,14 @@
 		227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C65D629A2D5A3006BF540 /* Flipper.swift */; };
 		227C65D929A4F8FE006BF540 /* CornerBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C65D829A4F8FE006BF540 /* CornerBadgeView.swift */; };
 		2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25729A7F53700F24EA9 /* ActionsView.swift */; };
-		2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostWrapper.swift */; };
+		2287F25C29A826F400F24EA9 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostManager.swift */; };
 		22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AF72B548B0B00378FF9 /* FancyPicker.swift */; };
 		22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */; };
 		22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */; };
 		22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B012B58464600378FF9 /* PhotoPickerView.swift */; };
 		22931B042B5852AC00378FF9 /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B032B5852AC00378FF9 /* Injectable.swift */; };
-		22931B062B58533C00378FF9 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* Connection.swift */; };
-		22AD6C812A5B6103008A79CA /* ServerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* ServerAccount.swift */; };
+		22931B062B58533C00378FF9 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* ConnectionManager.swift */; };
+		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
 		22CD12092991BE5E00B7D70D /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* BottomBarView.swift */; };
@@ -52,7 +52,7 @@
 		22EC1202298F23E200976ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1201298F23E200976ECC /* Assets.xcassets */; };
 		22EC1206298F23E200976ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1205298F23E200976ECC /* Preview Assets.xcassets */; };
 		22EC121D298F430800976ECC /* BoxPacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC121C298F430800976ECC /* BoxPacker.swift */; };
-		22EC121F298FCBF300976ECC /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC121E298FCBF300976ECC /* StatusView.swift */; };
+		22EC121F298FCBF300976ECC /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC121E298FCBF300976ECC /* PostView.swift */; };
 		22EC122229904FF900976ECC /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122129904FF900976ECC /* Nuke */; };
 		22EC122429904FF900976ECC /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122329904FF900976ECC /* NukeExtensions */; };
 		22EC122629904FF900976ECC /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122529904FF900976ECC /* NukeUI */; };
@@ -76,20 +76,20 @@
 		2236FB622994609000436F65 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2236FB692995B73700436F65 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		2236FB742997052200436F65 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		2236FB7629970E5000436F65 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		2236FB7629970E5000436F65 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		224390652A5D90180040C26C /* FilmStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmStrip.swift; sourceTree = "<group>"; };
 		2277F1AA29B298E200CB0D9C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		227C65D629A2D5A3006BF540 /* Flipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flipper.swift; sourceTree = "<group>"; };
 		227C65D829A4F8FE006BF540 /* CornerBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerBadgeView.swift; sourceTree = "<group>"; };
 		2287F25729A7F53700F24EA9 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
-		2287F25B29A826F400F24EA9 /* PostWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWrapper.swift; sourceTree = "<group>"; };
+		2287F25B29A826F400F24EA9 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		22931AF72B548B0B00378FF9 /* FancyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyPicker.swift; sourceTree = "<group>"; };
 		22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootClientEnvironment.swift; sourceTree = "<group>"; };
 		22931B012B58464600378FF9 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		22931B032B5852AC00378FF9 /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
-		22931B052B58533C00378FF9 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		22AD6C802A5B6103008A79CA /* ServerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccount.swift; sourceTree = "<group>"; };
+		22931B052B58533C00378FF9 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		22AD6C802A5B6103008A79CA /* FediAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FediAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PostComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerView.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
 		22CD12082991BE5E00B7D70D /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		22EC1203298F23E200976ECC /* Tootygraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tootygraph.entitlements; sourceTree = "<group>"; };
 		22EC1205298F23E200976ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22EC121C298F430800976ECC /* BoxPacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxPacker.swift; sourceTree = "<group>"; };
-		22EC121E298FCBF300976ECC /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		22EC121E298FCBF300976ECC /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		22EC1227299050EE00976ECC /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServerView.swift; sourceTree = "<group>"; };
 		22F9CDC62B50A0E3006D2C6D /* TootygraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootygraphApp.swift; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 				22EC11FF298F23E100976ECC /* TimelineView.swift */,
 				2200224B2999A8B7000FA97F /* TimelineViewModel.swift */,
 				2236FB622994609000436F65 /* DetailView.swift */,
-				22EC121E298FCBF300976ECC /* StatusView.swift */,
+				22EC121E298FCBF300976ECC /* PostView.swift */,
 				2287F25729A7F53700F24EA9 /* ActionsView.swift */,
 				22EC1227299050EE00976ECC /* AvatarView.swift */,
 				227C65D629A2D5A3006BF540 /* Flipper.swift */,
@@ -281,10 +281,10 @@
 			isa = PBXGroup;
 			children = (
 				22002244299850F5000FA97F /* AccountsManager.swift */,
-				22AD6C802A5B6103008A79CA /* ServerAccount.swift */,
-				22931B052B58533C00378FF9 /* Connection.swift */,
-				2287F25B29A826F400F24EA9 /* PostWrapper.swift */,
-				2236FB7629970E5000436F65 /* Settings.swift */,
+				22AD6C802A5B6103008A79CA /* FediAccount.swift */,
+				22931B052B58533C00378FF9 /* ConnectionManager.swift */,
+				2287F25B29A826F400F24EA9 /* PostManager.swift */,
+				2236FB7629970E5000436F65 /* SettingsManager.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -392,9 +392,9 @@
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
 				22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */,
 				220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */,
-				22931B062B58533C00378FF9 /* Connection.swift in Sources */,
-				22AD6C812A5B6103008A79CA /* ServerAccount.swift in Sources */,
-				2236FB7729970E5000436F65 /* Settings.swift in Sources */,
+				22931B062B58533C00378FF9 /* ConnectionManager.swift in Sources */,
+				22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */,
+				2236FB7729970E5000436F65 /* SettingsManager.swift in Sources */,
 				22EC1200298F23E100976ECC /* TimelineView.swift in Sources */,
 				22002243299850C6000FA97F /* AccountsView.swift in Sources */,
 				22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */,
@@ -404,7 +404,7 @@
 				2223CC1B2AA53A7100122870 /* TopBarView.swift in Sources */,
 				220022472998759E000FA97F /* BoutiqueStores.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,
-				22EC121F298FCBF300976ECC /* StatusView.swift in Sources */,
+				22EC121F298FCBF300976ECC /* PostView.swift in Sources */,
 				2200224929987715000FA97F /* ServerAccountView.swift in Sources */,
 				2236FB752997052200436F65 /* MainView.swift in Sources */,
 				22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */,
@@ -415,7 +415,7 @@
 				22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */,
 				220AE8C129C521A30023554D /* CameraView.swift in Sources */,
 				22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */,
-				2287F25C29A826F400F24EA9 /* PostWrapper.swift in Sources */,
+				2287F25C29A826F400F24EA9 /* PostManager.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
 				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,
 				227C65D929A4F8FE006BF540 /* CornerBadgeView.swift in Sources */,

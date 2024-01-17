@@ -16,7 +16,7 @@ enum MainViewStates {
 
 struct MainView: View {
     
-    @StateObject var settings = Settings()
+    @StateObject var settings = SettingsManager()
     @StateObject var accountsManager = AccountsManager()
     
     @State var selectedViewTag: String = "settings"
@@ -44,9 +44,9 @@ struct MainView: View {
                 ConnectionView(connection: connection)
                     .environmentObject(settings)
                     .environmentObject(accountsManager)
-                    .tag(connection.serverAccount.niceName)
-                    .palette(Palette(connection.serverAccount.hue))
-                    .tint(Palette(connection.serverAccount.hue).highlight)
+                    .tag(connection.account.id)
+                    .palette(Palette(connection.account.hue))
+                    .tint(Palette(connection.account.hue).highlight)
                 
             }
 
@@ -68,7 +68,7 @@ struct MainView: View {
         .onChange(of: selectedViewTag, {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
-                    currentBackground = AnyShapeStyle(Palette(connection.serverAccount.hue).background)
+                    currentBackground = AnyShapeStyle(Palette(connection.account.hue).background)
                     fieldFocussed = false
                 }
             } else {

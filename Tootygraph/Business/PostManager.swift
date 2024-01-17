@@ -8,7 +8,7 @@
 import Foundation
 import TootSDK
 
-class PostWrapper: ObservableObject, Identifiable, Hashable{
+class PostManager: ObservableObject, Identifiable, Hashable{
 
   
   let id: String
@@ -16,7 +16,7 @@ class PostWrapper: ObservableObject, Identifiable, Hashable{
   func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
-  static func == (lhs: PostWrapper, rhs: PostWrapper) -> Bool {
+  static func == (lhs: PostManager, rhs: PostManager) -> Bool {
     lhs.id == rhs.id
   }
   

@@ -10,8 +10,8 @@ import Boutique
 import TootSDK
 
 struct ConnectionView: View {
-    @ObservedObject var connection: Connection
-    @EnvironmentObject var settings: Settings
+    @ObservedObject var connection: ConnectionManager
+    @EnvironmentObject var settings: SettingsManager
     
     var body: some View {
         if let tootClient = connection.tootClient {
@@ -36,7 +36,7 @@ struct TimelineView: View {
     
     @StateObject var timelineViewModel: TimelineViewModel
     
-    init(client: TootClient, timeline: Timeline, settings: Settings){
+    init(client: TootClient, timeline: Timeline, settings: SettingsManager){
         self.client = client
         
         self.timeline = timeline
@@ -44,7 +44,7 @@ struct TimelineView: View {
         
     }
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsManager
     @EnvironmentObject var accountsManager: AccountsManager
     
     var body: some View {
@@ -52,7 +52,7 @@ struct TimelineView: View {
         GeometryReader{ geometry in
             List(timelineViewModel.posts) { post in
                 
-                StatusView(post: post, geometry: geometry)
+                PostView(post: post, geometry: geometry)
                     .padding(20)
                     .onAppear{
                         timelineViewModel.onItemAppear(post)

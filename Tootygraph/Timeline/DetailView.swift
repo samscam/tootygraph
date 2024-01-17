@@ -12,7 +12,7 @@ import TootSDK
 
 struct DetailView: View {
   
-  let post: PostWrapper
+  let post: PostManager
   let selectedMedia: MediaAttachment?
   
   @State private var dragOffset = CGSize.zero

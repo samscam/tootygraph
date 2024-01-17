@@ -14,7 +14,7 @@ struct PostComposerView: View {
     
     @StateObject var viewModel: PostComposerViewModel
     
-    init(replyContext: PostWrapper? = nil){
+    init(replyContext: PostManager? = nil){
         _viewModel = StateObject(wrappedValue: PostComposerViewModel(tootClient: nil,replyContext: nil))
     }
     

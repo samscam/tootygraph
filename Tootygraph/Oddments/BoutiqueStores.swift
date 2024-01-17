@@ -10,8 +10,8 @@ import Boutique
 import TootSDK
 
 
-extension Store where Item == ServerAccount {
-  static let serverAccountsStore = Store<ServerAccount>(
+extension Store where Item == FediAccount {
+  static let serverAccountsStore = Store<FediAccount>(
       storage: SQLiteStorageEngine.default(appendingPath: "ServerAccounts")
   )
 }

@@ -42,7 +42,7 @@ extension MediaAttachment {
 }
 
 struct PhotoView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsManager
     
     @State private var flipped: Bool = false
     

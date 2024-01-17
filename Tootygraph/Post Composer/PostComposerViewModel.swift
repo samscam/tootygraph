@@ -14,9 +14,9 @@ class PostComposerViewModel: ObservableObject{
 
     
     let tootClient: TootClient?
-    let replyContext: PostWrapper?
+    let replyContext: PostManager?
     
-    init(tootClient: TootClient?,replyContext: PostWrapper? = nil){
+    init(tootClient: TootClient?,replyContext: PostManager? = nil){
         self.replyContext = replyContext
         self.tootClient = tootClient
     }

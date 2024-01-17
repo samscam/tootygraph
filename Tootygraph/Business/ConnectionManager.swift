@@ -8,17 +8,21 @@
 import Foundation
 import TootSDK
 
+/**
+The ConnectionManager is responsible for a single connection to a fedi account.
+ 
+*/
 @MainActor
-class Connection: Identifiable, ObservableObject {
-    @Published var serverAccount: ServerAccount
-    @Published var tootClient: TootClient?
+class ConnectionManager: Identifiable, ObservableObject {
+    @Published var account: FediAccount
+    @Published private (set) var tootClient: TootClient?
     
-    init(serverAccount: ServerAccount) {
-        self.serverAccount = serverAccount
+    init(account: FediAccount) {
+        self.account = account
     }
     
     var avatarURL: URL? {
-        guard let avatar = serverAccount.userAccount?.avatar else {
+        guard let avatar = account.userAccount?.avatar else {
             return nil
         }
         return URL(string:avatar)
@@ -29,10 +33,10 @@ class Connection: Identifiable, ObservableObject {
             return
         }
         
-        let client = try await TootClient(connect: serverAccount.instanceURL, accessToken: serverAccount.accessToken)
+        let client = try await TootClient(connect: account.instanceURL, accessToken: account.accessToken)
         
         // We need to refresh the server account with the user account
-        var serverAccount = serverAccount
+        var serverAccount = account
         let userAccount = try await client.verifyCredentials()
         serverAccount.userAccount = userAccount
         
