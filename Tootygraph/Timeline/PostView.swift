@@ -95,7 +95,7 @@ struct PostView: View {
     
     var actionButtons: some View {
         HStack(spacing:10){
-            ActionButtonView(highlighted: post.displayPost.reposted ?? false, actionType: .reply) {
+            ActionButtonView(highlighted: false, actionType: .reply) {
                 showingReplySheet = true
             }.frame(width:40,height:40)
             Spacer()
