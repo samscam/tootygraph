@@ -10,13 +10,12 @@ import NukeUI
 import TootSDK
 
 struct ServerAccountView: View{
-    @Environment(\.palette) var palette: Palette
     
-    let account: Account
+    let connection: ConnectionManager
     
     var body: some View {
         HStack{
-            LazyImage(url: URL(string:account.avatar)) { state in
+            LazyImage(url: connection.avatarURL) { state in
                 if let image = state.image {
                     image
                         .resizable().aspectRatio(contentMode: .fill)
@@ -28,43 +27,47 @@ struct ServerAccountView: View{
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
             VStack(alignment: .leading){
-                Text("\(account.displayName ?? account.acct)").font(.title3).bold()
-                Text(account.acct)
-                Text(account.id)
+                Text("\(connection.account.userAccount?.displayName ?? connection.account.username)").font(.title3).bold()
+                Text(connection.account.niceName)
             }.padding(5).foregroundColor(.primary)
             Spacer()
         }
-
+        
         .padding(5)
         .background{
-            if account.header != "" {
-                LazyImage(url: URL(string:account.header)) { state in
-                    if let image = state.image {
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .blur(radius: 2)
-                            .saturation(0)
-                            .opacity(0.3)
-                            
-                            
-                    } else {
-                        EmptyView()
-                    }
+            LazyImage(url: connection.headerURL) { state in
+                if let image = state.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .blur(radius: 2)
+                        .saturation(0)
+                        .opacity(0.3)
+                    
+                    
+                } else {
+                    EmptyView()
                 }
             }
         }
-        .background(palette.background)
+        .background(connection.palette.background)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay{
             RoundedRectangle(cornerRadius: 10)
-                .stroke(palette.highlight,lineWidth: 3)
+                .stroke(connection.palette.highlight,lineWidth: 3)
         }
         
     }
 }
+
 #Preview(traits: .sizeThatFitsLayout){
-    let account = Account(
+    let account: FediAccount = FediAccount(
+        id: "someid",
+        username: "sam",
+        hue: .random(in: 0...1),
+        instanceURL: URL(string: "https://togl.me")!,
+        accessToken: nil,
+        userAccount: Account(
             id: "arrg",
             acct: "dunno",
             url: "https://example.foo",
@@ -78,6 +81,6 @@ struct ServerAccountView: View{
             postsCount: 1023,
             followersCount: 123,
             followingCount: 432,
-            fields: [])
-    return ServerAccountView(account: account).padding()
+            fields: []))
+    return ServerAccountView(connection: ConnectionManager(account: account)).padding()
 }

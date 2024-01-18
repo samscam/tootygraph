@@ -28,6 +28,17 @@ class ConnectionManager: Identifiable, ObservableObject {
         return URL(string:avatar)
     }
     
+    var headerURL: URL? {
+        guard let header = account.userAccount?.header else {
+            return nil
+        }
+        return URL(string:header)
+    }
+    
+    var palette: Palette {
+        return Palette(account.hue)
+    }
+    
     func connect() async throws {
         guard tootClient == nil else {
             return

@@ -40,7 +40,11 @@ class AccountsManager: ObservableObject {
         $accounts.$items
             .map{ serverAccounts in
                 serverAccounts.map { serverAccount in
-                    ConnectionManager(account: serverAccount)
+                    let conn = ConnectionManager(account: serverAccount)
+                    Task{
+                        try await conn.connect()
+                    }
+                    return conn
                 }
             }
             .assign(to: &$connections)

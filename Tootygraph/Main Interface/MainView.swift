@@ -45,8 +45,8 @@ struct MainView: View {
                     .environmentObject(settings)
                     .environmentObject(accountsManager)
                     .tag(connection.account.id)
-                    .palette(Palette(connection.account.hue))
-                    .tint(Palette(connection.account.hue).highlight)
+                    .palette(connection.palette)
+                    .tint(connection.palette.highlight)
                 
             }
 
@@ -68,7 +68,7 @@ struct MainView: View {
         .onChange(of: selectedViewTag, {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
-                    currentBackground = AnyShapeStyle(Palette(connection.account.hue).background)
+                    currentBackground = AnyShapeStyle(connection.palette.background)
                     fieldFocussed = false
                 }
             } else {

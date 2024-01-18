@@ -31,8 +31,8 @@ struct AccountsView: View {
                     Text("Accounts").font(.title)
                     
                     ForEach($accountsManager.connections){ $connection in
-                        ServerAccountView(account:connection.account.userAccount!)//<<<<<< don't leave this there
-                            .palette(Palette(connection.account.hue))
+                        ServerAccountView(connection:connection)
+                            .palette(connection.palette)
                             .frame(maxWidth: .infinity)
                             
                             .contentShape(Rectangle())

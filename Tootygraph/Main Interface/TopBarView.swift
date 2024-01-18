@@ -51,7 +51,7 @@ struct TopBarView: View {
                     .if(selectedViewTag == connection.account.id){
                         $0.overlay{
                              
-                            let highlight = Palette(connection.account.hue).highlight
+                            let highlight = connection.palette.highlight
                             RoundedRectangle(cornerRadius: 10)
                                     .stroke(highlight, lineWidth: 4)
 
