@@ -80,11 +80,6 @@ struct MainView: View {
         
         
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .onAppear {
-            Task{
-                try await accountsManager.connectAll()
-            }
-        }
         .if(accountsManager.connections.count > 0, transform: { view in
             view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
                 VStack{
