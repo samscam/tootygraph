@@ -111,7 +111,7 @@ struct PostView: View {
             }.frame(width:40,height:40)
         }
         .sheet(isPresented: $showingReplySheet, content: {
-            PostComposerView(replyContext: post)
+            PostComposerView(showingComposer: $showingReplySheet, viewModel: PostComposerViewModel(tootClient: post.client, replyContext: post))
         })
     }
     

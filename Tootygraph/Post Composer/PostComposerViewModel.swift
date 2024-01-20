@@ -9,20 +9,53 @@ import SwiftUI
 import TootSDK
 
 
-
+@MainActor
 class PostComposerViewModel: ObservableObject{
 
+    @Published var composedText: String = ""
+    @Published var remainingChars: Int = 0
+    @Published var maxChars: Int? = nil
+    @Published var replyingTo: String? = nil
     
-    let tootClient: TootClient?
+    private let tootClient: TootClient?
     let replyContext: PostManager?
     
     init(tootClient: TootClient?,replyContext: PostManager? = nil){
+        
         self.replyContext = replyContext
         self.tootClient = tootClient
+        
+
+        
+        $composedText.combineLatest($maxChars).map{(text,max) in
+            if let max {
+              return max - text.count
+            } else {
+                return text.count
+            }
+        }.assign(to: &$remainingChars)
+        
+        if let replyContext {
+           let replyingUser = replyContext.post.displayPost.account.acct
+            replyingTo = replyingUser
+            composedText = "@\(replyingUser) "
+        }
+        
+        Task{
+            self.maxChars = try await tootClient?.getInstanceInfo().configuration?.posts?.maxCharacters
+        }
     }
     
-    func postMedia(){
-        // now do something
+    func post() async throws{
+        guard let tootClient else {
+            return // should throw something
+        }
+
+        var params: PostParams = PostParams(post: composedText, visibility: .public)
+        if let replyContext {
+            params.inReplyToId = replyContext.displayPost.id
+        }
+        let resultPost = try await tootClient.publishPost(params)
     }
 }
 

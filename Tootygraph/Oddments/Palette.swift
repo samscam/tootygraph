@@ -131,6 +131,7 @@ extension EnvironmentValues {
 extension View {
     func palette(_ palette: Palette) -> some View {
         environment(\.palette, palette)
+            .tint(palette.highlight)
     }
 }
 
