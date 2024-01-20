@@ -77,7 +77,8 @@ class AccountsManager: ObservableObject {
             throw AccountsManagerError.invalidURL
         }
         
-        let client = try await TootClient(connect: url)
+        let client = try await TootClient( connect: url,clientName:"Tootygraph")
+        
         
         let accessToken = try await client.presentSignIn(callbackURI: "tootygraph://auth")
         let userAccount = try await client.verifyCredentials()

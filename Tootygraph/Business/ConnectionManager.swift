@@ -44,7 +44,7 @@ class ConnectionManager: Identifiable, ObservableObject {
             return
         }
         
-        let client = try await TootClient(connect: account.instanceURL, accessToken: account.accessToken)
+        let client = try await TootClient(connect: account.instanceURL, clientName:"Tootygraph", accessToken: account.accessToken)
         
         // We need to refresh the server account with the user account
         var serverAccount = account
