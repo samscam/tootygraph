@@ -115,6 +115,11 @@ extension Palette {
         let hue = Double.random(in: 0...1)
         return Palette(hue)
     }
+    
+    static func standard() -> Palette {
+        let hue = 0.5
+        return Palette(hue)
+    }
 }
 
 private struct PaletteEnvironmentKey: EnvironmentKey {

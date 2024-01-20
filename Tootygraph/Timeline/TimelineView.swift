@@ -61,6 +61,7 @@ struct TimelineView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     .listRowBackground(EmptyView())
             }
+            .scrollClipDisabled()
             .listStyle(PlainListStyle())
             .padding(0)
             .refreshable {

@@ -20,8 +20,7 @@ struct MainView: View {
     @StateObject var accountsManager = AccountsManager()
     
     @State var selectedViewTag: String = "settings"
-    
-    @State var currentBackground: AnyShapeStyle = AnyShapeStyle(Color.background)
+    @State var currentPalette: Palette = Palette.standard()
     
 
     // This is for defocussing the add account field from AddServerView.swift - it is unpleasant that it's here but hey, whatevs
@@ -38,6 +37,7 @@ struct MainView: View {
             AccountsView(fieldFocussed: $fieldFocussed, selectedViewTag: $selectedViewTag)
                 .environmentObject(settings)
                 .environmentObject(accountsManager)
+                .palette(Palette.standard())
                 .tag("settings")
             
             ForEach(accountsManager.connections){ connection in
@@ -46,7 +46,6 @@ struct MainView: View {
                     .environmentObject(accountsManager)
                     .tag(connection.account.id)
                     .palette(connection.palette)
-                    .tint(connection.palette.highlight)
                 
             }
 
@@ -55,7 +54,7 @@ struct MainView: View {
         .background{
             ZStack {
                 Rectangle()
-                    .fill(currentBackground)
+                    .fill(currentPalette.background)
                 
                 Image("wood-texture")
                     .resizable()
@@ -68,27 +67,39 @@ struct MainView: View {
         .onChange(of: selectedViewTag, {
             if let connection = accountsManager[selectedViewTag] {
                 withAnimation{
-                    currentBackground = AnyShapeStyle(connection.palette.background)
+                    currentPalette = connection.palette
                     fieldFocussed = false
                 }
             } else {
                 withAnimation{
-                    currentBackground = AnyShapeStyle(Color.background)
+                    currentPalette = Palette.standard()
                 }
             }
         })
         
         
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .if(accountsManager.connections.count > 0, transform: { view in
-            view.safeAreaInset(edge: .top,alignment: .center,spacing:0) {
+        .safeAreaInset(edge: .bottom,alignment: .center,spacing:0) {
+            if accountsManager.connections.count > 0 {
                 VStack{
-                    TopBarView(selectedViewTag: $selectedViewTag)
+                    TabBarView(selectedViewTag: $selectedViewTag)
                         .environmentObject(accountsManager)
+                        .palette(currentPalette)
                     
                 }
             }
-        })
+        }
+        
+        .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
+            if selectedViewTag != "settings" {
+                VStack{
+                    ActionBarView()
+                        .environment(\.tootClient, accountsManager[selectedViewTag]?.tootClient)
+                        .palette(currentPalette)
+                    
+                }
+            }
+        }
         
     }
 }
