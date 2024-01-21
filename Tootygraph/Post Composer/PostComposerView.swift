@@ -43,7 +43,7 @@ struct PostComposerView: View {
                 .padding(5)
                 .background{
                     RoundedRectangle(cornerRadius: 10).fill(palette.postBackground)
-                }.tint(.white)
+                }
             
             HStack{
                 
