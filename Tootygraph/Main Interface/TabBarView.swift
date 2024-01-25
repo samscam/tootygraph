@@ -11,33 +11,16 @@ import TootSDK
 import NukeUI
 
 struct TabBarView: View {
+    
     @EnvironmentObject var accountsManager: AccountsManager
-    @Binding var selectedViewTag: String
+    @Binding var selectedTimeline: TimelineController?
+    let connections: [ConnectionController]
     
     var body: some View {
         
         ScrollView(.horizontal) {
             HStack{
-                Image(systemName: "gearshape.fill")
-                    .resizable()
-                    .padding(15)
-                    .frame(width: 52,height:52)
-                    .opacity(selectedViewTag == "settings" ? 1.0 : 0.4)
-                    .if(selectedViewTag == "settings"){
-                        $0.overlay{
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.gray, lineWidth: 4)
-
-                        }
-                    }
-                    .tag("settings")
-                    .onTapGesture {
-                        withAnimation(.spring(duration:0.2)) {
-                            selectedViewTag = "settings"
-                        }
-                    }
-                
-                ForEach(accountsManager.connections){ connection in
+                ForEach(connections){ connection in
                     
                     LazyImage(url: connection.avatarURL){ state in
                         if let image = state.image {
@@ -48,26 +31,35 @@ struct TabBarView: View {
                     }
                     .frame(width: 52,height:52)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .if(selectedViewTag == connection.account.id){
-                        $0.overlay{
-                             
-                            let highlight = connection.palette.highlight
-                            RoundedRectangle(cornerRadius: 10)
-                                    .stroke(highlight, lineWidth: 4)
-
-                        }
-                    }
+                }
+            }
+        }
+    }
+}
+/**
+//                    .if(connection.timelines.contains(selectedTimeline)){
+//                        $0.overlay{
+//                            
+//                            let highlight = connection.palette.highlight
+//                            RoundedRectangle(cornerRadius: 10)
+//                                .stroke(highlight, lineWidth: 4)
+//                            
+//                        }
+//                    }
                     
-                    .if(connection.account.id != selectedViewTag){
-                        $0.opacity(0.7)
+                    ForEach(connections){ timeline in
+                        Image(systemName: timeline.timeline.iconName)
+                        
                     }
-                    .onTapGesture {
-                        withAnimation(.spring(duration:0.2)) {
-                            selectedViewTag = connection.account.id
-                        }
-                    }
+//                    .opacity(connection.account.id != selectedViewTag 0.7)
                     
-                    .tag(connection.account.id)
+//                    .onTapGesture {
+//                        withAnimation(.spring(duration:0.2)) {
+//                            selectedTimeline = connection.account.id
+//                        }
+//                    }
+                    
+//                    .tag(connection.account.id)
                 }
             }
         }
@@ -80,9 +72,34 @@ struct TabBarView: View {
     }
 }
 
-#Preview {
-    let accountsManager = AccountsManager()
-    @State var selectedViewTag: String = "preferences"
-    
-    return TabBarView(selectedViewTag: $selectedViewTag).environmentObject(accountsManager)
+//#Preview {
+//    let accountsManager = AccountsManager()
+//    @State var selectedViewTag: String = "preferences"
+//    
+//    return TabBarView(selectedViewTag: $selectedViewTag).environmentObject(accountsManager)
+//}
+ */
+
+extension Timeline {
+    var iconName: String {
+        switch self {
+            
+        case .home:
+            return "house.fill"
+        case .local(_):
+            return "bicycle"
+        case .federated(_):
+            return "sailboat.fill"
+        case .favourites:
+            return "heart.fill"
+        case .bookmarks:
+            return "bookmark.fill"
+        case .hashtag(_):
+            return "number.square.fill"
+        case .list(_):
+            return "list.bullet.clipboard"
+        case .user(_):
+            return "person.fill"
+        }
+    }
 }

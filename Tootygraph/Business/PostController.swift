@@ -8,15 +8,17 @@
 import Foundation
 import TootSDK
 
-class PostManager: ObservableObject, Identifiable, Hashable{
+@MainActor
+class PostController: ObservableObject, Identifiable, Hashable{
 
   
   let id: String
   
-  func hash(into hasher: inout Hasher) {
+  nonisolated func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
-  static func == (lhs: PostManager, rhs: PostManager) -> Bool {
+    
+  nonisolated static func == (lhs: PostController, rhs: PostController) -> Bool {
     lhs.id == rhs.id
   }
   

@@ -9,10 +9,12 @@ import SwiftUI
 import TootSDK
 
 struct AccountsView: View {
+    
+    let geometryEffectNamespace: Namespace.ID
+    
     @EnvironmentObject var accountsManager: AccountsManager
     
-    var fieldFocussed: FocusState<Bool>.Binding
-    @Binding var selectedViewTag: String
+    @FocusState var fieldFocussed: Bool
     
     @State private var showResetAlert: Bool = false
     
@@ -25,6 +27,7 @@ struct AccountsView: View {
                     .photoFrame()
                     .frame(width:128)
                     .padding(.top,20)
+                    .matchedGeometryEffect(id: "splash-icon", in: geometryEffectNamespace)
             }
             VStack(alignment:.leading){
                 if (accountsManager.connections.count > 0){
@@ -36,11 +39,6 @@ struct AccountsView: View {
                             .frame(maxWidth: .infinity)
                             
                             .contentShape(Rectangle())
-                            .onTapGesture {
-                                withAnimation{
-                                    selectedViewTag = connection.account.id
-                                }
-                            }
                         
                     }
                     
@@ -56,7 +54,7 @@ struct AccountsView: View {
                 
                 Spacer()
                 Divider()
-                AddServerView(fieldFocussed: fieldFocussed)
+                AddServerView(fieldFocussed: $fieldFocussed)
                 
                 Spacer()
                 Divider()
@@ -79,7 +77,7 @@ struct AccountsView: View {
             }.padding()
             .contentShape(Rectangle())
             .onTapGesture {
-                fieldFocussed.wrappedValue = false
+                fieldFocussed = false
             }
             
         }.scrollDismissesKeyboard(.automatic)
@@ -87,7 +85,7 @@ struct AccountsView: View {
 }
 
 #Preview{
-    
+    @Namespace var fakeNamespace
     @State var account: FediAccount = FediAccount(
         id: "someid",
         username: "sam",
@@ -112,10 +110,9 @@ struct AccountsView: View {
     
     @StateObject var accountsManager = AccountsManager()
     @StateObject var settings = SettingsManager()
-    @State var selectedViewTag: String = "settings"
     @FocusState var fieldFocussed: Bool
     
-    return AccountsView(fieldFocussed: $fieldFocussed, selectedViewTag: $selectedViewTag)
+    return AccountsView(geometryEffectNamespace: fakeNamespace)
         .environmentObject(accountsManager)
         .environmentObject(settings)
         .onAppear{

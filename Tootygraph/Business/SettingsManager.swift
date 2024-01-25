@@ -9,6 +9,19 @@ import Foundation
 import Combine
 import Boutique
 
+
+private struct SettingsManagerKey: InjectionKey {
+    @MainActor static var currentValue: SettingsManager = SettingsManager()
+}
+
+extension InjectedValues {
+    var settingsManager: SettingsManager {
+        get { Self[SettingsManagerKey.self] }
+        set { Self[SettingsManagerKey.self] = newValue }
+    }
+}
+
+
 enum SettingsKeys: String{
   case jaunty
   case descriptionsFirst

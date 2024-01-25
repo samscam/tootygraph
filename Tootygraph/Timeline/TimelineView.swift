@@ -9,53 +9,21 @@ import SwiftUI
 import Boutique
 import TootSDK
 
-struct ConnectionView: View {
-    @ObservedObject var connection: ConnectionManager
-    @EnvironmentObject var settings: SettingsManager
-    
-    var body: some View {
-        if let tootClient = connection.tootClient {
-            TimelineView(client: tootClient, timeline: .home, settings: settings)
-                
-        } else {
-            Button {
-              Task{
-                try? await connection.connect()
-              }
-            } label: {
-              Text("Connect")
-            }.buttonStyle(.borderedProminent)
-        }
-    }
-}
+
 
 struct TimelineView: View {
     
-    let client: TootClient
-    let timeline: Timeline
-    
-    @StateObject var timelineViewModel: TimelineViewModel
-    
-    init(client: TootClient, timeline: Timeline, settings: SettingsManager){
-        self.client = client
-        
-        self.timeline = timeline
-        _timelineViewModel = StateObject(wrappedValue: TimelineViewModel(client: client, timeline: timeline, settings: settings))
-        
-    }
-    
-    @EnvironmentObject var settings: SettingsManager
-    @EnvironmentObject var accountsManager: AccountsManager
+    var timelineController: TimelineController
     
     var body: some View {
         
         GeometryReader{ geometry in
-            List(timelineViewModel.posts) { post in
+            List(timelineController.posts) { post in
                 
                 PostView(post: post, geometry: geometry)
                     .padding(20)
                     .onAppear{
-                        timelineViewModel.onItemAppear(post)
+                        timelineController.onItemAppear(post)
                     }
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -66,19 +34,20 @@ struct TimelineView: View {
             .padding(0)
             .refreshable {
                 do {
-                    try await timelineViewModel.refresh()
+                    try await timelineController.refresh()
                 } catch {
                     print("Oh noes \(error)")
                 }
             }
             .onAppear{
-                timelineViewModel.loadInitial()
+                timelineController.loadInitial()
             }
-            .navigationTitle(timelineViewModel.name)
+            .navigationTitle(timelineController.name)
             
         }
     }
 }
+
 
 //struct TimelineView_Previews: PreviewProvider {
 //  static var previews: some View {

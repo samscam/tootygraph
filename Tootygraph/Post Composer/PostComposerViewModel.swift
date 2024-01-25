@@ -18,9 +18,9 @@ class PostComposerViewModel: ObservableObject{
     @Published var replyingTo: String? = nil
     
     private let tootClient: TootClient?
-    let replyContext: PostManager?
+    let replyContext: PostController?
     
-    init(tootClient: TootClient?,replyContext: PostManager? = nil){
+    init(tootClient: TootClient?,replyContext: PostController? = nil){
         
         self.replyContext = replyContext
         self.tootClient = tootClient
@@ -55,7 +55,7 @@ class PostComposerViewModel: ObservableObject{
         if let replyContext {
             params.inReplyToId = replyContext.displayPost.id
         }
-        let resultPost = try await tootClient.publishPost(params)
+        _ = try await tootClient.publishPost(params)
     }
 }
 

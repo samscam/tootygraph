@@ -16,7 +16,7 @@ struct PostView: View {
     @Environment(\.palette) var palette: Palette
     @EnvironmentObject var settings: SettingsManager
     
-    @ObservedObject var post: PostManager
+    @ObservedObject var post: PostController
     
     @State var showingReplySheet: Bool = false
     
@@ -128,7 +128,7 @@ struct PostView: View {
     }()
     let palette = Palette.random()
     
-    let postWrapper = PostManager(TestPosts.justText)
+    let postWrapper = PostController(TestPosts.justText)
     return PostView(post: postWrapper, geometry: nil).environmentObject(settings)
         .palette(palette)
     
@@ -143,7 +143,7 @@ struct PostView: View {
         return settings
     }()
     
-    let postWrapper = PostManager(TestPosts.postWithPics)
+    let postWrapper = PostController(TestPosts.postWithPics)
     return PostView(post: postWrapper, geometry: nil).environmentObject(settings).padding()
     
     

@@ -9,10 +9,6 @@ import Foundation
 import TootSDK
 import Boutique
 
-import NukeUI
-import Nuke
-import NukeVideo
-
 
 enum AccountsManagerError: Error {
     case invalidURL
@@ -31,16 +27,18 @@ class AccountsManager: ObservableObject {
     // Nope we can't be having this... credentials need to be in the keychain
     @Stored(in: .serverAccountsStore) private var accounts: [FediAccount]
     
-    @Published var connections: [ConnectionManager] = []
+    @Published var loadState: LoadState = .starting
+    @Published var connections: [ConnectionController] = []
+    
+
     
     init(){
-        // This is to make Nuke be able to handle videos, apparently
-        ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)
+        
         
         $accounts.$items
             .map{ serverAccounts in
                 serverAccounts.map { serverAccount in
-                    let conn = ConnectionManager(account: serverAccount)
+                    let conn = ConnectionController(account: serverAccount)
                     Task{
                         try await conn.connect()
                     }
@@ -48,6 +46,29 @@ class AccountsManager: ObservableObject {
                 }
             }
             .assign(to: &$connections)
+        
+        Task{
+            do{
+                try await $accounts.itemsHaveLoaded()
+                
+                loadState = .loaded
+                
+            } catch {
+                loadState = .error(error: error, recoverButton: "Clear accounts", recoverAction: recoverAction)
+                print(error)
+            }
+        }
+    }
+    
+    func recoverAction() {
+        Task {
+            do {
+                try await Store.serverAccountsStore.removeAll()
+                
+            } catch {
+                self.loadState = .error(error: error)
+            }
+        }
     }
     
     func connectAll() async throws {
@@ -96,10 +117,35 @@ class AccountsManager: ObservableObject {
         }
     }
     
-    subscript(accountId:String) -> ConnectionManager?{
+    subscript(accountId:String) -> ConnectionController?{
         return connections.first{
             accountId == $0.account.id
         }
+    }
+    
+    enum LoadState: Equatable {
+        static func == (lhs: AccountsManager.LoadState, rhs: AccountsManager.LoadState) -> Bool {
+            switch (lhs,rhs) {
+            case (.starting,.starting):
+                return true
+            case (.message(let lmessage), .message(let rmessage)):
+                return lmessage == rmessage
+            case (.error(let lerror, _, _),
+                  .error(let rerror, _, _)):
+                return lerror.localizedDescription == rerror.localizedDescription
+            case (.loaded,.loaded):
+                return true
+            default:
+                return false
+            }
+        }
+        
+        case starting
+        case message(message: String)
+        case error(error: Error,
+                   recoverButton:String? = nil,
+                   recoverAction: (()->())? = nil)
+        case loaded
     }
 }
 

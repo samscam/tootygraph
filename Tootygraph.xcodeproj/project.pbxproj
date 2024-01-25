@@ -11,7 +11,7 @@
 		22002245299850F5000FA97F /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22002244299850F5000FA97F /* AccountsManager.swift */; };
 		220022472998759E000FA97F /* BoutiqueStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220022462998759E000FA97F /* BoutiqueStores.swift */; };
 		2200224929987715000FA97F /* ServerAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224829987715000FA97F /* ServerAccountView.swift */; };
-		2200224C2999A8B7000FA97F /* TimelineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* TimelineViewModel.swift */; };
+		2200224C2999A8B7000FA97F /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* TimelineController.swift */; };
 		220AE8C129C521A30023554D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C029C521A30023554D /* CameraView.swift */; };
 		220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C229C521B30023554D /* CameraViewModel.swift */; };
 		22120CA92B4A2A99006FECD6 /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CA82B4A2A99006FECD6 /* NukeVideo */; };
@@ -26,17 +26,21 @@
 		224390662A5D90180040C26C /* FilmStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224390652A5D90180040C26C /* FilmStrip.swift */; };
 		2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C227299847AF004B3A4A /* MultipartKitTootSDK */; };
 		2245C22A299847AF004B3A4A /* TootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C229299847AF004B3A4A /* TootSDK */; };
+		22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */; };
+		22516CD12B5F301E004F8A88 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CD02B5F301E004F8A88 /* Injection.swift */; };
+		2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276821E2B5D371A001E5D80 /* TabbedView.swift */; };
+		227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227682202B5D7A0A001E5D80 /* SplashView.swift */; };
+		227682232B5D90C1001E5D80 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227682222B5D90C1001E5D80 /* ConnectionView.swift */; };
 		2277F1AB29B298E200CB0D9C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2277F1AA29B298E200CB0D9C /* README.md */; };
 		227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C65D629A2D5A3006BF540 /* Flipper.swift */; };
 		227C65D929A4F8FE006BF540 /* CornerBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C65D829A4F8FE006BF540 /* CornerBadgeView.swift */; };
 		2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25729A7F53700F24EA9 /* ActionsView.swift */; };
-		2287F25C29A826F400F24EA9 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostManager.swift */; };
+		2287F25C29A826F400F24EA9 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2287F25B29A826F400F24EA9 /* PostController.swift */; };
 		22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AF72B548B0B00378FF9 /* FancyPicker.swift */; };
 		22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */; };
 		22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */; };
 		22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B012B58464600378FF9 /* PhotoPickerView.swift */; };
-		22931B042B5852AC00378FF9 /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B032B5852AC00378FF9 /* Injectable.swift */; };
-		22931B062B58533C00378FF9 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* ConnectionManager.swift */; };
+		22931B062B58533C00378FF9 /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* ConnectionController.swift */; };
 		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -68,7 +72,7 @@
 		220022462998759E000FA97F /* BoutiqueStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueStores.swift; sourceTree = "<group>"; };
 		2200224829987715000FA97F /* ServerAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccountView.swift; sourceTree = "<group>"; };
 		2200224A2998CECF000FA97F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2200224B2999A8B7000FA97F /* TimelineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewModel.swift; sourceTree = "<group>"; };
+		2200224B2999A8B7000FA97F /* TimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
 		220AE8C029C521A30023554D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		220AE8C229C521B30023554D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		22120CAE2B4B7395006FECD6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -78,17 +82,21 @@
 		2236FB742997052200436F65 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2236FB7629970E5000436F65 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		224390652A5D90180040C26C /* FilmStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmStrip.swift; sourceTree = "<group>"; };
+		22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tootygraph.swift; sourceTree = "<group>"; };
+		22516CD02B5F301E004F8A88 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
+		2276821E2B5D371A001E5D80 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
+		227682202B5D7A0A001E5D80 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		227682222B5D90C1001E5D80 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		2277F1AA29B298E200CB0D9C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		227C65D629A2D5A3006BF540 /* Flipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flipper.swift; sourceTree = "<group>"; };
 		227C65D829A4F8FE006BF540 /* CornerBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerBadgeView.swift; sourceTree = "<group>"; };
 		2287F25729A7F53700F24EA9 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
-		2287F25B29A826F400F24EA9 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		2287F25B29A826F400F24EA9 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		22931AF72B548B0B00378FF9 /* FancyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyPicker.swift; sourceTree = "<group>"; };
 		22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootClientEnvironment.swift; sourceTree = "<group>"; };
 		22931B012B58464600378FF9 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
-		22931B032B5852AC00378FF9 /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
-		22931B052B58533C00378FF9 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		22931B052B58533C00378FF9 /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* FediAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FediAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PostComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerView.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
@@ -153,7 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				22EC11FF298F23E100976ECC /* TimelineView.swift */,
-				2200224B2999A8B7000FA97F /* TimelineViewModel.swift */,
+				227682222B5D90C1001E5D80 /* ConnectionView.swift */,
+				2200224B2999A8B7000FA97F /* TimelineController.swift */,
 				2236FB622994609000436F65 /* DetailView.swift */,
 				22EC121E298FCBF300976ECC /* PostView.swift */,
 				2287F25729A7F53700F24EA9 /* ActionsView.swift */,
@@ -197,7 +206,7 @@
 				22120CAE2B4B7395006FECD6 /* Palette.swift */,
 				22931AF72B548B0B00378FF9 /* FancyPicker.swift */,
 				22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */,
-				22931B032B5852AC00378FF9 /* Injectable.swift */,
+				22516CD02B5F301E004F8A88 /* Injection.swift */,
 			);
 			path = Oddments;
 			sourceTree = "<group>";
@@ -206,6 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				2236FB742997052200436F65 /* MainView.swift */,
+				227682202B5D7A0A001E5D80 /* SplashView.swift */,
+				2276821E2B5D371A001E5D80 /* TabbedView.swift */,
 				2223CC1A2AA53A7100122870 /* TabBarView.swift */,
 				22CD12082991BE5E00B7D70D /* ActionBarView.swift */,
 			);
@@ -280,11 +291,12 @@
 		22EC120D298F240D00976ECC /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */,
 				22002244299850F5000FA97F /* AccountsManager.swift */,
 				22AD6C802A5B6103008A79CA /* FediAccount.swift */,
-				22931B052B58533C00378FF9 /* ConnectionManager.swift */,
-				2287F25B29A826F400F24EA9 /* PostManager.swift */,
 				2236FB7629970E5000436F65 /* SettingsManager.swift */,
+				22931B052B58533C00378FF9 /* ConnectionController.swift */,
+				2287F25B29A826F400F24EA9 /* PostController.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -390,32 +402,36 @@
 				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
+				227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */,
 				22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */,
 				220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */,
-				22931B062B58533C00378FF9 /* ConnectionManager.swift in Sources */,
+				22931B062B58533C00378FF9 /* ConnectionController.swift in Sources */,
 				22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */,
 				2236FB7729970E5000436F65 /* SettingsManager.swift in Sources */,
 				22EC1200298F23E100976ECC /* TimelineView.swift in Sources */,
 				22002243299850C6000FA97F /* AccountsView.swift in Sources */,
 				22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */,
 				22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */,
-				22931B042B5852AC00378FF9 /* Injectable.swift in Sources */,
 				2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */,
 				2223CC1B2AA53A7100122870 /* TabBarView.swift in Sources */,
+				22516CD12B5F301E004F8A88 /* Injection.swift in Sources */,
+				2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */,
 				220022472998759E000FA97F /* BoutiqueStores.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,
 				22EC121F298FCBF300976ECC /* PostView.swift in Sources */,
 				2200224929987715000FA97F /* ServerAccountView.swift in Sources */,
+				227682232B5D90C1001E5D80 /* ConnectionView.swift in Sources */,
 				2236FB752997052200436F65 /* MainView.swift in Sources */,
+				22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */,
 				22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */,
 				22CD12092991BE5E00B7D70D /* ActionBarView.swift in Sources */,
-				2200224C2999A8B7000FA97F /* TimelineViewModel.swift in Sources */,
+				2200224C2999A8B7000FA97F /* TimelineController.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
 				22DFF05D29AD5D9F00D14A27 /* PostComposerViewModel.swift in Sources */,
 				22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */,
 				220AE8C129C521A30023554D /* CameraView.swift in Sources */,
 				22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */,
-				2287F25C29A826F400F24EA9 /* PostManager.swift in Sources */,
+				2287F25C29A826F400F24EA9 /* PostController.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
 				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,
 				227C65D929A4F8FE006BF540 /* CornerBadgeView.swift in Sources */,

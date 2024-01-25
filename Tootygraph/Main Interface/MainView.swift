@@ -9,98 +9,45 @@ import SwiftUI
 import NukeUI
 import Boutique
 
-enum MainViewStates {
-    case noAccounts
-    case normal
-}
 
 struct MainView: View {
     
-    @StateObject var settings = SettingsManager()
-    @StateObject var accountsManager = AccountsManager()
+    // GIVEN that we are waiting to find out about the various accounts, and they have not connected yet, it should show a splash screen
     
-    @State var selectedViewTag: String = "settings"
-    @State var currentPalette: Palette = Palette.standard()
+    // GIVEN that no accounts have been set up
+    // THEN it should show the settings screen
     
-
-    // This is for defocussing the add account field from AddServerView.swift - it is unpleasant that it's here but hey, whatevs
-    @FocusState var fieldFocussed: Bool
+    // GIVEN that there are one-or-more accounts
+    // THEN it should show the Tabbed interface
+    
+    @Namespace var geometryEffectNamespace
+    
+    @EnvironmentObject var accountsManager: AccountsManager
     
     
     var body: some View {
-        
-        
-
-        
-        TabView(selection: $selectedViewTag.animation()){
+        Group{
             
-            AccountsView(fieldFocussed: $fieldFocussed, selectedViewTag: $selectedViewTag)
-                .environmentObject(settings)
-                .environmentObject(accountsManager)
-                .palette(Palette.standard())
-                .tag("settings")
-            
-            ForEach(accountsManager.connections){ connection in
-                ConnectionView(connection: connection)
-                    .environmentObject(settings)
-                    .environmentObject(accountsManager)
-                    .tag(connection.account.id)
-                    .palette(connection.palette)
-                
-            }
-
-            
-        }
-        .background{
-            ZStack {
-                Rectangle()
-                    .fill(currentPalette.background)
-                
-                Image("wood-texture")
-                    .resizable()
-                    .saturation(0)
-                    .blendMode(.multiply)
-                    .opacity(0.3)
-                
-            }.ignoresSafeArea()
-        }
-        .onChange(of: selectedViewTag, {
-            if let connection = accountsManager[selectedViewTag] {
-                withAnimation{
-                    currentPalette = connection.palette
-                    fieldFocussed = false
-                }
-            } else {
-                withAnimation{
-                    currentPalette = Palette.standard()
-                }
-            }
-        })
-        
-        
-        .tabViewStyle(.page(indexDisplayMode: .never))
-        .safeAreaInset(edge: .bottom,alignment: .center,spacing:0) {
-            if accountsManager.connections.count > 0 {
-                VStack{
-                    TabBarView(selectedViewTag: $selectedViewTag)
-                        .environmentObject(accountsManager)
-                        .palette(currentPalette)
+            switch accountsManager.loadState {
+            case .starting:
+                SplashView(geometryEffectNamespace: geometryEffectNamespace, splashMessage: "Starting up")
+            case .error(let error,_,_):
+                SplashView(geometryEffectNamespace: geometryEffectNamespace, splashMessage: error.localizedDescription)
+            case .loaded:
+                if (accountsManager.connections.count == 0) {
+                    AccountsView(geometryEffectNamespace: geometryEffectNamespace)
+                        .palette(Palette.standard())
+                        .tag("settings")
+                } else {
+                    TabbedView(connections: $accountsManager.connections)
                     
                 }
+            case .message(let message):
+                
+                SplashView(geometryEffectNamespace: geometryEffectNamespace,splashMessage: message)
             }
-        }
-        
-        .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
-            if selectedViewTag != "settings" {
-                VStack{
-                    ActionBarView()
-                        .environment(\.tootClient, accountsManager[selectedViewTag]?.tootClient)
-                        .palette(currentPalette)
-                    
-                }
-            }
-        }
-        
+            
+        }.animation(.default, value: accountsManager.loadState)
     }
 }
 
