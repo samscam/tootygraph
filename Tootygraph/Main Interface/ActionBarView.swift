@@ -15,7 +15,6 @@ struct ActionBarView: View {
     @State var showingPostComposer: Bool = false
     @Environment(\.tootClient) var tootClient: TootClient?
     @Environment(\.palette) var palette: Palette
-    @Namespace var geometryEffectNamespace
     
     var body: some View {
         HStack{
@@ -30,7 +29,8 @@ struct ActionBarView: View {
                     .padding(10)
             }
             .popover(isPresented: $showingSettings){
-                AccountsView(geometryEffectNamespace: geometryEffectNamespace)}
+                AccountsView()
+            }
             
             Spacer()
             Button {

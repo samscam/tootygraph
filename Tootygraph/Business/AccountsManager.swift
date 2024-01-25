@@ -30,8 +30,6 @@ class AccountsManager: ObservableObject {
     @Published var loadState: LoadState = .starting
     @Published var connections: [ConnectionController] = []
     
-
-    
     init(){
         
         

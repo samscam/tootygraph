@@ -20,8 +20,6 @@ struct MainView: View {
     // GIVEN that there are one-or-more accounts
     // THEN it should show the Tabbed interface
     
-    @Namespace var geometryEffectNamespace
-    
     @EnvironmentObject var accountsManager: AccountsManager
     
     
@@ -30,12 +28,12 @@ struct MainView: View {
             
             switch accountsManager.loadState {
             case .starting:
-                SplashView(geometryEffectNamespace: geometryEffectNamespace, splashMessage: "Starting up")
+                SplashView(splashMessage: "Starting up")
             case .error(let error):
-                SplashView(geometryEffectNamespace: geometryEffectNamespace, splashMessage: error.localizedDescription)
+                SplashView(splashMessage: error.localizedDescription)
             case .loaded:
                 if (accountsManager.connections.count == 0) {
-                    AccountsView(geometryEffectNamespace: geometryEffectNamespace)
+                    AccountsView()
                         .palette(Palette.standard())
                         .tag("settings")
                 } else {
@@ -44,7 +42,7 @@ struct MainView: View {
                 }
             case .message(let message):
                 
-                SplashView(geometryEffectNamespace: geometryEffectNamespace,splashMessage: message)
+                SplashView(splashMessage: message)
             }
             
         }.animation(.default, value: accountsManager.loadState)

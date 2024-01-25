@@ -10,8 +10,6 @@ import SwiftUI
 
 struct SplashView: View {
     
-    let geometryEffectNamespace: Namespace.ID
-    
     var splashMessage: String? = nil
     
     var body: some View {
@@ -20,8 +18,7 @@ struct SplashView: View {
             .aspectRatio(contentMode: .fit)
             .photoFrame()
             .frame(maxWidth:200)
-            .matchedGeometryEffect(id: "splash-icon", in: geometryEffectNamespace)
-        
+
         if let splashMessage {
             
             Text(splashMessage)
@@ -36,7 +33,6 @@ struct SplashView: View {
 
 #Preview {
     let message: String? = "Hello something is happengng. Lorem ipsum whatnot fotnot bibbety bobbety boo."
-    @Namespace var fakeNamespace
-    return SplashView(geometryEffectNamespace: fakeNamespace, splashMessage: message)
+    return SplashView(splashMessage: message)
     
 }

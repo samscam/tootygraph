@@ -10,8 +10,6 @@ import TootSDK
 
 struct AccountsView: View {
     
-    let geometryEffectNamespace: Namespace.ID
-    
     @EnvironmentObject var accountsManager: AccountsManager
     
     @FocusState var fieldFocussed: Bool
@@ -27,7 +25,6 @@ struct AccountsView: View {
                     .photoFrame()
                     .frame(width:128)
                     .padding(.top,20)
-                    .matchedGeometryEffect(id: "splash-icon", in: geometryEffectNamespace)
             }
             VStack(alignment:.leading){
                 if (accountsManager.connections.count > 0){
@@ -112,7 +109,7 @@ struct AccountsView: View {
     @StateObject var settings = SettingsManager()
     @FocusState var fieldFocussed: Bool
     
-    return AccountsView(geometryEffectNamespace: fakeNamespace)
+    return AccountsView()
         .environmentObject(accountsManager)
         .environmentObject(settings)
         .onAppear{
