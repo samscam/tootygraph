@@ -31,7 +31,7 @@ struct MainView: View {
             switch accountsManager.loadState {
             case .starting:
                 SplashView(geometryEffectNamespace: geometryEffectNamespace, splashMessage: "Starting up")
-            case .error(let error,_,_):
+            case .error(let error):
                 SplashView(geometryEffectNamespace: geometryEffectNamespace, splashMessage: error.localizedDescription)
             case .loaded:
                 if (accountsManager.connections.count == 0) {

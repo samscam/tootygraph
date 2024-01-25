@@ -54,7 +54,7 @@ class AccountsManager: ObservableObject {
                 loadState = .loaded
                 
             } catch {
-                loadState = .error(error: error, recoverButton: "Clear accounts", recoverAction: recoverAction)
+                loadState = .error(error: error)
                 print(error)
             }
         }
@@ -130,9 +130,8 @@ class AccountsManager: ObservableObject {
                 return true
             case (.message(let lmessage), .message(let rmessage)):
                 return lmessage == rmessage
-            case (.error(let lerror, _, _),
-                  .error(let rerror, _, _)):
-                return lerror.localizedDescription == rerror.localizedDescription
+            case (.error(let lerr),.error(let rerr)):
+                return lerr.localizedDescription == rerr.localizedDescription
             case (.loaded,.loaded):
                 return true
             default:
@@ -142,9 +141,7 @@ class AccountsManager: ObservableObject {
         
         case starting
         case message(message: String)
-        case error(error: Error,
-                   recoverButton:String? = nil,
-                   recoverAction: (()->())? = nil)
+        case error(error: Error)
         case loaded
     }
 }
