@@ -28,7 +28,7 @@ class AccountsManager: ObservableObject {
     @Stored(in: .serverAccountsStore) private var accounts: [FediAccount]
     
     @Published var loadState: LoadState = .starting
-    @Published var connections: [ConnectionController] = []
+    @Published var connections: [Connection] = []
     
     init(){
         
@@ -36,7 +36,7 @@ class AccountsManager: ObservableObject {
         $accounts.$items
             .map{ serverAccounts in
                 serverAccounts.map { serverAccount in
-                    let conn = ConnectionController(account: serverAccount)
+                    let conn = Connection(account: serverAccount)
                     Task{
                         try await conn.connect()
                     }
@@ -115,7 +115,7 @@ class AccountsManager: ObservableObject {
         }
     }
     
-    subscript(accountId:String) -> ConnectionController?{
+    subscript(accountId:String) -> Connection?{
         return connections.first{
             accountId == $0.account.id
         }

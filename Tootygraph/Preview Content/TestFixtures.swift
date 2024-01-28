@@ -115,4 +115,26 @@ extension Account {
                   bot: false,
                   source: nil)
     }
+    
+    static let testAccount: FediAccount = FediAccount(
+        id: "someid",
+        username: "sam",
+        hue: .random(in: 0...1),
+        instanceURL: URL(string: "https://togl.me")!,
+        accessToken: nil,
+        userAccount: Account(
+            id: "arrg",
+            acct: "dunno",
+            url: "https://example.foo",
+            note: "no notes",
+            avatar: "https://togl.me/system/accounts/avatars/109/331/181/925/532/108/original/4f663b6f6802cac5.jpeg",
+            header: "https://togl.me/system/accounts/headers/109/331/181/925/532/108/original/cc4bcf8745fae566.jpg",
+            headerStatic: "static",
+            locked: false,
+            emojis: [],
+            createdAt: Date(),
+            postsCount: 1023,
+            followersCount: 123,
+            followingCount: 432,
+            fields: []))
 }

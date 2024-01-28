@@ -21,8 +21,7 @@ struct MainView: View {
     // THEN it should show the Tabbed interface
     
     @EnvironmentObject var accountsManager: AccountsManager
-    
-    
+
     var body: some View {
         Group{
             
@@ -38,7 +37,6 @@ struct MainView: View {
                         .tag("settings")
                 } else {
                     TabbedView(connections: $accountsManager.connections)
-                    
                 }
             case .message(let message):
                 

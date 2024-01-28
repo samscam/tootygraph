@@ -11,7 +11,7 @@ import TootSDK
 
 struct ServerAccountView: View{
     
-    let connection: ConnectionController
+    let connection: Connection
     
     var body: some View {
         HStack{
@@ -82,5 +82,5 @@ struct ServerAccountView: View{
             followersCount: 123,
             followingCount: 432,
             fields: []))
-    return ServerAccountView(connection: ConnectionController(account: account)).padding()
+    return ServerAccountView(connection: Connection(account: account)).padding()
 }

@@ -42,7 +42,7 @@ struct TimelineView: View {
             .onAppear{
                 timelineController.loadInitial()
             }
-            .navigationTitle(timelineController.name)
+//            .navigationTitle(timelineController.name)
             
         }
     }

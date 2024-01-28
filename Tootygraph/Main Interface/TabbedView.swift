@@ -14,25 +14,33 @@ import TootSDK
 struct TabbedView: View {
     
     @EnvironmentObject var settings: SettingsManager
-
+    @EnvironmentObject var accountsManager: AccountsManager
+    
     @State var currentPalette: Palette = Palette.standard()
     
-    @State var selectedTimeline: TimelineController? = nil
-
-    @Binding var connections: [ConnectionController]
+    @State var selectedTimeline: String? = nil
+    
+    @Binding var connections: [Connection]
     
     var body: some View {
-
+        
         TabView(selection: $selectedTimeline){
             ForEach(connections){ connection in
+                
                 ForEach(connection.timelines){ timeline in
+                    
                     TimelineView(timelineController: timeline)
-                    // .palette(timeline.connection.palette)
-                }
+                        .tabItem {
+                            Label(timeline.timeline.stringName, systemImage: timeline.timeline.iconName)
+                        }
+//                        .tag(timeline.name)
+                    
+                }.palette(connection.palette)
             }
-
+            
             
         }
+        .tabViewStyle(.page(indexDisplayMode: .never))
         .background{
             ZStack {
                 Rectangle()
@@ -46,64 +54,62 @@ struct TabbedView: View {
                 
             }.ignoresSafeArea()
         }
-//        .onChange(of: selectedViewTag, {
-//            if let connection = accountsManager[selectedViewTag] {
-//                withAnimation{
-//                    currentPalette = connection.palette
-//                }
-//            } else {
-//                withAnimation{
-//                    currentPalette = Palette.standard()
-//                }
-//            }
-//        })
+        .onChange(of: selectedTimeline) {
+            guard let selectedTimeline else { return }
+            guard let palette = accountsManager[selectedTimeline]?.palette else {
+                withAnimation{
+                    currentPalette = .standard()
+                }
+                return
+            }
+            withAnimation{
+                currentPalette = palette
+            }
+            
+        }.palette(currentPalette)
         
-        
-        .tabViewStyle(.page(indexDisplayMode: .never))
-        .safeAreaInset(edge: .bottom,alignment: .center,spacing:0) {
-            if connections.count > 0 {
-                VStack{
-                    
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .safeAreaInset(edge: .bottom,alignment: .center,spacing:0) {
+                if connections.count > 0 {
+                    VStack{
+                        
                         TabBarView(selectedTimeline: $selectedTimeline, connections: connections)
                             .palette(currentPalette)
-                    
+                        
+                    }
                 }
             }
-        }
         
-        .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
-            ActionBarView()
-//                .environment(\.tootClient, selectedTimeline?.tootClient)
-                .palette(currentPalette)
-        }
+            .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
+                ActionBarView()
+//                    .environment(\.tootClient, selectedTimeline?.tootClient)
+                    .palette(currentPalette)
+            }
         
     }
 }
 
 #Preview {
-    let account: FediAccount = FediAccount(
-        id: "someid",
-        username: "sam",
-        hue: .random(in: 0...1),
-        instanceURL: URL(string: "https://togl.me")!,
-        accessToken: nil,
-        userAccount: Account(
-            id: "arrg",
-            acct: "dunno",
-            url: "https://example.foo",
-            note: "no notes",
-            avatar: "https://togl.me/system/accounts/avatars/109/331/181/925/532/108/original/4f663b6f6802cac5.jpeg",
-            header: "https://togl.me/system/accounts/headers/109/331/181/925/532/108/original/cc4bcf8745fae566.jpg",
-            headerStatic: "static",
-            locked: false,
-            emojis: [],
-            createdAt: Date(),
-            postsCount: 1023,
-            followersCount: 123,
-            followingCount: 432,
-            fields: []))
-    @State var connections: [ConnectionController] = [
-        ConnectionController(account:account)
+    let account = Account.testAccount
+    let settings = SettingsManager()
+    let accountsManager = AccountsManager()
+    @State var connections: [Connection] = [
+        Connection(account:account)
     ]
+    
     return TabbedView(connections: $connections)
+        .environmentObject(settings)
+        .environmentObject(accountsManager)
+}
+
+struct MagicTabViewStyle: TabViewStyle{
+    static func _makeView<SelectionValue>(value: _GraphValue<_TabViewValue<MagicPagedTabViewStyle, SelectionValue>>, inputs: _ViewInputs) -> _ViewOutputs where SelectionValue : Hashable {
+        return Text("hello")
+    }
+    
+    static func _makeViewList<SelectionValue>(value: _GraphValue<_TabViewValue<MagicPagedTabViewStyle, SelectionValue>>, inputs: _ViewListInputs) -> _ViewListOutputs where SelectionValue : Hashable {
+        return Text("listView")
+    }
+    
+    
 }

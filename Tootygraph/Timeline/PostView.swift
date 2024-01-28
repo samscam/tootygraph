@@ -16,7 +16,7 @@ struct PostView: View {
     @Environment(\.palette) var palette: Palette
     @EnvironmentObject var settings: SettingsManager
     
-    @ObservedObject var post: PostController
+    var post: PostController
     
     @State var showingReplySheet: Bool = false
     

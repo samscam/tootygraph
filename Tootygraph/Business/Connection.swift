@@ -9,17 +9,18 @@ import Foundation
 import TootSDK
 
 /**
-The ConnectionController is responsible for a single connection to a fedi account.
+The Connection is responsible for a single connection to a fedi account.
  
 */
 @MainActor
-class ConnectionController: ObservableObject {
+@Observable
+class Connection {
     
-    @Published var connectionState: ConnectionState = .connecting
-    @Published var account: FediAccount
-    @Published var timelines: [TimelineController] = []
+    var connectionState: ConnectionState = .connecting
+    var account: FediAccount
+    var timelines: [TimelineController] = []
     
-    @Published private (set) var tootClient: TootClient?
+    private (set) var tootClient: TootClient?
 
     
     init(account: FediAccount) {
@@ -60,13 +61,25 @@ class ConnectionController: ObservableObject {
             connectionState = .connected
             
             timelines = [
-                TimelineController(client: client, timeline: .home),
-                TimelineController(client: client, timeline: .federated)
+                TimelineController(client: client,
+                                   timeline: .home,
+                                   palette: palette),
+                TimelineController(client: client,
+                                   timeline: .federated,
+                                   palette: palette)
             ]
         } catch {
             connectionState = .error(error: error)
         }
 
+    }
+    func timeline(_ timelineType: Timeline) throws -> TimelineController{
+        guard let tootClient else {
+            throw ConnectionError.notConnected
+        }
+        return TimelineController(client: tootClient,
+                           timeline: .federated,
+                           palette: palette)
     }
     
     enum ConnectionState {
@@ -75,20 +88,24 @@ class ConnectionController: ObservableObject {
         case connected
     }
     
+    enum ConnectionError: Error {
+        case notConnected
+    }
+    
     
 }
 
 
-extension ConnectionController: Identifiable {}
+extension Connection: Identifiable {}
 
-extension ConnectionController: Hashable{
+extension Connection: Hashable{
     nonisolated func hash(into hasher: inout Hasher) {
       hasher.combine(id)
     }
 }
 
-extension ConnectionController: Equatable {
-    nonisolated static func == (lhs: ConnectionController, rhs: ConnectionController) -> Bool {
+extension Connection: Equatable {
+    nonisolated static func == (lhs: Connection, rhs: Connection) -> Bool {
       lhs.id == rhs.id
     }
 }

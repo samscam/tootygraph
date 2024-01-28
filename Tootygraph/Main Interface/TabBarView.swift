@@ -13,8 +13,8 @@ import NukeUI
 struct TabBarView: View {
     
     @EnvironmentObject var accountsManager: AccountsManager
-    @Binding var selectedTimeline: TimelineController?
-    let connections: [ConnectionController]
+    @Binding var selectedTimeline: String?
+    let connections: [Connection]
     
     var body: some View {
         

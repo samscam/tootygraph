@@ -34,8 +34,8 @@ class TimelineController {
     
     var posts: [PostController] = []
     var loading: Bool = false
-    var name: String = ""
-    var account: Account?
+    var palette: Palette
+    var name: String
     
     private (set) var client: TootClient
     
@@ -56,11 +56,11 @@ class TimelineController {
 
     
     
-    init(client: TootClient, timeline: Timeline){
+    init(client: TootClient, timeline: Timeline, palette: Palette){
         self.client = client
         self.timeline = timeline
-        self.name = client.instanceURL.absoluteString
-        
+        self.palette = palette
+        self.name = timeline.stringName
         
         // Binding for postsSet to apply filtering and update posts
         
@@ -95,8 +95,6 @@ class TimelineController {
         pagingState = .loadingFirst
         Task{
             do {
-                let _ = try await client.verifyCredentials()
-                
                 try await self.loadMore()
                 await self.startStreaming()
             } catch {
@@ -176,7 +174,7 @@ class TimelineController {
     func refresh() async throws {
         self.loading = true
         try await client.data.refresh(timeline)
-        try await client.data.refresh(.verifyCredentials)
+//        try await client.data.refresh(.verifyCredentials)
         self.loading = false
     }
     
@@ -220,5 +218,21 @@ extension TimelineController: Hashable{
 extension TimelineController: Equatable {
     nonisolated static func == (lhs: TimelineController, rhs: TimelineController) -> Bool {
         lhs.id == rhs.id
+    }
+}
+
+
+extension Timeline{
+    var stringName: String {
+        switch self {
+            case .bookmarks: return "Bookmarks"
+            case .favourites: return "Favourites"
+            case .federated: return "Federated"
+            case .home: return "Home"
+            case .hashtag: return "Hashtag"
+            case .list: return "List"
+            case .user: return "User"
+            case .local: return "Local"
+        }
     }
 }

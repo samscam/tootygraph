@@ -28,6 +28,7 @@
 		2245C22A299847AF004B3A4A /* TootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C229299847AF004B3A4A /* TootSDK */; };
 		22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */; };
 		22516CD12B5F301E004F8A88 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CD02B5F301E004F8A88 /* Injection.swift */; };
+		22516CD32B630870004F8A88 /* TestTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CD22B630870004F8A88 /* TestTimeline.swift */; };
 		2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276821E2B5D371A001E5D80 /* TabbedView.swift */; };
 		227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227682202B5D7A0A001E5D80 /* SplashView.swift */; };
 		227682232B5D90C1001E5D80 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227682222B5D90C1001E5D80 /* ConnectionView.swift */; };
@@ -40,7 +41,7 @@
 		22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */; };
 		22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */; };
 		22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B012B58464600378FF9 /* PhotoPickerView.swift */; };
-		22931B062B58533C00378FF9 /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* ConnectionController.swift */; };
+		22931B062B58533C00378FF9 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* Connection.swift */; };
 		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -84,6 +85,7 @@
 		224390652A5D90180040C26C /* FilmStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmStrip.swift; sourceTree = "<group>"; };
 		22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tootygraph.swift; sourceTree = "<group>"; };
 		22516CD02B5F301E004F8A88 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
+		22516CD22B630870004F8A88 /* TestTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTimeline.swift; sourceTree = "<group>"; };
 		2276821E2B5D371A001E5D80 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
 		227682202B5D7A0A001E5D80 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		227682222B5D90C1001E5D80 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
@@ -96,7 +98,7 @@
 		22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootClientEnvironment.swift; sourceTree = "<group>"; };
 		22931B012B58464600378FF9 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
-		22931B052B58533C00378FF9 /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
+		22931B052B58533C00378FF9 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* FediAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FediAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PostComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerView.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				22D750FC2B53547E00B71F7D /* macs.jpeg */,
 				22EC1205298F23E200976ECC /* Preview Assets.xcassets */,
 				22D750F72B534BC300B71F7D /* TestFixtures.swift */,
+				22516CD22B630870004F8A88 /* TestTimeline.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -295,7 +298,7 @@
 				22002244299850F5000FA97F /* AccountsManager.swift */,
 				22AD6C802A5B6103008A79CA /* FediAccount.swift */,
 				2236FB7629970E5000436F65 /* SettingsManager.swift */,
-				22931B052B58533C00378FF9 /* ConnectionController.swift */,
+				22931B052B58533C00378FF9 /* Connection.swift */,
 				2287F25B29A826F400F24EA9 /* PostController.swift */,
 			);
 			path = Business;
@@ -405,7 +408,7 @@
 				227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */,
 				22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */,
 				220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */,
-				22931B062B58533C00378FF9 /* ConnectionController.swift in Sources */,
+				22931B062B58533C00378FF9 /* Connection.swift in Sources */,
 				22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */,
 				2236FB7729970E5000436F65 /* SettingsManager.swift in Sources */,
 				22EC1200298F23E100976ECC /* TimelineView.swift in Sources */,
@@ -432,6 +435,7 @@
 				220AE8C129C521A30023554D /* CameraView.swift in Sources */,
 				22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */,
 				2287F25C29A826F400F24EA9 /* PostController.swift in Sources */,
+				22516CD32B630870004F8A88 /* TestTimeline.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
 				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,
 				227C65D929A4F8FE006BF540 /* CornerBadgeView.swift in Sources */,

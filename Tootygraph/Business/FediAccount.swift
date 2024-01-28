@@ -14,7 +14,7 @@ import SwiftUI
  
  The actual `Account` providing full details of the user from TootSDK is embedded within it and updated when connected.
  
- Suitable for storing locally and initiating a ConnectionController.
+ Suitable for storing locally and initiating a Connection.
  */
 struct FediAccount: Codable, Equatable, Identifiable, Hashable {
     

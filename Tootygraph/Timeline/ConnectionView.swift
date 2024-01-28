@@ -11,7 +11,7 @@ import Boutique
 import TootSDK
 
 struct ConnectionView: View {
-    @ObservedObject var connection: ConnectionController
+    var connection: Connection
     @EnvironmentObject var settings: SettingsManager
     
     var body: some View {
