@@ -104,7 +104,10 @@ class AccountsManager: ObservableObject {
         
         let serverAccount = FediAccount(id: userAccount.id,
                                         username: userAccount.acct,
-                                          hue: .random(in: 0...1) , instanceURL: url, accessToken: accessToken, userAccount: userAccount)
+                                        hue: .random(in: 0...1),
+                                        instanceURL: url,
+                                        accessToken: accessToken,
+                                        userAccount: userAccount)
         try await addServerAccount(serverAccount)
         
     }
@@ -115,9 +118,9 @@ class AccountsManager: ObservableObject {
         }
     }
     
-    subscript(accountId:String) -> Connection?{
+    subscript(feedIdentifier:FeedIdentifier) -> Connection?{
         return connections.first{
-            accountId == $0.account.id
+            feedIdentifier.account == $0.account.niceName
         }
     }
     

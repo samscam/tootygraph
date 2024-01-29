@@ -35,7 +35,7 @@ class TimelineController {
     var posts: [PostController] = []
     var loading: Bool = false
     var palette: Palette
-    var name: String
+    var accountNiceName: String
     
     private (set) var client: TootClient
     
@@ -56,11 +56,11 @@ class TimelineController {
 
     
     
-    init(client: TootClient, timeline: Timeline, palette: Palette){
+    init(client: TootClient, timeline: Timeline, palette: Palette, accountNiceName: String){
         self.client = client
         self.timeline = timeline
         self.palette = palette
-        self.name = timeline.stringName
+        self.accountNiceName = accountNiceName
         
         // Binding for postsSet to apply filtering and update posts
         
@@ -174,7 +174,7 @@ class TimelineController {
     func refresh() async throws {
         self.loading = true
         try await client.data.refresh(timeline)
-//        try await client.data.refresh(.verifyCredentials)
+        try await client.data.refresh(.verifyCredentials)
         self.loading = false
     }
     
@@ -207,16 +207,22 @@ class TimelineController {
     
 }
 
-extension TimelineController: Identifiable{}
+extension TimelineController: Identifiable{
+    
+    var id: FeedIdentifier {
+        return FeedIdentifier(account: accountNiceName, timeline: timeline.stringName)
+    }
+    
+}
 
 extension TimelineController: Hashable{
-    nonisolated func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }
 
 extension TimelineController: Equatable {
-    nonisolated static func == (lhs: TimelineController, rhs: TimelineController) -> Bool {
+    static func == (lhs: TimelineController, rhs: TimelineController) -> Bool {
         lhs.id == rhs.id
     }
 }

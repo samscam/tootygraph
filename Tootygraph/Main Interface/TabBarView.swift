@@ -13,7 +13,8 @@ import NukeUI
 struct TabBarView: View {
     
     @EnvironmentObject var accountsManager: AccountsManager
-    @Binding var selectedTimeline: String?
+    @Environment(\.palette) var palette: Palette
+    @Binding var selectedTimeline: FeedIdentifier?
     let connections: [Connection]
     
     var body: some View {
@@ -21,18 +22,84 @@ struct TabBarView: View {
         ScrollView(.horizontal) {
             HStack{
                 ForEach(connections){ connection in
-                    
-                    LazyImage(url: connection.avatarURL){ state in
-                        if let image = state.image {
-                            image.resizable()
-                        } else {
-                            Color.gray
-                        }
-                    }
-                    .frame(width: 52,height:52)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    ConnectionLozenge(connection: connection, selectedFeed: $selectedTimeline)
+                }
+            }.padding(5)
+        }
+        .background(
+            Material.bar
+        )
+    }
+    
+}
+
+struct ConnectionLozenge: View {
+    let connection: Connection
+    @Binding var selectedFeed: FeedIdentifier?
+    
+    var body: some View {
+        HStack{
+            LazyImage(url: connection.avatarURL){ state in
+                if let image = state.image {
+                    image.resizable()
+                } else {
+                    Color.gray
                 }
             }
+            .frame(width: 42,height:42)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            ForEach(connection.timelines){ timeline in
+                Button {
+                    withAnimation {
+                        selectedFeed = timeline.id
+                    }
+                   
+                } label: {
+                    Image(systemName: timeline.timeline.iconName)
+                        .resizable()
+                        
+                        .padding(5)
+                        .frame(width: 42,height:42)
+                        .background{
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(connection.palette.background)
+                                .stroke(highlightStyle(for: timeline.id),lineWidth:4)
+                                
+                        }
+                }
+                .buttonStyle(.plain)
+                .tint(connection.palette.highlight)
+            }
+        }
+        .padding(5)
+        .background{
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(lozengeStyle)
+                .blur(radius: 2)
+        }
+    }
+    
+    @MainActor
+    var lozengeStyle: some ShapeStyle {
+        
+        let background: AnyShapeStyle
+        if let selectedFeed,
+           selectedFeed.account == connection.account.niceName {
+            background = AnyShapeStyle(connection.palette.highlight)
+        } else {
+            background = AnyShapeStyle(connection.palette.postBackground)
+        }
+        return background
+    }
+    
+    @MainActor
+    func highlightStyle(for feed: FeedIdentifier) -> some ShapeStyle{
+        if let selectedFeed,
+           selectedFeed == feed {
+            return AnyShapeStyle(connection.palette.highlight)
+        } else {
+            return AnyShapeStyle(.clear)
         }
     }
 }

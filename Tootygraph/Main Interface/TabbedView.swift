@@ -18,29 +18,17 @@ struct TabbedView: View {
     
     @State var currentPalette: Palette = Palette.standard()
     
-    @State var selectedTimeline: String? = nil
+    @State var selectedTimeline: FeedIdentifier? = nil
     
     @Binding var connections: [Connection]
     
     var body: some View {
         
-        TabView(selection: $selectedTimeline){
+        SwipeableTabView(selection: $selectedTimeline){
             ForEach(connections){ connection in
-                
-                ForEach(connection.timelines){ timeline in
-                    
-                    TimelineView(timelineController: timeline)
-                        .tabItem {
-                            Label(timeline.timeline.stringName, systemImage: timeline.timeline.iconName)
-                        }
-//                        .tag(timeline.name)
-                    
-                }.palette(connection.palette)
+                ConnectionView(connection: connection).palette(connection.palette)
             }
-            
-            
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
         .background{
             ZStack {
                 Rectangle()
@@ -54,8 +42,10 @@ struct TabbedView: View {
                 
             }.ignoresSafeArea()
         }
-        .onChange(of: selectedTimeline) {
-            guard let selectedTimeline else { return }
+        .onChange(of: selectedTimeline, initial: true) {
+            guard let selectedTimeline else {
+                return
+            }
             guard let palette = accountsManager[selectedTimeline]?.palette else {
                 withAnimation{
                     currentPalette = .standard()
@@ -79,20 +69,32 @@ struct TabbedView: View {
                     }
                 }
             }
-        
+//            .overlay{
             .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
                 ActionBarView()
-//                    .environment(\.tootClient, selectedTimeline?.tootClient)
+                //                    .environment(\.tootClient, selectedTimeline?.tootClient)
                     .palette(currentPalette)
             }
         
     }
 }
 
+
+struct FeedIdentifier: Hashable, Equatable {
+    let account: String
+    let timeline: String
+    
+    static var unknown: FeedIdentifier {
+        FeedIdentifier(account: "unknown", timeline: "unknown")
+    }
+}
+
+
 #Preview {
     let account = Account.testAccount
     let settings = SettingsManager()
     let accountsManager = AccountsManager()
+    
     @State var connections: [Connection] = [
         Connection(account:account)
     ]
@@ -100,16 +102,4 @@ struct TabbedView: View {
     return TabbedView(connections: $connections)
         .environmentObject(settings)
         .environmentObject(accountsManager)
-}
-
-struct MagicTabViewStyle: TabViewStyle{
-    static func _makeView<SelectionValue>(value: _GraphValue<_TabViewValue<MagicPagedTabViewStyle, SelectionValue>>, inputs: _ViewInputs) -> _ViewOutputs where SelectionValue : Hashable {
-        return Text("hello")
-    }
-    
-    static func _makeViewList<SelectionValue>(value: _GraphValue<_TabViewValue<MagicPagedTabViewStyle, SelectionValue>>, inputs: _ViewListInputs) -> _ViewListOutputs where SelectionValue : Hashable {
-        return Text("listView")
-    }
-    
-    
 }

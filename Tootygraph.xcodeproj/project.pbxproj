@@ -42,6 +42,7 @@
 		22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */; };
 		22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B012B58464600378FF9 /* PhotoPickerView.swift */; };
 		22931B062B58533C00378FF9 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* Connection.swift */; };
+		229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */; };
 		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -99,6 +100,7 @@
 		22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootClientEnvironment.swift; sourceTree = "<group>"; };
 		22931B012B58464600378FF9 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		22931B052B58533C00378FF9 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTabView.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* FediAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FediAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PostComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerView.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				22931AF72B548B0B00378FF9 /* FancyPicker.swift */,
 				22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */,
 				22516CD02B5F301E004F8A88 /* Injection.swift */,
+				229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */,
 			);
 			path = Oddments;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
 				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */,
+				229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
 				227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */,
 				22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */,

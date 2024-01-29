@@ -29,8 +29,9 @@ struct ConnectionView: View {
                 Text(error.localizedDescription)
             }
         case .connected:
-            ForEach(connection.timelines){ timeline in
+            ForEach(connection.timelines,id:\.id){ timeline in
                 TimelineView(timelineController: timeline)
+                    
             }
         }
         

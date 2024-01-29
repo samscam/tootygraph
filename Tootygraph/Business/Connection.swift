@@ -63,10 +63,12 @@ class Connection {
             timelines = [
                 TimelineController(client: client,
                                    timeline: .home,
-                                   palette: palette),
+                                   palette: palette,
+                                   accountNiceName: serverAccount.niceName),
                 TimelineController(client: client,
                                    timeline: .federated,
-                                   palette: palette)
+                                   palette: palette,
+                                  accountNiceName: serverAccount.niceName)
             ]
         } catch {
             connectionState = .error(error: error)
@@ -79,7 +81,8 @@ class Connection {
         }
         return TimelineController(client: tootClient,
                            timeline: .federated,
-                           palette: palette)
+                           palette: palette,
+                                  accountNiceName:account.niceName)
     }
     
     enum ConnectionState {
