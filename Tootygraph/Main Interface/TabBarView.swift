@@ -14,18 +14,26 @@ struct TabBarView: View {
     
     @EnvironmentObject var accountsManager: AccountsManager
     @Environment(\.palette) var palette: Palette
+    
     @Binding var selectedTimeline: FeedIdentifier?
+    
+    let horizontal: Bool
+    
     let connections: [Connection]
     
     var body: some View {
         
-        ScrollView(.horizontal) {
-            HStack{
+        ScrollView(horizontal ? .horizontal : .vertical) {
+            FlippingStackView(horizontal: horizontal){
                 ForEach(connections){ connection in
-                    ConnectionLozenge(connection: connection, selectedFeed: $selectedTimeline)
+                    ConnectionLozenge(connection: connection, horizontal: horizontal, selectedFeed: $selectedTimeline)
                 }
-            }.padding(5)
+            }.scrollTargetLayout()
+                .padding(5)
         }
+        .scrollIndicators(.never)
+        .scrollClipDisabled(true)
+        .scrollTargetBehavior(.viewAligned)
         .background(
             Material.bar
         )
@@ -35,10 +43,11 @@ struct TabBarView: View {
 
 struct ConnectionLozenge: View {
     let connection: Connection
+    let horizontal: Bool
     @Binding var selectedFeed: FeedIdentifier?
     
     var body: some View {
-        HStack{
+        FlippingStackView(horizontal: horizontal){
             LazyImage(url: connection.avatarURL){ state in
                 if let image = state.image {
                     image.resizable()
@@ -103,49 +112,7 @@ struct ConnectionLozenge: View {
         }
     }
 }
-/**
-//                    .if(connection.timelines.contains(selectedTimeline)){
-//                        $0.overlay{
-//                            
-//                            let highlight = connection.palette.highlight
-//                            RoundedRectangle(cornerRadius: 10)
-//                                .stroke(highlight, lineWidth: 4)
-//                            
-//                        }
-//                    }
-                    
-                    ForEach(connections){ timeline in
-                        Image(systemName: timeline.timeline.iconName)
-                        
-                    }
-//                    .opacity(connection.account.id != selectedViewTag 0.7)
-                    
-//                    .onTapGesture {
-//                        withAnimation(.spring(duration:0.2)) {
-//                            selectedTimeline = connection.account.id
-//                        }
-//                    }
-                    
-//                    .tag(connection.account.id)
-                }
-            }
-        }
-        .scrollClipDisabled()
-        .padding(10)
-        .background(
-            Material.bar
-        )
-        
-    }
-}
 
-//#Preview {
-//    let accountsManager = AccountsManager()
-//    @State var selectedViewTag: String = "preferences"
-//    
-//    return TabBarView(selectedViewTag: $selectedViewTag).environmentObject(accountsManager)
-//}
- */
 
 extension Timeline {
     var iconName: String {

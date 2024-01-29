@@ -17,10 +17,10 @@ struct TimelineView: View {
     
     var body: some View {
         
-        GeometryReader{ geometry in
+//        GeometryReader{ geometry in
             List(timelineController.posts) { post in
                 
-                PostView(post: post, geometry: geometry)
+                PostView(post: post)
                     .padding(20)
                     .onAppear{
                         timelineController.onItemAppear(post)
@@ -45,7 +45,7 @@ struct TimelineView: View {
 //            .navigationTitle(timelineController.name)
             
         }
-    }
+//    }
 }
 
 

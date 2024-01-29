@@ -43,6 +43,8 @@
 		22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B012B58464600378FF9 /* PhotoPickerView.swift */; };
 		22931B062B58533C00378FF9 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* Connection.swift */; };
 		229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */; };
+		229C19BD2B68628E00AD7F9B /* FlippingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */; };
+		229C19BF2B686BD100AD7F9B /* FlippingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BE2B686BD100AD7F9B /* FlippingBar.swift */; };
 		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -101,6 +103,8 @@
 		22931B012B58464600378FF9 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		22931B052B58533C00378FF9 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTabView.swift; sourceTree = "<group>"; };
+		229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingStackView.swift; sourceTree = "<group>"; };
+		229C19BE2B686BD100AD7F9B /* FlippingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingBar.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* FediAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FediAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PostComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerView.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 				22120CAE2B4B7395006FECD6 /* Palette.swift */,
 				22931AF72B548B0B00378FF9 /* FancyPicker.swift */,
 				22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */,
+				229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */,
+				229C19BE2B686BD100AD7F9B /* FlippingBar.swift */,
 				22516CD02B5F301E004F8A88 /* Injection.swift */,
 				229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */,
 			);
@@ -416,6 +422,7 @@
 				22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */,
 				2236FB7729970E5000436F65 /* SettingsManager.swift in Sources */,
 				22EC1200298F23E100976ECC /* TimelineView.swift in Sources */,
+				229C19BD2B68628E00AD7F9B /* FlippingStackView.swift in Sources */,
 				22002243299850C6000FA97F /* AccountsView.swift in Sources */,
 				22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */,
 				22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */,
@@ -441,6 +448,7 @@
 				2287F25C29A826F400F24EA9 /* PostController.swift in Sources */,
 				22516CD32B630870004F8A88 /* TestTimeline.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
+				229C19BF2B686BD100AD7F9B /* FlippingBar.swift in Sources */,
 				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,
 				227C65D929A4F8FE006BF540 /* CornerBadgeView.swift in Sources */,
 			);

@@ -16,8 +16,10 @@ struct ActionBarView: View {
     @Environment(\.tootClient) var tootClient: TootClient?
     @Environment(\.palette) var palette: Palette
     
+    let horizontal: Bool
+    
     var body: some View {
-        HStack{
+        FlippingStackView(horizontal: horizontal){
             Button {
                 showingSettings = true
             } label: {
@@ -57,5 +59,5 @@ struct ActionBarView: View {
 #Preview(traits:.sizeThatFitsLayout) {
     @State var showingPostComposer: Bool = false
     
-    return ActionBarView(showingPostComposer: showingPostComposer)
+    return ActionBarView(showingPostComposer: showingPostComposer, horizontal: true)
 }

@@ -21,6 +21,7 @@ struct TabbedView: View {
     @State var selectedTimeline: FeedIdentifier? = nil
     
     @Binding var connections: [Connection]
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
         
@@ -56,26 +57,28 @@ struct TabbedView: View {
                 currentPalette = palette
             }
             
-        }.palette(currentPalette)
+        }
+        .palette(currentPalette)
+        .flippingBar(flipped: verticalSizeClass == .compact, orientation: .bottomLeading){
+            feedSelectionBar
+        }
+        .flippingBar(flipped: verticalSizeClass == .compact, orientation: .topTrailing){
+            ActionBarView(horizontal: verticalSizeClass == .regular)
+               .palette(currentPalette)
+       }
         
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .safeAreaInset(edge: .bottom,alignment: .center,spacing:0) {
-                if connections.count > 0 {
-                    VStack{
-                        
-                        TabBarView(selectedTimeline: $selectedTimeline, connections: connections)
-                            .palette(currentPalette)
-                        
-                    }
+    }
+    
+    var feedSelectionBar: some View {
+        Group{
+            if connections.count > 0 {
+                VStack{
+                    TabBarView(selectedTimeline: $selectedTimeline, horizontal: verticalSizeClass == .regular, connections: connections)
+                        .palette(currentPalette)
+                    
                 }
             }
-//            .overlay{
-            .safeAreaInset(edge: .top,alignment: .center,spacing:0) {
-                ActionBarView()
-                //                    .environment(\.tootClient, selectedTimeline?.tootClient)
-                    .palette(currentPalette)
-            }
-        
+        }
     }
 }
 

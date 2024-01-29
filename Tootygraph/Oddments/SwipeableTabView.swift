@@ -27,10 +27,7 @@ struct SwipeableTabView<Content: View, Selection: Hashable>: View {
             .scrollPosition(id: $selection)
             .scrollIndicators(.never)
             .scrollClipDisabled(true)
-            .scrollTargetBehavior(.paging)
-            .onChange(of: selection) {
-                print(selection ?? "none")
-            }
+            .scrollTargetBehavior(.viewAligned)
 
         }
     }
