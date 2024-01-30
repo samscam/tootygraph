@@ -1,5 +1,5 @@
 //
-//  TimelineController.swift
+//  Feed.swift
 //  Tootygraph
 //
 //  Created by Sam Easterby-Smith on 12/02/2023.
@@ -30,7 +30,7 @@ enum PagingErrors: Error {
 
 @MainActor
 @Observable
-class TimelineController {
+class Feed {
     
     var posts: [PostController] = []
     var loading: Bool = false
@@ -207,7 +207,7 @@ class TimelineController {
     
 }
 
-extension TimelineController: Identifiable{
+extension Feed: Identifiable{
     
     var id: FeedIdentifier {
         return FeedIdentifier(account: accountNiceName, timeline: timeline.stringName)
@@ -215,14 +215,14 @@ extension TimelineController: Identifiable{
     
 }
 
-extension TimelineController: Hashable{
+extension Feed: Hashable{
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }
 
-extension TimelineController: Equatable {
-    static func == (lhs: TimelineController, rhs: TimelineController) -> Bool {
+extension Feed: Equatable {
+    static func == (lhs: Feed, rhs: Feed) -> Bool {
         lhs.id == rhs.id
     }
 }

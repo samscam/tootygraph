@@ -18,14 +18,14 @@ struct TabbedView: View {
     
     @State var currentPalette: Palette = Palette.standard()
     
-    @State var selectedTimeline: FeedIdentifier? = nil
+    @State var selectedFeed: FeedIdentifier? = nil
     
     @Binding var connections: [Connection]
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
         
-        SwipeableTabView(selection: $selectedTimeline){
+        SwipeableTabView(selection: $selectedFeed){
             ForEach(connections){ connection in
                 ConnectionView(connection: connection).palette(connection.palette)
             }
@@ -43,11 +43,11 @@ struct TabbedView: View {
                 
             }.ignoresSafeArea()
         }
-        .onChange(of: selectedTimeline, initial: true) {
-            guard let selectedTimeline else {
+        .onChange(of: selectedFeed, initial: true) {
+            guard let selectedFeed else {
                 return
             }
-            guard let palette = accountsManager[selectedTimeline]?.palette else {
+            guard let palette = accountsManager[selectedFeed]?.palette else {
                 withAnimation{
                     currentPalette = .standard()
                 }
@@ -73,7 +73,7 @@ struct TabbedView: View {
         Group{
             if connections.count > 0 {
                 VStack{
-                    TabBarView(selectedTimeline: $selectedTimeline, horizontal: verticalSizeClass == .regular, connections: connections)
+                    TabBarView(selectedFeed: $selectedFeed, horizontal: verticalSizeClass == .regular, connections: connections)
                         .palette(currentPalette)
                     
                 }

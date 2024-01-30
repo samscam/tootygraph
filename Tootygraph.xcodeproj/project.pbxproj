@@ -11,7 +11,7 @@
 		22002245299850F5000FA97F /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22002244299850F5000FA97F /* AccountsManager.swift */; };
 		220022472998759E000FA97F /* BoutiqueStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220022462998759E000FA97F /* BoutiqueStores.swift */; };
 		2200224929987715000FA97F /* ServerAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224829987715000FA97F /* ServerAccountView.swift */; };
-		2200224C2999A8B7000FA97F /* TimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* TimelineController.swift */; };
+		2200224C2999A8B7000FA97F /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* Feed.swift */; };
 		220AE8C129C521A30023554D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C029C521A30023554D /* CameraView.swift */; };
 		220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C229C521B30023554D /* CameraViewModel.swift */; };
 		22120CA92B4A2A99006FECD6 /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CA82B4A2A99006FECD6 /* NukeVideo */; };
@@ -56,7 +56,7 @@
 		22D750FD2B53547E00B71F7D /* heaton.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750FB2B53547E00B71F7D /* heaton.jpeg */; };
 		22D750FE2B53547E00B71F7D /* macs.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750FC2B53547E00B71F7D /* macs.jpeg */; };
 		22DFF05D29AD5D9F00D14A27 /* PostComposerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF05C29AD5D9F00D14A27 /* PostComposerViewModel.swift */; };
-		22EC1200298F23E100976ECC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FF298F23E100976ECC /* TimelineView.swift */; };
+		22EC1200298F23E100976ECC /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC11FF298F23E100976ECC /* FeedView.swift */; };
 		22EC1202298F23E200976ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1201298F23E200976ECC /* Assets.xcassets */; };
 		22EC1206298F23E200976ECC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22EC1205298F23E200976ECC /* Preview Assets.xcassets */; };
 		22EC121D298F430800976ECC /* BoxPacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC121C298F430800976ECC /* BoxPacker.swift */; };
@@ -76,7 +76,7 @@
 		220022462998759E000FA97F /* BoutiqueStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueStores.swift; sourceTree = "<group>"; };
 		2200224829987715000FA97F /* ServerAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccountView.swift; sourceTree = "<group>"; };
 		2200224A2998CECF000FA97F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2200224B2999A8B7000FA97F /* TimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineController.swift; sourceTree = "<group>"; };
+		2200224B2999A8B7000FA97F /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		220AE8C029C521A30023554D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		220AE8C229C521B30023554D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		22120CAE2B4B7395006FECD6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		22D750FC2B53547E00B71F7D /* macs.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = macs.jpeg; sourceTree = "<group>"; };
 		22DFF05C29AD5D9F00D14A27 /* PostComposerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerViewModel.swift; sourceTree = "<group>"; };
 		22EC11FA298F23E100976ECC /* Tootygraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tootygraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22EC11FF298F23E100976ECC /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		22EC11FF298F23E100976ECC /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		22EC1201298F23E200976ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22EC1203298F23E200976ECC /* Tootygraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tootygraph.entitlements; sourceTree = "<group>"; };
 		22EC1205298F23E200976ECC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -168,9 +168,8 @@
 		2236FB672995B63300436F65 /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
-				22EC11FF298F23E100976ECC /* TimelineView.swift */,
+				22EC11FF298F23E100976ECC /* FeedView.swift */,
 				227682222B5D90C1001E5D80 /* ConnectionView.swift */,
-				2200224B2999A8B7000FA97F /* TimelineController.swift */,
 				2236FB622994609000436F65 /* DetailView.swift */,
 				22EC121E298FCBF300976ECC /* PostView.swift */,
 				2287F25729A7F53700F24EA9 /* ActionsView.swift */,
@@ -308,6 +307,7 @@
 				22AD6C802A5B6103008A79CA /* FediAccount.swift */,
 				2236FB7629970E5000436F65 /* SettingsManager.swift */,
 				22931B052B58533C00378FF9 /* Connection.swift */,
+				2200224B2999A8B7000FA97F /* Feed.swift */,
 				2287F25B29A826F400F24EA9 /* PostController.swift */,
 			);
 			path = Business;
@@ -421,7 +421,7 @@
 				22931B062B58533C00378FF9 /* Connection.swift in Sources */,
 				22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */,
 				2236FB7729970E5000436F65 /* SettingsManager.swift in Sources */,
-				22EC1200298F23E100976ECC /* TimelineView.swift in Sources */,
+				22EC1200298F23E100976ECC /* FeedView.swift in Sources */,
 				229C19BD2B68628E00AD7F9B /* FlippingStackView.swift in Sources */,
 				22002243299850C6000FA97F /* AccountsView.swift in Sources */,
 				22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */,
@@ -439,7 +439,7 @@
 				22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */,
 				22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */,
 				22CD12092991BE5E00B7D70D /* ActionBarView.swift in Sources */,
-				2200224C2999A8B7000FA97F /* TimelineController.swift in Sources */,
+				2200224C2999A8B7000FA97F /* Feed.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
 				22DFF05D29AD5D9F00D14A27 /* PostComposerViewModel.swift in Sources */,
 				22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */,

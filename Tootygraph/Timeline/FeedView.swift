@@ -11,19 +11,19 @@ import TootSDK
 
 
 
-struct TimelineView: View {
+struct FeedView: View {
     
-    var timelineController: TimelineController
+    var feed: Feed
     
     var body: some View {
         
 //        GeometryReader{ geometry in
-            List(timelineController.posts) { post in
+            List(feed.posts) { post in
                 
                 PostView(post: post)
                     .padding(20)
                     .onAppear{
-                        timelineController.onItemAppear(post)
+                        feed.onItemAppear(post)
                     }
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -34,15 +34,15 @@ struct TimelineView: View {
             .padding(0)
             .refreshable {
                 do {
-                    try await timelineController.refresh()
+                    try await feed.refresh()
                 } catch {
                     print("Oh noes \(error)")
                 }
             }
             .onAppear{
-                timelineController.loadInitial()
+                feed.loadInitial()
             }
-//            .navigationTitle(timelineController.name)
+//            .navigationTitle(feed.name)
             
         }
 //    }

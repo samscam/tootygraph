@@ -18,7 +18,7 @@ class Connection {
     
     var connectionState: ConnectionState = .connecting
     var account: FediAccount
-    var timelines: [TimelineController] = []
+    var feeds: [Feed] = []
     
     private (set) var tootClient: TootClient?
 
@@ -60,12 +60,12 @@ class Connection {
             self.tootClient = client
             connectionState = .connected
             
-            timelines = [
-                TimelineController(client: client,
+            feeds = [
+                Feed(client: client,
                                    timeline: .home,
                                    palette: palette,
                                    accountNiceName: serverAccount.niceName),
-                TimelineController(client: client,
+                Feed(client: client,
                                    timeline: .federated,
                                    palette: palette,
                                   accountNiceName: serverAccount.niceName)
@@ -74,15 +74,6 @@ class Connection {
             connectionState = .error(error: error)
         }
 
-    }
-    func timeline(_ timelineType: Timeline) throws -> TimelineController{
-        guard let tootClient else {
-            throw ConnectionError.notConnected
-        }
-        return TimelineController(client: tootClient,
-                           timeline: .federated,
-                           palette: palette,
-                                  accountNiceName:account.niceName)
     }
     
     enum ConnectionState {

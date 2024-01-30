@@ -15,7 +15,7 @@ struct TabBarView: View {
     @EnvironmentObject var accountsManager: AccountsManager
     @Environment(\.palette) var palette: Palette
     
-    @Binding var selectedTimeline: FeedIdentifier?
+    @Binding var selectedFeed: FeedIdentifier?
     
     let horizontal: Bool
     
@@ -26,7 +26,7 @@ struct TabBarView: View {
         ScrollView(horizontal ? .horizontal : .vertical) {
             FlippingStackView(horizontal: horizontal){
                 ForEach(connections){ connection in
-                    ConnectionLozenge(connection: connection, horizontal: horizontal, selectedFeed: $selectedTimeline)
+                    ConnectionLozenge(connection: connection, horizontal: horizontal, selectedFeed: $selectedFeed)
                 }
             }.scrollTargetLayout()
                 .padding(5)
@@ -58,14 +58,14 @@ struct ConnectionLozenge: View {
             .frame(width: 42,height:42)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
-            ForEach(connection.timelines){ timeline in
+            ForEach(connection.feeds){ feed in
                 Button {
                     withAnimation {
-                        selectedFeed = timeline.id
+                        selectedFeed = feed.id
                     }
                    
                 } label: {
-                    Image(systemName: timeline.timeline.iconName)
+                    Image(systemName: feed.timeline.iconName)
                         .resizable()
                         
                         .padding(5)
@@ -73,7 +73,7 @@ struct ConnectionLozenge: View {
                         .background{
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(connection.palette.background)
-                                .stroke(highlightStyle(for: timeline.id),lineWidth:4)
+                                .stroke(highlightStyle(for: feed.id),lineWidth:4)
                                 
                         }
                 }
