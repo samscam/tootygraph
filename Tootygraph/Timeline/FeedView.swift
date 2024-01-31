@@ -13,17 +13,24 @@ import TootSDK
 
 struct FeedView: View {
     
-    var feed: Feed
+    var feed: any Feed
     
     var body: some View {
         
 //        GeometryReader{ geometry in
-            List(feed.posts) { post in
-                
-                PostView(post: post)
+        List(feed.items, id:\.id) { item in
+                Group{
+                    switch item {
+                    case let item as PostController:
+                        PostView(post: item)
+                    default:
+                        Text("whoopsy")
+                    }
+                    
+                }
                     .padding(20)
                     .onAppear{
-                        feed.onItemAppear(post)
+                        feed.onItemAppear(item)
                     }
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))

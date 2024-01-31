@@ -118,9 +118,9 @@ class AccountsManager: ObservableObject {
         }
     }
     
-    subscript(feedIdentifier:FeedIdentifier) -> Connection?{
+    subscript(id: UUID) -> Connection?{
         return connections.first{
-            feedIdentifier.account == $0.account.niceName
+            id == $0.id
         }
     }
     

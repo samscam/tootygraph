@@ -18,7 +18,9 @@ class Connection {
     
     var connectionState: ConnectionState = .connecting
     var account: FediAccount
-    var feeds: [Feed] = []
+    var feeds: [any Feed] = []
+    
+    let id: UUID = UUID()
     
     private (set) var tootClient: TootClient?
 
@@ -61,11 +63,11 @@ class Connection {
             connectionState = .connected
             
             feeds = [
-                Feed(client: client,
+                TootFeed(client: client,
                                    timeline: .home,
                                    palette: palette,
                                    accountNiceName: serverAccount.niceName),
-                Feed(client: client,
+                TootFeed(client: client,
                                    timeline: .federated,
                                    palette: palette,
                                   accountNiceName: serverAccount.niceName)
@@ -90,7 +92,9 @@ class Connection {
 }
 
 
-extension Connection: Identifiable {}
+extension Connection: Identifiable {
+    
+}
 
 extension Connection: Hashable{
     nonisolated func hash(into hasher: inout Hasher) {

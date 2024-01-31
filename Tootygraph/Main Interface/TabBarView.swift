@@ -15,7 +15,7 @@ struct TabBarView: View {
     @EnvironmentObject var accountsManager: AccountsManager
     @Environment(\.palette) var palette: Palette
     
-    @Binding var selectedFeed: FeedIdentifier?
+    @Binding var selectedFeed: UUID?
     
     let horizontal: Bool
     
@@ -44,7 +44,7 @@ struct TabBarView: View {
 struct ConnectionLozenge: View {
     let connection: Connection
     let horizontal: Bool
-    @Binding var selectedFeed: FeedIdentifier?
+    @Binding var selectedFeed: UUID?
     
     var body: some View {
         FlippingStackView(horizontal: horizontal){
@@ -58,14 +58,14 @@ struct ConnectionLozenge: View {
             .frame(width: 42,height:42)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
-            ForEach(connection.feeds){ feed in
+            ForEach(connection.feeds, id:\.id){ feed in
                 Button {
                     withAnimation {
                         selectedFeed = feed.id
                     }
                    
                 } label: {
-                    Image(systemName: feed.timeline.iconName)
+                    Image(systemName: feed.iconName)
                         .resizable()
                         
                         .padding(5)
@@ -73,7 +73,7 @@ struct ConnectionLozenge: View {
                         .background{
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(connection.palette.background)
-                                .stroke(highlightStyle(for: feed.id),lineWidth:4)
+//                                .stroke(highlightStyle(for: feed.id),lineWidth:4)
                                 
                         }
                 }
@@ -84,33 +84,33 @@ struct ConnectionLozenge: View {
         .padding(5)
         .background{
             RoundedRectangle(cornerRadius: 10)
-                .stroke(lozengeStyle)
+//                .stroke(lozengeStyle)
                 .blur(radius: 2)
         }
     }
     
-    @MainActor
-    var lozengeStyle: some ShapeStyle {
-        
-        let background: AnyShapeStyle
-        if let selectedFeed,
-           selectedFeed.account == connection.account.niceName {
-            background = AnyShapeStyle(connection.palette.highlight)
-        } else {
-            background = AnyShapeStyle(connection.palette.postBackground)
-        }
-        return background
-    }
-    
-    @MainActor
-    func highlightStyle(for feed: FeedIdentifier) -> some ShapeStyle{
-        if let selectedFeed,
-           selectedFeed == feed {
-            return AnyShapeStyle(connection.palette.highlight)
-        } else {
-            return AnyShapeStyle(.clear)
-        }
-    }
+//    @MainActor
+//    var lozengeStyle: some ShapeStyle {
+//        
+//        let background: AnyShapeStyle
+//        if let selectedFeed,
+//           selectedFeed.account == connection.account.niceName {
+//            background = AnyShapeStyle(connection.palette.highlight)
+//        } else {
+//            background = AnyShapeStyle(connection.palette.postBackground)
+//        }
+//        return background
+//    }
+//    
+//    @MainActor
+//    func highlightStyle(for feed: FeedIdentifier) -> some ShapeStyle{
+//        if let selectedFeed,
+//           selectedFeed == feed {
+//            return AnyShapeStyle(connection.palette.highlight)
+//        } else {
+//            return AnyShapeStyle(.clear)
+//        }
+//    }
 }
 
 

@@ -9,9 +9,12 @@ import Foundation
 import TootSDK
 
 @Observable
-class PostController {
+class PostController: FeedItem {
+
     
-    let id: String
+    var id: String {
+        return post.id
+    }
     
     private(set) var post: Post
     private(set) var attributedContent: AttributedString
@@ -33,7 +36,7 @@ class PostController {
         
         self.client = client
         self.post = post
-        self.id = post.id
+//        self.id = post.id
         
         // Pre-render html content
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)

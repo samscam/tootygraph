@@ -18,7 +18,7 @@ struct TabbedView: View {
     
     @State var currentPalette: Palette = Palette.standard()
     
-    @State var selectedFeed: FeedIdentifier? = nil
+    @State var selectedFeed: UUID? = nil
     
     @Binding var connections: [Connection]
     @Environment(\.verticalSizeClass) var verticalSizeClass

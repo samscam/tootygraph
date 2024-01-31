@@ -29,7 +29,7 @@ struct ConnectionView: View {
                 Text(error.localizedDescription)
             }
         case .connected:
-            ForEach(connection.feeds,id:\.id){ feed in
+            ForEach(connection.feeds, id:\.id) { feed in
                 FeedView(feed: feed)
                     
             }
