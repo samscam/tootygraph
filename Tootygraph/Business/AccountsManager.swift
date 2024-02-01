@@ -124,6 +124,19 @@ class AccountsManager: ObservableObject {
         }
     }
     
+    func feed(id: UUID) -> (any Feed)? {
+        let allFeeds = connections.flatMap{$0.feeds}
+        return allFeeds.first { $0.id == id }
+    }
+    
+    func connectionContaining(feedID: UUID) -> Connection? {
+        connections.first { connection in
+            connection.feeds.contains { inFeed in
+                inFeed.id == feedID
+            }
+        }
+    }
+    
     enum LoadState: Equatable {
         static func == (lhs: AccountsManager.LoadState, rhs: AccountsManager.LoadState) -> Bool {
             switch (lhs,rhs) {

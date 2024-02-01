@@ -31,7 +31,6 @@ struct ConnectionView: View {
         case .connected:
             ForEach(connection.feeds, id:\.id) { feed in
                 FeedView(feed: feed)
-                    
             }
         }
         

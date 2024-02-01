@@ -47,7 +47,7 @@ struct TabbedView: View {
             guard let selectedFeed else {
                 return
             }
-            guard let palette = accountsManager[selectedFeed]?.palette else {
+            guard let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
                 withAnimation{
                     currentPalette = .standard()
                 }

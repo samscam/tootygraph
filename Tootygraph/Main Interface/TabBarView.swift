@@ -73,7 +73,7 @@ struct ConnectionLozenge: View {
                         .background{
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(connection.palette.background)
-//                                .stroke(highlightStyle(for: feed.id),lineWidth:4)
+                                .stroke(highlightStyle(for: feed.id),lineWidth:4)
                                 
                         }
                 }
@@ -102,15 +102,15 @@ struct ConnectionLozenge: View {
 //        return background
 //    }
 //    
-//    @MainActor
-//    func highlightStyle(for feed: FeedIdentifier) -> some ShapeStyle{
-//        if let selectedFeed,
-//           selectedFeed == feed {
-//            return AnyShapeStyle(connection.palette.highlight)
-//        } else {
-//            return AnyShapeStyle(.clear)
-//        }
-//    }
+    @MainActor
+    func highlightStyle(for feed: UUID) -> some ShapeStyle{
+        if let selectedFeed,
+           selectedFeed == feed {
+            return AnyShapeStyle(connection.palette.highlight)
+        } else {
+            return AnyShapeStyle(.clear)
+        }
+    }
 }
 
 

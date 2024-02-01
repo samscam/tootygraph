@@ -86,7 +86,9 @@ class Connection {
         case notConnected
     }
     
-    
+    func hasFeed(_ feed: any Feed) -> Bool {
+        return feeds.contains{ $0.id == feed.id }
+    }
 }
 
 
