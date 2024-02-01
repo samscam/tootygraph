@@ -13,7 +13,7 @@ struct AvatarView: View {
   let account: Account
   
   var body: some View{
-          HStack(alignment:.center){
+          HStack(alignment:.top){
               LazyImage(url: URL(string:account.avatar)){ state in
                   if let image = state.image {
                       image

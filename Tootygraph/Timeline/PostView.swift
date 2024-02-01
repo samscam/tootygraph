@@ -89,8 +89,15 @@ struct PostView: View {
             .if(post.mediaAttachments.count > 0){
                 $0.padding(.top,20)
             }
-            
-            
+    }
+    
+    var compactTextContent: some View {
+        Text(post.attributedContent)
+            .lineLimit(4, reservesSpace: false)
+            .font(.custom("AmericanTypewriter",size:14))
+            .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity,alignment: .leading)
+            .foregroundColor(.primary)
     }
     
     var actionButtons: some View {

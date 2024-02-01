@@ -17,6 +17,7 @@
 		22120CA92B4A2A99006FECD6 /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CA82B4A2A99006FECD6 /* NukeVideo */; };
 		22120CAD2B4AB8B3006FECD6 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CAC2B4AB8B3006FECD6 /* Gifu */; };
 		22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22120CAE2B4B7395006FECD6 /* Palette.swift */; };
+		22127BC12B6B0A6E0040E2DC /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22127BC02B6B0A6E0040E2DC /* NotificationView.swift */; };
 		2223CC1B2AA53A7100122870 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223CC1A2AA53A7100122870 /* TabBarView.swift */; };
 		2236FB632994609000436F65 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB622994609000436F65 /* DetailView.swift */; };
 		2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2236FB6529946A7100436F65 /* SwiftSoup */; };
@@ -46,6 +47,7 @@
 		229C19BD2B68628E00AD7F9B /* FlippingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */; };
 		229C19BF2B686BD100AD7F9B /* FlippingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BE2B686BD100AD7F9B /* FlippingBar.swift */; };
 		229C19C12B69A6EA00AD7F9B /* TootFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19C02B69A6EA00AD7F9B /* TootFeed.swift */; };
+		229C19C32B6AFA1700AD7F9B /* NotificationsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19C22B6AFA1700AD7F9B /* NotificationsFeed.swift */; };
 		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -81,6 +83,7 @@
 		220AE8C029C521A30023554D /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		220AE8C229C521B30023554D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		22120CAE2B4B7395006FECD6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		22127BC02B6B0A6E0040E2DC /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2223CC1A2AA53A7100122870 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		2236FB622994609000436F65 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2236FB692995B73700436F65 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 		229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingStackView.swift; sourceTree = "<group>"; };
 		229C19BE2B686BD100AD7F9B /* FlippingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingBar.swift; sourceTree = "<group>"; };
 		229C19C02B69A6EA00AD7F9B /* TootFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootFeed.swift; sourceTree = "<group>"; };
+		229C19C22B6AFA1700AD7F9B /* NotificationsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsFeed.swift; sourceTree = "<group>"; };
 		22AD6C802A5B6103008A79CA /* FediAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FediAccount.swift; sourceTree = "<group>"; };
 		22C0338129ABB5EC00A353B8 /* PostComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComposerView.swift; sourceTree = "<group>"; };
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				227682222B5D90C1001E5D80 /* ConnectionView.swift */,
 				2236FB622994609000436F65 /* DetailView.swift */,
 				22EC121E298FCBF300976ECC /* PostView.swift */,
+				22127BC02B6B0A6E0040E2DC /* NotificationView.swift */,
 				2287F25729A7F53700F24EA9 /* ActionsView.swift */,
 				22EC1227299050EE00976ECC /* AvatarView.swift */,
 				227C65D629A2D5A3006BF540 /* Flipper.swift */,
@@ -311,6 +316,7 @@
 				22931B052B58533C00378FF9 /* Connection.swift */,
 				2200224B2999A8B7000FA97F /* Feed.swift */,
 				229C19C02B69A6EA00AD7F9B /* TootFeed.swift */,
+				229C19C22B6AFA1700AD7F9B /* NotificationsFeed.swift */,
 				2287F25B29A826F400F24EA9 /* PostController.swift */,
 			);
 			path = Business;
@@ -418,6 +424,7 @@
 				22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */,
 				229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
+				229C19C32B6AFA1700AD7F9B /* NotificationsFeed.swift in Sources */,
 				227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */,
 				22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */,
 				220AE8C329C521B30023554D /* CameraViewModel.swift in Sources */,
@@ -443,6 +450,7 @@
 				22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */,
 				22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */,
 				22CD12092991BE5E00B7D70D /* ActionBarView.swift in Sources */,
+				22127BC12B6B0A6E0040E2DC /* NotificationView.swift in Sources */,
 				2200224C2999A8B7000FA97F /* Feed.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
 				22DFF05D29AD5D9F00D14A27 /* PostComposerViewModel.swift in Sources */,
@@ -707,7 +715,7 @@
 			repositoryURL = "https://github.com/TootSDK/TootSDK";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.0;
+				minimumVersion = 2.2.0;
 			};
 		};
 		22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */ = {

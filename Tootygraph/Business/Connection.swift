@@ -63,14 +63,12 @@ class Connection {
             connectionState = .connected
             
             feeds = [
+                
                 TootFeed(client: client,
                                    timeline: .home,
                                    palette: palette,
                                    accountNiceName: serverAccount.niceName),
-                TootFeed(client: client,
-                                   timeline: .federated,
-                                   palette: palette,
-                                  accountNiceName: serverAccount.niceName)
+                NotificationsFeed(client: client)
             ]
         } catch {
             connectionState = .error(error: error)

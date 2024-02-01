@@ -21,8 +21,10 @@ struct FeedView: View {
         List(feed.items, id:\.id) { item in
                 Group{
                     switch item {
-                    case let item as PostController:
-                        PostView(post: item)
+                    case let post as PostController:
+                        PostView(post: post)
+                    case let notification as TootNotification:
+                        NotificationView(notification: notification)
                     default:
                         Text("whoopsy")
                     }

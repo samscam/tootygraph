@@ -110,7 +110,6 @@ class TootFeed: Feed {
             } catch {
                 print("Oh noes \(error)")
             }
-            
         }
     }
     
