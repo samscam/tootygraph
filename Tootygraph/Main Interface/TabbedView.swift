@@ -44,10 +44,8 @@ struct TabbedView: View {
             }.ignoresSafeArea()
         }
         .onChange(of: selectedFeed, initial: true) {
-            guard let selectedFeed else {
-                return
-            }
-            guard let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
+            guard let selectedFeed,
+                  let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
                 withAnimation{
                     currentPalette = .standard()
                 }
