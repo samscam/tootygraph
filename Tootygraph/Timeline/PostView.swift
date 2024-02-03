@@ -25,7 +25,7 @@ struct PostView: View {
     var body: some View{
 
         VStack(alignment: .leading, spacing: 0) {
-            
+
             AvatarView(account: post.displayPost.account)
                 .padding(.bottom,20)
             
@@ -72,6 +72,13 @@ struct PostView: View {
         .background{
             RoundedRectangle(cornerRadius: 10)
                 .fill(palette.postBackground)
+        }
+        .overlay(alignment: .topTrailing){
+            if let booster = post.booster {
+                AvatarImage(url: URL(string:booster.avatar))
+                    .rotationEffect(.degrees(15))
+                    .frame(width:40,height:40)
+            }
         }
         .padding(.horizontal,10)
         

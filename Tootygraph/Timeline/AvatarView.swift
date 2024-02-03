@@ -14,17 +14,7 @@ struct AvatarView: View {
   
   var body: some View{
           HStack(alignment:.top){
-              LazyImage(url: URL(string:account.avatar)){ state in
-                  if let image = state.image {
-                      image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                          .clipShape(RoundedRectangle(cornerRadius: 5))
-                          
-                  } else {
-                      Rectangle().foregroundColor(.gray.opacity(0.3))
-                  }
-              }
+              AvatarImage(url: URL(string:account.avatar))
               .frame(width:40,height:40)
               
               VStack(alignment: .leading){
@@ -40,6 +30,38 @@ struct AvatarView: View {
           
           
   }
+}
+
+struct AvatarImage: View {
+    let url: URL?
+    var body: some View{
+        LazyImage(url: url){ state in
+            if let image = state.image {
+                image
+                    .avatarStyle()
+                    
+            } else {
+                Rectangle()
+                    .foregroundColor(.gray.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+            }
+        }
+    }
+    
+}
+
+extension Image {
+
+    func avatarStyle() -> some View {
+        return self
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .clipShape(RoundedRectangle(cornerRadius: 5))
+            .padding(2)
+            .background{
+                RoundedRectangle(cornerRadius: 6).fill( Color.secondary)
+            }
+    }
 }
 
 #if DEBUG

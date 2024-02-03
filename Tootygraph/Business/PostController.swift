@@ -27,6 +27,13 @@ class PostController: FeedItem {
         return post.displayPost
     }
     
+    var booster: Account? {
+        guard post.repost != nil else {
+             return nil
+        }
+        return post.account
+    }
+    
     // Pre-generate jaunty angles for display...
     var jauntyAngles: [Double] = []
     
