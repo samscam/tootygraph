@@ -19,12 +19,10 @@ struct MainView: View {
     
     // GIVEN that there are one-or-more accounts
     // THEN it should show the Tabbed interface
-    
-    @EnvironmentObject var accountsManager: AccountsManager
+    @Environment(AccountsManager.self) var accountsManager: AccountsManager
 
     var body: some View {
-        Group{
-            
+//        Group{
             switch accountsManager.loadState {
             case .starting:
                 SplashView(splashMessage: "Starting up")
@@ -36,14 +34,14 @@ struct MainView: View {
                         .palette(Palette.standard())
                         .tag("settings")
                 } else {
-                    TabbedView(connections: $accountsManager.connections)
+                    TabbedView(connections: accountsManager.connections)
                 }
             case .message(let message):
                 
                 SplashView(splashMessage: message)
             }
             
-        }.animation(.default, value: accountsManager.loadState)
+//        }.animation(.default, value: accountsManager.loadState)
     }
 }
 

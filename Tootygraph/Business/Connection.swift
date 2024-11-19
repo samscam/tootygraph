@@ -89,6 +89,14 @@ class Connection {
     func hasFeed(_ feed: any Feed) -> Bool {
         return feeds.contains{ $0.id == feed.id }
     }
+    
+    func feedFor(_ account: Account) -> (any Feed)? {
+        guard let tootClient else { return nil }
+        let timeline = Timeline.user(userID: account.id)
+        let feed = TootFeed(client: tootClient, timeline: timeline, palette: palette, accountNiceName: account.acct)
+        return feed
+    }
+
 }
 
 

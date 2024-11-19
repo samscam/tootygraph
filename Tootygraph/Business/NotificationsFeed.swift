@@ -17,10 +17,12 @@ class NotificationsFeed: Feed {
     let id: UUID = UUID()
     
     var items: [any FeedItem] = []
+    
+    let name: String = "Notifications"
 
     var iconName: String = "party.popper.fill"
     
-    private let tootClient: TootClient
+    let client: TootClient
     
     var pageInfo: PagedInfo? = nil
     
@@ -31,7 +33,7 @@ class NotificationsFeed: Feed {
     private var cancellables: Set<AnyCancellable> = []
     
     init(client: TootClient){
-        self.tootClient = client
+        self.client = client
         setupBindings()
     }
     
@@ -56,7 +58,7 @@ class NotificationsFeed: Feed {
     /// Private functions --
     private func loadMore() async throws {
         
-        let result = try await tootClient.getNotifications( pageInfo, limit: 30)
+        let result = try await client.getNotifications( pageInfo, limit: 30)
         pageInfo = result.nextPage
         addItems(result.result)
     }
@@ -79,6 +81,13 @@ class NotificationsFeed: Feed {
             }
             .assign(to: \.items, on: self)
             .store(in: &cancellables)
+    }
+    
+    func feedFor(_ account: Account) -> (any Feed)? {
+        
+        let timeline = Timeline.user(userID: account.id)
+        let feed = TootFeed(client: client, timeline: timeline, palette: Palette.random(), accountNiceName: account.acct)
+        return feed
     }
 }
 

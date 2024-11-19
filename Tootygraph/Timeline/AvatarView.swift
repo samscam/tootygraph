@@ -62,6 +62,19 @@ extension Image {
                 RoundedRectangle(cornerRadius: 6).fill( Color.secondary)
             }
     }
+    
+    
+}
+
+extension View {
+    func hearty() -> some View {
+        return self
+            .mask(
+                Image(systemName: "heart.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            )
+    }
 }
 
 #if DEBUG
@@ -73,4 +86,5 @@ extension Image {
 #Preview(traits:.sizeThatFitsLayout) {
     AvatarView(account: TestAccounts.sam)
 }
+
 #endif

@@ -20,7 +20,7 @@ struct TootygraphApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(tootygraph.accountsManager)
+                .environment(tootygraph.accountsManager)
                 .environmentObject(tootygraph.settingsManager)
                 .task{
                     // This is to make Nuke be able to handle videos, apparently

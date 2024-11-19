@@ -11,11 +11,12 @@ import SwiftUI
 import Combine
 
 
-extension PagedInfo: Equatable{
-    public static func == (lhs: PagedInfo, rhs: PagedInfo) -> Bool {
-        return lhs.minId == rhs.minId && lhs.maxId == rhs.maxId && lhs.sinceId == rhs.sinceId
-    }
-}
+//extension PagedInfo: Equatable{
+//    public static func == (lhs: PagedInfo, rhs: PagedInfo) -> Bool {
+//        return lhs.minId == rhs.minId && lhs.maxId == rhs.maxId && lhs.sinceId == rhs.sinceId
+//    }
+//}
+
 
 enum PagingState: Equatable {
     case nothing
@@ -32,18 +33,19 @@ enum PagingErrors: Error {
 @Observable
 class TootFeed: Feed {
 
-    
     let id: UUID = UUID()
     
-
     var items: [any FeedItem] = []
     
     var loading: Bool = false
     
+    var name: String
+    
     var palette: Palette
     var accountNiceName: String
     
-    private (set) var client: TootClient
+    @ObservationIgnored
+    let client: TootClient
     
     @ObservationIgnored
     private var postsSet = CurrentValueSubject<Set<PostController>,Never>(Set<PostController>())
@@ -68,20 +70,21 @@ class TootFeed: Feed {
         self.palette = palette
         self.accountNiceName = accountNiceName
         
+        self.name = timeline.stringName
         // Binding for postsSet to apply filtering and update posts
         
         postsSet
-            .combineLatest(settings.$includeTextPosts.publisher)
-            .map{ (posts, includeText) in
-                return posts.filter {post in
-                    
-                    if includeText {
-                        return true
-                    } else {
-                        return post.mediaAttachments.count > 0
-                    }
-                }
-            }
+//            .combineLatest()
+//            .map{ (posts, includeText) in
+//                return posts.filter {post in
+//                    
+//                    if includeText {
+//                        return true
+//                    } else {
+//                        return post.mediaAttachments.count > 0
+//                    }
+//                }
+//            }
             .map{ posts in
                 return posts.sorted {
                     $0.id > $1.id
@@ -90,7 +93,6 @@ class TootFeed: Feed {
             .assign(to: \.items, on: self)
             .store(in: &cancellables)
         
-        loadInitial()
     }
     
     var iconName: String {
@@ -211,6 +213,12 @@ class TootFeed: Feed {
         }
     }
     
+    func feedFor(_ account: Account) -> (any Feed)? {
+        
+        let timeline = Timeline.user(userID: account.id)
+        let feed = TootFeed(client: client, timeline: timeline, palette: palette, accountNiceName: account.acct)
+        return feed
+    }
     
     
 }
@@ -230,7 +238,7 @@ extension TootFeed: Hashable{
 }
 
 extension TootFeed: Equatable {
-    static func == (lhs: TootFeed, rhs: TootFeed) -> Bool {
+    nonisolated static func == (lhs: TootFeed, rhs: TootFeed) -> Bool {
         lhs.id == rhs.id
     }
 }
@@ -245,7 +253,10 @@ extension Timeline{
             case .home: return "Home"
             case .hashtag: return "Hashtag"
             case .list: return "List"
-            case .user: return "User"
+
+        case .user(let query):
+            return "User \(query.userId)"
+
             case .local: return "Local"
         }
     }

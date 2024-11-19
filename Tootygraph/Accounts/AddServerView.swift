@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 struct AddServerView: View {
-    
-    @EnvironmentObject var accountsManager: AccountsManager
+
+    @Environment(AccountsManager.self) var accountsManager: AccountsManager
+
     
     @State var newAccountURLString: String = ""
     @State var connecting: Bool = false

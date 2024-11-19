@@ -22,29 +22,33 @@ enum AccountsManagerError: Error {
  
  */
 @MainActor
-class AccountsManager: ObservableObject {
+@Observable
+class AccountsManager {
     
     // Nope we can't be having this... credentials need to be in the keychain
+    @ObservationIgnored
     @Stored(in: .serverAccountsStore) private var accounts: [FediAccount]
     
-    @Published var loadState: LoadState = .starting
-    @Published var connections: [Connection] = []
+    var loadState: LoadState = .starting
+    var connections: [Connection] = []
     
     init(){
         
-        
-        $accounts.$items
-            .map{ serverAccounts in
-                serverAccounts.map { serverAccount in
-                    let conn = Connection(account: serverAccount)
-                    Task{
-                        try await conn.connect()
-                    }
-                    return conn
+        Task{
+            for await event in $accounts.events {
+                let newConnections = event.items.map {
+                    serverAccount in
+                        let conn = Connection(account: serverAccount)
+                        Task{
+                            try await conn.connect()
+                        }
+                        return conn
+                    
                 }
+                self.connections = newConnections
             }
-            .assign(to: &$connections)
-        
+        }
+
         Task{
             do{
                 try await $accounts.itemsHaveLoaded()

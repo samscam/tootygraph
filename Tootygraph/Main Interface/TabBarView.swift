@@ -11,8 +11,7 @@ import TootSDK
 import NukeUI
 
 struct TabBarView: View {
-    
-    @EnvironmentObject var accountsManager: AccountsManager
+    @Environment(AccountsManager.self) var accountsManager: AccountsManager
     @Environment(\.palette) var palette: Palette
     
     @Binding var selectedFeed: UUID?
@@ -85,7 +84,7 @@ struct ConnectionLozenge: View {
         .background{
             RoundedRectangle(cornerRadius: 10)
 //                .stroke(lozengeStyle)
-                .blur(radius: 2)
+//                .blur(radius: 2)
         }
     }
     

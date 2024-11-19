@@ -23,16 +23,21 @@ struct NotificationView: View {
                 .frame(width: 32,height:32)
                 .foregroundStyle(.tint)
                 .rotationEffect(.degrees(-5))
+                .offset(y: 20)
             
             VStack(alignment: .leading, spacing:5){
-                AvatarView(account: notification.account)
+                
                 
                 if let post = notification.post {
-                    PostView(post: PostController(post))
-                        .compactTextContent
-
+                    if notification.type == .mention {
+                        PostView(post: PostController(post))
+                    } else {
+                        AvatarView(account: notification.account)
+                        PostView(post: PostController(post))
+                            .compactTextContent
+                    }
                 }
-            }.padding(5)
+            }.padding(10)
                 .background{
                     RoundedRectangle(cornerRadius: 10)
                         .fill(palette.postBackground)
@@ -76,6 +81,8 @@ extension TootNotification.NotificationType {
             return "paperplane.fill"
         case .update:
             return "light.beacon.max.fill"
+        default:
+            return "questionmark.bubble.fill"
         }
     }
 }

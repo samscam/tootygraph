@@ -14,56 +14,63 @@ import TootSDK
 struct TabbedView: View {
     
     @EnvironmentObject var settings: SettingsManager
-    @EnvironmentObject var accountsManager: AccountsManager
+    
+    @Environment(AccountsManager.self) var accountsManager: AccountsManager
     
     @State var currentPalette: Palette = Palette.standard()
     
     @State var selectedFeed: UUID? = nil
     
-    @Binding var connections: [Connection]
+    var connections: [Connection]
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
         
-        SwipeableTabView(selection: $selectedFeed){
-            ForEach(connections){ connection in
-                ConnectionView(connection: connection).palette(connection.palette)
-            }
-        }
-        .background{
-            ZStack {
-                Rectangle()
-                    .fill(currentPalette.background)
-                
-                Image("wood-texture")
-                    .resizable()
-                    .saturation(0)
-                    .blendMode(.multiply)
-                    .opacity(0.3)
-                
-            }.ignoresSafeArea()
-        }
-        .onChange(of: selectedFeed, initial: true) {
-            guard let selectedFeed,
-                  let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
-                withAnimation{
-                    currentPalette = .standard()
-                }
-                return
-            }
-            withAnimation{
-                currentPalette = palette
-            }
             
-        }
-        .palette(currentPalette)
-        .flippingBar(flipped: verticalSizeClass == .compact, orientation: .bottomLeading){
-            feedSelectionBar
-        }
-        .flippingBar(flipped: verticalSizeClass == .compact, orientation: .topTrailing){
-            ActionBarView(horizontal: verticalSizeClass == .regular)
-               .palette(currentPalette)
-       }
+            SwipeableTabView(selection: $selectedFeed){
+                ForEach(connections){ connection in
+                    ConnectionView(connection: connection).palette(connection.palette)
+                }
+            }.ignoresSafeArea()
+            
+            .background{
+                ZStack {
+                    Rectangle()
+                        .fill(currentPalette.background)
+                    
+                    Image("wood-texture")
+                        .resizable()
+                        .saturation(0)
+                        .blendMode(.multiply)
+                        .opacity(0.3)
+                    
+                }.ignoresSafeArea()
+            }
+            .onChange(of: selectedFeed, initial: true) {
+                guard let selectedFeed,
+                      let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
+                    withAnimation{
+                        currentPalette = .standard()
+                    }
+                    return
+                }
+                withAnimation{
+                    currentPalette = palette
+                }
+                
+            }
+            .palette(currentPalette)
+//            .flippingBar(flipped: verticalSizeClass == .compact, orientation: .bottomLeading){
+//                feedSelectionBar
+//            }
+//            .flippingBar(flipped: verticalSizeClass == .compact, orientation: .topTrailing){
+//                ActionBarView(horizontal: verticalSizeClass == .regular)
+//                    .palette(currentPalette)
+//            }
+            .safeAreaInset(edge: .bottom){
+                feedSelectionBar
+            }
+        
         
     }
     
@@ -100,7 +107,8 @@ struct FeedIdentifier: Hashable, Equatable {
         Connection(account:account)
     ]
     
-    return TabbedView(connections: $connections)
+    TabbedView(connections: connections)
         .environmentObject(settings)
-        .environmentObject(accountsManager)
+        .environment(accountsManager)
+    
 }

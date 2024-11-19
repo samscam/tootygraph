@@ -41,9 +41,9 @@ class PostComposerViewModel: ObservableObject{
             composedText = "@\(replyingUser) "
         }
         
-        Task{
-            self.maxChars = try await tootClient?.getInstanceInfo().configuration?.posts?.maxCharacters
-        }
+//        Task{
+//            self.maxChars = try await tootClient?.getInstanceInfo().configuration?.posts?.maxCharacters
+//        }
     }
     
     func post() async throws{

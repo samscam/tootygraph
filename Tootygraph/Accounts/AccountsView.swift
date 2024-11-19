@@ -10,7 +10,7 @@ import TootSDK
 
 struct AccountsView: View {
     
-    @EnvironmentObject var accountsManager: AccountsManager
+    @Environment(AccountsManager.self) var accountsManager: AccountsManager
     
     @FocusState var fieldFocussed: Bool
     
@@ -30,7 +30,7 @@ struct AccountsView: View {
                 if (accountsManager.connections.count > 0){
                     Text("Accounts").font(.title)
                     
-                    ForEach($accountsManager.connections){ $connection in
+                    ForEach(accountsManager.connections){ connection in
                         ServerAccountView(connection:connection)
                             .palette(connection.palette)
                             .frame(maxWidth: .infinity)
@@ -105,12 +105,13 @@ struct AccountsView: View {
             followingCount: 432,
             fields: []))
     
-    @StateObject var accountsManager = AccountsManager()
+    @State var accountsManager = AccountsManager()
+    
     @StateObject var settings = SettingsManager()
     @FocusState var fieldFocussed: Bool
     
-    return AccountsView()
-        .environmentObject(accountsManager)
+    AccountsView()
+        .environment(accountsManager)
         .environmentObject(settings)
         .onAppear{
             Task{

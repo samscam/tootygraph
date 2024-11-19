@@ -25,18 +25,22 @@ struct PostView: View {
     var body: some View{
 
         VStack(alignment: .leading, spacing: 0) {
-
-            AvatarView(account: post.displayPost.account)
-                .padding(.bottom,20)
+            NavigationLink(value: post.feedFor(post.displayPost.account)) {
+                AvatarView(account: post.displayPost.account)
+                    .padding(.bottom,20)
+            }
+  
             
             VStack(alignment: .center,spacing:0){
                 ForEach(post.mediaAttachments){ media in
                     
                     let index = post.mediaAttachments.firstIndex(of: media)!
                     let jaunty = post.jauntyAngles[index+2]
-                    
-                    PhotoView(media: media)
-                        .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
+//                    NavigationLink(value: media){
+                        
+                        PhotoView(media: media)
+                            .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
+//                    }
                     // These are currently commented out - because they mess up other aspects of
                     // scaling the photo frames... :/
 //                               .frame(maxWidth: geometry.size.width * 0.9)
@@ -75,13 +79,17 @@ struct PostView: View {
         }
         .overlay(alignment: .topTrailing){
             if let booster = post.booster {
-                AvatarImage(url: URL(string:booster.avatar))
-                    .rotationEffect(.degrees(15))
-                    .frame(width:40,height:40)
+                NavigationLink(value: post.feedFor(booster) ) {
+                    AvatarImage(url: URL(string:booster.avatar))
+
+                        .rotationEffect(.degrees(15))
+                        .frame(width:40,height:40)
+                        
+                }
             }
         }
         .padding(.horizontal,10)
-        
+
     }
     
     

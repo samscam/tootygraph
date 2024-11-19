@@ -49,17 +49,17 @@ class SettingsManager: ObservableObject {
   init(){
     
     // Set up behaviour for interdependent settings
-    $showContent.publisher.sink { [weak self] newValue in
-      if newValue == false {
-          self?.$includeTextPosts.set(false)
-      }
-    }.store(in: &disposebag)
-  
-    $includeTextPosts.publisher.sink { [weak self] newValue in
-      if newValue == true {
-        self?.$showContent.set(true)
-      }
-    }.store(in: &disposebag)
+//    $showContent.publisher.sink { [weak self] newValue in
+//      if newValue == false {
+//          self?.$includeTextPosts.set(false)
+//      }
+//    }.store(in: &disposebag)
+//  
+//    $includeTextPosts.publisher.sink { [weak self] newValue in
+//      if newValue == true {
+//        self?.$showContent.set(true)
+//      }
+//    }.store(in: &disposebag)
     
   }
   

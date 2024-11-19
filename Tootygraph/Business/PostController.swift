@@ -8,6 +8,7 @@
 import Foundation
 import TootSDK
 
+@MainActor
 @Observable
 class PostController: FeedItem {
 
@@ -32,6 +33,13 @@ class PostController: FeedItem {
              return nil
         }
         return post.account
+    }
+    
+    func feedFor(_ account: Account) -> TootFeed? {
+        guard let client else { return nil }
+        let timeline = Timeline.user(userID: account.id)
+        let feed = TootFeed(client: client, timeline: timeline, palette: Palette.random(), accountNiceName: account.acct)
+        return feed
     }
     
     // Pre-generate jaunty angles for display...
@@ -99,13 +107,13 @@ extension PostController:  Identifiable {
 }
 
 extension PostController: Hashable {
-    nonisolated func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }
 
 extension PostController: Equatable {
-    nonisolated static func == (lhs: PostController, rhs: PostController) -> Bool {
+    static func == (lhs: PostController, rhs: PostController) -> Bool {
         lhs.id == rhs.id
     }
 }
