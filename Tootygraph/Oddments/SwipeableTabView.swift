@@ -35,7 +35,7 @@ struct SwipeableTabView<Content: View, Selection: Hashable>: View {
 
 
 #Preview {
-    @State var selection: String?
+    @Previewable @State var selection: String?
     return VStack{
         SwipeableTabView(selection: $selection){
             Text("One").id("1").background(.blue)

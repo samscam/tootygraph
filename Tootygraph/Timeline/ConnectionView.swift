@@ -33,6 +33,7 @@ struct ConnectionView: View {
                     NavigationStack{
                         FeedView(feed: feed)
                             .palette(connection.palette)
+                            .navigationBarTitleDisplayMode(.inline)
                     }
                 }
             

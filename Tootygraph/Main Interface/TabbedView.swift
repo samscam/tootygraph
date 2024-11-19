@@ -42,24 +42,24 @@ struct TabbedView: View {
                         .resizable()
                         .saturation(0)
                         .blendMode(.multiply)
-                        .opacity(0.3)
+                        .opacity(0.4)
                     
                 }.ignoresSafeArea()
             }
             .onChange(of: selectedFeed, initial: true) {
                 guard let selectedFeed,
                       let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
-                    withAnimation{
+//                    withAnimation{
                         currentPalette = .standard()
-                    }
+//                    }
                     return
                 }
-                withAnimation{
+//                withAnimation{
                     currentPalette = palette
-                }
+//                }
                 
             }
-            .palette(currentPalette)
+            
 //            .flippingBar(flipped: verticalSizeClass == .compact, orientation: .bottomLeading){
 //                feedSelectionBar
 //            }
@@ -67,10 +67,14 @@ struct TabbedView: View {
 //                ActionBarView(horizontal: verticalSizeClass == .regular)
 //                    .palette(currentPalette)
 //            }
+            .safeAreaInset(edge: .top) {
+                ActionBarView(horizontal: true)
+            }
             .safeAreaInset(edge: .bottom){
                 feedSelectionBar
             }
-        
+            .palette(currentPalette)
+            
         
     }
     
@@ -99,13 +103,16 @@ struct FeedIdentifier: Hashable, Equatable {
 
 
 #Preview {
+    @Previewable
+    @State var connections: [Connection] = [
+        Connection(account:Account.testAccount)
+    ]
+    
     let account = Account.testAccount
     let settings = SettingsManager()
     let accountsManager = AccountsManager()
     
-    @State var connections: [Connection] = [
-        Connection(account:account)
-    ]
+
     
     TabbedView(connections: connections)
         .environmentObject(settings)

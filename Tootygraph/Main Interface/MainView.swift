@@ -22,7 +22,7 @@ struct MainView: View {
     @Environment(AccountsManager.self) var accountsManager: AccountsManager
 
     var body: some View {
-//        Group{
+        Group{
             switch accountsManager.loadState {
             case .starting:
                 SplashView(splashMessage: "Starting up")
@@ -41,7 +41,8 @@ struct MainView: View {
                 SplashView(splashMessage: message)
             }
             
-//        }.animation(.default, value: accountsManager.loadState)
+        }
+//        .animation(.default, value: accountsManager.loadState)
     }
 }
 

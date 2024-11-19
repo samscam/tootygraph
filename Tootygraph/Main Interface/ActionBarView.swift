@@ -50,13 +50,14 @@ struct ActionBarView: View {
             }
             
         }
-        .background(Material.bar)
+//        .background(Material.bar)
         
         
     }
 }
 
 #Preview(traits:.sizeThatFitsLayout) {
+    @Previewable
     @State var showingPostComposer: Bool = false
     
     return ActionBarView(showingPostComposer: showingPostComposer, horizontal: true)

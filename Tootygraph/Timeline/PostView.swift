@@ -20,7 +20,6 @@ struct PostView: View {
     
     @State var showingReplySheet: Bool = false
     
-//    let geometry: GeometryProxy
     
     var body: some View{
 
@@ -41,10 +40,6 @@ struct PostView: View {
                         PhotoView(media: media)
                             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
 //                    }
-                    // These are currently commented out - because they mess up other aspects of
-                    // scaling the photo frames... :/
-//                               .frame(maxWidth: geometry.size.width * 0.9)
-//                               .frame(maxHeight: geometry.size.height * 0.9)
                     
                         .if(index == post.mediaAttachments.count-1){
                             $0.padding(.bottom,20)

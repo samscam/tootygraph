@@ -18,7 +18,6 @@ struct FeedView: View {
     
     var body: some View {
         
-            //        GeometryReader{ geometry in
             ScrollView{
                 LazyVStack{
                     ForEach(feed.items, id:\.id) { item in
