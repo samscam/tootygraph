@@ -12,12 +12,12 @@ import TootSDK
 @Observable
 class PostController: FeedItem {
 
-    
     var id: String {
         return post.id
     }
     
     private(set) var post: Post
+    
     private(set) var attributedContent: AttributedString
     
     var mediaAttachments: [MediaAttachment] {
@@ -45,7 +45,8 @@ class PostController: FeedItem {
     // Pre-generate jaunty angles for display...
     var jauntyAngles: [Double] = []
     
-    weak var client: TootClient?
+    @ObservationIgnored
+    private(set) weak var client: TootClient?
     
     init(_ post: Post, client: TootClient? = nil){
         
@@ -102,7 +103,7 @@ class PostController: FeedItem {
     
 }
 
-extension PostController:  Identifiable {
+extension PostController: Identifiable {
     
 }
 

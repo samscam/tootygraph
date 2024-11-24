@@ -27,11 +27,12 @@ struct TabbedView: View {
     var body: some View {
         
             
-            SwipeableTabView(selection: $selectedFeed){
+            TabView(selection: $selectedFeed){
                 ForEach(connections){ connection in
                     ConnectionView(connection: connection).palette(connection.palette)
                 }
-            }.ignoresSafeArea()
+            }
+            .tabViewStyle(.page).ignoresSafeArea()
             
             .background{
                 ZStack {

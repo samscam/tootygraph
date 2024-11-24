@@ -25,6 +25,7 @@ protocol Feed: Identifiable, Observable {
     
 }
 
+@MainActor
 protocol FeedItem: Identifiable, Observable {
     var id: String { get }
 }

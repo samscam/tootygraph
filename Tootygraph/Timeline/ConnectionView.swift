@@ -30,11 +30,12 @@ struct ConnectionView: View {
                 }
             case .connected:
                 ForEach(connection.feeds, id:\.id) { feed in
-                    NavigationStack{
-                        FeedView(feed: feed)
-                            .palette(connection.palette)
-                            .navigationBarTitleDisplayMode(.inline)
-                    }
+                        NavigationStack{
+                            FeedView(feed: feed)
+                                .palette(connection.palette)
+                                .navigationBarTitleDisplayMode(.inline)
+                        }
+                    
                 }
             
             }

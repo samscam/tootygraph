@@ -91,7 +91,8 @@ struct PostView: View {
     var textContent: some View {
         
         Text(post.attributedContent)
-            .font(.custom("AmericanTypewriter",size:18))
+            .font(.body)
+//            .font(.custom("AmericanTypewriter",size:18))
             .multilineTextAlignment(.leading)
             .layoutPriority(10)
             .frame(maxWidth: .infinity,alignment: .leading)
@@ -146,10 +147,11 @@ struct PostView: View {
     let palette = Palette.random()
     
     let postWrapper = PostController(TestPosts.justText)
-    return GeometryReader{ geometry in
-        PostView(post: postWrapper).environmentObject(settings)
+    
+    return PostView(post: postWrapper).environmentObject(settings)
             .palette(palette)
-    }
+            .background(palette.background)
+    
     
     
 }
@@ -157,17 +159,19 @@ struct PostView: View {
 #Preview(traits: .sizeThatFitsLayout){
     let settings = {
         let settings = SettingsManager()
-        settings.$jaunty.set(false)
+        settings.$jaunty.set(true)
         settings.$showContent.set(true)
         return settings
     }()
+    let palette = Palette.random()
     
     let postWrapper = PostController(TestPosts.postWithPics)
-    return GeometryReader{ geometry in
-        PostView(post: postWrapper)
+    return PostView(post: postWrapper)
+            .palette(palette)
             .environmentObject(settings)
             .padding()
-    }
+            .background(palette.background)
+    
     
     
 }

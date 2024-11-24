@@ -42,7 +42,7 @@ extension MediaAttachment {
 }
 
 struct PhotoView: View {
-    @EnvironmentObject var settings: SettingsManager
+//    @EnvironmentObject var settings: SettingsManager
     
     @State private var flipped: Bool = false
     
@@ -57,12 +57,12 @@ struct PhotoView: View {
             }
             
         }
-        .onAppear{
-            flipped = settings.descriptionsFirst
-        }
+//        .onAppear{
+//            flipped = settings.descriptionsFirst
+//        }
     }
     
-    @MainActor
+
     var frontView: some View {
         ZStack {
             Rectangle().foregroundColor(.gray.opacity(0.5))
@@ -81,6 +81,7 @@ struct PhotoView: View {
                 }
                 .foregroundColor(.white)
                 .onTapGesture{
+                    print("FLIP!")
                     withAnimation {
                         self.flipped = true
                     }
@@ -94,7 +95,6 @@ struct PhotoView: View {
         
     }
     
-    @MainActor
     var rearView: some View {
         ZStack{
             
@@ -112,6 +112,7 @@ struct PhotoView: View {
             
         }
         .onTapGesture {
+            print("FLOP!")
             withAnimation {
                 self.flipped = false
             }
