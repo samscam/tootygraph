@@ -17,7 +17,7 @@ struct FeedView: View {
     @Environment(\.palette) var palette: Palette
     
     var body: some View {
-        
+        NavigationStack{
             ScrollView{
                 LazyVStack{
                     ForEach(feed.items, id:\.id) { item in
@@ -32,6 +32,7 @@ struct FeedView: View {
                             }
                             
                         }
+                        .geometryGroup()
                         .padding(20)
                         .onAppear{
                             feed.onItemAppear(item)
@@ -57,9 +58,9 @@ struct FeedView: View {
             }
             .navigationDestination(for: TootFeed.self) { childFeed in
                 
-                    FeedView(feed: childFeed)
+                FeedView(feed: childFeed)
                 
-              }
+            }
             .navigationTitle(feed.name)
             .background{
                 ZStack {
@@ -75,6 +76,7 @@ struct FeedView: View {
                 }.ignoresSafeArea()
             }
         }
+    }
     
 }
 

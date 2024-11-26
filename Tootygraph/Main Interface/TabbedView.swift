@@ -11,86 +11,93 @@ import NukeUI
 import Boutique
 import TootSDK
 
-struct TabbedView: View {
+enum Tabs: String, Equatable, Hashable, Identifiable {
+    case settings
+    case profile
+    case home
+    case replies
     
-    @EnvironmentObject var settings: SettingsManager
-    
-    @Environment(AccountsManager.self) var accountsManager: AccountsManager
-    
-    @State var currentPalette: Palette = Palette.standard()
-    
-    @State var selectedFeed: UUID? = nil
-    
-    var connections: [Connection]
-    @Environment(\.verticalSizeClass) var verticalSizeClass
-    
-    var body: some View {
-        
-            
-            TabView(selection: $selectedFeed){
-                ForEach(connections){ connection in
-                    ConnectionView(connection: connection).palette(connection.palette)
-                }
-            }
-            .tabViewStyle(.page).ignoresSafeArea()
-            
-            .background{
-                ZStack {
-                    Rectangle()
-                        .fill(currentPalette.background)
-                    
-                    Image("wood-texture")
-                        .resizable()
-                        .saturation(0)
-                        .blendMode(.multiply)
-                        .opacity(0.4)
-                    
-                }.ignoresSafeArea()
-            }
-            .onChange(of: selectedFeed, initial: true) {
-                guard let selectedFeed,
-                      let palette = accountsManager.connectionContaining(feedID: selectedFeed)?.palette else {
-//                    withAnimation{
-                        currentPalette = .standard()
-//                    }
-                    return
-                }
-//                withAnimation{
-                    currentPalette = palette
-//                }
-                
-            }
-            
-//            .flippingBar(flipped: verticalSizeClass == .compact, orientation: .bottomLeading){
-//                feedSelectionBar
-//            }
-//            .flippingBar(flipped: verticalSizeClass == .compact, orientation: .topTrailing){
-//                ActionBarView(horizontal: verticalSizeClass == .regular)
-//                    .palette(currentPalette)
-//            }
-            .safeAreaInset(edge: .top) {
-                ActionBarView(horizontal: true)
-            }
-            .safeAreaInset(edge: .bottom){
-                feedSelectionBar
-            }
-            .palette(currentPalette)
-            
-        
+    var id: Int {
+        switch self {
+        case .settings: 0
+        case .home: 1
+        case .profile: 2
+        case .replies: 3
+        }
     }
     
-    var feedSelectionBar: some View {
-        Group{
-            if connections.count > 0 {
-                VStack{
-                    TabBarView(selectedFeed: $selectedFeed, horizontal: verticalSizeClass == .regular, connections: connections)
-                        .palette(currentPalette)
-                    
+    var name: String {
+        self.rawValue.capitalized
+    }
+}
+
+struct TabbedView: View {
+    
+    @Environment(AccountsManager.self) var accountsManager: AccountsManager
+
+    @EnvironmentObject var settings: SettingsManager
+    
+    @State private var currentPalette: Palette = Palette.standard()
+    
+    @State private var selectedTab: Tabs = .home
+    
+    @State var connections: [Connection]
+    
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    
+    
+    var body: some View {
+
+        TabView {
+            Tab("Settings", systemImage: "gearshape") {
+                AccountsView()
+            }
+            ForEach(accountsManager.connections){ connection in
+                TabSection(connection.account.niceName) {
+                    Tab("Home", systemImage: "house"){
+                        if let home = connection.homeFeed {             FeedView(feed:home)
+                        }
+                    }
+                    Tab("Notifications", systemImage: "text.bubble"){
+                        if let replies = connection.notificationsFeed{
+                            FeedView(feed:replies)
+                        }
+                    }
                 }
             }
         }
+
+        .tabViewStyle(.sidebarAdaptable)
+        
+        .background{
+            ZStack {
+                Rectangle()
+                    .fill(currentPalette.background)
+                
+                Image("wood-texture")
+                    .resizable()
+                    .saturation(0)
+                    .blendMode(.hardLight)
+                    .opacity(0.8)
+                
+            }.ignoresSafeArea()
+        }
     }
 }
+
+var feedSelectionBar: some View {
+    Group{
+        
+        VStack{
+            Text("Everything is brok")
+            //                    TabBarView(selectedFeed: $selectedFeed, horizontal: verticalSizeClass == .regular, connections: connections)
+            //                        .palette(currentPalette)
+            
+        }
+        
+    }
+}
+
 
 
 struct FeedIdentifier: Hashable, Equatable {
@@ -105,18 +112,18 @@ struct FeedIdentifier: Hashable, Equatable {
 
 #Preview {
     @Previewable
-    @State var connections: [Connection] = [
-        Connection(account:Account.testAccount)
-    ]
+    @State var connections: [Connection] =
+    [Connection(account:Account.testAccount)]
+    
     
     let account = Account.testAccount
     let settings = SettingsManager()
-    let accountsManager = AccountsManager()
+    let tootygraph = Tootygraph()
+    let accountsManager = AccountsManager(modelContainer: tootygraph.modelContainer)
     
-
+    
     
     TabbedView(connections: connections)
         .environmentObject(settings)
-        .environment(accountsManager)
     
 }

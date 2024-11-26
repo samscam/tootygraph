@@ -9,9 +9,9 @@ import Foundation
 import Boutique
 import TootSDK
 
-
-extension Store where Item == FediAccount {
-  static let serverAccountsStore = Store<FediAccount>(
-      storage: SQLiteStorageEngine.default(appendingPath: "ServerAccounts")
-  )
-}
+//
+//extension Store where Item == FediAccount {
+//  static let serverAccountsStore = Store<FediAccount>(
+//      storage: SQLiteStorageEngine.default(appendingPath: "ServerAccounts")
+//  )
+//}

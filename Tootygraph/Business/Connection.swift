@@ -20,9 +20,12 @@ class Connection {
     var account: FediAccount
     var feeds: [any Feed] = []
     
+    var homeFeed: TootFeed? = nil
+    var notificationsFeed: NotificationsFeed? = nil
+    
     let id: UUID = UUID()
     
-    private (set) var tootClient: TootClient?
+    private(set) var tootClient: TootClient?
 
     
     init(account: FediAccount) {
@@ -56,20 +59,17 @@ class Connection {
             let client = try await TootClient(connect: account.instanceURL, clientName:"Tootygraph", accessToken: account.accessToken)
             
             // We need to refresh the server account with the user account
-            var serverAccount = account
+            let serverAccount = account
             let userAccount = try await client.verifyCredentials()
             serverAccount.userAccount = userAccount
             self.tootClient = client
             connectionState = .connected
+            homeFeed = TootFeed(client: client,
+                                timeline: .home,
+                                palette: palette,
+                                accountNiceName: serverAccount.niceName)
+            notificationsFeed = NotificationsFeed(client: client)
             
-            feeds = [
-                
-                TootFeed(client: client,
-                                   timeline: .home,
-                                   palette: palette,
-                                   accountNiceName: serverAccount.niceName),
-                NotificationsFeed(client: client)
-            ]
         } catch {
             connectionState = .error(error: error)
         }

@@ -11,11 +11,12 @@ import NukeUI
 import Nuke
 import NukeVideo
 
+import SwiftData
 
 @main
 struct TootygraphApp: App {
     
-    @StateObject var tootygraph = Tootygraph()
+    @State var tootygraph = Tootygraph()
     
     var body: some Scene {
         WindowGroup {
@@ -26,6 +27,7 @@ struct TootygraphApp: App {
                     // This is to make Nuke be able to handle videos, apparently
                     ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)
                 }
+                .modelContainer(tootygraph.modelContainer)
         }
     }
 }

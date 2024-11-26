@@ -42,7 +42,7 @@ extension MediaAttachment {
 }
 
 struct PhotoView: View {
-//    @EnvironmentObject var settings: SettingsManager
+//    @EnvironmentVariable var settings: SettingsManager
     
     @State private var flipped: Bool = false
     
@@ -52,6 +52,7 @@ struct PhotoView: View {
         Group{
             if media.description != nil {
                 Flipper( flipped: $flipped, frontView: frontView, rearView: rearView)
+                    
             } else {
                 frontView
             }
@@ -72,7 +73,7 @@ struct PhotoView: View {
         .aspectRatio(media.aspect,contentMode: .fit)
         .photoFrame()
         .overlay(alignment: .bottomTrailing) {
-            if let _ = media.description {
+            if media.description != nil {
                 CornerBadge( alignment: .bottomTrailing){
                     Text("ALT")
                         .bold()
@@ -82,7 +83,7 @@ struct PhotoView: View {
                 .foregroundColor(.white)
                 .onTapGesture{
                     print("FLIP!")
-                    withAnimation {
+                    withAnimation (.spring(duration:4)){
                         self.flipped = true
                     }
                 }
@@ -124,7 +125,6 @@ struct PhotoView: View {
         
     }
     
-    @MainActor
     var photoView: some View {
         Group{
             if media.type == .image {

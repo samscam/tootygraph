@@ -35,6 +35,8 @@ struct MainView: View {
                         .tag("settings")
                 } else {
                     TabbedView(connections: accountsManager.connections)
+//                    Text("Whoops")
+                    
                 }
             case .message(let message):
                 

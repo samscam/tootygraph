@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22002243299850C6000FA97F /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22002242299850C6000FA97F /* AccountsView.swift */; };
-		22002245299850F5000FA97F /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22002244299850F5000FA97F /* AccountsManager.swift */; };
 		220022472998759E000FA97F /* BoutiqueStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220022462998759E000FA97F /* BoutiqueStores.swift */; };
 		2200224929987715000FA97F /* ServerAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224829987715000FA97F /* ServerAccountView.swift */; };
 		2200224C2999A8B7000FA97F /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* Feed.swift */; };
@@ -53,6 +52,7 @@
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
 		22CD12092991BE5E00B7D70D /* ActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* ActionBarView.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenuView.swift */; };
+		22D474762CF3FC460013875A /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D474752CF3FC460013875A /* AccountsManager.swift */; };
 		22D750F42B533A8200B71F7D /* alpaca.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750F32B533A8200B71F7D /* alpaca.jpeg */; };
 		22D750F62B533AAE00B71F7D /* sam.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750F52B533AAD00B71F7D /* sam.jpeg */; };
 		22D750F82B534BC300B71F7D /* TestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D750F72B534BC300B71F7D /* TestFixtures.swift */; };
@@ -75,7 +75,6 @@
 
 /* Begin PBXFileReference section */
 		22002242299850C6000FA97F /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
-		22002244299850F5000FA97F /* AccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsManager.swift; sourceTree = "<group>"; };
 		220022462998759E000FA97F /* BoutiqueStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueStores.swift; sourceTree = "<group>"; };
 		2200224829987715000FA97F /* ServerAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccountView.swift; sourceTree = "<group>"; };
 		2200224A2998CECF000FA97F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -116,6 +115,7 @@
 		22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeVideoView.swift; sourceTree = "<group>"; };
 		22CD12082991BE5E00B7D70D /* ActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarView.swift; sourceTree = "<group>"; };
 		22CD120A2993061800B7D70D /* SettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuView.swift; sourceTree = "<group>"; };
+		22D474752CF3FC460013875A /* AccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsManager.swift; sourceTree = "<group>"; };
 		22D750F32B533A8200B71F7D /* alpaca.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alpaca.jpeg; sourceTree = "<group>"; };
 		22D750F52B533AAD00B71F7D /* sam.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sam.jpeg; sourceTree = "<group>"; };
 		22D750F72B534BC300B71F7D /* TestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFixtures.swift; sourceTree = "<group>"; };
@@ -310,7 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */,
-				22002244299850F5000FA97F /* AccountsManager.swift */,
+				22D474752CF3FC460013875A /* AccountsManager.swift */,
 				22AD6C802A5B6103008A79CA /* FediAccount.swift */,
 				2236FB7629970E5000436F65 /* SettingsManager.swift */,
 				22931B052B58533C00378FF9 /* Connection.swift */,
@@ -419,7 +419,6 @@
 				22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */,
 				22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */,
 				22D750F82B534BC300B71F7D /* TestFixtures.swift in Sources */,
-				22002245299850F5000FA97F /* AccountsManager.swift in Sources */,
 				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */,
 				229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */,
@@ -459,6 +458,7 @@
 				22931AF82B548B0B00378FF9 /* FancyPicker.swift in Sources */,
 				2287F25C29A826F400F24EA9 /* PostController.swift in Sources */,
 				22516CD32B630870004F8A88 /* TestTimeline.swift in Sources */,
+				22D474762CF3FC460013875A /* AccountsManager.swift in Sources */,
 				22EC121D298F430800976ECC /* BoxPacker.swift in Sources */,
 				229C19BF2B686BD100AD7F9B /* FlippingBar.swift in Sources */,
 				22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */,
@@ -611,7 +611,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -654,7 +654,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;

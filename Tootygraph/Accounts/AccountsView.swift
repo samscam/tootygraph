@@ -7,16 +7,19 @@
 
 import SwiftUI
 import TootSDK
+import SwiftData
 
 struct AccountsView: View {
     
-    @Environment(AccountsManager.self) var accountsManager: AccountsManager
+    @Query(sort: \FediAccount.username, order: .forward) var accounts: [FediAccount]
     
     @FocusState var fieldFocussed: Bool
     
     @State private var showResetAlert: Bool = false
+    @Environment(\.modelContext) private var context
     
     var body: some View {
+
         ScrollView{
             VStack(alignment:.center){
                 Image("greenicon1024")
@@ -27,18 +30,14 @@ struct AccountsView: View {
                     .padding(.top,20)
             }
             VStack(alignment:.leading){
-                if (accountsManager.connections.count > 0){
+                if (accounts.count > 0){
                     Text("Accounts").font(.title)
-                    
-                    ForEach(accountsManager.connections){ connection in
-                        ServerAccountView(connection:connection)
-                            .palette(connection.palette)
+                    ForEach(accounts){ account in
+                        ServerAccountView(account: account)
+                            .palette(account.palette)
                             .frame(maxWidth: .infinity)
-                            
                             .contentShape(Rectangle())
-                        
                     }
-                    
                     
                 } else {
                     
@@ -63,7 +62,7 @@ struct AccountsView: View {
                 }.alert("Are you sure you want to reset Tootygraph?",isPresented: $showResetAlert){
                     Button("Reset",role:.destructive){
                         Task {
-                            try await accountsManager.reset()
+                            try context.delete(model: FediAccount.self)
                         }
                     }
                     Button("Cancel",role: .cancel){
@@ -82,8 +81,8 @@ struct AccountsView: View {
 }
 
 #Preview{
-    @Namespace var fakeNamespace
-    @State var account: FediAccount = FediAccount(
+    @Previewable @Namespace var fakeNamespace
+    @Previewable @State var account: FediAccount = FediAccount(
         id: "someid",
         username: "sam",
         hue: .random(in: 0...1),
@@ -105,17 +104,13 @@ struct AccountsView: View {
             followingCount: 432,
             fields: []))
     
-    @State var accountsManager = AccountsManager()
-    
-    @StateObject var settings = SettingsManager()
+    @Previewable @StateObject var settings = SettingsManager()
     @FocusState var fieldFocussed: Bool
     
     AccountsView()
-        .environment(accountsManager)
         .environmentObject(settings)
         .onAppear{
             Task{
-                try await accountsManager.addServerAccount(account)
                 
             }
         }

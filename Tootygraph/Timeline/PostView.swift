@@ -24,10 +24,10 @@ struct PostView: View {
     var body: some View{
 
         VStack(alignment: .leading, spacing: 0) {
-            NavigationLink(value: post.feedFor(post.displayPost.account)) {
+//            NavigationLink(value: post.feedFor(post.displayPost.account)) {
                 AvatarView(account: post.displayPost.account)
                     .padding(.bottom,20)
-            }
+//            }
   
             
             VStack(alignment: .center,spacing:0){

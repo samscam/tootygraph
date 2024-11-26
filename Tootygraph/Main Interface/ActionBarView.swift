@@ -50,7 +50,7 @@ struct ActionBarView: View {
             }
             
         }
-//        .background(Material.bar)
+        .background(Material.bar)
         
         
     }

@@ -8,7 +8,7 @@
 import Foundation
 import TootSDK
 import Boutique
-
+import SwiftData
 
 enum AccountsManagerError: Error {
     case invalidURL
@@ -25,66 +25,43 @@ enum AccountsManagerError: Error {
 @Observable
 class AccountsManager {
     
-    // Nope we can't be having this... credentials need to be in the keychain
-    @ObservationIgnored
-    @Stored(in: .serverAccountsStore) private var accounts: [FediAccount]
-    
+    let modelContainer: ModelContainer
     var loadState: LoadState = .starting
     var connections: [Connection] = []
     
-    init(){
-        
+    init(modelContainer: ModelContainer){
+        self.modelContainer = modelContainer
         Task{
-            for await event in $accounts.events {
-                let newConnections = event.items.map {
-                    serverAccount in
-                        let conn = Connection(account: serverAccount)
-                        Task{
-                            try await conn.connect()
-                        }
-                        return conn
-                    
-                }
-                self.connections = newConnections
-            }
-        }
-
-        Task{
-            do{
-                try await $accounts.itemsHaveLoaded()
-                
-                loadState = .loaded
-                
-            } catch {
-                loadState = .error(error: error)
-                print(error)
-            }
+            try await connectAll()
         }
     }
     
     func recoverAction() {
-        Task {
-            do {
-                try await Store.serverAccountsStore.removeAll()
-                
-            } catch {
-                self.loadState = .error(error: error)
-            }
-        }
+
     }
     
     func connectAll() async throws {
+        let fetch = try modelContainer.mainContext.fetch(FetchDescriptor<FediAccount>())
+        connections = fetch.map{
+            Connection(account: $0)
+        }
         for connection in connections {
             try await connection.connect()
         }
+        loadState = .loaded
     }
     
     func addServerAccount(_ account: FediAccount) async throws{
-        try await $accounts.insert(account)
+        let context = modelContainer.mainContext
+        context.insert(account)
+        Task{
+            try await connectAll()
+        }
     }
     
-    func removeServerAccount(_ account: FediAccount) async throws{
-        try await $accounts.remove(account)
+    func deleteServerAccount(_ account: FediAccount) async throws{
+        let context = modelContainer.mainContext
+        context.delete(account)
     }
     
     
@@ -117,9 +94,7 @@ class AccountsManager {
     }
     
     func reset() async throws{
-        for connection in connections {
-            try await removeServerAccount(connection.account)
-        }
+        try modelContainer.mainContext.delete(model: FediAccount.self)
     }
     
     subscript(id: UUID) -> Connection?{

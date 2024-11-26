@@ -7,8 +7,8 @@
 
 import Foundation
 import TootSDK
-import SwiftUI
 
+import SwiftData
 /**
  A FediAccount is the storable structure representing a user account on a server somewhere.
  
@@ -16,14 +16,20 @@ import SwiftUI
  
  Suitable for storing locally and initiating a Connection.
  */
-struct FediAccount: Codable, Equatable, Identifiable, Hashable {
+@Model
+class FediAccount {
+
+    @Attribute(.unique) var id: String
     
-    let id: String
-    let username: String
+    var username: String
     var hue: Double
-    let instanceURL: URL
+    var instanceURL: URL
+    var avatarURL: URL?
+    var headerURL: URL?
     
-    let accessToken: String?
+    var accessToken: String?
+    
+    @Transient
     var userAccount: Account?
     
     var niceName: String {
@@ -32,5 +38,18 @@ struct FediAccount: Codable, Equatable, Identifiable, Hashable {
     
     var host: String {
         instanceURL.host ?? "unknown"
+    }
+    
+    var palette: Palette {
+        Palette(self.hue)
+    }
+    
+    init(id: String, username: String, hue: Double, instanceURL: URL, accessToken: String?, userAccount: Account? = nil) {
+        self.id = id
+        self.username = username
+        self.hue = hue
+        self.instanceURL = instanceURL
+        self.accessToken = accessToken
+        self.userAccount = userAccount
     }
 }

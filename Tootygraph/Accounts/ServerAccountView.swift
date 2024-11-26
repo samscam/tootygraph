@@ -11,11 +11,11 @@ import TootSDK
 
 struct ServerAccountView: View{
     
-    let connection: Connection
+    let account: FediAccount
     
     var body: some View {
         HStack{
-            LazyImage(url: connection.avatarURL) { state in
+            LazyImage(url: account.avatarURL) { state in
                 if let image = state.image {
                     image
                         .resizable().aspectRatio(contentMode: .fill)
@@ -27,15 +27,15 @@ struct ServerAccountView: View{
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
             VStack(alignment: .leading){
-                Text("\(connection.account.userAccount?.displayName ?? connection.account.username)").font(.title3).bold()
-                Text(connection.account.niceName)
+                Text(account.instanceURL.absoluteString).font(.title3).bold()
+                Text(account.niceName)
             }.padding(5).foregroundColor(.primary)
             Spacer()
         }
         
         .padding(5)
         .background{
-            LazyImage(url: connection.headerURL) { state in
+            LazyImage(url: account.headerURL) { state in
                 if let image = state.image {
                     image
                         .resizable()
@@ -50,11 +50,11 @@ struct ServerAccountView: View{
                 }
             }
         }
-        .background(connection.palette.background)
+        .background(account.palette.background)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay{
             RoundedRectangle(cornerRadius: 10)
-                .stroke(connection.palette.highlight,lineWidth: 3)
+                .stroke(account.palette.highlight,lineWidth: 3)
         }
         
     }
@@ -82,5 +82,5 @@ struct ServerAccountView: View{
             followersCount: 123,
             followingCount: 432,
             fields: []))
-    return ServerAccountView(connection: Connection(account: account)).padding()
+    return ServerAccountView(account: account).padding()
 }
