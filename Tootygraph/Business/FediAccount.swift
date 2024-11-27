@@ -52,4 +52,12 @@ class FediAccount {
         self.accessToken = accessToken
         self.userAccount = userAccount
     }
+    
+    init(_ account: Account){
+        self.id = account.id
+        self.username = account.username!
+        self.avatarURL = URL(string:account.avatar)
+        self.instanceURL = URL(string:account.url)!
+        self.hue = Double.random(in: 0.0...1.0)
+    }
 }

@@ -62,6 +62,7 @@ class Connection {
             let serverAccount = account
             let userAccount = try await client.verifyCredentials()
             serverAccount.userAccount = userAccount
+            serverAccount.avatarURL = URL(string: userAccount.avatar)
             self.tootClient = client
             connectionState = .connected
             homeFeed = TootFeed(client: client,

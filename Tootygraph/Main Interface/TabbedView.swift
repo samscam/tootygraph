@@ -53,14 +53,31 @@ struct TabbedView: View {
                 AccountsView()
             }
             ForEach(accountsManager.connections){ connection in
-                TabSection(connection.account.niceName) {
-                    Tab("Home", systemImage: "house"){
-                        if let home = connection.homeFeed {             FeedView(feed:home)
+                switch connection.connectionState {
+                case .connected:
+                    TabSection(connection.account.niceName) {
+                        Tab("Home", systemImage: "house"){
+                            if let home = connection.homeFeed {             FeedView(feed:home)
+                            }
+                        }
+                        Tab("Notifications", systemImage: "text.bubble"){
+                            if let replies = connection.notificationsFeed{
+                                FeedView(feed:replies)
+                            }
                         }
                     }
-                    Tab("Notifications", systemImage: "text.bubble"){
-                        if let replies = connection.notificationsFeed{
-                            FeedView(feed:replies)
+                case .connecting:
+                    Tab( "Connecting",systemImage: "house"){
+                        Text("Connecting")
+                    }
+                case .error(let error):
+                    Tab( "Error",systemImage: "house"){
+                        Text("Error")
+                        Text(error.localizedDescription)
+                        Button("try again") {
+                            Task{
+                                try await connection.connect()
+                            }
                         }
                     }
                 }
@@ -113,10 +130,10 @@ struct FeedIdentifier: Hashable, Equatable {
 #Preview {
     @Previewable
     @State var connections: [Connection] =
-    [Connection(account:Account.testAccount)]
+    [Connection(account:FediAccount.Samples.alpaca)]
     
     
-    let account = Account.testAccount
+    let account = FediAccount.Samples.alpaca
     let settings = SettingsManager()
     let tootygraph = Tootygraph()
     let accountsManager = AccountsManager(modelContainer: tootygraph.modelContainer)

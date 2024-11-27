@@ -17,6 +17,7 @@
 		22120CAD2B4AB8B3006FECD6 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 22120CAC2B4AB8B3006FECD6 /* Gifu */; };
 		22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22120CAE2B4B7395006FECD6 /* Palette.swift */; };
 		22127BC12B6B0A6E0040E2DC /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22127BC02B6B0A6E0040E2DC /* NotificationView.swift */; };
+		2222125D2CF6952E00CBFEF8 /* ConnectionLozenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222125C2CF6952A00CBFEF8 /* ConnectionLozenge.swift */; };
 		2223CC1B2AA53A7100122870 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223CC1A2AA53A7100122870 /* TabBarView.swift */; };
 		2236FB632994609000436F65 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB622994609000436F65 /* DetailView.swift */; };
 		2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2236FB6529946A7100436F65 /* SwiftSoup */; };
@@ -53,6 +54,8 @@
 		22CD12092991BE5E00B7D70D /* ActionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD12082991BE5E00B7D70D /* ActionBarView.swift */; };
 		22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD120A2993061800B7D70D /* SettingsMenuView.swift */; };
 		22D474762CF3FC460013875A /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D474752CF3FC460013875A /* AccountsManager.swift */; };
+		22D474F12CF68FF60013875A /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D474F02CF68FF20013875A /* PreviewData.swift */; };
+		22D474F32CF691070013875A /* FediAccount+samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D474F22CF690FF0013875A /* FediAccount+samples.swift */; };
 		22D750F42B533A8200B71F7D /* alpaca.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750F32B533A8200B71F7D /* alpaca.jpeg */; };
 		22D750F62B533AAE00B71F7D /* sam.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 22D750F52B533AAD00B71F7D /* sam.jpeg */; };
 		22D750F82B534BC300B71F7D /* TestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D750F72B534BC300B71F7D /* TestFixtures.swift */; };
@@ -83,6 +86,7 @@
 		220AE8C229C521B30023554D /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		22120CAE2B4B7395006FECD6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		22127BC02B6B0A6E0040E2DC /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		2222125C2CF6952A00CBFEF8 /* ConnectionLozenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionLozenge.swift; sourceTree = "<group>"; };
 		2223CC1A2AA53A7100122870 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		2236FB622994609000436F65 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2236FB692995B73700436F65 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 		22CD12082991BE5E00B7D70D /* ActionBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarView.swift; sourceTree = "<group>"; };
 		22CD120A2993061800B7D70D /* SettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuView.swift; sourceTree = "<group>"; };
 		22D474752CF3FC460013875A /* AccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsManager.swift; sourceTree = "<group>"; };
+		22D474F02CF68FF20013875A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		22D474F22CF690FF0013875A /* FediAccount+samples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FediAccount+samples.swift"; sourceTree = "<group>"; };
 		22D750F32B533A8200B71F7D /* alpaca.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alpaca.jpeg; sourceTree = "<group>"; };
 		22D750F52B533AAD00B71F7D /* sam.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sam.jpeg; sourceTree = "<group>"; };
 		22D750F72B534BC300B71F7D /* TestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFixtures.swift; sourceTree = "<group>"; };
@@ -169,6 +175,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2222125B2CF6951400CBFEF8 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				2222125C2CF6952A00CBFEF8 /* ConnectionLozenge.swift */,
+				2223CC1A2AA53A7100122870 /* TabBarView.swift */,
+			);
+			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
 		2236FB672995B63300436F65 /* Timeline */ = {
@@ -234,7 +249,7 @@
 				2236FB742997052200436F65 /* MainView.swift */,
 				227682202B5D7A0A001E5D80 /* SplashView.swift */,
 				2276821E2B5D371A001E5D80 /* TabbedView.swift */,
-				2223CC1A2AA53A7100122870 /* TabBarView.swift */,
+				2222125B2CF6951400CBFEF8 /* CustomTabBar */,
 				22CD12082991BE5E00B7D70D /* ActionBarView.swift */,
 			);
 			path = "Main Interface";
@@ -300,6 +315,8 @@
 				22D750FB2B53547E00B71F7D /* heaton.jpeg */,
 				22D750FC2B53547E00B71F7D /* macs.jpeg */,
 				22EC1205298F23E200976ECC /* Preview Assets.xcassets */,
+				22D474F02CF68FF20013875A /* PreviewData.swift */,
+				22D474F22CF690FF0013875A /* FediAccount+samples.swift */,
 				22D750F72B534BC300B71F7D /* TestFixtures.swift */,
 				22516CD22B630870004F8A88 /* TestTimeline.swift */,
 			);
@@ -446,12 +463,15 @@
 				2200224929987715000FA97F /* ServerAccountView.swift in Sources */,
 				227682232B5D90C1001E5D80 /* ConnectionView.swift in Sources */,
 				2236FB752997052200436F65 /* MainView.swift in Sources */,
+				22D474F32CF691070013875A /* FediAccount+samples.swift in Sources */,
 				22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */,
+				22D474F12CF68FF60013875A /* PreviewData.swift in Sources */,
 				22931AFE2B573DBD00378FF9 /* ViewExtensions.swift in Sources */,
 				22CD12092991BE5E00B7D70D /* ActionBarView.swift in Sources */,
 				22127BC12B6B0A6E0040E2DC /* NotificationView.swift in Sources */,
 				2200224C2999A8B7000FA97F /* Feed.swift in Sources */,
 				227C65D729A2D5A3006BF540 /* Flipper.swift in Sources */,
+				2222125D2CF6952E00CBFEF8 /* ConnectionLozenge.swift in Sources */,
 				22DFF05D29AD5D9F00D14A27 /* PostComposerViewModel.swift in Sources */,
 				22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */,
 				220AE8C129C521A30023554D /* CameraView.swift in Sources */,
