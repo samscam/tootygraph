@@ -6,16 +6,11 @@
 //
 
 import Foundation
-import TootSDK
+@preconcurrency import TootSDK
 import SwiftUI
 import Combine
+import Observation
 
-
-//extension PagedInfo: Equatable{
-//    public static func == (lhs: PagedInfo, rhs: PagedInfo) -> Bool {
-//        return lhs.minId == rhs.minId && lhs.maxId == rhs.maxId && lhs.sinceId == rhs.sinceId
-//    }
-//}
 
 
 enum PagingState: Equatable {
@@ -51,6 +46,9 @@ class TootFeed: Feed {
     private var postsSet = CurrentValueSubject<Set<PostController>,Never>(Set<PostController>())
     
     @ObservationIgnored
+    private var includeText = CurrentValueSubject<Bool,Never>(false)
+    
+    @ObservationIgnored
     private var cancellables: Set<AnyCancellable> = []
     
     @ObservationIgnored
@@ -58,9 +56,6 @@ class TootFeed: Feed {
     
     @ObservationIgnored
     let timeline: Timeline
-    
-    @ObservationIgnored
-    @Injected(\.settingsManager) var settings: SettingsManager
 
     
     
@@ -70,21 +65,23 @@ class TootFeed: Feed {
         self.palette = palette
         self.accountNiceName = accountNiceName
         
+
+        
         self.name = timeline.stringName
         // Binding for postsSet to apply filtering and update posts
         
         postsSet
-//            .combineLatest()
-//            .map{ (posts, includeText) in
-//                return posts.filter {post in
-//                    
-//                    if includeText {
-//                        return true
-//                    } else {
-//                        return post.mediaAttachments.count > 0
-//                    }
-//                }
-//            }
+//            .combineLatest(settings.includeTextPosts)
+            .map{ posts in
+                return posts.filter {post in
+                    
+                    if self.includeText.value {
+                        return true
+                    } else {
+                        return post.mediaAttachments.count > 0
+                    }
+                }
+            }
             .map{ posts in
                 return posts.sorted {
                     $0.id > $1.id
@@ -232,7 +229,7 @@ class TootFeed: Feed {
 //}
 
 extension TootFeed: Hashable{
-    func hash(into hasher: inout Hasher) {
+    nonisolated func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }

@@ -118,3 +118,8 @@ struct CornerBadge<Content:View>: View {
     }
   }
 }
+#Preview {
+    CornerBadge(alignment: .bottomTrailing) {
+        Text("Hello there")
+    }
+}

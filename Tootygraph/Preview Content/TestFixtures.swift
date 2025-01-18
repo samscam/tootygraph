@@ -51,7 +51,7 @@ enum TestPosts {
 
 enum TestAttachments {
     
-    static func attachmentFor(_ name: String) -> MediaAttachment{
+    static func attachmentFor(_ name: String, description: String? = nil) -> MediaAttachment{
         let url = Bundle.main.url(forResource: name, withExtension: nil)?.absoluteString ?? ""
         
         let meta = """
@@ -70,7 +70,7 @@ enum TestAttachments {
         attachmentMeta.original?.width = Int(uiImage.size.width)
         attachmentMeta.original?.height = Int(uiImage.size.height)
         
-        return MediaAttachment(id: name, type: .image, url: url, meta: attachmentMeta)
+        return MediaAttachment(id: name, type: .image, url: url, meta: attachmentMeta, description: description)
     }
 }
 

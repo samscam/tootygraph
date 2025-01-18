@@ -11,24 +11,23 @@ import SwiftData
 // Top level state and injection of everything
 
 @MainActor
-
 class Tootygraph {
+    
+    var accountsManager: AccountsManager
+    var settingsManager: SettingsManager
+    var modelContainer: ModelContainer
+    
     init(){
         print("New tootygraph")
-    }
-    lazy var accountsManager: AccountsManager = AccountsManager(modelContainer: modelContainer)
-    
-    @Injected(\.settingsManager) var settingsManager: SettingsManager
-    
-    nonisolated lazy var modelContainer: ModelContainer = {
-        let modelContainer: ModelContainer
         do {
             modelContainer = try ModelContainer(for: FediAccount.self)
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
-        return modelContainer
-    }()
+        settingsManager = SettingsManager()
+        accountsManager = AccountsManager(modelContainer: modelContainer)
+    }
+    
     
     var context: ModelContext {
         return modelContainer.mainContext

@@ -9,13 +9,8 @@ import Foundation
 import TootSDK
 
 @MainActor
-@Observable
 class PostController: FeedItem {
 
-    var id: String {
-        return post.id
-    }
-    
     private(set) var post: Post
     
     private(set) var attributedContent: AttributedString
@@ -103,17 +98,19 @@ class PostController: FeedItem {
     
 }
 
-extension PostController: Identifiable {
-    
+extension PostController: @preconcurrency Identifiable {
+    var id: String {
+        return post.id
+    }
 }
 
-extension PostController: Hashable {
+extension PostController: @preconcurrency Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 }
 
-extension PostController: Equatable {
+extension PostController: @preconcurrency Equatable {
     static func == (lhs: PostController, rhs: PostController) -> Bool {
         lhs.id == rhs.id
     }

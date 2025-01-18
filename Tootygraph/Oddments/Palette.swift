@@ -9,20 +9,21 @@ import Foundation
 import CoreGraphics
 import SwiftUI
 
-
-
 struct Palette {
     
     var hue: Double
     
+    @MainActor
     var highlight: some ShapeStyle {
         return PaletteHighlightColor(hue)
     }
     
+    @MainActor
     var background: some ShapeStyle {
         return PaletteBackgroundColor(hue)
     }
     
+    @MainActor
     var postBackground: some ShapeStyle {
         return PalettePostBackgroundColor(hue)
     }
@@ -34,13 +35,13 @@ struct Palette {
 }
 
 struct PaletteHighlightColor: View, ShapeStyle {
-    var hue: Double
+    let hue: Double
     
     init(_ hue: Double) {
         self.hue = hue
     }
     
-    func resolve(in environment: EnvironmentValues)-> some ShapeStyle  {
+    nonisolated func resolve(in environment: EnvironmentValues)-> some ShapeStyle  {
         if environment.colorScheme == .light {
             return lightHighlight
         } else {
@@ -49,24 +50,24 @@ struct PaletteHighlightColor: View, ShapeStyle {
     }
     
 
-    private var darkHighlight: Color {
-        return Color(hue: hue + 0.05, saturation: 0.6, brightness: 1.0)
+    nonisolated private var darkHighlight: Color {
+        return Color(hue: hue, saturation: 0.9, brightness: 0.85)
     }
 
-    private var lightHighlight: Color {
-        return Color(hue: hue + 0.05, saturation: 0.9, brightness: 0.85)
+    nonisolated private var lightHighlight: Color {
+        return Color(hue: hue, saturation: 0.9, brightness: 0.85)
     }
     
 }
 
 struct PaletteBackgroundColor: View, ShapeStyle {
-    var hue: Double
+    let hue: Double
     
     init(_ hue: Double) {
         self.hue = hue
     }
     
-    func resolve(in environment: EnvironmentValues) -> some ShapeStyle {
+    nonisolated func resolve(in environment: EnvironmentValues) -> some ShapeStyle {
         if environment.colorScheme == .light {
             return lightBackground
         } else {
@@ -74,25 +75,25 @@ struct PaletteBackgroundColor: View, ShapeStyle {
         }
     }
     
-    private var lightBackground: Color {
+    nonisolated private var lightBackground: Color {
         return Color(hue: hue, saturation: 0.1, brightness: 1.0)
     }
     
     
-    private var darkBackground: Color {
+    nonisolated private var darkBackground: Color {
         return Color(hue: hue, saturation: 1.0, brightness: 0.35)
     }
 }
 
 
 struct PalettePostBackgroundColor: View, ShapeStyle {
-    var hue: Double
+    let hue: Double
     
     init(_ hue: Double) {
         self.hue = hue
     }
     
-    func resolve(in environment: EnvironmentValues) -> some ShapeStyle {
+    nonisolated func resolve(in environment: EnvironmentValues) -> some ShapeStyle {
         if environment.colorScheme == .light {
             return lightBackground
         } else {
@@ -100,12 +101,12 @@ struct PalettePostBackgroundColor: View, ShapeStyle {
         }
     }
     
-    private var lightBackground: Color {
+    nonisolated private var lightBackground: Color {
         return Color(hue: hue, saturation: 0.01, brightness: 1.0)
     }
     
     
-    private var darkBackground: Color {
+    nonisolated private var darkBackground: Color {
         return Color(hue: hue, saturation: 0.2, brightness: 0.2)
     }
 }
@@ -145,7 +146,6 @@ struct ColourSample: View{
     
     var body: some View {
         
-        HStack {
             HStack{
                 Text("Primary").bold()
                     .frame(maxWidth: .infinity, maxHeight:.infinity)
@@ -154,32 +154,18 @@ struct ColourSample: View{
                 Text("Tint").bold()
                     .foregroundStyle(palette.highlight)
                 
-                .frame(maxWidth: .infinity, maxHeight:.infinity)
+                    .frame(maxWidth: .infinity, maxHeight:.infinity)
                     .background{
                         RoundedRectangle(cornerRadius: 10)
                             .fill(palette.postBackground)
                     }
                     .padding()
+                Button("Prominent", role: .none) {}.buttonStyle(.borderedProminent)
+                Button("Borderless", role: .none) {}.buttonStyle(.borderless)
+                Button("Bordered", role: .none) {}.buttonStyle(.bordered)
             }
+            .tint(palette.highlight)
             .background(palette.background)
-            .colorScheme(.dark)
-            HStack{
-                
-                Text("Primary").bold()
-                    .frame(maxWidth: .infinity, maxHeight:.infinity)
-                    .foregroundStyle(.primary)
-                
-                Text("Tint").bold()
-                    .foregroundStyle(palette.highlight)
-                    .frame(maxWidth: .infinity, maxHeight:.infinity)
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(palette.postBackground)
-                    }
-                    .padding()
-            }.background(palette.background)
-                .colorScheme(.light)
-        }
     }
 }
 

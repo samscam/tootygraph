@@ -7,12 +7,10 @@
 
 import Foundation
 import SwiftUI
-import Boutique
 import TootSDK
 
 struct ConnectionView: View {
     var connection: Connection
-    @EnvironmentObject var settings: SettingsManager
     
     var body: some View {
         

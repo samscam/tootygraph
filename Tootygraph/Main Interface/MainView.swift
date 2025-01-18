@@ -6,9 +6,6 @@
 //
 
 import SwiftUI
-import NukeUI
-import Boutique
-
 
 struct MainView: View {
     
@@ -35,7 +32,6 @@ struct MainView: View {
                         .tag("settings")
                 } else {
                     TabbedView(connections: accountsManager.connections)
-//                    Text("Whoops")
                     
                 }
             case .message(let message):
@@ -44,7 +40,6 @@ struct MainView: View {
             }
             
         }
-//        .animation(.default, value: accountsManager.loadState)
     }
 }
 

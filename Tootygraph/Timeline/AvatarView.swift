@@ -11,7 +11,13 @@ import TootSDK
 
 struct AvatarView: View {
   let account: Account
-  
+    let booster: Account?
+    
+    init(account: Account, booster: Account? = nil) {
+        self.account = account
+        self.booster = booster
+    }
+    
   var body: some View{
           HStack(alignment:.top){
               AvatarImage(url: URL(string:account.avatar))
@@ -25,6 +31,12 @@ struct AvatarView: View {
                   Text(account.acct)
                       .font(.caption)
                       .foregroundColor(.secondary)
+              }
+              
+              if let booster {
+                  Spacer()
+                  AvatarImage(url: URL(string:booster.avatar))
+                      .frame(width:40,height:40)
               }
           }
           

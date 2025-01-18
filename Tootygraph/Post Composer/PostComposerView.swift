@@ -69,10 +69,10 @@ struct PostComposerView: View {
 }
 
 #Preview {
-    @State var showingComposer: Bool = true
+    @Previewable @State var showingComposer: Bool = true
     let palette = Palette(0.7)
     let viewModel = PostComposerViewModel(tootClient: nil)
-    viewModel.composedText = "This is some sample text which we have already writte for the preview"
+    viewModel.composedText = "This is some sample text which we have already written for the preview"
     return PostComposerView(showingComposer: $showingComposer, viewModel: viewModel)
         .palette(palette)
     

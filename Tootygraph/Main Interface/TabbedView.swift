@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import NukeUI
-import Boutique
 import TootSDK
 
 enum Tabs: String, Equatable, Hashable, Identifiable {
@@ -35,7 +34,7 @@ struct TabbedView: View {
     
     @Environment(AccountsManager.self) var accountsManager: AccountsManager
 
-    @EnvironmentObject var settings: SettingsManager
+    @Environment(SettingsManager.self) var settings: SettingsManager?
     
     @State private var currentPalette: Palette = Palette.standard()
     
@@ -86,19 +85,6 @@ struct TabbedView: View {
 
         .tabViewStyle(.sidebarAdaptable)
         
-        .background{
-            ZStack {
-                Rectangle()
-                    .fill(currentPalette.background)
-                
-                Image("wood-texture")
-                    .resizable()
-                    .saturation(0)
-                    .blendMode(.hardLight)
-                    .opacity(0.8)
-                
-            }.ignoresSafeArea()
-        }
     }
 }
 
@@ -141,6 +127,6 @@ struct FeedIdentifier: Hashable, Equatable {
     
     
     TabbedView(connections: connections)
-        .environmentObject(settings)
+        .environment(settings)
     
 }

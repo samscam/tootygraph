@@ -7,16 +7,15 @@
 
 import SwiftUI
 import NukeUI
-import Boutique
 import TootSDK
 
 
 struct PostView: View {
     
     @Environment(\.palette) var palette: Palette
-    @EnvironmentObject var settings: SettingsManager
+    @Environment(SettingsManager.self) var settings: SettingsManager
     
-    var post: PostController
+    @State var post: PostController
     
     @State var showingReplySheet: Bool = false
     
@@ -25,7 +24,7 @@ struct PostView: View {
 
         VStack(alignment: .leading, spacing: 0) {
 //            NavigationLink(value: post.feedFor(post.displayPost.account)) {
-                AvatarView(account: post.displayPost.account)
+            AvatarView(account: post.displayPost.account, booster: post.booster)
                     .padding(.bottom,20)
 //            }
   
@@ -69,20 +68,11 @@ struct PostView: View {
         }
         .padding(15)
         .background{
+//            Material.thick
             RoundedRectangle(cornerRadius: 10)
-                .fill(palette.postBackground)
+                .fill(Material.thin)
         }
-        .overlay(alignment: .topTrailing){
-            if let booster = post.booster {
-                NavigationLink(value: post.feedFor(booster) ) {
-                    AvatarImage(url: URL(string:booster.avatar))
 
-                        .rotationEffect(.degrees(15))
-                        .frame(width:40,height:40)
-                        
-                }
-            }
-        }
         .padding(.horizontal,10)
 
     }
@@ -138,40 +128,48 @@ struct PostView: View {
 
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout){
-    let settings = {
+    @Previewable @State var settings = {
         let settings = SettingsManager()
-        settings.$jaunty.set(false)
-        settings.$showContent.set(true)
+        settings.jaunty = true
+        settings.showContent = true
         return settings
     }()
+    
     let palette = Palette.random()
     
     let postWrapper = PostController(TestPosts.justText)
     
-    return PostView(post: postWrapper).environmentObject(settings)
-            .palette(palette)
-            .background(palette.background)
+    return PostView(post: postWrapper)
+        .environment(settings)
+        .palette(palette)
+        .background(palette.background)
     
     
     
 }
 
 #Preview(traits: .sizeThatFitsLayout){
-    let settings = {
+    @Previewable @State var settings = {
         let settings = SettingsManager()
-        settings.$jaunty.set(true)
-        settings.$showContent.set(true)
+        settings.jaunty = true
+        settings.showContent = true
         return settings
     }()
     let palette = Palette.random()
     
     let postWrapper = PostController(TestPosts.postWithPics)
-    return PostView(post: postWrapper)
-            .palette(palette)
-            .environmentObject(settings)
-            .padding()
-            .background(palette.background)
-    
+    ZStack {
+        Image("wood-texture")
+            .resizable()
+            .ignoresSafeArea()
+        
+        ScrollView{
+            PostView(post: postWrapper)
+                .palette(palette)
+                .environment(settings)
+                .padding()
+        }
+    }
     
     
 }

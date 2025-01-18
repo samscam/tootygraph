@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		22002243299850C6000FA97F /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22002242299850C6000FA97F /* AccountsView.swift */; };
-		220022472998759E000FA97F /* BoutiqueStores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220022462998759E000FA97F /* BoutiqueStores.swift */; };
 		2200224929987715000FA97F /* ServerAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224829987715000FA97F /* ServerAccountView.swift */; };
 		2200224C2999A8B7000FA97F /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200224B2999A8B7000FA97F /* Feed.swift */; };
 		220AE8C129C521A30023554D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220AE8C029C521A30023554D /* CameraView.swift */; };
@@ -71,14 +70,12 @@
 		22EC122429904FF900976ECC /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122329904FF900976ECC /* NukeExtensions */; };
 		22EC122629904FF900976ECC /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122529904FF900976ECC /* NukeUI */; };
 		22EC1228299050EE00976ECC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EC1227299050EE00976ECC /* AvatarView.swift */; };
-		22EC122B299061AC00976ECC /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = 22EC122A299061AC00976ECC /* Boutique */; };
 		22F9CDC52B4ED3F0006D2C6D /* AddServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9CDC42B4ED3F0006D2C6D /* AddServerView.swift */; };
 		22F9CDC72B50A0E3006D2C6D /* TootygraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9CDC62B50A0E3006D2C6D /* TootygraphApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22002242299850C6000FA97F /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
-		220022462998759E000FA97F /* BoutiqueStores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueStores.swift; sourceTree = "<group>"; };
 		2200224829987715000FA97F /* ServerAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAccountView.swift; sourceTree = "<group>"; };
 		2200224A2998CECF000FA97F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2200224B2999A8B7000FA97F /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -151,7 +148,6 @@
 				22120CA92B4A2A99006FECD6 /* NukeVideo in Frameworks */,
 				22EC122229904FF900976ECC /* Nuke in Frameworks */,
 				22120CAD2B4AB8B3006FECD6 /* Gifu in Frameworks */,
-				22EC122B299061AC00976ECC /* Boutique in Frameworks */,
 				22EC122429904FF900976ECC /* NukeExtensions in Frameworks */,
 				2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */,
 			);
@@ -196,7 +192,6 @@
 				22127BC02B6B0A6E0040E2DC /* NotificationView.swift */,
 				2287F25729A7F53700F24EA9 /* ActionsView.swift */,
 				22EC1227299050EE00976ECC /* AvatarView.swift */,
-				227C65D629A2D5A3006BF540 /* Flipper.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -215,6 +210,7 @@
 				2236FB692995B73700436F65 /* PhotoView.swift */,
 				227C65D829A4F8FE006BF540 /* CornerBadgeView.swift */,
 				22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */,
+				227C65D629A2D5A3006BF540 /* Flipper.swift */,
 			);
 			path = "Media Views";
 			sourceTree = "<group>";
@@ -231,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */,
-				220022462998759E000FA97F /* BoutiqueStores.swift */,
 				22120CAE2B4B7395006FECD6 /* Palette.swift */,
 				22931AF72B548B0B00378FF9 /* FancyPicker.swift */,
 				22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */,
@@ -359,7 +354,6 @@
 				22EC122129904FF900976ECC /* Nuke */,
 				22EC122329904FF900976ECC /* NukeExtensions */,
 				22EC122529904FF900976ECC /* NukeUI */,
-				22EC122A299061AC00976ECC /* Boutique */,
 				2236FB6529946A7100436F65 /* SwiftSoup */,
 				2245C227299847AF004B3A4A /* MultipartKitTootSDK */,
 				2245C229299847AF004B3A4A /* TootSDK */,
@@ -396,7 +390,6 @@
 			mainGroup = 22EC11F1298F23E100976ECC;
 			packageReferences = (
 				22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */,
-				22EC1229299061AC00976ECC /* XCRemoteSwiftPackageReference "Boutique" */,
 				2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */,
 				22120CAB2B4AB8B3006FECD6 /* XCRemoteSwiftPackageReference "Gifu" */,
@@ -456,7 +449,6 @@
 				2223CC1B2AA53A7100122870 /* TabBarView.swift in Sources */,
 				22516CD12B5F301E004F8A88 /* Injection.swift in Sources */,
 				2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */,
-				220022472998759E000FA97F /* BoutiqueStores.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,
 				22EC121F298FCBF300976ECC /* PostView.swift in Sources */,
 				229C19C12B69A6EA00AD7F9B /* TootFeed.swift in Sources */,
@@ -642,6 +634,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -685,6 +678,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -743,15 +737,7 @@
 			repositoryURL = "https://github.com/kean/Nuke";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "13.0.0-beta.1";
-			};
-		};
-		22EC1229299061AC00976ECC /* XCRemoteSwiftPackageReference "Boutique" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mergesort/Boutique.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = "3.0.0-beta.1";
+				minimumVersion = 12.8.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -796,11 +782,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
-		};
-		22EC122A299061AC00976ECC /* Boutique */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 22EC1229299061AC00976ECC /* XCRemoteSwiftPackageReference "Boutique" */;
-			productName = Boutique;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

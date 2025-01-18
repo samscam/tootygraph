@@ -13,19 +13,30 @@ struct SplashView: View {
     var splashMessage: String? = nil
     
     var body: some View {
-        Image("greenicon1024")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .photoFrame()
-            .frame(maxWidth:200)
-
-        if let splashMessage {
+        ZStack{
+            Image("wood-texture")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
             
-            Text(splashMessage)
-                .multilineTextAlignment(.center)
-                .bold()
-                .padding(.horizontal,20)
-                .padding(.top,40)
+            VStack{
+                Image("greenicon1024")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .photoFrame()
+                    .frame(maxWidth:200)
+                
+                if let splashMessage {
+                    
+                    Text(splashMessage)
+                        .multilineTextAlignment(.center)
+                        .bold()
+                        .padding(.horizontal,20)
+                        .padding(.top,40)
+                        .frame(maxWidth:300)
+                }
+            }
+            
+            
         }
         
     }

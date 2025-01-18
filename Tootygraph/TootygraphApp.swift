@@ -22,7 +22,7 @@ struct TootygraphApp: App {
         WindowGroup {
             MainView()
                 .environment(tootygraph.accountsManager)
-                .environmentObject(tootygraph.settingsManager)
+                .environment(tootygraph.settingsManager)
                 .task{
                     // This is to make Nuke be able to handle videos, apparently
                     ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)

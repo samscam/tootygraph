@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import TootSDK
+@preconcurrency import TootSDK
 import SwiftUI
 import Combine
 
@@ -91,6 +91,7 @@ class NotificationsFeed: Feed {
     }
 }
 
+extension TootNotification: @retroactive Observable {}
 extension TootNotification: FeedItem {
     
 }

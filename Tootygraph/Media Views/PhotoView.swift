@@ -42,7 +42,8 @@ extension MediaAttachment {
 }
 
 struct PhotoView: View {
-//    @EnvironmentVariable var settings: SettingsManager
+    
+    @Environment(SettingsManager.self) private var settings: SettingsManager?
     
     @State private var flipped: Bool = false
     
@@ -52,18 +53,18 @@ struct PhotoView: View {
         Group{
             if media.description != nil {
                 Flipper( flipped: $flipped, frontView: frontView, rearView: rearView)
-                    
+                    .geometryGroup()
             } else {
                 frontView
             }
             
         }
-//        .onAppear{
-//            flipped = settings.descriptionsFirst
-//        }
+        .onAppear{
+            flipped = settings?.descriptionsFirst ?? false
+        }
     }
     
-
+    
     var frontView: some View {
         ZStack {
             Rectangle().foregroundColor(.gray.opacity(0.5))
@@ -72,9 +73,9 @@ struct PhotoView: View {
         .frame(maxWidth:media.width, maxHeight:media.height)
         .aspectRatio(media.aspect,contentMode: .fit)
         .photoFrame()
-        .overlay(alignment: .bottomTrailing) {
+        .overlay(alignment: .topLeading) {
             if media.description != nil {
-                CornerBadge( alignment: .bottomTrailing){
+                CornerBadge( alignment: .topLeading){
                     Text("ALT")
                         .bold()
                         .foregroundColor(.black)
@@ -83,7 +84,7 @@ struct PhotoView: View {
                 .foregroundColor(.white)
                 .onTapGesture{
                     print("FLIP!")
-                    withAnimation (.spring(duration:4)){
+                    withAnimation (.spring()){
                         self.flipped = true
                     }
                 }
@@ -103,7 +104,7 @@ struct PhotoView: View {
                 .rotation3DEffect(.radians(.pi), axis: (0,1,0))
                 .blur(radius: 5)
             
-            Rectangle().foregroundColor(.black.opacity(0.5))
+            Rectangle().foregroundColor(.black.opacity(0.6))
             
             if let description = media.description {
                 Text(description)
@@ -113,8 +114,7 @@ struct PhotoView: View {
             
         }
         .onTapGesture {
-            print("FLOP!")
-            withAnimation {
+            withAnimation (.spring()){
                 self.flipped = false
             }
         }
@@ -168,23 +168,11 @@ extension View {
         modifier(PhotoFrame())
     }
 }
-//
-//
-//struct GifuView: UIViewRepresentable {
-//    func makeUIView(context: Context) -> Gifu.GIFImageView {
-//        let gifuView = GIFImageView(image: image)
-//        return gifuView
-//    }
-//
-//    func updateUIView(_ uiView: Gifu.GIFImageView, context: Context) {
-//        uiView.image = image
-//    }
-//
-//    typealias UIViewType = GIFImageView
-//
-//    @Binding var image: UIImage
-//
-//
-//
-//
-//}
+
+
+#Preview(traits: .sizeThatFitsLayout){
+    let media = TestAttachments.attachmentFor("alpaca.jpeg",description:"Well this is very exciting")
+
+    return PhotoView(media: media).padding()
+}
+

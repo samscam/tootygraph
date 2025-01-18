@@ -7,7 +7,6 @@
 
 import Foundation
 import TootSDK
-import Boutique
 import SwiftData
 
 enum AccountsManagerError: Error {
@@ -18,14 +17,13 @@ enum AccountsManagerError: Error {
 
 /**
  The AccountsManager is responsible for managing the different fedi accounts that the user has added to the app.
- 
- 
  */
 @MainActor
 @Observable
 class AccountsManager {
     
-    let modelContainer: ModelContainer
+    @ObservationIgnored let modelContainer: ModelContainer
+    
     var loadState: LoadState = .starting
     var connections: [Connection] = []
     
@@ -41,11 +39,13 @@ class AccountsManager {
     }
     
     func connectAll() async throws {
+        
         let fetch = try modelContainer.mainContext.fetch(FetchDescriptor<FediAccount>())
         connections = fetch.map{
             Connection(account: $0)
         }
         for connection in connections {
+            loadState = .message(message: "connecting to \(connection.account.niceName)")
             try await connection.connect()
         }
         loadState = .loaded

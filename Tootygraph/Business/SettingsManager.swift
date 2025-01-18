@@ -6,61 +6,85 @@
 //
 
 import Foundation
-import Combine
-import Boutique
-
-
-private struct SettingsManagerKey: InjectionKey {
-    @MainActor static var currentValue: SettingsManager = SettingsManager()
-}
-
-extension InjectedValues {
-    var settingsManager: SettingsManager {
-        get { Self[SettingsManagerKey.self] }
-        set { Self[SettingsManagerKey.self] = newValue }
-    }
-}
+import SwiftUI
 
 
 enum SettingsKeys: String{
-  case jaunty
-  case descriptionsFirst
-  case includeTextPosts
-  case showContent
+    case jaunty
+    case descriptionsFirst
+    case includeTextPosts
+    case showContent
 }
 
-@MainActor
-class SettingsManager: ObservableObject {
-  
-  @StoredValue(key:SettingsKeys.jaunty.rawValue)
-  var jaunty: Bool = false
-  
-  @StoredValue(key:SettingsKeys.descriptionsFirst.rawValue)
-  var descriptionsFirst: Bool = false
-  
-  @StoredValue(key:SettingsKeys.includeTextPosts.rawValue)
-  var includeTextPosts: Bool = false
-  
-  @StoredValue(key:SettingsKeys.showContent.rawValue)
-  var showContent: Bool = false
-  
-  var disposebag = Set<AnyCancellable>()
-  
-  init(){
+
+@Observable
+final class SettingsManager {
     
-    // Set up behaviour for interdependent settings
-//    $showContent.publisher.sink { [weak self] newValue in
-//      if newValue == false {
-//          self?.$includeTextPosts.set(false)
-//      }
-//    }.store(in: &disposebag)
-//  
-//    $includeTextPosts.publisher.sink { [weak self] newValue in
-//      if newValue == true {
-//        self?.$showContent.set(true)
-//      }
-//    }.store(in: &disposebag)
+    var foo: Bool = false
     
-  }
-  
+    var jaunty: Bool {
+        get {
+            access(keyPath: \.jaunty)
+            return UserDefaults.standard.bool(forKey: "jaunty")
+        }
+        set {
+            withMutation(keyPath: \.jaunty) {
+                UserDefaults.standard.setValue(newValue, forKey: "jaunty")
+            }
+        }
+    }
+    
+    var descriptionsFirst: Bool {
+        get {
+            access(keyPath: \.descriptionsFirst)
+            return UserDefaults.standard.bool(forKey: "descriptionsFirst")
+        }
+        set {
+            withMutation(keyPath: \.descriptionsFirst) {
+                UserDefaults.standard.setValue(newValue, forKey: "descriptionsFirst")
+            }
+        }
+    }
+    
+    var includeTextPosts: Bool {
+        get {
+            access(keyPath: \.includeTextPosts)
+            return UserDefaults.standard.bool(forKey: "includeTextPosts")
+        }
+        set {
+            withMutation(keyPath: \.includeTextPosts) {
+                UserDefaults.standard.setValue(newValue, forKey: "includeTextPosts")
+            }
+        }
+    }
+    
+    var showContent: Bool {
+        get {
+            access(keyPath: \.showContent)
+            return UserDefaults.standard.bool(forKey: "showContent")
+        }
+        set {
+            withMutation(keyPath: \.showContent) {
+                UserDefaults.standard.setValue(newValue, forKey: "showContent")
+            }
+        }
+    }
+    
+    init(){
+        
+        // Set up behaviour for interdependent settings
+        //    $showContent.publisher.sink { [weak self] newValue in
+        //      if newValue == false {
+        //          self?.$includeTextPosts.set(false)
+        //      }
+        //    }.store(in: &disposebag)
+        //
+        //    $includeTextPosts.publisher.sink { [weak self] newValue in
+        //      if newValue == true {
+        //        self?.$showContent.set(true)
+        //      }
+        //    }.store(in: &disposebag)
+        
+    }
+    
 }

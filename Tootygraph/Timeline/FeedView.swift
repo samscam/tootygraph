@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Boutique
 import TootSDK
 
 
@@ -37,9 +36,9 @@ struct FeedView: View {
                         .onAppear{
                             feed.onItemAppear(item)
                         }
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        .listRowBackground(EmptyView())
+//                        .listRowSeparator(.hidden)
+//                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+//                        .listRowBackground(EmptyView())
                     }
                 }
             }

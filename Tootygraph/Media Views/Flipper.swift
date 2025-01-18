@@ -28,7 +28,8 @@ struct Flipper<Front:View, Rear:View>: View {
   }
 }
 
-private struct FlipOpacity: ViewModifier, Animatable{
+@MainActor
+private struct FlipOpacity: ViewModifier, @preconcurrency Animatable{
   var opacity: CGFloat = 0
   
   var animatableData: CGFloat {

@@ -23,12 +23,15 @@ class Connection {
     var homeFeed: TootFeed? = nil
     var notificationsFeed: NotificationsFeed? = nil
     
+    var settingsManager: SettingsManager
+    
     let id: UUID = UUID()
     
     private(set) var tootClient: TootClient?
 
     
-    init(account: FediAccount) {
+    init(account: FediAccount, settingsManager: SettingsManager = SettingsManager()) {
+        self.settingsManager = settingsManager
         self.account = account
     }
     

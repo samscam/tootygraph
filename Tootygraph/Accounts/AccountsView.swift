@@ -104,11 +104,11 @@ struct AccountsView: View {
             followingCount: 432,
             fields: []))
     
-    @Previewable @StateObject var settings = SettingsManager()
+    @Previewable @State var settings = SettingsManager()
     @FocusState var fieldFocussed: Bool
     
     AccountsView()
-        .environmentObject(settings)
+        .environment(settings)
         .onAppear{
             Task{
                 
