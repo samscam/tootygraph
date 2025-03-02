@@ -33,9 +33,6 @@ struct NukeVideoView: UIViewRepresentable {
             return nil
         }
         imageView.url = self.asset
-        let overlayView = UIView()
-        overlayView.backgroundColor = UIColor(.blue)
-        imageView.placeholderView = overlayView
         contentView.addSubview(imageView)
         imageView.pinToSuperview()
         

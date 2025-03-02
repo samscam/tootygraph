@@ -1,5 +1,5 @@
 {
-  "originHash" : "2dfa9cc50bb36fd2aabfcb4d206ee78648963ea662dde2b4ed0e039fe57016a8",
+  "originHash" : "027d8d11579fb5aa8af58ec259ca06430c493708a51eac3e8a4c55fc8cb32848",
   "pins" : [
     {
       "identity" : "gifu",
@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "swift-algorithms",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-algorithms.git",
+      "state" : {
+        "revision" : "87e50f483c54e6efd60e885f7f5aa946cee68023",
+        "version" : "1.2.1"
+      }
+    },
+    {
       "identity" : "swift-asn1",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-asn1.git",
@@ -35,6 +44,15 @@
       "state" : {
         "revision" : "cd142fd2f64be2100422d658e7411e39489da985",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swift-blurhash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/valeriyvan/swift-blurhash.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7fc7276f5d11fdd4e46e7c67765ed87278c4c80d"
       }
     },
     {
@@ -62,6 +80,15 @@
       "state" : {
         "revision" : "dca6594f65308c761a9c409e09fbf35f48d50d34",
         "version" : "2.77.0"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
       }
     },
     {

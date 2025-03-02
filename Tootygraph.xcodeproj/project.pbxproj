@@ -47,6 +47,7 @@
 		229C19BF2B686BD100AD7F9B /* FlippingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BE2B686BD100AD7F9B /* FlippingBar.swift */; };
 		229C19C12B69A6EA00AD7F9B /* TootFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19C02B69A6EA00AD7F9B /* TootFeed.swift */; };
 		229C19C32B6AFA1700AD7F9B /* NotificationsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19C22B6AFA1700AD7F9B /* NotificationsFeed.swift */; };
+		22A85B452D751670009D4328 /* Blurhash in Frameworks */ = {isa = PBXBuildFile; productRef = 22A85B442D751670009D4328 /* Blurhash */; };
 		22AD6C812A5B6103008A79CA /* FediAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD6C802A5B6103008A79CA /* FediAccount.swift */; };
 		22C0338229ABB5EC00A353B8 /* PostComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C0338129ABB5EC00A353B8 /* PostComposerView.swift */; };
 		22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4F8782B50AC5F007E2F8A /* NukeVideoView.swift */; };
@@ -150,6 +151,7 @@
 				22120CAD2B4AB8B3006FECD6 /* Gifu in Frameworks */,
 				22EC122429904FF900976ECC /* NukeExtensions in Frameworks */,
 				2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */,
+				22A85B452D751670009D4328 /* Blurhash in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +361,7 @@
 				2245C229299847AF004B3A4A /* TootSDK */,
 				22120CA82B4A2A99006FECD6 /* NukeVideo */,
 				22120CAC2B4AB8B3006FECD6 /* Gifu */,
+				22A85B442D751670009D4328 /* Blurhash */,
 			);
 			productName = Fedster;
 			productReference = 22EC11FA298F23E100976ECC /* Tootygraph.app */;
@@ -393,6 +396,7 @@
 				2236FB6429946A7100436F65 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */,
 				22120CAB2B4AB8B3006FECD6 /* XCRemoteSwiftPackageReference "Gifu" */,
+				22A85B432D751670009D4328 /* XCRemoteSwiftPackageReference "swift-blurhash" */,
 			);
 			productRefGroup = 22EC11FB298F23E100976ECC /* Products */;
 			projectDirPath = "";
@@ -732,6 +736,14 @@
 				minimumVersion = 12.0.0;
 			};
 		};
+		22A85B432D751670009D4328 /* XCRemoteSwiftPackageReference "swift-blurhash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/valeriyvan/swift-blurhash.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		22EC122029904FF900976ECC /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
@@ -767,6 +779,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2245C226299847AF004B3A4A /* XCRemoteSwiftPackageReference "TootSDK" */;
 			productName = TootSDK;
+		};
+		22A85B442D751670009D4328 /* Blurhash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22A85B432D751670009D4328 /* XCRemoteSwiftPackageReference "swift-blurhash" */;
+			productName = Blurhash;
 		};
 		22EC122129904FF900976ECC /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;

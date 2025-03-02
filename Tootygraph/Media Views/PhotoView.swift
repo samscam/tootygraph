@@ -10,6 +10,7 @@ import NukeUI
 import NukeVideo
 import TootSDK
 import Gifu
+import Blurhash
 
 extension MediaAttachment {
     var mediaURL: URL? {
@@ -27,6 +28,11 @@ extension MediaAttachment {
         guard let original = meta?.original,
               let width = original.width, let height = original.height else { return CGSize.zero }
         
+        return CGSize(width: width, height: height)
+    }
+    
+    var size: CGSize? {
+        guard let width, let height else { return nil }
         return CGSize(width: width, height: height)
     }
     
@@ -121,8 +127,10 @@ struct PhotoView: View {
     
     
     var frontView: some View {
-
-    photoView
+        ZStack{
+            blurhashView
+            photoView
+        }
         .frame(maxWidth:media.width, maxHeight:media.height)
         .aspectRatio(media.aspect,contentMode: .fit)
         
@@ -138,10 +146,26 @@ struct PhotoView: View {
         
     }
     
+    var blurhashView: some View {
+        Group{
+            let size = CGSize(width:20,height:20)
+            if let blurhash = media.blurhash,
+               
+               let uiImage = UIImage(blurHash: blurhash, size: size, punch: 1) {
+                Image(uiImage: uiImage).resizable()
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
     var photoView: some View {
         Group{
             if media.type == .image {
-                LazyImage(url: media.mediaURL, transaction: .init(animation: .default)) { state in
+                
+                LazyImage(url: media.mediaURL
+                          ,transaction: .init(animation: Animation.easeInOut(duration: 0.4))
+                ) { state in
                     
                     if let image = state.image {
                         
@@ -153,6 +177,8 @@ struct PhotoView: View {
                             
                         }
                         
+                    } else {
+                        Color.clear
                     }
                 }
             } else {
