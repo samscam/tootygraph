@@ -10,8 +10,8 @@ import SwiftUI
 import TootSDK
 import NukeUI
 
-struct TabBarView: View {
-    @Environment(AccountsManager.self) var accountsManager: AccountsManager
+struct ConnectionsBarView: View {
+//    @Environment(AccountsManager.self) var accountsManager: AccountsManager
     @Environment(\.palette) var palette: Palette
     
     @Binding var selectedFeed: UUID?
@@ -45,7 +45,8 @@ struct TabBarView: View {
     @Previewable @State var connections: [Connection] = [
         Connection(account:FediAccount.Samples.sam)
     ]
-    TabBarView(selectedFeed: $selectedFeed, horizontal: false, connections: connections)
+    
+    ConnectionsBarView(selectedFeed: $selectedFeed, horizontal: true, connections: connections).palette(.random())
 }
 
 

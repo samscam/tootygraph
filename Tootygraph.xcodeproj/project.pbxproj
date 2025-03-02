@@ -17,7 +17,7 @@
 		22120CAF2B4B7395006FECD6 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22120CAE2B4B7395006FECD6 /* Palette.swift */; };
 		22127BC12B6B0A6E0040E2DC /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22127BC02B6B0A6E0040E2DC /* NotificationView.swift */; };
 		2222125D2CF6952E00CBFEF8 /* ConnectionLozenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222125C2CF6952A00CBFEF8 /* ConnectionLozenge.swift */; };
-		2223CC1B2AA53A7100122870 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223CC1A2AA53A7100122870 /* TabBarView.swift */; };
+		2223CC1B2AA53A7100122870 /* ConnectionsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223CC1A2AA53A7100122870 /* ConnectionsBarView.swift */; };
 		2236FB632994609000436F65 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB622994609000436F65 /* DetailView.swift */; };
 		2236FB6629946A7100436F65 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2236FB6529946A7100436F65 /* SwiftSoup */; };
 		2236FB6A2995B73700436F65 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236FB692995B73700436F65 /* PhotoView.swift */; };
@@ -42,7 +42,7 @@
 		22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */; };
 		22931B022B58464600378FF9 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B012B58464600378FF9 /* PhotoPickerView.swift */; };
 		22931B062B58533C00378FF9 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22931B052B58533C00378FF9 /* Connection.swift */; };
-		229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */; };
+		229C19BB2B669D6500AD7F9B /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BA2B669D6500AD7F9B /* CustomTabView.swift */; };
 		229C19BD2B68628E00AD7F9B /* FlippingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */; };
 		229C19BF2B686BD100AD7F9B /* FlippingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19BE2B686BD100AD7F9B /* FlippingBar.swift */; };
 		229C19C12B69A6EA00AD7F9B /* TootFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C19C02B69A6EA00AD7F9B /* TootFeed.swift */; };
@@ -84,7 +84,7 @@
 		22120CAE2B4B7395006FECD6 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		22127BC02B6B0A6E0040E2DC /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		2222125C2CF6952A00CBFEF8 /* ConnectionLozenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionLozenge.swift; sourceTree = "<group>"; };
-		2223CC1A2AA53A7100122870 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		2223CC1A2AA53A7100122870 /* ConnectionsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsBarView.swift; sourceTree = "<group>"; };
 		2236FB622994609000436F65 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2236FB692995B73700436F65 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		2236FB742997052200436F65 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		22931AFF2B5800D900378FF9 /* TootClientEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootClientEnvironment.swift; sourceTree = "<group>"; };
 		22931B012B58464600378FF9 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		22931B052B58533C00378FF9 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTabView.swift; sourceTree = "<group>"; };
+		229C19BA2B669D6500AD7F9B /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingStackView.swift; sourceTree = "<group>"; };
 		229C19BE2B686BD100AD7F9B /* FlippingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingBar.swift; sourceTree = "<group>"; };
 		229C19C02B69A6EA00AD7F9B /* TootFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootFeed.swift; sourceTree = "<group>"; };
@@ -173,13 +173,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2222125B2CF6951400CBFEF8 /* CustomTabBar */ = {
+		2222125B2CF6951400CBFEF8 /* ConnectionsBar */ = {
 			isa = PBXGroup;
 			children = (
 				2222125C2CF6952A00CBFEF8 /* ConnectionLozenge.swift */,
-				2223CC1A2AA53A7100122870 /* TabBarView.swift */,
+				2223CC1A2AA53A7100122870 /* ConnectionsBarView.swift */,
 			);
-			path = CustomTabBar;
+			path = ConnectionsBar;
 			sourceTree = "<group>";
 		};
 		2236FB672995B63300436F65 /* Timeline */ = {
@@ -233,7 +233,7 @@
 				229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */,
 				229C19BE2B686BD100AD7F9B /* FlippingBar.swift */,
 				22516CD02B5F301E004F8A88 /* Injection.swift */,
-				229C19BA2B669D6500AD7F9B /* SwipeableTabView.swift */,
+				229C19BA2B669D6500AD7F9B /* CustomTabView.swift */,
 			);
 			path = Oddments;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 				2236FB742997052200436F65 /* MainView.swift */,
 				227682202B5D7A0A001E5D80 /* SplashView.swift */,
 				2276821E2B5D371A001E5D80 /* TabbedView.swift */,
-				2222125B2CF6951400CBFEF8 /* CustomTabBar */,
+				2222125B2CF6951400CBFEF8 /* ConnectionsBar */,
 				22CD12082991BE5E00B7D70D /* ActionBarView.swift */,
 			);
 			path = "Main Interface";
@@ -431,7 +431,7 @@
 				22D750F82B534BC300B71F7D /* TestFixtures.swift in Sources */,
 				224390662A5D90180040C26C /* FilmStrip.swift in Sources */,
 				22CD120B2993061800B7D70D /* SettingsMenuView.swift in Sources */,
-				229C19BB2B669D6500AD7F9B /* SwipeableTabView.swift in Sources */,
+				229C19BB2B669D6500AD7F9B /* CustomTabView.swift in Sources */,
 				2236FB632994609000436F65 /* DetailView.swift in Sources */,
 				229C19C32B6AFA1700AD7F9B /* NotificationsFeed.swift in Sources */,
 				227682212B5D7A0A001E5D80 /* SplashView.swift in Sources */,
@@ -446,7 +446,7 @@
 				22931B002B5800D900378FF9 /* TootClientEnvironment.swift in Sources */,
 				22C4F8792B50AC5F007E2F8A /* NukeVideoView.swift in Sources */,
 				2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */,
-				2223CC1B2AA53A7100122870 /* TabBarView.swift in Sources */,
+				2223CC1B2AA53A7100122870 /* ConnectionsBarView.swift in Sources */,
 				22516CD12B5F301E004F8A88 /* Injection.swift in Sources */,
 				2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,

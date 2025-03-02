@@ -40,52 +40,71 @@ struct TabbedView: View {
     
     @State private var selectedTab: Tabs = .home
     
+    @State private var selectedFeed: UUID? = nil
+    
     @State var connections: [Connection]
     
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     
     var body: some View {
-
-        TabView {
-            Tab("Settings", systemImage: "gearshape") {
-                AccountsView()
+        ZStack{
+            Image("wood-texture")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            
+            
+            CustomTabView(selection:$selectedFeed){
+                    
+                    ForEach(accountsManager.connections){ connection in
+                        ConnectionView(connection: connection)
+                    }
+                    
             }
-            ForEach(accountsManager.connections){ connection in
-                switch connection.connectionState {
-                case .connected:
-                    TabSection(connection.account.niceName) {
-                        Tab("Home", systemImage: "house"){
-                            if let home = connection.homeFeed {             FeedView(feed:home)
-                            }
-                        }
-                        Tab("Notifications", systemImage: "text.bubble"){
-                            if let replies = connection.notificationsFeed{
-                                FeedView(feed:replies)
-                            }
-                        }
-                    }
-                case .connecting:
-                    Tab( "Connecting",systemImage: "house"){
-                        Text("Connecting")
-                    }
-                case .error(let error):
-                    Tab( "Error",systemImage: "house"){
-                        Text("Error")
-                        Text(error.localizedDescription)
-                        Button("try again") {
-                            Task{
-                                try await connection.connect()
-                            }
-                        }
-                    }
-                }
+            .safeAreaInset(edge: .bottom) {
+                ConnectionsBarView(selectedFeed: $selectedFeed, horizontal: true, connections: accountsManager.connections)
             }
         }
-
-        .tabViewStyle(.sidebarAdaptable)
-        
     }
+//
+//        TabView {
+//            Tab("Settings", systemImage: "gearshape") {
+//                AccountsView()
+//            }
+//            ForEach(accountsManager.connections){ connection in
+//                switch connection.connectionState {
+//                case .connected:
+//                    TabSection(connection.account.niceName) {
+//                        Tab("Home", systemImage: "house"){
+//                            if let home = connection.homeFeed {             FeedView(feed:home)
+//                            }
+//                        }
+//                        Tab("Notifications", systemImage: "text.bubble"){
+//                            if let replies = connection.notificationsFeed{
+//                                FeedView(feed:replies)
+//                            }
+//                        }
+//                    }
+//                case .connecting:
+//                    Tab( "Connecting",systemImage: "house"){
+//                        Text("Connecting")
+//                    }
+//                case .error(let error):
+//                    Tab( "Error",systemImage: "house"){
+//                        Text("Error")
+//                        Text(error.localizedDescription)
+//                        Button("try again") {
+//                            Task{
+//                                try await connection.connect()
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+        
+        
 }
 
 var feedSelectionBar: some View {

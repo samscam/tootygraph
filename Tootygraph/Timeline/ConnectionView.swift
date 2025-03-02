@@ -10,7 +10,7 @@ import SwiftUI
 import TootSDK
 
 struct ConnectionView: View {
-    var connection: Connection
+    @State var connection: Connection
     
     var body: some View {
         
@@ -31,14 +31,20 @@ struct ConnectionView: View {
             }
             
         case .connected:
-            ForEach(connection.feeds, id:\.id) { feed in
-                
-                
-                FeedView(feed: feed)
+            if let homeFeed = connection.homeFeed {
+                FeedView(feed: homeFeed)
                     .palette(connection.palette)
                     .navigationBarTitleDisplayMode(.inline)
-                
             }
+            
+//            ForEach(connection.feeds, id:\.id) { feed in
+//                
+//                
+//                FeedView(feed: feed)
+//                    .palette(connection.palette)
+//                    .navigationBarTitleDisplayMode(.inline)
+//                
+//            }
         }
     }
 }

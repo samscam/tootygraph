@@ -9,6 +9,8 @@ import SwiftUI
 import NukeUI
 
 struct ConnectionLozenge: View {
+    
+    
     let connection: Connection
     let horizontal: Bool
     @Binding var selectedFeed: UUID?

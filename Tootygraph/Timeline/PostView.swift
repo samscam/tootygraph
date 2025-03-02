@@ -23,23 +23,18 @@ struct PostView: View {
     var body: some View{
 
         VStack(alignment: .leading, spacing: 0) {
-//            NavigationLink(value: post.feedFor(post.displayPost.account)) {
+
             AvatarView(account: post.displayPost.account, booster: post.booster)
                     .padding(.bottom,20)
-//            }
-  
             
             VStack(alignment: .center,spacing:0){
                 ForEach(post.mediaAttachments){ media in
                     
                     let index = post.mediaAttachments.firstIndex(of: media)!
                     let jaunty = post.jauntyAngles[index+2]
-//                    NavigationLink(value: media){
-                        
+
                         PhotoView(media: media)
                             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
-//                    }
-                    
                         .if(index == post.mediaAttachments.count-1){
                             $0.padding(.bottom,20)
                         }
@@ -68,7 +63,6 @@ struct PostView: View {
         }
         .padding(15)
         .background{
-//            Material.thick
             RoundedRectangle(cornerRadius: 10)
                 .fill(Material.thin)
         }
@@ -82,7 +76,7 @@ struct PostView: View {
         
         Text(post.attributedContent)
             .font(.body)
-//            .font(.custom("AmericanTypewriter",size:18))
+            .font(.custom("AmericanTypewriter",size:18))
             .multilineTextAlignment(.leading)
             .layoutPriority(10)
             .frame(maxWidth: .infinity,alignment: .leading)

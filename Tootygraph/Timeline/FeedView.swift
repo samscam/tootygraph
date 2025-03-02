@@ -16,7 +16,7 @@ struct FeedView: View {
     @Environment(\.palette) var palette: Palette
     
     var body: some View {
-        NavigationStack{
+
             ScrollView{
                 LazyVStack{
                     ForEach(feed.items, id:\.id) { item in
@@ -36,9 +36,6 @@ struct FeedView: View {
                         .onAppear{
                             feed.onItemAppear(item)
                         }
-//                        .listRowSeparator(.hidden)
-//                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-//                        .listRowBackground(EmptyView())
                     }
                 }
             }
@@ -65,17 +62,10 @@ struct FeedView: View {
                 ZStack {
                     Rectangle()
                         .fill(palette.background)
-                    
-                    Image("wood-texture")
-                        .resizable()
-                        .saturation(0)
-                        .blendMode(.multiply)
-                        .opacity(0.3)
-                    
                 }.ignoresSafeArea()
             }
         }
-    }
+    
     
 }
 
