@@ -71,9 +71,6 @@ struct PhotoView: View {
                                 Image(systemName: "figure")
                                     .foregroundStyle(.black)
                                     .rotationEffect(showingDescription ? .degrees(180) : .zero )
-//                                Text("ALT")
-//                                    .bold()
-//                                    .foregroundColor(.black)
                                     .padding(4)
                             }
                             .offset(CGSize(width: 1, height: 1))
@@ -96,7 +93,6 @@ struct PhotoView: View {
                         
                             .frame(maxWidth: .infinity)
                             .foregroundColor(Color(white: 0.3, opacity: 1.0))
-//                            .padding(10)
                             .animation(.easeIn, value: showingDescription)
                         
                         
@@ -163,7 +159,7 @@ struct PhotoView: View {
         Group{
             if media.type == .image {
                 
-                LazyImage(url: media.mediaURL
+                LazyImage(url: media.mediaPreviewURL
                           ,transaction: .init(animation: Animation.easeInOut(duration: 0.4))
                 ) { state in
                     
