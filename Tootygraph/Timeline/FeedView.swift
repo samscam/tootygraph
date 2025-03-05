@@ -14,6 +14,7 @@ struct FeedView: View {
     
     var feed: any Feed
     @Environment(\.palette) var palette: Palette
+    @Namespace var animationNamespace
     
     var body: some View {
 
@@ -23,9 +24,9 @@ struct FeedView: View {
                         Group{
                             switch item {
                             case let post as PostController:
-                                PostView(post: post)
+                                PostView(post: post, animationNamespace: animationNamespace)
                             case let notification as TootNotification:
-                                NotificationView(notification: notification)
+                                NotificationView(notification: notification, animationNamespace: animationNamespace)
                             default:
                                 Text("whoopsy")
                             }
@@ -56,6 +57,9 @@ struct FeedView: View {
                 
                 FeedView(feed: childFeed)
                 
+            }
+            .navigationDestination(for: MediaAttachment.self) { attachment in
+                FullScreenPhotoView(mediaAttachment:attachment, animationNamespace: animationNamespace)
             }
             .navigationTitle(feed.name)
             .background{

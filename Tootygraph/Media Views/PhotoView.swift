@@ -58,86 +58,96 @@ struct PhotoView: View {
     @Environment(SettingsManager.self) private var settings: SettingsManager?
     
     @State private var showingDescription: Bool = true
-    
+  
     let media: MediaAttachment
     
+    var animationNamespace: Namespace.ID
+    
     var body: some View {
-            VStack(alignment:.leading){
-                
-                frontView
-                    .overlay(alignment: .bottomTrailing) {
-                        if media.description != nil {
-                            CornerBadge( alignment: .bottomTrailing){
-                                Image(systemName: "figure")
-                                    .foregroundStyle(.black)
-                                    .rotationEffect(showingDescription ? .degrees(180) : .zero )
-                                    .padding(4)
-                            }
-                            .offset(CGSize(width: 1, height: 1))
-                            .foregroundColor(Color(white:1.0,opacity:0.7))
-                            .onTapGesture{
-                                print("FLIP!")
-                                withAnimation (.spring()){
-                                    self.showingDescription = !self.showingDescription
-                                }
-                            }
-                        } else {
-                            EmptyView()
+        VStack(alignment:.leading){
+            
+            frontView
+                .matchedTransitionSource(id: media.id, in: animationNamespace)
+                .overlay(alignment: .bottomTrailing) {
+                    if media.description != nil {
+                        CornerBadge( alignment: .bottomTrailing){
+                            Image(systemName: "figure")
+                                .foregroundStyle(.black)
+                                .rotationEffect(showingDescription ? .degrees(180) : .zero )
+                                .padding(4)
                         }
-                    }
-
-                Group{
-                    if let description = media.description, showingDescription {
-                        Text(description)
-                            .font(.custom("American Typewriter", size: 16))
-                        
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(Color(white: 0.3, opacity: 1.0))
-                            .animation(.easeIn, value: showingDescription)
-                        
-                        
+                        .offset(CGSize(width: 1, height: 1))
+                        .foregroundColor(Color(white:1.0,opacity:0.7))
+                        .onTapGesture{
+                            print("FLIP!")
+                            withAnimation (.spring()){
+                                self.showingDescription = !self.showingDescription
+                            }
+                        }
+                    } else {
+                        EmptyView()
                     }
                 }
-            }
-            .transaction {
-                $0.animation = $0.animation?.delay(showingDescription ? 0.2 : 0)
-            }
-            .frame(maxWidth:media.width)
             
-            .padding(10)
-            .background(
-                Rectangle().fill(.white)
-                    .shadow(color:.black.opacity(0.3), radius: 10)                    .transaction {
-                        $0.animation = $0.animation?.delay(showingDescription ? 0: 0.2)
-                    })
-            
-            .onAppear {
-                showingDescription = settings?.descriptionsFirst ?? false
+            Group{
+                if let description = media.description, showingDescription {
+                    Text(description)
+                        .font(.custom("American Typewriter", size: 16))
+                    
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(Color(white: 0.3, opacity: 1.0))
+                        .animation(.easeIn, value: showingDescription)
+                    
+                    
+                }
             }
-            .geometryGroup()
+        }
+        .transaction {
+            $0.animation = $0.animation?.delay(showingDescription ? 0.2 : 0)
+        }
+        .frame(maxWidth:media.width)
         
-
-
+        .padding(10)
+        .background(
+            Rectangle().fill(.white)
+                .shadow(color:.black.opacity(0.3), radius: 10)                    .transaction {
+                    $0.animation = $0.animation?.delay(showingDescription ? 0: 0.2)
+                })
+        
+        .onAppear {
+            showingDescription = settings?.descriptionsFirst ?? false
+        }
+//        .geometryGroup()
+//        .matchedGeometryEffect(id: "zoom", in: animationNamespace)
+        
+        
+        
+        
         
     }
     
     
     var frontView: some View {
-        ZStack{
-            blurhashView
-            photoView
-        }
-        .frame(maxWidth:media.width, maxHeight:media.height)
-        .aspectRatio(media.aspect,contentMode: .fit)
-        
-        .overlay{
-            Rectangle()
+        NavigationLink(value: media) {
+            
+            ZStack{
+                blurhashView
+                ActualPhotoView(media: media)
+            }
+            .frame(maxWidth:media.width, maxHeight:media.height)
+            .aspectRatio(media.aspect,contentMode: .fit)
+            
+            .overlay{
+                Rectangle()
                 
-                .stroke(lineWidth: 3)
-                .foregroundStyle(Color.gray)
-                .blur(radius: 10)
-                .clipped()
+                    .stroke(lineWidth: 3)
+                    .foregroundStyle(Color.black)
+                    .blur(radius: 10)
+                    .clipped()
+            }
         }
+        
+        
         
         
     }
@@ -147,7 +157,7 @@ struct PhotoView: View {
             let size = CGSize(width:20,height:20)
             if let blurhash = media.blurhash,
                
-               let uiImage = UIImage(blurHash: blurhash, size: size, punch: 1) {
+                let uiImage = UIImage(blurHash: blurhash, size: size, punch: 1) {
                 Image(uiImage: uiImage).resizable()
             } else {
                 EmptyView()
@@ -155,11 +165,18 @@ struct PhotoView: View {
         }
     }
     
-    var photoView: some View {
+    
+}
+
+struct ActualPhotoView: View {
+    let media: MediaAttachment
+    var fullRes: Bool = false
+    
+    var body: some View {
         Group{
             if media.type == .image {
                 
-                LazyImage(url: media.mediaPreviewURL
+                LazyImage(url: fullRes ? media.mediaURL : media.mediaPreviewURL
                           ,transaction: .init(animation: Animation.easeInOut(duration: 0.4))
                 ) { state in
                     
@@ -206,13 +223,17 @@ extension View {
 
 
 #Preview(traits: .sizeThatFitsLayout){
+    
+    @Previewable @Namespace var namespace
     let media = TestAttachments.attachmentFor("alpaca.jpeg",description:"Well this is very exciting")
     
-    return PhotoView(media: media).padding()
+    PhotoView(media: media, animationNamespace: namespace).padding()
 }
 
 #Preview(traits: .sizeThatFitsLayout){
-    let media = TestAttachments.attachmentFor("macs.jpeg",description:"Well this is very exciting")
     
-    return PhotoView(media: media).padding()
+    @Previewable @Namespace var namespace
+    let media = TestAttachments.attachmentFor("macs.jpeg",description:"Black and white photograph: Three classic Macintosh computers sitting side by side on a table. There is an anglepoise lamp in front of them.")
+    
+    PhotoView(media: media, animationNamespace: namespace).padding()
 }

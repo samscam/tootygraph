@@ -70,7 +70,7 @@ enum TestAttachments {
         attachmentMeta.original?.width = Int(uiImage.size.width)
         attachmentMeta.original?.height = Int(uiImage.size.height)
         
-        return MediaAttachment(id: name, type: .image, url: url, meta: attachmentMeta, description: description)
+        return MediaAttachment(id: name, type: .image, url: url, previewUrl: url, meta: attachmentMeta, description: description)
     }
 }
 
