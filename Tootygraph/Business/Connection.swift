@@ -23,15 +23,15 @@ class Connection {
     var homeFeed: TootFeed? = nil
     var notificationsFeed: NotificationsFeed? = nil
     
-    var settingsManager: SettingsManager
+    var settings: SettingsManager
     
     let id: UUID = UUID()
     
     private(set) var tootClient: TootClient?
 
     
-    init(account: FediAccount, settingsManager: SettingsManager = SettingsManager()) {
-        self.settingsManager = settingsManager
+    init(account: FediAccount, settings: SettingsManager = SettingsManager()) {
+        self.settings = settings
         self.account = account
     }
     
@@ -71,8 +71,9 @@ class Connection {
             homeFeed = TootFeed(client: client,
                                 timeline: .home,
                                 palette: palette,
-                                accountNiceName: serverAccount.niceName)
-            notificationsFeed = NotificationsFeed(client: client)
+                                accountNiceName: serverAccount.niceName,
+                                settings: settings)
+            notificationsFeed = NotificationsFeed(client: client, settings: settings)
             
         } catch {
             connectionState = .error(error: error)
@@ -97,7 +98,7 @@ class Connection {
     func feedFor(_ account: Account) -> (any Feed)? {
         guard let tootClient else { return nil }
         let timeline = Timeline.user(userID: account.id)
-        let feed = TootFeed(client: tootClient, timeline: timeline, palette: palette, accountNiceName: account.acct)
+        let feed = TootFeed(client: tootClient, timeline: timeline, palette: palette, accountNiceName: account.acct, settings: settings)
         return feed
     }
 

@@ -19,7 +19,7 @@ struct SettingsMenuView: View {
       @Bindable var settings = settings
       VStack(alignment:.leading){
         Text("Settings").font(.title)
-        Toggle("Jaunty angles",isOn: $settings.foo)
+          Toggle("Jaunty angles",isOn: $settings.jaunty)
         
         Toggle("Descriptions first", isOn: $settings.descriptionsFirst)
         Toggle("Include posts with no pictures", isOn: $settings.includeTextPosts)

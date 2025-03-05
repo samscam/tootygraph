@@ -12,7 +12,10 @@ import TootSDK
 struct NotificationView: View {
     
     let notification: TootNotification
+    let animationNamespace: Namespace.ID
+    
     @Environment(\.palette) var palette: Palette
+    @Environment(SettingsManager.self) var settings: SettingsManager
     
     var body: some View {
         HStack(alignment:.top){
@@ -30,10 +33,10 @@ struct NotificationView: View {
                 
                 if let post = notification.post {
                     if notification.type == .mention {
-                        PostView(post: PostController(post))
+                        PostView(post: PostController(post, settings: settings), animationNamespace: animationNamespace)
                     } else {
                         AvatarView(account: notification.account)
-                        PostView(post: PostController(post))
+                        PostView(post: PostController(post, settings: settings), animationNamespace: animationNamespace)
                             .compactTextContent
                     }
                 }

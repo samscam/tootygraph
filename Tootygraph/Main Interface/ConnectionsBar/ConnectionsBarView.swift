@@ -15,7 +15,7 @@ struct ConnectionsBarView: View {
     @Environment(\.palette) var palette: Palette
     
     @Binding var selectedFeed: UUID?
-    
+    @State var showingSettings: Bool = false
     let horizontal: Bool
     
     let connections: [Connection]
@@ -27,8 +27,14 @@ struct ConnectionsBarView: View {
                 ForEach(connections){ connection in
                     ConnectionLozenge(connection: connection, horizontal: horizontal, selectedFeed: $selectedFeed)
                 }
+                Button("settings", systemImage: "umbrella.fill"){
+                    // show settings
+                    showingSettings = true
+                }
             }.scrollTargetLayout()
                 .padding(5)
+
+             
         }
         .scrollIndicators(.never)
         .scrollClipDisabled(true)
@@ -36,6 +42,9 @@ struct ConnectionsBarView: View {
         .background(
             Material.bar
         )
+        .popover(isPresented: $showingSettings){
+           AccountsView()
+       }
     }
     
 }

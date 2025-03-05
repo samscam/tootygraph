@@ -19,6 +19,7 @@ struct PostView: View {
     
     @State var showingReplySheet: Bool = false
     
+    var animationNamespace: Namespace.ID
     
     var body: some View{
 
@@ -33,7 +34,7 @@ struct PostView: View {
                     let index = post.mediaAttachments.firstIndex(of: media)!
                     let jaunty = post.jauntyAngles[index+2]
 
-                        PhotoView(media: media)
+                    PhotoView(media: media, animationNamespace: animationNamespace )
                             .rotationEffect(Angle(degrees: settings.jaunty ? jaunty : 0))
                         .if(index == post.mediaAttachments.count-1){
                             $0.padding(.bottom,20)
@@ -68,6 +69,7 @@ struct PostView: View {
         }
 
         .padding(.horizontal,10)
+
 
     }
     
@@ -122,6 +124,8 @@ struct PostView: View {
 
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout){
+    
+    @Previewable @Namespace var namespace
     @Previewable @State var settings = {
         let settings = SettingsManager()
         settings.jaunty = true
@@ -131,9 +135,9 @@ struct PostView: View {
     
     let palette = Palette.random()
     
-    let postWrapper = PostController(TestPosts.justText)
+    let postWrapper = PostController(TestPosts.justText, settings: settings)
     
-    return PostView(post: postWrapper)
+    PostView(post: postWrapper, animationNamespace: namespace)
         .environment(settings)
         .palette(palette)
         .background(palette.background)
@@ -143,6 +147,7 @@ struct PostView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout){
+    @Previewable @Namespace var namespace
     @Previewable @State var settings = {
         let settings = SettingsManager()
         settings.jaunty = true
@@ -151,14 +156,14 @@ struct PostView: View {
     }()
     let palette = Palette.random()
     
-    let postWrapper = PostController(TestPosts.postWithPics)
+    let postWrapper = PostController(TestPosts.postWithPics, settings: settings)
     ZStack {
         Image("wood-texture")
             .resizable()
             .ignoresSafeArea()
         
         ScrollView{
-            PostView(post: postWrapper)
+            PostView(post: postWrapper, animationNamespace: namespace)
                 .palette(palette)
                 .environment(settings)
                 .padding()

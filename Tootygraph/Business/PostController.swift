@@ -30,10 +30,12 @@ class PostController: FeedItem {
         return post.account
     }
     
+    private var settings: SettingsManager
+    
     func feedFor(_ account: Account) -> TootFeed? {
         guard let client else { return nil }
         let timeline = Timeline.user(userID: account.id)
-        let feed = TootFeed(client: client, timeline: timeline, palette: Palette.random(), accountNiceName: account.acct)
+        let feed = TootFeed(client: client, timeline: timeline, palette: Palette.random(), accountNiceName: account.acct, settings: settings)
         return feed
     }
     
@@ -43,8 +45,8 @@ class PostController: FeedItem {
     @ObservationIgnored
     private(set) weak var client: TootClient?
     
-    init(_ post: Post, client: TootClient? = nil){
-        
+    init(_ post: Post, client: TootClient? = nil, settings: SettingsManager){
+        self.settings = settings
         self.client = client
         self.post = post
 //        self.id = post.id

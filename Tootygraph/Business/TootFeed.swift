@@ -57,25 +57,24 @@ class TootFeed: Feed {
     @ObservationIgnored
     let timeline: Timeline
 
+    private var settings: SettingsManager
     
-    
-    init(client: TootClient, timeline: Timeline, palette: Palette, accountNiceName: String){
+    init(client: TootClient, timeline: Timeline, palette: Palette, accountNiceName: String, settings: SettingsManager){
         self.client = client
         self.timeline = timeline
         self.palette = palette
         self.accountNiceName = accountNiceName
-        
+        self.settings = settings
 
         
         self.name = timeline.stringName
         // Binding for postsSet to apply filtering and update posts
         
         postsSet
-//            .combineLatest(settings.includeTextPosts)
             .map{ posts in
                 return posts.filter {post in
                     
-                    if self.includeText.value {
+                    if settings.includeTextPosts {
                         return true
                     } else {
                         return post.mediaAttachments.count > 0
@@ -188,7 +187,7 @@ class TootFeed: Feed {
     @MainActor
     private func addPosts(_ newPosts: [Post]) {
         
-        let postWrappers = newPosts.map{ PostController($0, client: client)}
+        let postWrappers = newPosts.map{ PostController($0, client: client, settings: settings)}
         
         for post in postWrappers {
             let (inserted, _) = postsSet.value.insert(post)
@@ -213,7 +212,7 @@ class TootFeed: Feed {
     func feedFor(_ account: Account) -> (any Feed)? {
         
         let timeline = Timeline.user(userID: account.id)
-        let feed = TootFeed(client: client, timeline: timeline, palette: palette, accountNiceName: account.acct)
+        let feed = TootFeed(client: client, timeline: timeline, palette: palette, accountNiceName: account.acct, settings: settings)
         return feed
     }
     

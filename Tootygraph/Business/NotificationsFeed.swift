@@ -31,8 +31,11 @@ class NotificationsFeed: Feed {
     
     @ObservationIgnored
     private var cancellables: Set<AnyCancellable> = []
+
+    private var settings: SettingsManager
     
-    init(client: TootClient){
+    init(client: TootClient, settings: SettingsManager){
+        self.settings = settings
         self.client = client
         setupBindings()
     }
@@ -86,7 +89,7 @@ class NotificationsFeed: Feed {
     func feedFor(_ account: Account) -> (any Feed)? {
         
         let timeline = Timeline.user(userID: account.id)
-        let feed = TootFeed(client: client, timeline: timeline, palette: Palette.random(), accountNiceName: account.acct)
+        let feed = TootFeed(client: client, timeline: timeline, palette: Palette.random(), accountNiceName: account.acct, settings: settings)
         return feed
     }
 }

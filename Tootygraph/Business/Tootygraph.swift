@@ -14,7 +14,7 @@ import SwiftData
 class Tootygraph {
     
     var accountsManager: AccountsManager
-    var settingsManager: SettingsManager
+    var settings: SettingsManager
     var modelContainer: ModelContainer
     
     init(){
@@ -24,8 +24,10 @@ class Tootygraph {
         } catch {
             fatalError("Failed to create the model container: \(error)")
         }
-        settingsManager = SettingsManager()
-        accountsManager = AccountsManager(modelContainer: modelContainer)
+        settings = SettingsManager()
+        accountsManager = AccountsManager(
+            modelContainer: modelContainer,
+            settings: settings)
     }
     
     

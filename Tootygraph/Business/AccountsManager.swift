@@ -27,8 +27,11 @@ class AccountsManager {
     var loadState: LoadState = .starting
     var connections: [Connection] = []
     
-    init(modelContainer: ModelContainer){
+    private var settings: SettingsManager
+    
+    init(modelContainer: ModelContainer, settings: SettingsManager){
         self.modelContainer = modelContainer
+        self.settings = settings
         Task{
             try await connectAll()
         }
@@ -42,7 +45,7 @@ class AccountsManager {
         
         let fetch = try modelContainer.mainContext.fetch(FetchDescriptor<FediAccount>())
         connections = fetch.map{
-            Connection(account: $0)
+            Connection(account: $0, settings: settings)
         }
         for connection in connections {
             loadState = .message(message: "connecting to \(connection.account.niceName)")
