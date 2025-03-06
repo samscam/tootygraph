@@ -20,19 +20,17 @@ enum SettingsKeys: String{
 @Observable
 final class SettingsManager {
     
-    var jaunty: Bool = false
-    
-//    var jaunty: Bool {
-//        get {
-//            access(keyPath: \.jaunty)
-//            return UserDefaults.standard.bool(forKey: "jaunty")
-//        }
-//        set {
-//            withMutation(keyPath: \.jaunty) {
-//                UserDefaults.standard.setValue(newValue, forKey: "jaunty")
-//            }
-//        }
-//    }
+    var jaunty: Bool {
+        get {
+            access(keyPath: \.jaunty)
+            return UserDefaults.standard.bool(forKey: "jaunty")
+        }
+        set {
+            withMutation(keyPath: \.jaunty) {
+                UserDefaults.standard.setValue(newValue, forKey: "jaunty")
+            }
+        }
+    }
     
     var descriptionsFirst: Bool {
         get {
