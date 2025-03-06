@@ -9,6 +9,7 @@ import Foundation
 import TootSDK
 
 import SwiftData
+
 /**
  A FediAccount is the storable structure representing a user account on a server somewhere.
  
@@ -17,7 +18,7 @@ import SwiftData
  Suitable for storing locally and initiating a Connection.
  */
 @Model
-class FediAccount {
+final class FediAccount: Sendable {
 
     @Attribute(.unique) var id: String
     

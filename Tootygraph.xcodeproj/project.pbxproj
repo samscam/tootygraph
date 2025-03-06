@@ -27,7 +27,6 @@
 		2245C228299847AF004B3A4A /* MultipartKitTootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C227299847AF004B3A4A /* MultipartKitTootSDK */; };
 		2245C22A299847AF004B3A4A /* TootSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2245C229299847AF004B3A4A /* TootSDK */; };
 		22516CCF2B5F2F16004F8A88 /* Tootygraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */; };
-		22516CD12B5F301E004F8A88 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CD02B5F301E004F8A88 /* Injection.swift */; };
 		22516CD32B630870004F8A88 /* TestTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22516CD22B630870004F8A88 /* TestTimeline.swift */; };
 		227477252D77C2FA000E651E /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227477242D77C2F7000E651E /* ZoomableScrollView.swift */; };
 		2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276821E2B5D371A001E5D80 /* TabbedView.swift */; };
@@ -94,7 +93,6 @@
 		2236FB7629970E5000436F65 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		224390652A5D90180040C26C /* FilmStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmStrip.swift; sourceTree = "<group>"; };
 		22516CCE2B5F2F16004F8A88 /* Tootygraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tootygraph.swift; sourceTree = "<group>"; };
-		22516CD02B5F301E004F8A88 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		22516CD22B630870004F8A88 /* TestTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTimeline.swift; sourceTree = "<group>"; };
 		227477242D77C2F7000E651E /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		2276821E2B5D371A001E5D80 /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 				22931AFD2B573DBD00378FF9 /* ViewExtensions.swift */,
 				229C19BC2B68628E00AD7F9B /* FlippingStackView.swift */,
 				229C19BE2B686BD100AD7F9B /* FlippingBar.swift */,
-				22516CD02B5F301E004F8A88 /* Injection.swift */,
 				229C19BA2B669D6500AD7F9B /* CustomTabView.swift */,
 			);
 			path = Oddments;
@@ -459,7 +456,6 @@
 				2287F25829A7F53700F24EA9 /* ActionsView.swift in Sources */,
 				227477252D77C2FA000E651E /* ZoomableScrollView.swift in Sources */,
 				2223CC1B2AA53A7100122870 /* ConnectionsBarView.swift in Sources */,
-				22516CD12B5F301E004F8A88 /* Injection.swift in Sources */,
 				2276821F2B5D371A001E5D80 /* TabbedView.swift in Sources */,
 				22EC1228299050EE00976ECC /* AvatarView.swift in Sources */,
 				22EC121F298FCBF300976ECC /* PostView.swift in Sources */,

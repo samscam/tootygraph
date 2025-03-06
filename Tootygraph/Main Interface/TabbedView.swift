@@ -62,8 +62,9 @@ struct TabbedView: View {
                     
                 }
                 .safeAreaInset(edge: .bottom) {
-                    ConnectionsBarView(selectedFeed: $selectedFeed, horizontal: true, connections: accountsManager.connections)
+                    ConnectionsBarView(selectedFeed: $selectedFeed, connections: accountsManager.connections)
                 }
+ 
             }
         }
     }
@@ -88,7 +89,8 @@ struct FeedIdentifier: Hashable, Equatable {
     [Connection(account:FediAccount.Samples.alpaca)]
     
     
-    let account = FediAccount.Samples.alpaca
+//    let account = FediAccount.Samples.alpaca
+    
     let settings = SettingsManager()
     let tootygraph = Tootygraph()
     let accountsManager = AccountsManager(
@@ -100,5 +102,6 @@ struct FeedIdentifier: Hashable, Equatable {
     
     TabbedView(connections: connections)
         .environment(settings)
+        .environment(accountsManager)
     
 }

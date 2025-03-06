@@ -17,15 +17,10 @@ struct ConnectionLozenge: View {
     
     var body: some View {
         FlippingStackView(horizontal: horizontal){
-            LazyImage(url: connection.avatarURL){ state in
-                if let image = state.image {
-                    image.resizable()
-                } else {
-                    Color.gray
-                }
-            }
-            .frame(width: 42,height:42)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            AvatarImage(url: connection.avatarURL)
+            .frame(width: 56,height:56)
+
             
             ForEach(connection.feeds, id:\.id){ feed in
                 Button {
@@ -53,23 +48,20 @@ struct ConnectionLozenge: View {
         .padding(5)
         .background{
             RoundedRectangle(cornerRadius: 10)
-//                .stroke(lozengeStyle)
-//                .blur(radius: 2)
+                .stroke(lozengeStyle)
+                .blur(radius: 2)
         }
     }
     
-//    var lozengeStyle: some ShapeStyle {
-//
-//        let background: AnyShapeStyle
-//        if let selectedFeed,
-//           selectedFeed.account == connection.account.niceName {
-//            background = AnyShapeStyle(connection.palette.highlight)
-//        } else {
-//            background = AnyShapeStyle(connection.palette.postBackground)
-//        }
-//        return background
-//    }
-//
+    var lozengeStyle: some ShapeStyle {
+
+        let background: AnyShapeStyle
+
+            background = AnyShapeStyle(connection.palette.highlight)
+
+        return background
+    }
+
     @MainActor
     func highlightStyle(for feed: UUID) -> some ShapeStyle{
         if let selectedFeed,
@@ -91,5 +83,5 @@ struct ConnectionLozenge: View {
         return con
     }()
     
-    return ConnectionLozenge(connection: connection, horizontal: true, selectedFeed: $selectedFeed)
+    return ConnectionLozenge(connection: connection, horizontal: false, selectedFeed: $selectedFeed)
 }

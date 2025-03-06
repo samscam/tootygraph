@@ -11,34 +11,65 @@ import TootSDK
 import NukeUI
 
 struct ConnectionsBarView: View {
-//    @Environment(AccountsManager.self) var accountsManager: AccountsManager
+
     @Environment(\.palette) var palette: Palette
+    
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @Binding var selectedFeed: UUID?
     @State var showingSettings: Bool = false
-    let horizontal: Bool
+    
+    @State var expanded: Bool = true
+    
+    var horizontal: Bool {
+        horizontalSizeClass == .compact
+    }
     
     let connections: [Connection]
     
     var body: some View {
-        
-        ScrollView(horizontal ? .horizontal : .vertical) {
-            FlippingStackView(horizontal: horizontal){
-                ForEach(connections){ connection in
-                    ConnectionLozenge(connection: connection, horizontal: horizontal, selectedFeed: $selectedFeed)
+        Group{
+            if expanded {
+                    VStack(alignment:.leading){
+                        ForEach(connections){ connection in
+                            HStack{
+                                AvatarImage(url: connection.avatarURL)
+                                    .frame(width: 56,height:56)
+                                Text(connection.account.niceName)
+                                    .multilineTextAlignment(.leading)
+                                    .frame(maxWidth:.infinity)
+                                
+                            }.padding(4)
+                                .background(connection.palette.background)
+                        }
+                        expandControl
+                    }.padding()
+                
+            } else {
+                ScrollView(horizontal ? .horizontal : .vertical) {
+                    
+                    FlippingStackView(horizontal: horizontal){
+                        expandControl
+                        ForEach(connections){ connection in
+                            ConnectionLozenge(connection: connection, horizontal: horizontal, selectedFeed: $selectedFeed)
+                        }
+                        
+                        Button("settings", systemImage: "umbrella.fill"){
+                            // show settings
+                            showingSettings = true
+                        }.labelStyle(.iconOnly)
+                        
+                    }.scrollTargetLayout()
+                        .padding(5)
+                    
+                    
                 }
-                Button("settings", systemImage: "umbrella.fill"){
-                    // show settings
-                    showingSettings = true
-                }
-            }.scrollTargetLayout()
-                .padding(5)
+                .scrollIndicators(.never)
+                .scrollClipDisabled(true)
+                .scrollTargetBehavior(.viewAligned)
+            }
 
-             
         }
-        .scrollIndicators(.never)
-        .scrollClipDisabled(true)
-        .scrollTargetBehavior(.viewAligned)
         .background(
             Material.bar
         )
@@ -47,15 +78,27 @@ struct ConnectionsBarView: View {
        }
     }
     
+    var expandControl: some View {
+        Image(systemName: "arrow.up.and.person.rectangle.turn.left")
+            .resizable()
+            .foregroundStyle(.black)
+            .frame(width:40,height:40)
+            .padding().onTapGesture {
+                expanded = !expanded
+            }
+    }
 }
 
 #Preview {
     @Previewable @State var selectedFeed: UUID? = nil
     @Previewable @State var connections: [Connection] = [
-        Connection(account:FediAccount.Samples.sam)
+        Connection(account:FediAccount.Samples.sam),
+        Connection(account:FediAccount.Samples.alpaca)
+        
     ]
     
-    ConnectionsBarView(selectedFeed: $selectedFeed, horizontal: true, connections: connections).palette(.random())
+    ConnectionsBarView(selectedFeed: $selectedFeed, connections: connections).palette(.random())
+    
 }
 
 

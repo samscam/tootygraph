@@ -59,10 +59,14 @@ struct FancyPicker<I,Content: View>: View where I: Identifiable & Hashable {
                     
                 }
             }
-        }.onPreferenceChange( RectPreferenceKey.self) { value in
+        }.onPreferenceChange( RectPreferenceKey.self ) { value in
             print("Oh what \(value)")
-            withAnimation{
-                selectedRect = value
+            Task{
+                await MainActor.run{
+                    withAnimation{
+                        selectedRect = value
+                    }
+                }
             }
         }.coordinateSpace(.named("pickerSpace"))
 
