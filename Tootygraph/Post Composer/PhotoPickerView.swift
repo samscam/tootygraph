@@ -238,7 +238,7 @@ class WrappedPickerItem: Identifiable, ObservableObject {
         id = UUID().uuidString
         state = .empty
         Task{
-            let mediaItem = try await pickerItem.loadTransferable(type: MediaItem.self)
+            _ = try await pickerItem.loadTransferable(type: MediaItem.self)
         }
         
     }

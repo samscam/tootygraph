@@ -13,6 +13,7 @@ import TootSDK
 struct ActionBarView: View {
     @State var showingSettings: Bool = false
     @State var showingPostComposer: Bool = false
+    @State var showingCamera: Bool = false
     @Environment(\.tootClient) var tootClient: TootClient?
     @Environment(\.palette) var palette: Palette
     
@@ -36,6 +37,16 @@ struct ActionBarView: View {
             
             Spacer()
             Button {
+                showingCamera.toggle()
+            } label: {
+                Image(systemName: "camera.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundStyle(palette.highlight)
+                    .frame(width: 40,height:40)
+                    .padding(10)
+            }
+            Button {
                 showingPostComposer.toggle()
             } label: {
                 Image(systemName: "paperplane.circle")
@@ -44,6 +55,9 @@ struct ActionBarView: View {
                     .foregroundStyle(palette.highlight)
                     .frame(width: 40,height:40)
                     .padding(10)
+            }
+            .popover(isPresented: $showingCamera){
+                CameraView()
             }
             .popover(isPresented: $showingPostComposer){
                 PostComposerView(showingComposer: $showingPostComposer, viewModel: PostComposerViewModel(tootClient: tootClient))

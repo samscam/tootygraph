@@ -64,6 +64,9 @@ struct TabbedView: View {
                 .safeAreaInset(edge: .bottom) {
                     ConnectionsBarView(selectedFeed: $selectedFeed, connections: accountsManager.connections)
                 }
+                .safeAreaInset(edge: .top) {
+                    ActionBarView(horizontal: true)
+                }
  
             }
         }

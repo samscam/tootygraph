@@ -18,7 +18,7 @@ import SwiftData
  Suitable for storing locally and initiating a Connection.
  */
 @Model
-final class FediAccount: Sendable {
+final class FediAccount {
 
     @Attribute(.unique) var id: String
     

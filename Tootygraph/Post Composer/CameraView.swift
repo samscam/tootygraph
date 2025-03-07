@@ -10,48 +10,77 @@ import AVFoundation
 import UIKit
 
 struct CameraView: View {
-  @StateObject var cameraViewModel = CameraViewModel()
-
-  
-  var body: some View {
-    VStack{
-      switch(cameraViewModel.authStatus){
-      case .notDetermined:
-       Text("You probably need to authorise camera access")
-      case .denied:
-        Text("Oh dear, denied")
-      case .restricted:
-        Text("Camera access is restricted")
-      case .authorized:
-        VideoPreviewView(captureSession: $cameraViewModel.captureSession)
-      default:
-        Text("Something else happened")
-      }
-      
-    }.border(.pink)
-  }
+    @StateObject var cameraViewModel = CameraViewModel()
+    
+    
+    var body: some View {
+        VStack{
+            switch(cameraViewModel.authStatus){
+            case .notDetermined:
+                Text("You probably need to authorise camera access")
+            case .denied:
+                Text("Oh dear, denied")
+            case .restricted:
+                Text("Camera access is restricted")
+            case .authorized:
+                VideoPreviewView(captureSession: $cameraViewModel.captureSession, captureDevice: $cameraViewModel.captureDevice)
+            default:
+                Text("Something else happened")
+            }
+            
+        }.border(.pink)
+    }
 }
 
 struct VideoPreviewView: UIViewRepresentable{
+    
+    typealias UIViewType = VideoPreviewUIView
+    @Binding var captureSession: AVCaptureSession
+    @Binding var captureDevice: AVCaptureDevice!
+    
+    
+    func makeUIView(context: Context) -> VideoPreviewUIView {
+        let preview = VideoPreviewUIView()
+        preview.setupCapture(session: captureSession, device: captureDevice)
+        return preview
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        uiView.videoPreviewLayer.session = captureSession
+        uiView.videoPreviewLayer.videoGravity = .resizeAspectFill
 
-  typealias UIViewType = VideoPreviewUIView
-  @Binding var captureSession: AVCaptureSession
-  
-  func makeUIView(context: Context) -> VideoPreviewUIView {
-    return VideoPreviewUIView()
-  }
-  
-  func updateUIView(_ uiView: UIViewType, context: Context) {
-    uiView.videoPreviewLayer.session = captureSession
-    uiView.videoPreviewLayer.videoGravity = .resizeAspectFill
-  }
+        
+    }
 }
 
-
+@MainActor
 class VideoPreviewUIView: UIView {
-  
-  var orientationChangeObserver: NSObjectProtocol?
-  
+    
+    var observation: NSKeyValueObservation?
+    
+    var rotationController: AVCaptureDevice.RotationCoordinator?
+    
+    func setupCapture(session: AVCaptureSession, device: AVCaptureDevice){
+        rotationController = AVCaptureDevice.RotationCoordinator(device: device, previewLayer: videoPreviewLayer)
+        
+        observation = rotationController?.observe(\.videoRotationAngleForHorizonLevelPreview, options: [.old, .new]) { rotationCoordinator, change in
+            Task{
+                await MainActor.run{
+                    guard let newValue = change.newValue,
+                          let connection = self.videoPreviewLayer.connection
+                    else { return }
+                    
+                    // Make sure the angle is supported. This can probably be omitted, but it's safe to check.
+                    if connection.isVideoRotationAngleSupported(newValue) {
+                        // Set the videoRotationAngle to the new value
+                        connection.videoRotationAngle = newValue
+                    }
+                }
+            }
+            
+        }
+    }
+    
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }
@@ -59,49 +88,23 @@ class VideoPreviewUIView: UIView {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
         return layer as! AVCaptureVideoPreviewLayer
     }
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    sharedInit()
-  }
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    sharedInit()
-  }
-  
-  func sharedInit(){
-    self.orientationChangeObserver = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] notification in
-      self?.correctVideoOrientation()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sharedInit()
     }
-  }
-
-  
-  deinit{
-    guard let orientationChangeObserver = orientationChangeObserver else { return }
-    NotificationCenter.default.removeObserver(orientationChangeObserver)
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    correctVideoOrientation()
-  }
-  
-  private func correctVideoOrientation() {
-    guard let orientation = self.window?.windowScene?.interfaceOrientation,
-          let connection = videoPreviewLayer.connection else { return }
-    if connection.isVideoOrientationSupported {
-      switch orientation {
-      case .portrait:
-        connection.videoOrientation = .portrait
-      case .landscapeLeft:
-        connection.videoOrientation = .landscapeLeft
-      case .landscapeRight:
-        connection.videoOrientation = .landscapeRight
-      case .portraitUpsideDown:
-        connection.videoOrientation = .portraitUpsideDown
-      default:
-        connection.videoOrientation = .portrait
-      }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        sharedInit()
     }
-  }
+    
+    func sharedInit(){
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+    
 }

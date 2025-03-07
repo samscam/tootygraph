@@ -10,11 +10,12 @@ import TootSDK
 extension FediAccount {
 
     enum Samples {
-        static let all: [FediAccount] = [
+
+        nonisolated(unsafe) static let sam = FediAccount(TestAccounts.sam)
+        nonisolated(unsafe) static let alpaca = FediAccount(TestAccounts.alpaca)
+        nonisolated(unsafe) static let all: [FediAccount] = [
             sam, alpaca
         ]
-        static let sam = FediAccount(TestAccounts.sam)
-        static let alpaca = FediAccount(TestAccounts.alpaca)
         
     }
 }
